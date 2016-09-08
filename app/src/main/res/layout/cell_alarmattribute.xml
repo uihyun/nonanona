@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_height="38dp"
+    android:layout_width="match_parent"
+    xmlns:rb="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+    android:descendantFocusability="blocksDescendants"
+    >
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="나눔알림"
+        android:textSize="14dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="35dp"/>
+
+    <com.yongtrim.lib.ui.UltraButton
+        android:id="@+id/btnSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_alignParentRight="true"
+        ultra:style="center"
+        ultra:defaultColor="@color/trans"
+        ultra:focusColor="@color/buttonsel_bg"
+        ultra:iconPosition="left"
+        ultra:iconResource="@drawable/bellgray"
+        android:layout_marginRight="20dp"
+        android:layout_centerVertical="true"
+
+        />
+
+
+    <View
+        android:id="@+id/viewLine"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@color/gray"/>
+
+</RelativeLayout>

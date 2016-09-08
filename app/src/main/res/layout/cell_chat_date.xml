@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    xmlns:ultra="http://schemas.android.com/apk/res-auto">
+
+
+    <RelativeLayout
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.yongtrim.lib.ui.UltraButton
+            android:id="@+id/tvDate"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:onClick="onButtonClicked"
+            ultra:style="center"
+            ultra:borderWidth="1px"
+            ultra:borderColor="@color/green"
+            ultra:radius="10dp"
+            ultra:defaultColor="@color/green"
+            ultra:focusColor="@color/green"
+            ultra:text="2015.07.07 화요일"
+            ultra:textSize="12dp"
+            ultra:textColor="@color/white" />
+
+    </RelativeLayout>
+
+</LinearLayout>

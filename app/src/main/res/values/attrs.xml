@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="PagerSlidingTabStrip">
+        <attr name="pstsType" format="integer" />
+    </declare-styleable>
+
+
+    <declare-styleable name="TintImageView">
+        <attr name="tint" format="reference|color" />
+        <attr name="tintColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="UltraButtonAttrs">
+        <attr name="defaultColor" format="color"/>
+        <attr name="text" format="string"/>
+        <attr name="textColor" format="color"/>
+        <attr name="textStyle" format="string"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="iconResource" format="integer"/>
+        <attr name="iconPosition" format="enum">
+            <enum name="left" value="1"/>
+            <enum name="right" value="2"/>
+            <enum name="top" value="3"/>
+            <enum name="bottom" value="4"/>
+            <enum name="lefttop" value="5"/>
+
+        </attr>
+        <attr name="style" format="enum">
+            <enum name="stretch" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="left" value="2"/>
+            <enum name="stretch2" value="3"/>
+
+        </attr>
+        <attr name="iconMargin" format="dimension"/>
+        <attr name="borderColor" format="color" />
+        <attr name="borderWidth" format="dimension"/>
+        <attr name="focusColor" format="color"/>
+        <attr name="radius" format="dimension"/>
+        <attr name="iconTint" format="reference|color" />
+    </declare-styleable>
+
+    <declare-styleable name="UltraEditAttrs">
+        <attr name="hint" format="string"/>
+        <attr name="multiline" format="boolean"/>
+        <attr name="iconRes" format="integer"/>
+
+        <attr name="bgStyle" format="enum">
+            <enum name="green" value="0"/>
+            <enum name="white" value="1"/>
+            <enum name="search" value="2"/>
+        </attr>
+
+    </declare-styleable>
+
+
+    <!-- Caldroid -->
+    <!-- Styles -->
+    <attr name="styleCaldroidViewLayout" format="reference"/>
+    <attr name="styleCaldroidLeftArrow" format="reference"/>
+    <attr name="styleCaldroidRightArrow" format="reference"/>
+    <attr name="styleCaldroidMonthName" format="reference"/>
+    <attr name="styleCaldroidNormalCell" format="reference"/>
+    <attr name="styleCaldroidSquareCell" format="reference"/>
+    <attr name="styleCaldroidGridView" format="reference"/>
+    <attr name="styleCaldroidWeekdayView" format="reference"/>
+
+    <!-- Custom states -->
+    <declare-styleable name="DateState">
+        <attr name="state_date_today" format="boolean"/>
+        <attr name="state_date_selected" format="boolean"/>
+        <attr name="state_date_disabled" format="boolean"/>
+        <attr name="state_date_prev_next_month" format="boolean"/>
+    </declare-styleable>
+
+    <!-- Declare stylable attribute for a cell -->
+    <declare-styleable name="Cell" >
+        <attr name="android:textColor" />
+        <attr name="android:background" />
+    </declare-styleable>
+
+
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_fill_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="ColoredRatingBar">
+        <attr name="indicator" format="boolean" />
+        <attr name="rating" format="float" />
+        <attr name="type" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="small" value="1" />
+            <enum name="big" value="2" />
+        </attr>
+        <attr name="coloredRatingBarStyle" format="reference" />
+        <!-- Indicator RatingBar style. -->
+        <attr name="coloredRatingBarStyleIndicator" format="reference" />
+        <!-- Small RatingBar style. -->
+        <attr name="coloredRatingBarStyleSmall" format="reference" />
+        <!-- Small indicator RatingBar style. -->
+        <attr name="coloredRatingBarStyleSmallIndicator" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="ExpandableTextView">
+        <attr name="maxCollapsedLines" format="integer"/>
+        <attr name="animDuration" format="integer"/>
+        <attr name="animAlphaStart" format="float"/>
+        <attr name="expandDrawable" format="reference"/>
+        <attr name="collapseDrawable" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="AutofitTextView">
+        <!-- Minimum size of the text. -->
+        <attr name="minTextSize" format="dimension" />
+        <!-- Amount of precision used to calculate the correct text size to fit within its
+        bounds. Lower precision is more precise and takes more time. -->
+        <attr name="precision" format="float" />
+        <!-- Defines whether to automatically resize text to fit to the view's bounds. -->
+        <attr name="sizeToFit" format="boolean" />
+    </declare-styleable>
+
+</resources>

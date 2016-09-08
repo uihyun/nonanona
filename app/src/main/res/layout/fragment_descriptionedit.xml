@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white2"
+    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+    >
+
+
+    <EditText
+        android:id="@+id/etDescription"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="상세설명\n"
+        android:textSize="16dp"
+        android:textColor="@color/gray_70"
+        android:background="@drawable/roundbox_gray"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+
+        android:gravity="top"
+        android:padding="10dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        >
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:textSize="13dp"
+            android:textColor="@color/gray_70"
+            android:text=""/>
+
+
+
+        <TextView
+            android:layout_below="@+id/etDescription"
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0/1000"
+            android:textColor="@color/gray_70"
+            android:textSize="12dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="right"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvCaution"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp"
+        android:textSize="13dp"
+        android:textColor="@color/gray_70"
+        android:text="[나눔 주의사항]"/>
+
+
+
+
+
+    <com.yongtrim.lib.ui.UltraButton
+        android:id="@+id/btnSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:onClick="onButtonClicked"
+        ultra:style="center"
+        ultra:borderWidth="1px"
+        ultra:borderColor="@color/white"
+        ultra:radius="10dp"
+        ultra:defaultColor="@color/green"
+        ultra:focusColor="@color/buttonsel_bg"
+        ultra:text="등록하기"
+        ultra:textSize="20dp"
+        ultra:textColor="@color/white" />
+
+
+
+</LinearLayout>

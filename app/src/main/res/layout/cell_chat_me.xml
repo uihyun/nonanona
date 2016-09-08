@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    xmlns:ultar="http://schemas.android.com/apk/res-auto"
+    android:descendantFocusability="blocksDescendants"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="10dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="right"
+            android:layout_alignParentRight="true">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_gravity="bottom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="right"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/tvUnread"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="안읽음"
+                        android:textSize="9dp"
+                        android:textColor="@color/green"/>
+
+                    <TextView
+                        android:id="@+id/tvTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="15분전"
+                        android:textSize="9dp"
+                        android:textColor="@color/gray"
+                        android:visibility="visible"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvMessage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="안녕하세요. fsdajf ls;dajf ;asdjf sdla;kjasd"
+                    android:textSize="13dp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/talkgreen"
+                    android:visibility="gone"/>
+
+                <include
+                    android:id="@+id/viewAddress"
+                    android:layout_height="wrap_content"
+                    android:layout_width="230dp"
+                    layout="@layout/view_chat_address"
+                    android:visibility="gone"
+                    />
+
+                <include
+                    android:id="@+id/viewDelivery"
+                    android:layout_height="wrap_content"
+                    android:layout_width="230dp"
+                    layout="@layout/view_chat_delivery"
+                    android:visibility="gone"
+                    />
+
+                <com.yongtrim.lib.ui.CustomNetworkImageView
+                    android:id="@+id/ivPhoto"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:padding="10dp"
+                    android:scaleType="fitCenter"
+
+                    android:background="@drawable/talkgreen"
+                    />
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

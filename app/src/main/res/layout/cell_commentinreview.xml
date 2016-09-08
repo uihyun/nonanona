@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:rb="http://schemas.android.com/apk/res-auto"
+    android:background="@color/trans"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="나눔나눔....ㄹㅇ나ㅣㄹㅇ너리ㅏㅇ너 ㅣㅏㄴㅇ멀이나멀 이ㅏㄴ멀 ㅣㅏㅇㄴ머리아 널ㅇㅁ니ㅏ렁니ㅏㅁ ㅓㅇ니마러 ㅁㄴ이ㅏ러 ㄴㅁㅇ"
+        android:textColor="@color/black"
+        android:textSize="13dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        />
+
+</LinearLayout>

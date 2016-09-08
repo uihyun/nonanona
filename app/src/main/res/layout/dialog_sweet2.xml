@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/loading"
+    android:layout_width="@dimen/alert_width"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="0dp">
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="17dp"
+        android:textColor="@color/green"
+        android:singleLine="true"
+        android:background="@color/white"
+        android:text="알림"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:padding="8dp"/>
+
+
+    <LinearLayout
+        android:id="@+id/viewContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+
+        <net.simonvt.widget.DatePicker
+            android:id="@+id/datepicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:calendarViewShown="false"
+            android:visibility="gone"
+            android:datePickerMode="spinner"
+            android:calendarTextColor="@color/green"
+
+            />
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tvTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="*생년월일은 다른 회원에게 공개되지 않습니다."
+        android:layout_gravity="left"
+        android:padding="10dp"
+        android:textColor="@color/gray"
+        android:textSize="12dp"
+        android:visibility="gone"
+        />
+
+    <LinearLayout
+        android:id="@+id/viewBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/viewCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/green"
+            android:visibility="visible">
+
+            <com.yongtrim.lib.ui.UltraButton
+                android:id="@+id/cancel_button"
+                android:layout_width="@dimen/alert_half_width"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                ultra:defaultColor="@color/green"
+                ultra:focusColor="@color/buttonsel_bg"
+                ultra:text="취소"
+                ultra:textSize="15dp"
+                ultra:textColor="@color/white" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+
+                android:background="@color/white"/>
+        </LinearLayout>
+
+        <com.yongtrim.lib.ui.UltraButton
+            android:id="@+id/confirm_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            ultra:defaultColor="@color/green"
+            ultra:focusColor="@color/buttonsel_bg"
+            ultra:text="확인"
+            ultra:textSize="15dp"
+            ultra:textColor="@color/white" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

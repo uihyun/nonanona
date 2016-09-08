@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+    >
+
+
+    <ImageButton
+        android:id="@+id/btnClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/tutorial_x"
+        android:background="@color/trans"
+        android:layout_alignParentRight="true"
+        android:paddingTop="30dp"
+        android:paddingRight="10dp"
+        android:onClick="onButtonClicked"
+        />
+
+    <RelativeLayout
+        android:paddingTop="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivGuide0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/tutorial_home"/>
+
+        <ImageView
+            android:id="@+id/ivGuide1"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/tutorial_camera"/>
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="등록 버튼을 누르면 나눔 물품을 등록할 수 있어요"
+            android:textSize="23dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            />
+
+        <com.yongtrim.lib.ui.UltraButton
+            android:id="@+id/btnNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:onClick="onButtonClicked"
+            ultra:style="center"
+            ultra:borderWidth="1px"
+            ultra:borderColor="@color/green"
+            ultra:radius="10dp"
+            ultra:defaultColor="@color/green"
+            ultra:focusColor="@color/buttonsel_bg"
+            ultra:text="확인"
+            ultra:textSize="20dp"
+            ultra:textColor="@color/white"
+            />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

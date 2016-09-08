@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffff</color>
+    <color name="white2">#fffffb</color>
+
+    <color name="black">#000000</color>
+
+    <color name="trans">#00000000</color>
+
+    <color name="white_trans">#ccffffff</color>
+    <color name="white_hint">#aaffffff</color>
+
+    <color name="red">#ffd21f31</color>
+    <color name="gray">#ffa7a9ab</color>
+    <color name="gray_20">#33a7a9ab</color>
+
+    <color name="gray_50">#50a7a9ab</color>
+    <color name="gray_70">#b4a7a9ab</color>
+
+    <color name="green">#ff2ab573</color>
+    <color name="green_80">#cc2ab573</color>
+    <!--<color name="orange">#fff05a22</color>-->
+
+    <!--<color name="orange_80">#ccf05a22</color>-->
+    <!--<color name="orange_dark">#ffC64724</color>-->
+    <color name="buttonsel_bg">#33a7a9ab</color>
+
+    <color name="pink">#ffEB1A51</color>
+    <color name="pink_80">#CCEB1A51</color>
+
+    <color name="gray2">#ffe2e0e0</color>
+
+    <color name="yellow">#fffff400</color>
+
+
+
+    <color name="caldroid_white">#FFFFFF</color>
+    <color name="caldroid_black">#000000</color>
+    <color name="caldroid_transparent">#00000000</color>
+    <!-- For settings framework -->
+    <color name="caldroid_lighter_gray">#ddd</color>
+    <color name="caldroid_gray">#CCC</color>
+    <color name="caldroid_darker_gray">#aaa</color>
+    <color name="caldroid_middle_gray">#888</color>
+    <!-- A light Holo shade of blue -->
+    <color name="caldroid_holo_blue_light">#ff33b5e5</color>
+    <!-- A dark Holo shade of blue -->
+    <color name="caldroid_holo_blue_dark">#ff0099cc</color>
+    <!-- A really bright Holo shade of blue -->
+    <color name="caldroid_sky_blue">#FFA3E8F7</color>
+
+    <color name="caldroid_333">#333</color>
+    <color name="caldroid_555">#555</color>
+    <color name="caldroid_light_red">#ff7f7f</color>
+</resources>

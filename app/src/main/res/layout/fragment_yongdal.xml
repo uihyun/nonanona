@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white2"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+    >
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        >
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <com.yongtrim.lib.ui.UltraButton
+                    android:id="@+id/btnStart"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:onClick="onButtonClicked"
+                    ultra:style="left"
+                    ultra:borderWidth="1px"
+                    ultra:borderColor="@color/gray"
+                    ultra:radius="10dp"
+                    ultra:defaultColor="@color/white"
+                    ultra:focusColor="@color/buttonsel_bg"
+                    ultra:text="출발지역"
+                    ultra:textSize="16dp"
+                    ultra:textColor="@color/gray" />
+
+
+                <com.yongtrim.lib.ui.TintImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/btn_list_right"
+                    app:tintColor="@color/red"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    />
+
+
+                <com.yongtrim.lib.ui.UltraButton
+                    android:id="@+id/btnEnd"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:onClick="onButtonClicked"
+                    ultra:style="left"
+                    ultra:borderWidth="1px"
+                    ultra:borderColor="@color/gray"
+                    ultra:radius="10dp"
+                    ultra:defaultColor="@color/white"
+                    ultra:focusColor="@color/buttonsel_bg"
+                    ultra:text="도착지역"
+                    ultra:textSize="16dp"
+                    ultra:textColor="@color/gray" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/viewTypeNormal"
+                android:onClick="onButtonClicked"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp">
+
+                <CheckBox
+                    android:id="@+id/cbTypeNormal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:button="@drawable/checkbox_green"
+                    android:onClick="onButtonClicked"
+                    android:text=""/>
+
+                <TextView
+                    android:id="@+id/tvTypeNormal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="일반 (서울 20~50분 / 수도권 80분내 배송)"
+                    android:textColor="@color/gray"
+                    android:textSize="15dp"
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/viewTypeRapid"
+                android:onClick="onButtonClicked"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <CheckBox
+                    android:id="@+id/cbTypeRapid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:button="@drawable/checkbox_green"
+                    android:onClick="onButtonClicked"
+                    android:text=""/>
+
+                <TextView
+                    android:id="@+id/tvTypeRapid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="긴급 (서울 10~30분 / 수도권 60분내 배송)"
+                    android:textColor="@color/gray"
+                    android:textSize="15dp"
+                    />
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/viewMethodBike"
+                    android:onClick="onButtonClicked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginRight="10dp">
+
+                    <CheckBox
+                        android:id="@+id/cbMethodBike"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:button="@drawable/checkbox_green"
+                        android:onClick="onButtonClicked"
+                        android:text=""/>
+
+                    <TextView
+                        android:id="@+id/tvMethodBike"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="오토바이"
+                        android:textColor="@color/gray"
+                        android:textSize="15dp"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/viewMethodSmallTruck"
+                    android:onClick="onButtonClicked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginRight="10dp">
+
+                    <CheckBox
+                        android:id="@+id/cbMethodSmallTruck"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:button="@drawable/checkbox_green"
+                        android:onClick="onButtonClicked"
+                        android:text=""/>
+
+                    <TextView
+                        android:id="@+id/tvMethodSmallTruck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="소형트럭"
+                        android:textColor="@color/gray"
+                        android:textSize="15dp"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/viewMethod1TonTruck"
+                    android:onClick="onButtonClicked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <CheckBox
+                        android:id="@+id/cbMethod1TonTruck"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:button="@drawable/checkbox_green"
+                        android:onClick="onButtonClicked"
+                        android:text=""/>
+
+                    <TextView
+                        android:id="@+id/tvMethod1TonTruck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1톤트럭"
+                        android:textColor="@color/gray"
+                        android:textSize="15dp"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <com.yongtrim.lib.ui.UltraEditText
+                android:id="@+id/etStuff"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hint="용달물품(구체적으로 작성해주세요.)"
+                app:multiline="true"
+                app:bgStyle="white"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+
+                >
+
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="bottom"
+                    android:layout_marginRight="20dp"
+                    >
+                    <com.yongtrim.lib.ui.UltraEditText
+                        android:id="@+id/etWeight"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hint="무게"
+                        app:bgStyle="white"
+                        />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kg"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:layout_marginLeft="10dp"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="bottom"
+                    android:layout_marginLeft="20dp"
+
+                    >
+                    <com.yongtrim.lib.ui.UltraEditText
+                        android:id="@+id/etCount"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hint="수량"
+                        app:bgStyle="white"
+                        />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="box"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:layout_marginLeft="10dp"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <com.yongtrim.lib.ui.UltraButton
+                android:id="@+id/btnInquiry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+
+                android:onClick="onButtonClicked"
+                ultra:style="center"
+                ultra:borderWidth="1px"
+                ultra:borderColor="@color/white"
+                ultra:radius="10dp"
+                ultra:defaultColor="@color/green"
+                ultra:focusColor="@color/buttonsel_bg"
+                ultra:text="요금조회"
+                ultra:textSize="20dp"
+                ultra:textColor="@color/white" />
+
+
+            <com.yongtrim.lib.ui.UltraButton
+                android:id="@+id/btnPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="13dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+
+                android:onClick="onButtonClicked"
+                ultra:style="center"
+                ultra:borderWidth="1px"
+                ultra:borderColor="@color/gray"
+                ultra:radius="10dp"
+                ultra:defaultColor="@color/trans"
+                ultra:focusColor="@color/trans"
+                ultra:text="12,000"
+                ultra:textSize="29dp"
+                ultra:textColor="@color/gray" />
+
+
+            <com.yongtrim.lib.ui.UltraButton
+                android:id="@+id/btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+
+                android:onClick="onButtonClicked"
+                ultra:style="center"
+                ultra:borderWidth="1px"
+                ultra:borderColor="@color/white"
+                ultra:radius="10dp"
+                ultra:defaultColor="@color/red"
+                ultra:focusColor="@color/buttonsel_bg"
+                ultra:text="용달접수"
+                ultra:textSize="20dp"
+                ultra:textColor="@color/white" />
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</RelativeLayout>

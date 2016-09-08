@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:rb="http://schemas.android.com/apk/res-auto"
+    android:background="@color/green_80"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:layout_marginLeft="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/btn_list_right"
+        android:layout_marginRight="10dp"/>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="나눔알림"
+        android:textSize="16dp"
+        android:textColor="@color/white"/>
+
+</LinearLayout>
+

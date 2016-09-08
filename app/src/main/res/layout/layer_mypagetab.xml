@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:attr="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <com.yongtrim.lib.ui.PagerSlidingTabStrip2
+        android:id="@+id/tabbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:pstsType="1"
+        android:background="@color/white"
+        />
+
+    <View
+        android:layout_alignParentBottom="true"
+        android:background="@color/gray"
+        android:layout_height="1px" android:layout_width="match_parent"/>
+
+</RelativeLayout>

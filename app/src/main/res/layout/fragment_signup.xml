@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:ignore="Overdraw"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+
+    >
+
+    <ScrollView android:orientation="vertical"
+        android:layout_centerInParent="true"
+
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        >
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logo_green"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="30dp"
+                >
+
+                <com.yongtrim.lib.ui.UltraEditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hint="이메일"
+                    app:bgStyle="white"
+                    />
+
+
+
+                <com.yongtrim.lib.ui.UltraEditText
+                    android:id="@+id/etRealName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hint="이름(실명)"
+                    app:bgStyle="white"
+                    />
+
+                <com.yongtrim.lib.ui.UltraEditText
+                    android:id="@+id/etNickName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hint="닉네임(2자이상)"
+                    app:bgStyle="white"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.yongtrim.lib.ui.UltraEditText
+                        android:id="@+id/etPassword"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hint="비밀번호"
+                        app:bgStyle="white"
+                        android:layout_marginRight="5dp"
+                        />
+
+                    <com.yongtrim.lib.ui.UltraEditText
+                        android:id="@+id/etConfirm"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hint="비밀번호 확인"
+                        app:bgStyle="white"
+                        android:layout_marginLeft="5dp"
+                        />
+                </LinearLayout>
+
+
+
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="35dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvPolicy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="확인 버튼을 누르면 개인정보 수집 및 이용에 동의하게 됩니다."
+                    android:textSize="10dp"
+                    />
+
+                <com.yongtrim.lib.ui.UltraButton
+                    android:id="@+id/btnSignin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:layout_marginTop="5dp"
+                    android:onClick="onButtonClicked"
+                    ultra:style="center"
+                    ultra:borderWidth="1px"
+                    ultra:borderColor="@color/white"
+                    ultra:radius="10dp"
+                    ultra:defaultColor="@color/green"
+                    ultra:focusColor="@color/buttonsel_bg"
+                    ultra:text="확인"
+                    ultra:textSize="20dp"
+                    ultra:textColor="@color/white" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

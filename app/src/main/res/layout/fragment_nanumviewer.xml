@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+    >
+
+    <ScrollView android:orientation="vertical"
+        android:id="@+id/scrollView"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        >
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include
+                android:id="@+id/viewNanum"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                layout="@layout/cell_nanum"
+                />
+
+            <RelativeLayout
+                android:id="@+id/viewTop"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:visibility="gone"
+                >
+                <com.yongtrim.lib.ui.autoscrollviewpager.AutoScrollViewPager
+                    android:id="@+id/viewPicture"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray"
+                    />
+                <com.yongtrim.lib.ui.viewpagerindicator.CirclePageIndicator
+                    android:id="@+id/pageIndicator"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent" />
+
+                <include
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/viewTimerBig"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_margin="10dp"
+                    layout="@layout/layer_timer"
+                    android:visibility="gone"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/viewFinishBig"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#b4c0c2c3"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="230dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:alpha="0.5"
+                        android:src="@drawable/logo_white"/>
+
+                    <TextView
+                        android:layout_marginTop="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="나눔 마감되었습니다."
+                        android:textSize="20dp"
+                        android:textColor="#50fefffb"/>
+
+                </LinearLayout>
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:id="@+id/viewSelect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="20dp"
+                android:visibility="gone">
+
+                <com.yongtrim.lib.ui.UltraButton
+                    android:id="@+id/btnSelect"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:onClick="onButtonClicked"
+                    ultra:style="center"
+                    ultra:borderWidth="1px"
+                    ultra:borderColor="@color/green"
+                    ultra:radius="5dp"
+                    ultra:defaultColor="@color/green"
+                    ultra:focusColor="@color/buttonsel_bg"
+                    ultra:text="나눔 선정하기"
+                    ultra:textSize="15dp"
+                    ultra:textColor="@color/white"
+                    android:layout_gravity="top"
+                    />
+
+                <!--<com.yongtrim.lib.ui.UltraButton-->
+                    <!--android:id="@+id/btnSelectConfirm"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:paddingLeft="15dp"-->
+                    <!--android:paddingRight="15dp"-->
+                    <!--android:paddingTop="8dp"-->
+                    <!--android:paddingBottom="8dp"-->
+                    <!--ultra:style="center"-->
+                    <!--ultra:borderWidth="1px"-->
+                    <!--ultra:borderColor="@color/green"-->
+                    <!--ultra:radius="5dp"-->
+                    <!--ultra:defaultColor="@color/white"-->
+                    <!--ultra:focusColor="@color/buttonsel_bg"-->
+                    <!--ultra:text="확인"-->
+                    <!--ultra:textSize="15dp"-->
+                    <!--ultra:textColor="@color/green"-->
+                    <!--android:layout_gravity="top"-->
+                    <!--/>-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <com.yongtrim.lib.ui.UltraButton
+                        android:id="@+id/btnApply"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        ultra:style="center"
+                        ultra:defaultColor="@color/trans"
+                        ultra:focusColor="@color/buttonsel_bg"
+                        ultra:iconPosition="left"
+                        ultra:iconResource="@drawable/peopleicon"
+                        ultra:iconMargin="3dp"
+                        ultra:text="-"
+                        ultra:textSize="14dp"
+                        ultra:textStyle="bold"
+                        ultra:textColor="@color/black"
+                        />
+                    <com.yongtrim.lib.ui.UltraButton
+
+                        android:id="@+id/btnBookmarkCnt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:paddingLeft="2dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+
+                        ultra:style="center"
+                        ultra:defaultColor="@color/trans"
+                        ultra:focusColor="@color/buttonsel_bg"
+                        ultra:iconPosition="left"
+                        ultra:iconResource="@drawable/smallstar"
+                        ultra:iconMargin="3dp"
+                        ultra:text="-"
+                        ultra:textStyle="bold"
+                        ultra:textSize="14dp"
+                        ultra:textColor="@color/black"
+                        />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/viewSeparator"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/gray"/>
+
+                <ListView
+                    android:id="@+id/listView"
+                    android:dividerHeight="0dp"
+                    android:divider="@null"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:listSelector="@color/trans"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/viewInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/gray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:gravity="center_vertical">
+
+                    <com.yongtrim.lib.ui.CircularNetworkImageView
+                        android:id="@+id/ivMyAvatar"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:scaleType="fitXY"
+                        android:background="@drawable/picture_big_icon"
+                        android:layout_gravity="top"
+                        />
+
+                    <EditText
+                        android:id="@+id/etInput"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp"
+                        android:padding="10dp"
+                        android:hint="메세지를 입력하세요"
+                        android:background="@color/trans"
+                        android:layout_gravity="bottom"
+                        android:layout_marginLeft="10dp"
+                        />
+
+                    <com.yongtrim.lib.ui.UltraButton
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="3dp"
+                        android:id="@+id/btnEnter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        ultra:style="center"
+                        ultra:borderWidth="1px"
+                        ultra:borderColor="@color/green"
+                        ultra:radius="5dp"
+                        ultra:defaultColor="@color/green"
+                        ultra:focusColor="@color/buttonsel_bg"
+                        ultra:text="전송"
+                        ultra:textSize="15dp"
+                        ultra:textColor="@color/white"
+                        android:layout_gravity="top"
+
+                        />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/gray"/>
+
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/viewBannerRoot"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="8dp"
+                >
+                <com.yongtrim.lib.ui.autoscrollviewpager.AutoScrollViewPager
+                    android:id="@+id/viewBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/trans"
+                    />
+                <com.yongtrim.lib.ui.viewpagerindicator.CirclePageIndicator
+                    android:id="@+id/bannerIndicator"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

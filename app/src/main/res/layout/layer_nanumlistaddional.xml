@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+    android:background="@color/green"
+    >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.yongtrim.lib.ui.UltraButton
+            android:id="@+id/btnDelivery"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:onClick="onButtonClicked"
+            ultra:style="center"
+            ultra:defaultColor="@color/trans"
+            ultra:focusColor="@color/trans"
+            ultra:iconResource="@drawable/pacel_button"
+            ultra:text="택배접수"
+            ultra:iconMargin="8dp"
+            ultra:textSize="18dp"
+            ultra:textColor="@color/white" />
+
+
+        <com.yongtrim.lib.ui.DiagonalLineView
+            android:layout_width="15dp"
+            android:layout_height="match_parent"
+            />
+
+        <com.yongtrim.lib.ui.UltraButton
+            android:id="@+id/btnYondal"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:onClick="onButtonClicked"
+            ultra:style="center"
+            ultra:defaultColor="@color/trans"
+            ultra:focusColor="@color/trans"
+            ultra:iconResource="@drawable/yongdal_button"
+            ultra:text="용달문의"
+            ultra:iconMargin="8dp"
+            ultra:textSize="18dp"
+            ultra:textColor="@color/white" />
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -1,0 +1,16 @@
+<resources>
+
+    <!-- sweet dialog -->
+    <dimen name="alert_width">290dp</dimen>
+    <dimen name="alert_half_width">145dp</dimen>
+
+
+
+    <dimen name="text_small">13dp</dimen>
+    <dimen name="text_medium">16dp</dimen>
+    <dimen name="text_large">20dp</dimen>
+    <dimen name="text_xlarge">25dp</dimen>
+
+
+    <dimen name="dgv_overlap_if_switch_straight_line">16dp</dimen>
+</resources>

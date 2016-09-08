@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray2">
+
+        <com.yongtrim.lib.ui.UltraButton
+            android:id="@+id/btnSearchUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:onClick="onButtonClicked"
+            ultra:style="center"
+            ultra:borderWidth="1px"
+            ultra:borderColor="@color/white"
+            ultra:radius="10dp"
+            ultra:defaultColor="@color/white"
+            ultra:focusColor="@color/gray_20"
+            ultra:text="닉네임 검색"
+            ultra:textSize="16dp"
+            ultra:textColor="@color/gray2"
+            ultra:iconPosition="left"
+            ultra:iconResource="@drawable/namesearch"
+
+            />
+
+
+    </LinearLayout>
+
+
+
+    <RelativeLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.yongtrim.lib.ui.UltraListView
+                    android:id="@+id/listView"
+                    android:dividerHeight="0dp"
+                    android:divider="@null"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="0dp"
+                    android:layout_height="match_parent"
+                    android:scrollbars="none"/>
+
+
+                <LinearLayout
+                    android:id="@+id/viewNodata"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="30dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/tvTitleNodata"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="대화 목록이 없습니다."
+                        android:gravity="center"
+                        android:textSize="18dp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        />
+
+
+                </LinearLayout>
+
+
+
+            </FrameLayout>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

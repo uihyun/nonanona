@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:background="@color/black"
+        android:gravity="center">
+
+        <RelativeLayout
+            android:layout_width="80dp"
+            android:layout_height="80dp">
+            <com.yongtrim.lib.ui.CircularNetworkImageView
+                android:id="@+id/ivAvatar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:background="@drawable/bbigpicture"
+                />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvNickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="16dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/white"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="내관심 키워드"
+                android:textSize="16dp"
+                android:textColor="@color/green"
+                android:textStyle="bold"
+                />
+
+
+            <com.yongtrim.lib.ui.UltraButton
+                android:id="@+id/btnWhatis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="3dp"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                android:paddingBottom="3dp"
+                android:layout_marginRight="4dp"
+                android:layout_alignParentRight="true"
+                ultra:borderWidth="1px"
+                ultra:borderColor="@color/green"
+                ultra:radius="10dp"
+                ultra:text="키워드 등록이란?"
+                ultra:textSize="11dp"
+                ultra:textColor="@color/white"
+                ultra:style="left"
+                ultra:defaultColor="@color/green"
+                ultra:focusColor="@color/buttonsel_bg"
+                />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <com.yongtrim.lib.ui.UltraButton
+                    android:layout_weight="1"
+                    android:id="@+id/btnKeyword0"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="8dp"
+                    android:paddingBottom="5dp"
+
+                    android:layout_marginRight="4dp"
+                    ultra:borderWidth="1px"
+                    ultra:borderColor="@color/green"
+                    ultra:radius="10dp"
+                    ultra:text=""
+                    ultra:textSize="15dp"
+                    ultra:textColor="@color/green"
+                    ultra:style="left"
+                    ultra:defaultColor="@color/trans"
+                    ultra:focusColor="@color/buttonsel_bg"
+                    ultra:iconMargin="5dp"
+                    ultra:iconResource="@drawable/keyword_plus"
+                    />
+
+                <com.yongtrim.lib.ui.UltraButton
+                    android:layout_weight="1"
+                    android:id="@+id/btnKeyword1"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="8dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    ultra:borderWidth="1px"
+                    ultra:borderColor="@color/green"
+                    ultra:radius="10dp"
+                    ultra:text=""
+                    ultra:textSize="15dp"
+                    ultra:textColor="@color/green"
+                    ultra:style="left"
+                    ultra:defaultColor="@color/trans"
+                    ultra:focusColor="@color/buttonsel_bg"
+                    ultra:iconMargin="5dp"
+                    ultra:iconResource="@drawable/keyword_plus"
+                    />
+
+                <com.yongtrim.lib.ui.UltraButton
+                    android:layout_weight="1"
+                    android:id="@+id/btnKeyword2"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="8dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginLeft="4dp"
+                    ultra:borderWidth="1px"
+                    ultra:borderColor="@color/green"
+                    ultra:radius="10dp"
+                    ultra:text=""
+                    ultra:textSize="15dp"
+                    ultra:textColor="@color/green"
+                    ultra:style="left"
+                    ultra:defaultColor="@color/trans"
+                    ultra:focusColor="@color/buttonsel_bg"
+                    ultra:iconMargin="5dp"
+                    ultra:iconResource="@drawable/keyword_plus"
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical">
+
+                <com.yongtrim.lib.ui.UltraButton
+                    android:layout_weight="1"
+                    android:id="@+id/btnKeyword3"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="8dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginRight="4dp"
+                    ultra:borderWidth="1px"
+                    ultra:borderColor="@color/green"
+                    ultra:radius="10dp"
+                    ultra:text=""
+                    ultra:textSize="15dp"
+                    ultra:textColor="@color/green"
+                    ultra:style="left"
+                    ultra:defaultColor="@color/trans"
+                    ultra:focusColor="@color/buttonsel_bg"
+                    ultra:iconMargin="5dp"
+                    ultra:iconResource="@drawable/keyword_plus"
+                    />
+
+                <com.yongtrim.lib.ui.UltraButton
+                    android:layout_weight="1"
+                    android:id="@+id/btnKeyword4"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="8dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    ultra:borderWidth="1px"
+                    ultra:borderColor="@color/green"
+                    ultra:radius="10dp"
+                    ultra:text=""
+                    ultra:textSize="15dp"
+                    ultra:textColor="@color/green"
+                    ultra:style="left"
+                    ultra:defaultColor="@color/trans"
+                    ultra:focusColor="@color/buttonsel_bg"
+                    ultra:iconMargin="5dp"
+                    ultra:iconResource="@drawable/keyword_plus"
+                    />
+
+                <com.yongtrim.lib.ui.UltraButton
+                    android:layout_weight="1"
+                    android:id="@+id/btnKeyword5"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="8dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginLeft="4dp"
+                    ultra:borderWidth="1px"
+                    ultra:borderColor="@color/green"
+                    ultra:radius="10dp"
+                    ultra:text=""
+                    ultra:textSize="15dp"
+                    ultra:textColor="@color/green"
+                    ultra:style="left"
+                    ultra:defaultColor="@color/trans"
+                    ultra:focusColor="@color/buttonsel_bg"
+                    ultra:iconMargin="5dp"
+                    ultra:iconResource="@drawable/keyword_plus"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical">
+
+                <com.yongtrim.lib.ui.UltraButton
+                    android:layout_weight="1"
+                    android:id="@+id/btnKeyword6"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="8dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginRight="4dp"
+                    ultra:borderWidth="1px"
+                    ultra:borderColor="@color/green"
+                    ultra:radius="10dp"
+                    ultra:text=""
+                    ultra:textSize="15dp"
+                    ultra:textColor="@color/green"
+                    ultra:style="left"
+                    ultra:defaultColor="@color/trans"
+                    ultra:focusColor="@color/buttonsel_bg"
+                    ultra:iconMargin="5dp"
+                    ultra:iconResource="@drawable/keyword_plus"
+                    />
+
+                <com.yongtrim.lib.ui.UltraButton
+                    android:layout_weight="1"
+                    android:id="@+id/btnKeyword7"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="8dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    ultra:borderWidth="1px"
+                    ultra:borderColor="@color/green"
+                    ultra:radius="10dp"
+                    ultra:text=""
+                    ultra:textSize="15dp"
+                    ultra:textColor="@color/green"
+                    ultra:style="left"
+                    ultra:defaultColor="@color/trans"
+                    ultra:focusColor="@color/buttonsel_bg"
+                    ultra:iconMargin="5dp"
+                    ultra:iconResource="@drawable/keyword_plus"
+                    />
+
+                <com.yongtrim.lib.ui.UltraButton
+                    android:layout_weight="1"
+                    android:id="@+id/btnKeyword8"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="8dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginLeft="4dp"
+                    ultra:borderWidth="1px"
+                    ultra:borderColor="@color/green"
+                    ultra:radius="10dp"
+                    ultra:text=""
+                    ultra:textSize="15dp"
+                    ultra:textColor="@color/green"
+                    ultra:style="left"
+                    ultra:defaultColor="@color/trans"
+                    ultra:focusColor="@color/buttonsel_bg"
+                    ultra:iconMargin="5dp"
+                    ultra:iconResource="@drawable/keyword_plus"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/green">
+        <com.yongtrim.lib.ui.UltraButton
+            android:layout_centerInParent="true"
+            android:id="@+id/btnApplyNanum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            ultra:text="나눔 요청하기"
+            ultra:textSize="17dp"
+            ultra:textColor="@color/white"
+            ultra:style="center"
+            ultra:defaultColor="@color/green"
+            ultra:focusColor="@color/buttonsel_bg"
+            ultra:iconMargin="2dp"
+            ultra:iconResource="@drawable/jgooo"
+            />
+
+        <com.yongtrim.lib.ui.UltraButton
+            android:layout_marginTop="5dp"
+            android:id="@+id/tvUnreadNanum"
+            android:layout_toRightOf="@+id/btnApplyNanum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:layout_marginLeft="5dp"
+            ultra:style="center"
+            ultra:borderWidth="1px"
+            ultra:borderColor="@color/red"
+            ultra:radius="10dp"
+            ultra:defaultColor="@color/red"
+            ultra:focusColor="@color/red"
+            ultra:text="112"
+            ultra:textSize="9dp"
+            ultra:textColor="@color/white"
+            android:visibility="gone"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

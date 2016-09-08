@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.yongtrim.lib.ui.UltraListView
+                    android:id="@+id/listView"
+                    android:dividerHeight="0dp"
+                    android:divider="@null"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="0dp"
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never"
+                    android:scrollbars="none"/>
+
+                <LinearLayout
+                    android:id="@+id/viewNodata"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="30dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/tvTitleNodata"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="알림이 없습니다."
+                        android:gravity="center"
+                        android:textSize="18dp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/layerTop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                    <include
+                        android:id="@+id/layerTabbar"
+                        android:layout_height="60dp"
+                        android:layout_width="match_parent"
+                        layout="@layout/layer_mypagetab"
+                        />
+
+
+                    <LinearLayout
+                        android:layout_height="20dp"
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+
+                        android:gravity="center_vertical"
+                        >
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvDate"
+                            android:text="날짜"
+                            android:textSize="12dp"
+                            android:textColor="@color/gray"
+                            android:gravity="center"
+                            />
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvTitle"
+                            android:text="물품"
+                            android:textSize="12dp"
+                            android:textColor="@color/gray"
+                            android:gravity="center"
+                            />
+
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvCompany"
+                            android:text="택배사"
+                            android:textSize="12dp"
+                            android:textColor="@color/gray"
+                            android:gravity="center"
+                            />
+
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvStatus"
+                            android:text="배송현황"
+                            android:textSize="12dp"
+                            android:textColor="@color/gray"
+                            android:gravity="center"
+                            />
+
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/viewLine"
+                        android:background="@color/gray"
+                        android:layout_height="1px" android:layout_width="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="5dp"/>
+
+
+                </LinearLayout>
+
+
+
+            </FrameLayout>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <RelativeLayout
+            android:id="@+id/layerBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            >
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+
+    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+    android:descendantFocusability="blocksDescendants">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:gravity="center_vertical">
+
+        <com.yongtrim.lib.ui.CircularNetworkImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+            android:scaleType="fitXY"
+            android:background="@drawable/bigggpicture"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/tvNickname"
+                android:text="조리조리"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@color/black" />
+
+            <com.yongtrim.lib.ui.UltraButton
+                android:id="@+id/btnAction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingRight="8dp"
+                android:paddingLeft="8dp"
+
+                android:layout_marginLeft="10dp"
+                android:onClick="onButtonClicked"
+                ultra:style="center"
+                ultra:borderWidth="1px"
+                ultra:borderColor="@color/green"
+                ultra:radius="5dp"
+                ultra:defaultColor="@color/green"
+                ultra:focusColor="@color/buttonsel_bg"
+                ultra:text="해제"
+                ultra:textSize="15dp"
+                ultra:textColor="@color/white" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/viewLine"
+        android:background="@color/gray"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_height="1px" android:layout_width="match_parent"/>
+
+
+
+</LinearLayout>

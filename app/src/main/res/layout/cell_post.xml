@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:background="@color/white2"
+
+    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+    android:descendantFocusability="blocksDescendants">
+
+
+
+    <RelativeLayout
+        android:id="@+id/viewTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/tvDate"
+            android:id="@+id/tvTitle"
+            android:text="조리조리"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15분전"
+            android:textSize="11dp"
+            android:textColor="@color/gray"
+            android:visibility="visible"
+            android:gravity="right"/>
+
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/viewMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp">
+
+        <View
+            android:background="@color/gray"
+            android:layout_height="1px" android:layout_width="match_parent"/>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/tvMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="초대불가 fdjsalf djsfl;adjs l;dskafj sad;lkjdas;lf jasd;l jasdl;fj "
+            android:textSize="13dp"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/viewLine"
+        android:background="@color/gray"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_height="1px" android:layout_width="match_parent"/>
+
+</LinearLayout>

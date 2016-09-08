@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/viewProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical"
+        android:layout_centerVertical="true"
+        android:onClick="onButtonClicked">
+
+        <com.yongtrim.lib.ui.CircularNetworkImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:scaleType="fitXY"
+            android:background="@drawable/hoogisajin"
+            android:layout_margin="5dp"
+            />
+
+        <TextView
+            android:id="@+id/tvNickname"
+            android:text="본인닉네임"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textColor="@color/green"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_marginLeft="5dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        >
+
+        <View
+            android:background="@color/gray"
+            android:layout_height="match_parent"
+            android:layout_width="1px"
+            android:layout_margin="2dp"/>
+
+        <com.yongtrim.lib.ui.UltraButton
+            android:id="@+id/btnAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onButtonClicked"
+            android:layout_marginLeft="14dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            ultra:style="center"
+            ultra:defaultColor="@color/white"
+            ultra:focusColor="@color/buttonsel_bg"
+            ultra:text="후기등록"
+            ultra:textSize="15dp"
+            ultra:textColor="@color/pink"
+            android:visibility="visible"/>
+
+        <LinearLayout
+            android:id="@+id/viewStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:visibility="gone"
+            >
+            <TextView
+                android:text="게시물"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                />
+
+            <TextView
+                android:id="@+id/tvMyReviewCount"
+                android:text="12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:textColor="@color/red"
+                android:textStyle="bold"
+                android:layout_marginLeft="5dp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_alignParentBottom="true"
+        android:background="@color/gray"
+        android:layout_height="1px"
+        android:layout_width="match_parent"/>
+
+
+
+</RelativeLayout>

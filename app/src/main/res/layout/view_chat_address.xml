@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/talkgreen"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/r_address_big"/>
+
+        <TextView
+            android:id="@+id/tvAddressTitle"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="13dp"
+            android:text="닉네임 님이 주소를 입력하였습니다."/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:minWidth="55dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                android:text="받는사람"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                android:text=":"/>
+
+            <TextView
+                android:id="@+id/tvAddressName"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                android:text="김성은"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:minWidth="55dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                android:text="연락처"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                android:text=":"/>
+
+            <TextView
+                android:id="@+id/tvAddressPhoneNumber"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                android:text="010-1234-5667"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:minWidth="55dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                android:text="배송지"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                android:text=":"/>
+
+            <TextView
+                android:id="@+id/tvAddressAddress"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="(110-123)서울 역삼동 401-1번지 삼성아파트 111동 101호"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <com.yongtrim.lib.ui.UltraButton
+        android:id="@+id/btnAddressConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        ultra:style="center"
+        ultra:defaultColor="@color/green"
+        ultra:focusColor="@color/buttonsel_bg"
+        ultra:text="배송신청"
+        ultra:textSize="16dp"
+        ultra:textColor="@color/white" />
+
+
+</LinearLayout>

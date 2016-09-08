@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+    <com.yongtrim.lib.ui.PagerSlidingTabStrip
+        android:id="@+id/tabbar"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="@color/white" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tabbar" />
+
+    <FrameLayout
+        android:id="@+id/viewDim"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#6f000000"
+        />
+</RelativeLayout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="placeholder" />
+
+    <item type="id" name="expandable_text"/>
+    <item type="id" name="expand_collapse"/>
+
+    <item type="id" name="number1"/>
+    <item type="id" name="number2"/>
+
+    <item type="id" name="number1_1"/>
+    <item type="id" name="number1_2"/>
+
+    <item type="id" name="dgv_wobble_tag"/>
+
+</resources>

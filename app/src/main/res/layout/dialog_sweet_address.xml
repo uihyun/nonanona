@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+    >
+
+
+    <com.yongtrim.lib.ui.UltraEditText
+        android:id="@+id/etName"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        app:hint="보내는 사람"
+        app:bgStyle="white"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.yongtrim.lib.ui.UltraEditText
+            android:id="@+id/etNumber0"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            app:hint="연락처"
+            app:bgStyle="white"
+            />
+
+        <com.yongtrim.lib.ui.UltraEditText
+            android:layout_marginLeft="10dp"
+            android:id="@+id/etNumber1"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            app:bgStyle="white"
+            />
+
+        <com.yongtrim.lib.ui.UltraEditText
+            android:layout_marginLeft="10dp"
+            android:id="@+id/etNumber2"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            app:bgStyle="white"
+
+            />
+
+    </LinearLayout>
+
+
+
+    <com.yongtrim.lib.ui.UltraButton
+        android:id="@+id/btnPostNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_marginTop="15dp"
+        ultra:style="left"
+        ultra:borderWidth="1px"
+        ultra:borderColor="@color/gray"
+        ultra:radius="10dp"
+        ultra:defaultColor="@color/white"
+        ultra:focusColor="@color/buttonsel_bg"
+        ultra:text="우편번호"
+        ultra:textSize="16dp"
+        ultra:textColor="@color/gray" />
+
+    <com.yongtrim.lib.ui.UltraButton
+        android:id="@+id/btnBasic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_marginTop="10dp"
+        ultra:style="left"
+        ultra:borderWidth="1px"
+        ultra:borderColor="@color/gray"
+        ultra:radius="10dp"
+        ultra:defaultColor="@color/white"
+        ultra:focusColor="@color/buttonsel_bg"
+        ultra:text="기본주소"
+        ultra:textSize="16dp"
+        ultra:textColor="@color/gray" />
+
+
+    <EditText
+        android:id="@+id/etDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_marginTop="10dp"
+
+        android:hint="상세주소"
+        android:textColorHint="@color/gray"
+        android:textColor="@color/gray"
+        android:background="@drawable/roundbox_gray"
+        android:singleLine="true"
+        />
+
+
+    <LinearLayout
+        android:id="@+id/viewRemember"
+        android:layout_marginTop="10dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right|center_vertical"
+        >
+
+        <CheckBox
+            android:id="@+id/cbRemember"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:button="@drawable/checkbox_green"
+            android:checked="true"
+            android:text=""/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="내주소 기억하기"
+            android:textColor="@color/green"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+</LinearLayout>

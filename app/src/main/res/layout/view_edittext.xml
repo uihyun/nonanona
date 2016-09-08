@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/trans">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/ivIcon"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:src="@drawable/mail"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
+
+            <EditText
+                android:id="@+id/edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:hint="이메일 주소"
+                android:text=""
+                android:textColorHint="@color/white_hint"
+                android:textSize="16dp"
+                android:textColor="@color/white_trans"
+                android:padding="10dp"
+                android:background="@color/trans"
+                android:textCursorDrawable="@drawable/text_cursor"/>
+
+        </LinearLayout>
+        <TextView
+            android:layout_alignParentRight="true"
+            android:id="@+id/tvMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:padding="1dp"
+            android:textColor="@color/red"
+            android:textSize="9dp"
+            android:layout_marginBottom="2dp"
+            />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/viewLine"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/white">
+
+    </View>
+
+</LinearLayout>

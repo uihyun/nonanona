@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/talkgreen"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/r_deliverynumber_big"/>
+
+        <TextView
+            android:id="@+id/tvDeliveryTitle"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="13dp"
+            android:text="닉네임 님이 운송장을 입력하였습니다."/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:minWidth="65dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                android:text="택 배 사"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                android:text=":"/>
+
+            <TextView
+                android:id="@+id/tvDeliveryCompany"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="통운"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:minWidth="65dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                android:text="운송장번호"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                android:text=":"/>
+
+            <TextView
+                android:id="@+id/tvDeliveryNumber"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="010-1234-5667"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <com.yongtrim.lib.ui.UltraButton
+        android:id="@+id/btnDeliveryConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        ultra:style="center"
+        ultra:defaultColor="@color/green"
+        ultra:focusColor="@color/buttonsel_bg"
+        ultra:text="배송조회"
+        ultra:textSize="16dp"
+        ultra:textColor="@color/white" />
+
+
+</LinearLayout>

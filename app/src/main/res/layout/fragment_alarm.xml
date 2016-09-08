@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+    >
+
+    <ScrollView android:orientation="vertical"
+        android:id="@+id/scrollView"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        >
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <include
+                android:id="@+id/viewHeader0"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                layout="@layout/cell_alarmheader"
+                />
+
+            <include
+                android:id="@+id/viewAttribute0_0"
+                android:layout_height="38dp"
+                android:layout_width="match_parent"
+                layout="@layout/cell_alarmattribute"
+                />
+
+            <include
+                android:id="@+id/viewAttribute0_1"
+                android:layout_height="38dp"
+                android:layout_width="match_parent"
+                layout="@layout/cell_alarmattribute"
+                />
+
+            <include
+                android:id="@+id/viewAttribute0_2"
+                android:layout_height="38dp"
+                android:layout_width="match_parent"
+                layout="@layout/cell_alarmattribute"
+                />
+
+            <include
+                android:id="@+id/viewAttribute0_3"
+                android:layout_height="38dp"
+                android:layout_width="match_parent"
+                layout="@layout/cell_alarmattribute"
+                />
+
+            <include
+                android:id="@+id/viewAttribute0_4"
+                android:layout_height="38dp"
+                android:layout_width="match_parent"
+                layout="@layout/cell_alarmattribute"
+                />
+
+
+
+            <include
+                android:id="@+id/viewHeader1"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                layout="@layout/cell_alarmheader"
+                />
+
+            <include
+                android:id="@+id/viewAttribute1_0"
+                android:layout_height="38dp"
+                android:layout_width="match_parent"
+                layout="@layout/cell_alarmattribute"
+                />
+
+
+
+            <include
+                android:id="@+id/viewHeader2"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                layout="@layout/cell_alarmheader"
+                />
+
+            <include
+                android:id="@+id/viewAttribute2_0"
+                android:layout_height="38dp"
+                android:layout_width="match_parent"
+                layout="@layout/cell_alarmattribute"
+                />
+
+
+
+            <include
+                android:id="@+id/viewHeader3"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                layout="@layout/cell_alarmheader"
+                />
+
+            <include
+                android:id="@+id/viewAttribute3_0"
+                android:layout_height="38dp"
+                android:layout_width="match_parent"
+                layout="@layout/cell_alarmattribute"
+                />
+
+            <include
+                android:id="@+id/viewAttribute3_1"
+                android:layout_height="38dp"
+                android:layout_width="match_parent"
+                layout="@layout/cell_alarmattribute"
+                />
+
+
+
+
+
+            <include
+                android:id="@+id/viewHeader4"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                layout="@layout/cell_alarmheader"
+                />
+
+            <include
+                android:id="@+id/viewAttribute4_0"
+                android:layout_height="38dp"
+                android:layout_width="match_parent"
+                layout="@layout/cell_alarmattribute"
+                />
+
+            <include
+                android:id="@+id/viewAttribute4_1"
+                android:layout_height="38dp"
+                android:layout_width="match_parent"
+                layout="@layout/cell_alarmattribute"
+                />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

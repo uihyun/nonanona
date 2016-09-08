@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+
+    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+    android:descendantFocusability="blocksDescendants">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+
+        <com.yongtrim.lib.ui.CircularNetworkImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+            android:scaleType="fitXY"
+            android:background="@drawable/bigggpicture"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tvNickname"
+                        android:text="조리조리"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black" />
+
+                    <!--<ImageView-->
+                        <!--android:id="@+id/ivNew"-->
+                        <!--android:layout_toRightOf="@+id/tvNickname"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_margin="5dp"-->
+                        <!--android:src="@drawable/ic_new_chat"/>-->
+
+                    <com.yongtrim.lib.ui.UltraButton
+                        android:id="@+id/tvUnread"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/tvNickname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:layout_marginLeft="5dp"
+                        ultra:style="center"
+                        ultra:borderWidth="1px"
+                        ultra:borderColor="@color/red"
+                        ultra:radius="10dp"
+                        ultra:defaultColor="@color/red"
+                        ultra:focusColor="@color/red"
+                        ultra:text="112"
+                        ultra:textSize="9dp"
+                        ultra:textColor="@color/white"
+                        android:visibility="gone"/>
+
+                    <CheckBox
+                        android:id="@+id/cbCheck"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/tvUnread"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:button="@drawable/checkbox_green"
+                        android:text=""
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:id="@+id/tvDate"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="15분전"
+                        android:textSize="11dp"
+                        android:textColor="@color/gray"
+                        android:visibility="visible"/>
+                </RelativeLayout>
+
+
+                <TextView
+                    android:layout_marginTop="2dp"
+                    android:id="@+id/tvMessage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="초대불가 fdjsalf djsfl;adjs l;dskafj sad;lkjdas;lf jasd;l jasdl;fj "
+                    android:textSize="13dp"
+                    android:textColor="@color/gray"
+
+                    android:singleLine="true"
+                    android:visibility="visible"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/viewLine"
+        android:background="@color/gray"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_height="1px" android:layout_width="match_parent"/>
+
+
+
+</LinearLayout>

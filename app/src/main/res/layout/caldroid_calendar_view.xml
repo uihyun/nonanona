@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="?styleCaldroidViewLayout"
+    android:orientation="vertical"
+    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+    >
+
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="17dp"
+        android:textColor="@color/red"
+        android:singleLine="true"
+        android:background="@color/white"
+        android:text="알림"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="8dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tvTip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="*생년월일은 다른 회원에게 공개되지 않습니다."
+        android:padding="10dp"
+        android:textColor="@color/gray"
+        android:textSize="12dp"
+        android:visibility="gone"
+        />
+
+    <LinearLayout
+        android:id="@+id/calendar_title_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/calendar_left_arrow"
+            style="?styleCaldroidLeftArrow" />
+
+        <TextView
+            android:id="@+id/calendar_month_year_textview"
+            style="?styleCaldroidMonthName"/>
+
+        <Button
+            android:id="@+id/calendar_right_arrow"
+            style="?styleCaldroidRightArrow" />
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/weekday_gridview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-10dp"
+        android:numColumns="7"
+        android:stretchMode="columnWidth" >
+    </GridView>
+
+    <com.antonyt.infiniteviewpager.InfiniteViewPager
+        android:id="@+id/months_infinite_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.yongtrim.lib.ui.UltraButton
+        android:id="@+id/btnDontCare"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        ultra:defaultColor="@color/red"
+        ultra:focusColor="@color/buttonsel_bg"
+        ultra:text="리셋"
+        ultra:textSize="15dp"
+        ultra:textColor="@color/white" />
+
+
+
+</LinearLayout>

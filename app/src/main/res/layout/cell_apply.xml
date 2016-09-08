@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:rb="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+    android:descendantFocusability="blocksDescendants">
+
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+
+        android:gravity="center_vertical"
+        >
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvDate"
+            android:text="2015.12.12"
+            android:textSize="13dp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTitle"
+            android:text="세척액 나눔"
+            android:textSize="13dp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            />
+
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvCompany"
+            android:text="대한통운"
+            android:textSize="13dp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            />
+
+
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvStatus"
+                android:text="배송준비"
+                android:textSize="13dp"
+                android:textColor="@color/pink"
+                android:gravity="center"
+                />
+
+            <com.yongtrim.lib.ui.UltraButton
+                android:layout_centerInParent="true"
+                android:id="@+id/btnConfirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="1dp"
+                android:paddingBottom="1dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                ultra:style="center"
+                ultra:defaultColor="@color/pink"
+                ultra:focusColor="@color/buttonsel_bg"
+                ultra:text="배송완료"
+                ultra:textSize="13dp"
+                ultra:textColor="@color/white"
+                android:visibility="gone"/>
+
+
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/viewLine"
+        android:background="@color/gray"
+        android:layout_height="1px" android:layout_width="match_parent"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"/>
+
+</LinearLayout>
