@@ -1,51 +1,38 @@
 package com.nuums.nuums.activity;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.util.SparseArray;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-
-import com.android.volley.Response;
 import com.nuums.nuums.R;
-
-import com.nuums.nuums.fragment.mypage.AlarmListFragment;
-import com.nuums.nuums.fragment.mypage.ApplyListFragment;
 import com.nuums.nuums.fragment.mypage.MypageMainFragment;
 import com.nuums.nuums.fragment.nanum.NanumEditFragment;
 import com.nuums.nuums.fragment.nanum.NanumListFragment;
 import com.nuums.nuums.fragment.review.ReviewListFragment;
 import com.nuums.nuums.fragment.talk.TalkListFragment;
-import com.nuums.nuums.model.chat.ChatManager;
 import com.nuums.nuums.model.chat.Talk;
-import com.nuums.nuums.model.report.Report;
 import com.nuums.nuums.view.SlideMenuView;
-import com.yongtrim.lib.Application;
 import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
 import com.yongtrim.lib.fragment.ABaseFragment;
-import com.yongtrim.lib.message.MessageManager;
 import com.yongtrim.lib.message.PushMessage;
-import com.yongtrim.lib.model.ACommonData;
-import com.yongtrim.lib.model.photo.Photo;
-import com.yongtrim.lib.model.photo.PhotoManager;
-import com.yongtrim.lib.model.user.User;
 import com.yongtrim.lib.model.user.UserManager;
 import com.yongtrim.lib.ui.PagerSlidingTabStrip;
-
-import java.util.List;
 
 import de.greenrobot.event.EventBus;
 import me.tangke.slidemenu.SlideMenu;
@@ -58,6 +45,8 @@ import me.tangke.slidemenu.SlideMenu;
 public class MainActivity extends ABaseFragmentAcitivty {
     private final String TAG = getClass().getSimpleName();
     private EventBus bus = EventBus.getDefault();
+
+    private final int MY_PERMISSION_REQUEST_LOCATION = 0;
 
     private View viewDim;
     SlideMenuExt slideMenu;
@@ -224,7 +213,7 @@ public class MainActivity extends ABaseFragmentAcitivty {
             UserManager.getInstance(contextHelper).readTutorial();
         }
 
-
+        checkPermission();
     }
 
     @Override
@@ -246,6 +235,55 @@ public class MainActivity extends ABaseFragmentAcitivty {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
+    private void checkPermission() {
+        // mashmellow 이하 no check.
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return;
+        }
+
+        // 권한이 없는 경우
+        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
+                || checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                || checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                || checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED
+                || checkSelfPermission(Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+
+            // 최초 거부를 선택하면 두번째부터 이벤트 발생 & 권한 획득이 필요한 이융를 설명
+            // Explain to the user why we need to write the permission.
+//            if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+//                Toast.makeText(this, "Need Access READ_EXTERNAL_STORAGE", Toast.LENGTH_SHORT).show();
+//            }
+//            if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+//                Toast.makeText(this, "Need Access WRITE_EXTERNAL_STORAGE", Toast.LENGTH_SHORT).show();
+//            }
+//            if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
+//                Toast.makeText(this, "Need Access CAMERA", Toast.LENGTH_SHORT).show();
+//            }
+//            if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
+//                Toast.makeText(this, "Need Access ACCESS_FINE_LOCATION", Toast.LENGTH_SHORT).show();
+//            }
+//            if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_COARSE_LOCATION)) {
+//                Toast.makeText(this, "Need Access ACCESS_COARSE_LOCATION", Toast.LENGTH_SHORT).show();
+//            }
+//            if (shouldShowRequestPermissionRationale(Manifest.permission.CALL_PHONE)) {
+//                Toast.makeText(this, "Need Access CALL_PHONE", Toast.LENGTH_SHORT).show();
+//            }
+//            if (shouldShowRequestPermissionRationale(Manifest.permission.READ_PHONE_STATE)) {
+//                Toast.makeText(this, "Need Access READ_PHONE_STATE", Toast.LENGTH_SHORT).show();
+//            }
+
+            // 요청 팝업 팝업 선택시 onRequestPermissionsResult 이동
+            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA,
+                    Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.CALL_PHONE, Manifest.permission.READ_PHONE_STATE}, MY_PERMISSION_REQUEST_LOCATION);
+        } else {
+//            Toast.makeText(this, "Successfully Access", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     protected void onDestroy(){

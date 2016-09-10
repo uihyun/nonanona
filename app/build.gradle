@@ -41,8 +41,7 @@ android {
         debug {
             // 개발용 KEY
             resValue "string", "google_maps_key", "AIzaSyAhfYsnE8mYnA3szlf07f_-n9hlgCv-CVA"
-            resValue "string", "server_url", "http://192.168.219.100:3000"
-            //resValue "string", "server_url", "https://haircok.herokuapp.com"
+            resValue "string", "server_url", "https://nuums.herokuapp.com"
             resValue "string", "isDebug", "1"
             resValue "string", "isDEBUGREPORT", "0"
         }
