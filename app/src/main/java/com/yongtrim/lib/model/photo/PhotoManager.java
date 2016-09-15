@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -16,39 +15,23 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
-import com.nuums.nuums.model.user.NsUser;
-import com.yongtrim.lib.Application;
 import com.yongtrim.lib.Config;
 import com.yongtrim.lib.ContextHelper;
-import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
 import com.yongtrim.lib.activity.imagepicker.ImagePickerActivity;
 import com.yongtrim.lib.log.Logger;
-import com.yongtrim.lib.model.GsonBodyRequest;
-import com.yongtrim.lib.model.RequestManager;
-import com.yongtrim.lib.model.user.User;
 import com.yongtrim.lib.model.user.UserManager;
 import com.yongtrim.lib.ui.CustomNetworkImageView;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
-import com.yongtrim.lib.util.FileUtil;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 
 /**
