@@ -1,33 +1,20 @@
 package com.nuums.nuums.fragment.misc;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.text.InputType;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.nuums.nuums.R;
 import com.nuums.nuums.activity.BaseActivity;
-import com.nuums.nuums.model.apply.Apply;
-import com.nuums.nuums.model.apply.ApplyData;
-import com.nuums.nuums.model.apply.ApplyManager;
-import com.nuums.nuums.model.chat.Address;
-import com.nuums.nuums.model.nanum.NanumData;
-import com.nuums.nuums.model.nanum.NanumManager;
 import com.nuums.nuums.model.report.Report;
 import com.nuums.nuums.model.user.NsUser;
-import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
 import com.yongtrim.lib.fragment.ABaseFragment;
 import com.yongtrim.lib.log.Logger;
 import com.yongtrim.lib.message.PushMessage;
@@ -43,12 +30,9 @@ import com.yongtrim.lib.sns.facebook.FacebookManager;
 import com.yongtrim.lib.sns.kakao.KakaoManager;
 import com.yongtrim.lib.sns.twitter.TwitterManager;
 import com.yongtrim.lib.ui.UltraButton;
-import com.yongtrim.lib.ui.UltraEditText;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
 
 import java.util.concurrent.CountDownLatch;
-
-import de.greenrobot.event.EventBus;
 
 /**
  * nuums / com.nuums.nuums.fragment.misc
@@ -128,7 +112,7 @@ public class SettingFragment extends ABaseFragment {
     void refresh() {
         TextView tvMyVersion = (TextView)mainView.findViewById(R.id.tvMyVersion);
 
-        TextView tvNowVersion = (TextView)mainView.findViewById(R.id.tvNowVersion);
+//        TextView tvNowVersion = (TextView)mainView.findViewById(R.id.tvNowVersion);
         UltraButton btnUpdate = (UltraButton)mainView.findViewById(R.id.btnUpdate);
 
         try {
@@ -148,9 +132,9 @@ public class SettingFragment extends ABaseFragment {
                 btnUpdate.setVisibility(View.GONE);
             }
             tvMyVersion.setText("현재버전 v" + myVersion);
-            tvNowVersion.setText("최신버전 v" + nowVersion);
+//            tvNowVersion.setText("최신버전 v" + nowVersion);
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
 
         NsUser me = UserManager.getInstance(contextHelper).getMe();

@@ -1,33 +1,21 @@
 package com.nuums.nuums.view;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.net.Uri;
-import android.os.Bundle;
-import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.nuums.nuums.R;
 import com.nuums.nuums.activity.BaseActivity;
-import com.nuums.nuums.adapter.EventAdapter;
-import com.nuums.nuums.fragment.membership.FindAccountFragment;
 import com.nuums.nuums.model.report.Report;
 import com.nuums.nuums.model.user.NsUser;
-import com.roomorama.caldroid.CaldroidFragment;
-import com.roomorama.caldroid.CaldroidListener;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.log.Logger;
 import com.yongtrim.lib.message.PushMessage;
@@ -36,7 +24,6 @@ import com.yongtrim.lib.model.config.ConfigData;
 import com.yongtrim.lib.model.config.ConfigManager;
 import com.yongtrim.lib.model.post.Post;
 import com.yongtrim.lib.model.user.LoginManager;
-import com.yongtrim.lib.model.user.User;
 import com.yongtrim.lib.model.user.UserData;
 import com.yongtrim.lib.model.user.UserManager;
 import com.yongtrim.lib.sns.SNSLoginoutListener;
@@ -46,12 +33,7 @@ import com.yongtrim.lib.sns.twitter.TwitterManager;
 import com.yongtrim.lib.ui.UltraButton;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.concurrent.CountDownLatch;
-
-import de.greenrobot.event.EventBus;
 
 /**
  * nuums / com.nuums.nuums.view
@@ -109,7 +91,7 @@ public class SlideMenuView extends LinearLayout {
     void refresh() {
         TextView tvMyVersion = (TextView)findViewById(R.id.tvMyVersion);
 
-        TextView tvNowVersion = (TextView)findViewById(R.id.tvNowVersion);
+//        TextView tvNowVersion = (TextView)findViewById(R.id.tvNowVersion);
         UltraButton btnUpdate = (UltraButton)findViewById(R.id.btnUpdate);
 
         try {
@@ -129,9 +111,9 @@ public class SlideMenuView extends LinearLayout {
                 btnUpdate.setVisibility(View.GONE);
             }
             tvMyVersion.setText("현재버전 v" + myVersion);
-            tvNowVersion.setText("최신버전 v" + nowVersion);
+//            tvNowVersion.setText("최신버전 v" + nowVersion);
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
 
         NsUser me = UserManager.getInstance(contextHelper).getMe();
