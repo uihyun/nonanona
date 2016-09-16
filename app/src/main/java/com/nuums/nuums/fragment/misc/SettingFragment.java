@@ -2,6 +2,7 @@ package com.nuums.nuums.fragment.misc;
 
 import android.content.Intent;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
+import com.nuums.nuums.MarketVersionChecker;
 import com.nuums.nuums.R;
 import com.nuums.nuums.activity.BaseActivity;
 import com.nuums.nuums.model.report.Report;
@@ -18,7 +20,6 @@ import com.nuums.nuums.model.user.NsUser;
 import com.yongtrim.lib.fragment.ABaseFragment;
 import com.yongtrim.lib.log.Logger;
 import com.yongtrim.lib.message.PushMessage;
-import com.yongtrim.lib.model.config.Config;
 import com.yongtrim.lib.model.config.ConfigData;
 import com.yongtrim.lib.model.config.ConfigManager;
 import com.yongtrim.lib.model.post.Post;
@@ -36,7 +37,7 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * nuums / com.nuums.nuums.fragment.misc
- * <p/>
+ * <p>
  * Created by yongtrim.com on 16. 1. 21..
  */
 public class SettingFragment extends ABaseFragment {
@@ -110,16 +111,18 @@ public class SettingFragment extends ABaseFragment {
     }
 
     void refresh() {
-        TextView tvMyVersion = (TextView)mainView.findViewById(R.id.tvMyVersion);
+        TextView tvMyVersion = (TextView) mainView.findViewById(R.id.tvMyVersion);
 
-//        TextView tvNowVersion = (TextView)mainView.findViewById(R.id.tvNowVersion);
-        UltraButton btnUpdate = (UltraButton)mainView.findViewById(R.id.btnUpdate);
+        TextView tvNowVersion = (TextView) mainView.findViewById(R.id.tvNowVersion);
+        UltraButton btnUpdate = (UltraButton) mainView.findViewById(R.id.btnUpdate);
 
         try {
-            String nowVersion = ConfigManager.getInstance(contextHelper).getConfigHello().getParams().getAdVersion();
+//            String nowVersion = ConfigManager.getInstance(contextHelper).getConfigHello().getParams().getAdVersion();
+            PackageInfo pinfo = contextHelper.getContext().getPackageManager().getPackageInfo(contextHelper.getContext().getPackageName(), 0);
+
+            String nowVersion = MarketVersionChecker.getMarketVersion(pinfo.packageName);
             String[] nowVersions = nowVersion.split("[.]");
 
-            PackageInfo pinfo = contextHelper.getContext().getPackageManager().getPackageInfo(contextHelper.getContext().getPackageName(), 0);
             String myVersion = pinfo.versionName;
             String[] myVersions = myVersion.split("[.]");
 
@@ -132,24 +135,24 @@ public class SettingFragment extends ABaseFragment {
                 btnUpdate.setVisibility(View.GONE);
             }
             tvMyVersion.setText("현재버전 v" + myVersion);
-//            tvNowVersion.setText("최신버전 v" + nowVersion);
+            tvNowVersion.setText("최신버전 v" + nowVersion);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         NsUser me = UserManager.getInstance(contextHelper).getMe();
 
-        UltraButton tvUnreadNotice = (UltraButton)mainView.findViewById(R.id.tvUnreadNotice);
-        UltraButton tvUnreadFaq = (UltraButton)mainView.findViewById(R.id.tvUnreadFaq);
+        UltraButton tvUnreadNotice = (UltraButton) mainView.findViewById(R.id.tvUnreadNotice);
+        UltraButton tvUnreadFaq = (UltraButton) mainView.findViewById(R.id.tvUnreadFaq);
 
-        if(me.getUnreadNotice() == 0) {
+        if (me.getUnreadNotice() == 0) {
             tvUnreadNotice.setVisibility(View.GONE);
         } else {
             tvUnreadNotice.setVisibility(View.VISIBLE);
             tvUnreadNotice.setText("" + me.getUnreadNotice());
         }
 
-        if(me.getUnreadFaq() == 0) {
+        if (me.getUnreadFaq() == 0) {
             tvUnreadFaq.setVisibility(View.GONE);
         } else {
             tvUnreadFaq.setVisibility(View.VISIBLE);
@@ -159,25 +162,25 @@ public class SettingFragment extends ABaseFragment {
 
     public void onButtonClicked(View v) {
 
-        switch(v.getId()) {
+        switch (v.getId()) {
             case R.id.viewAlarm: {
                 Intent i = new Intent(getContext(), BaseActivity.class);
                 i.putExtra("activityCode", BaseActivity.ActivityCode.ALARM.ordinal());
                 getContext().startActivity(i);
             }
-                break;
+            break;
             case R.id.viewLogout:
                 new SweetAlertDialog(getContext())
-                    .setContentText("정말 로그아웃 하시겠습니까?")
-                    .showCancelButton(true)
-                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                        @Override
-                        public void onClick(final SweetAlertDialog sweetAlertDialog) {
-                            sweetAlertDialog.dismissWithAnimation();
-                            logout(false);
-                        }
-                    })
-                    .show();
+                        .setContentText("정말 로그아웃 하시겠습니까?")
+                        .showCancelButton(true)
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(final SweetAlertDialog sweetAlertDialog) {
+                                sweetAlertDialog.dismissWithAnimation();
+                                logout(false);
+                            }
+                        })
+                        .show();
                 break;
             case R.id.viewFaq: {
                 Intent i = new Intent(getContext(), BaseActivity.class);
@@ -186,15 +189,15 @@ public class SettingFragment extends ABaseFragment {
                 getContext().startActivity(i);
             }
 
-                break;
-            case R.id.viewNotice:{
+            break;
+            case R.id.viewNotice: {
                 Intent i = new Intent(getContext(), BaseActivity.class);
                 i.putExtra("activityCode", BaseActivity.ActivityCode.POSTLIST.ordinal());
                 i.putExtra("type", Post.TYPE_NOTICE);
                 getContext().startActivity(i);
             }
-                break;
-            case R.id.viewReport:{
+            break;
+            case R.id.viewReport: {
                 Intent i = new Intent(getContext(), BaseActivity.class);
                 i.putExtra("activityCode", BaseActivity.ActivityCode.REPORT.ordinal());
                 i.putExtra("type", Report.REPORTTYPE_REPORT);
@@ -207,14 +210,14 @@ public class SettingFragment extends ABaseFragment {
                 i.putExtra("type", Report.REPORTTYPE_INQUIRY);
                 getContext().startActivity(i);
             }
-                break;
+            break;
             case R.id.viewInquryAd: {
                 Intent i = new Intent(getContext(), BaseActivity.class);
                 i.putExtra("activityCode", BaseActivity.ActivityCode.REPORT.ordinal());
                 i.putExtra("type", Report.REPORTTYPE_AD);
                 getContext().startActivity(i);
             }
-                break;
+            break;
             case R.id.viewWithdraw: {
                 new SweetAlertDialog(getContext())
                         .setContentText("탈퇴후 재가입은 한달후에 가능합니다.\n정말 탈퇴하시겠습니까?")
@@ -228,14 +231,20 @@ public class SettingFragment extends ABaseFragment {
                         })
                         .show();
             }
-                break;
+            break;
             case R.id.btnUpdate: {
-                Config config = ConfigManager.getInstance(contextHelper).getConfigHello();
+                PackageInfo pinfo = null;
+                try {
+                    pinfo = contextHelper.getContext().getPackageManager().getPackageInfo(contextHelper.getContext().getPackageName(), 0);
+                } catch (PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
+                }
 
                 contextHelper.getActivity().startActivity(new Intent(Intent.ACTION_VIEW,
-                        Uri.parse(config.getParams().getAdUrl())));
+                        Uri.parse("https://play.google.com/store/apps/details?id="
+                                + pinfo.packageName)));
             }
-                break;
+            break;
             case R.id.actionbarImageButton:
                 contextHelper.getActivity().finish();
                 break;
@@ -244,7 +253,7 @@ public class SettingFragment extends ABaseFragment {
 
 
     public void onEvent(PushMessage pushMessage) {
-        switch(pushMessage.getActionCode()) {
+        switch (pushMessage.getActionCode()) {
             case PushMessage.ACTIONCODE_CHANGE_ME:
                 refresh();
                 break;
@@ -366,7 +375,6 @@ public class SettingFragment extends ABaseFragment {
         }).start();
 
 
-
         final CountDownLatch latchKakao = new CountDownLatch(1);
 
         new Thread(new Runnable() {
@@ -405,7 +413,6 @@ public class SettingFragment extends ABaseFragment {
         }).start();
 
 
-
         final CountDownLatch latchWithdraw = new CountDownLatch(1);
 
         new Thread(new Runnable() {
@@ -414,7 +421,7 @@ public class SettingFragment extends ABaseFragment {
                 try {
                     latchKakao.await();
 
-                    if(isWithdraw) {
+                    if (isWithdraw) {
                         UserManager.getInstance(contextHelper).delete(me,
                                 new Response.Listener<UserData>() {
                                     @Override
@@ -442,7 +449,6 @@ public class SettingFragment extends ABaseFragment {
         }).start();
 
 
-
         new Thread(new Runnable() {
 
             @Override
@@ -455,7 +461,7 @@ public class SettingFragment extends ABaseFragment {
                         public void run() {
                             contextHelper.hideProgress();
 
-                            if(isWithdraw) {
+                            if (isWithdraw) {
                                 Toast.makeText(contextHelper.getContext(), "탈퇴 하였습니다.", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(contextHelper.getContext(), "로그아웃 하였습니다.", Toast.LENGTH_SHORT).show();

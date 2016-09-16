@@ -3,6 +3,7 @@ package com.nuums.nuums.view;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
+import com.nuums.nuums.MarketVersionChecker;
 import com.nuums.nuums.R;
 import com.nuums.nuums.activity.BaseActivity;
 import com.nuums.nuums.model.report.Report;
@@ -19,7 +21,6 @@ import com.nuums.nuums.model.user.NsUser;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.log.Logger;
 import com.yongtrim.lib.message.PushMessage;
-import com.yongtrim.lib.model.config.Config;
 import com.yongtrim.lib.model.config.ConfigData;
 import com.yongtrim.lib.model.config.ConfigManager;
 import com.yongtrim.lib.model.post.Post;
@@ -37,7 +38,7 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * nuums / com.nuums.nuums.view
- * <p/>
+ * <p>
  * Created by yongtrim.com on 15. 12. 12..
  */
 public class SlideMenuView extends LinearLayout {
@@ -47,7 +48,6 @@ public class SlideMenuView extends LinearLayout {
     //AvatarView viewAvatar;
 
     NsUser me;
-
 
 
     public SlideMenuView(Context context, ContextHelper contextHelper) {
@@ -63,7 +63,7 @@ public class SlideMenuView extends LinearLayout {
 
     private void init() {
 
-        LayoutInflater li = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater li = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         li.inflate(R.layout.view_slidemenu, this, true);
 
 
@@ -88,17 +88,20 @@ public class SlideMenuView extends LinearLayout {
                 "HELLO"
         );
     }
-    void refresh() {
-        TextView tvMyVersion = (TextView)findViewById(R.id.tvMyVersion);
 
-//        TextView tvNowVersion = (TextView)findViewById(R.id.tvNowVersion);
-        UltraButton btnUpdate = (UltraButton)findViewById(R.id.btnUpdate);
+    void refresh() {
+        TextView tvMyVersion = (TextView) findViewById(R.id.tvMyVersion);
+
+        TextView tvNowVersion = (TextView) findViewById(R.id.tvNowVersion);
+        UltraButton btnUpdate = (UltraButton) findViewById(R.id.btnUpdate);
 
         try {
-            String nowVersion = ConfigManager.getInstance(contextHelper).getConfigHello().getParams().getAdVersion();
+//            String nowVersion = ConfigManager.getInstance(contextHelper).getConfigHello().getParams().getAdVersion();
+            PackageInfo pinfo = contextHelper.getContext().getPackageManager().getPackageInfo(contextHelper.getContext().getPackageName(), 0);
+
+            String nowVersion = MarketVersionChecker.getMarketVersion(pinfo.packageName);
             String[] nowVersions = nowVersion.split("[.]");
 
-            PackageInfo pinfo = contextHelper.getContext().getPackageManager().getPackageInfo(contextHelper.getContext().getPackageName(), 0);
             String myVersion = pinfo.versionName;
             String[] myVersions = myVersion.split("[.]");
 
@@ -111,24 +114,24 @@ public class SlideMenuView extends LinearLayout {
                 btnUpdate.setVisibility(View.GONE);
             }
             tvMyVersion.setText("현재버전 v" + myVersion);
-//            tvNowVersion.setText("최신버전 v" + nowVersion);
+            tvNowVersion.setText("최신버전 v" + nowVersion);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         NsUser me = UserManager.getInstance(contextHelper).getMe();
 
-        UltraButton tvUnreadNotice = (UltraButton)findViewById(R.id.tvUnreadNotice);
-        UltraButton tvUnreadFaq = (UltraButton)findViewById(R.id.tvUnreadFaq);
+        UltraButton tvUnreadNotice = (UltraButton) findViewById(R.id.tvUnreadNotice);
+        UltraButton tvUnreadFaq = (UltraButton) findViewById(R.id.tvUnreadFaq);
 
-        if(me.getUnreadNotice() == 0) {
+        if (me.getUnreadNotice() == 0) {
             tvUnreadNotice.setVisibility(View.GONE);
         } else {
             tvUnreadNotice.setVisibility(View.VISIBLE);
             tvUnreadNotice.setText("" + me.getUnreadNotice());
         }
 
-        if(me.getUnreadFaq() == 0) {
+        if (me.getUnreadFaq() == 0) {
             tvUnreadFaq.setVisibility(View.GONE);
         } else {
             tvUnreadFaq.setVisibility(View.VISIBLE);
@@ -138,7 +141,7 @@ public class SlideMenuView extends LinearLayout {
 
     public boolean onButtonClicked(View v) {
 
-        switch(v.getId()) {
+        switch (v.getId()) {
             case R.id.viewAlarm: {
                 Intent i = new Intent(getContext(), BaseActivity.class);
                 i.putExtra("activityCode", BaseActivity.ActivityCode.ALARM.ordinal());
@@ -157,7 +160,7 @@ public class SlideMenuView extends LinearLayout {
                             }
                         })
                         .show();
-            return true;
+                return true;
             case R.id.viewFaq: {
                 Intent i = new Intent(getContext(), BaseActivity.class);
                 i.putExtra("activityCode", BaseActivity.ActivityCode.POSTLIST.ordinal());
@@ -166,14 +169,14 @@ public class SlideMenuView extends LinearLayout {
             }
 
             return true;
-            case R.id.viewNotice:{
+            case R.id.viewNotice: {
                 Intent i = new Intent(getContext(), BaseActivity.class);
                 i.putExtra("activityCode", BaseActivity.ActivityCode.POSTLIST.ordinal());
                 i.putExtra("type", Post.TYPE_NOTICE);
                 getContext().startActivity(i);
             }
             return true;
-            case R.id.viewReport:{
+            case R.id.viewReport: {
                 Intent i = new Intent(getContext(), BaseActivity.class);
                 i.putExtra("activityCode", BaseActivity.ActivityCode.REPORT.ordinal());
                 i.putExtra("type", Report.REPORTTYPE_REPORT);
@@ -209,10 +212,16 @@ public class SlideMenuView extends LinearLayout {
             }
             return true;
             case R.id.btnUpdate: {
-                Config config = ConfigManager.getInstance(contextHelper).getConfigHello();
+                PackageInfo pinfo = null;
+                try {
+                    pinfo = contextHelper.getContext().getPackageManager().getPackageInfo(contextHelper.getContext().getPackageName(), 0);
+                } catch (PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
+                }
 
                 contextHelper.getActivity().startActivity(new Intent(Intent.ACTION_VIEW,
-                        Uri.parse(config.getParams().getAdUrl())));
+                        Uri.parse("https://play.google.com/store/apps/details?id="
+                                + pinfo.packageName)));
             }
             return true;
         }
@@ -221,7 +230,7 @@ public class SlideMenuView extends LinearLayout {
 
 
     public void onEvent(PushMessage pushMessage) {
-        switch(pushMessage.getActionCode()) {
+        switch (pushMessage.getActionCode()) {
             case PushMessage.ACTIONCODE_CHANGE_ME:
                 refresh();
                 break;
@@ -343,7 +352,6 @@ public class SlideMenuView extends LinearLayout {
         }).start();
 
 
-
         final CountDownLatch latchKakao = new CountDownLatch(1);
 
         new Thread(new Runnable() {
@@ -382,7 +390,6 @@ public class SlideMenuView extends LinearLayout {
         }).start();
 
 
-
         final CountDownLatch latchWithdraw = new CountDownLatch(1);
 
         new Thread(new Runnable() {
@@ -391,7 +398,7 @@ public class SlideMenuView extends LinearLayout {
                 try {
                     latchKakao.await();
 
-                    if(isWithdraw) {
+                    if (isWithdraw) {
                         UserManager.getInstance(contextHelper).delete(me,
                                 new Response.Listener<UserData>() {
                                     @Override
@@ -419,7 +426,6 @@ public class SlideMenuView extends LinearLayout {
         }).start();
 
 
-
         new Thread(new Runnable() {
 
             @Override
@@ -432,7 +438,7 @@ public class SlideMenuView extends LinearLayout {
                         public void run() {
                             contextHelper.hideProgress();
 
-                            if(isWithdraw) {
+                            if (isWithdraw) {
                                 Toast.makeText(contextHelper.getContext(), "탈퇴 하였습니다.", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(contextHelper.getContext(), "로그아웃 하였습니다.", Toast.LENGTH_SHORT).show();
