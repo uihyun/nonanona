@@ -1,23 +1,15 @@
 package com.nuums.nuums.fragment.nanum;
 
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.ResolveInfo;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.text.InputFilter;
 import android.text.SpannableString;
-import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,41 +24,31 @@ import com.nuums.nuums.adapter.PhotoPagerAdapter;
 import com.nuums.nuums.model.nanum.Nanum;
 import com.nuums.nuums.model.nanum.NanumData;
 import com.nuums.nuums.model.nanum.NanumManager;
-import com.nuums.nuums.model.review.Review;
-import com.nuums.nuums.model.user.NsUser;
 import com.nuums.nuums.view.PhotoScrollView;
 import com.yongtrim.lib.Config;
 import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
-import com.yongtrim.lib.adapter.ImagePagerAdapter;
 import com.yongtrim.lib.fragment.ABaseFragment;
-import com.yongtrim.lib.log.Logger;
 import com.yongtrim.lib.message.PushMessage;
-import com.yongtrim.lib.model.ACommonData;
 import com.yongtrim.lib.model.config.ConfigManager;
 import com.yongtrim.lib.model.photo.Photo;
 import com.yongtrim.lib.model.photo.PhotoManager;
-import com.yongtrim.lib.model.post.Post;
 import com.yongtrim.lib.model.user.UserManager;
 import com.yongtrim.lib.ui.UltraButton;
 import com.yongtrim.lib.ui.UltraEditText;
 import com.yongtrim.lib.ui.autoscrollviewpager.AutoScrollViewPager;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
-import com.yongtrim.lib.util.MiscUtil;
 import com.yongtrim.lib.util.StringFilter;
 import com.yongtrim.lib.util.UIUtil;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
-import java.util.regex.Pattern;
 
 import de.greenrobot.event.EventBus;
 
 /**
  * nuums / com.nuums.nuums.fragment.nanum
- * <p/>
+ * <p>
  * Created by yongtrim.com on 15. 12. 20..
  */
 public class NanumEditFragment extends ABaseFragment implements UltraEditText.OnChangeListener {
@@ -116,24 +98,24 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
 
         isModify = contextHelper.getActivity().getIntent().getBooleanExtra("isModify", false);
 
-        if(saveInstanceState != null) {
+        if (saveInstanceState != null) {
             nanum = Nanum.getNanum(saveInstanceState.getString("nanum"));
         }
 
-        if(isModify) {
+        if (isModify) {
             contextHelper.getActivity().setupActionBar("수정하기");
-            if(nanum == null)
+            if (nanum == null)
                 nanum = Nanum.getNanum(contextHelper.getActivity().getIntent().getStringExtra("nanum"));
-        } else if(contextHelper.getActivity().getIntent().hasExtra("asker")) {
+        } else if (contextHelper.getActivity().getIntent().hasExtra("asker")) {
             contextHelper.getActivity().setupActionBar("나눔등록");
             isAsker = true;
 
-            if(nanum == null)
+            if (nanum == null)
                 nanum = new Nanum();
         } else {
-            if(nanum == null)
+            if (nanum == null)
                 nanum = ConfigManager.getInstance(contextHelper).getPreference().getNanumParam();
-            if(nanum == null) {
+            if (nanum == null) {
                 nanum = new Nanum();
             }
         }
@@ -147,7 +129,7 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
         viewTop = view.findViewById(R.id.viewTop);
         UIUtil.setRatio(viewTop, getContext(), 320, 250);//원래 200
 
-        viewPhotoMain = (AutoScrollViewPager)view.findViewById(R.id.viewPhoto);
+        viewPhotoMain = (AutoScrollViewPager) view.findViewById(R.id.viewPhoto);
         viewPhotoMain.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -165,7 +147,7 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
             }
         });
 
-        photoScrollView = (PhotoScrollView)view.findViewById(R.id.photoScrollView);
+        photoScrollView = (PhotoScrollView) view.findViewById(R.id.photoScrollView);
         photoScrollView.setPhotos((ArrayList<Photo>) nanum.getPhotos());
         photoScrollView.setMaxPhotoCount(6);
         photoScrollView.setPhotoChangeListener(new PhotoScrollView.OnPhotoChangeListener() {
@@ -190,23 +172,23 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
         });
 
 
-        btnDescription = (UltraButton)view.findViewById(R.id.btnDescription);
-        btnLocation = (UltraButton)view.findViewById(R.id.btnLocation);
-        btnAmount = (UltraButton)view.findViewById(R.id.btnAmount);
+        btnDescription = (UltraButton) view.findViewById(R.id.btnDescription);
+        btnLocation = (UltraButton) view.findViewById(R.id.btnLocation);
+        btnAmount = (UltraButton) view.findViewById(R.id.btnAmount);
 
         viewArrival = view.findViewById(R.id.viewArrival);
-        cbArrival = (CheckBox)view.findViewById(R.id.cbArrival);
-        tvArrival = (TextView)view.findViewById(R.id.tvArrival);
+        cbArrival = (CheckBox) view.findViewById(R.id.cbArrival);
+        tvArrival = (TextView) view.findViewById(R.id.tvArrival);
 
         viewSelect = view.findViewById(R.id.viewSelect);
-        cbSelect = (CheckBox)view.findViewById(R.id.cbSelect);
-        tvSelect = (TextView)view.findViewById(R.id.tvSelect);
+        cbSelect = (CheckBox) view.findViewById(R.id.cbSelect);
+        tvSelect = (TextView) view.findViewById(R.id.tvSelect);
 
         viewRandom = view.findViewById(R.id.viewRandom);
-        cbRandom = (CheckBox)view.findViewById(R.id.cbRandom);
-        tvRandom = (TextView)view.findViewById(R.id.tvRandom);
+        cbRandom = (CheckBox) view.findViewById(R.id.cbRandom);
+        tvRandom = (TextView) view.findViewById(R.id.tvRandom);
 
-        etTitle = (UltraEditText)view.findViewById(R.id.etTitle);
+        etTitle = (UltraEditText) view.findViewById(R.id.etTitle);
         etTitle.setText(nanum.getTitle());
         etTitle.setChangeListener(this);
 
@@ -216,8 +198,8 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
 
         etTitle.setFilters(allowAlphanumericHangul);
 
-        if(isModify) {
-            UltraButton btnSubmit = (UltraButton)view.findViewById(R.id.btnSubmit);
+        if (isModify) {
+            UltraButton btnSubmit = (UltraButton) view.findViewById(R.id.btnSubmit);
             btnSubmit.setText("수정하기");
 
             cbArrival.setEnabled(false);
@@ -228,7 +210,7 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
         }
 
 
-        if(UserManager.getInstance(contextHelper).getMe().getRole() != null && UserManager.getInstance(contextHelper).getMe().getRole().equals("ADMIN")) {
+        if (UserManager.getInstance(contextHelper).getMe().getRole() != null && UserManager.getInstance(contextHelper).getMe().getRole().equals("ADMIN")) {
             btnLocation.setVisibility(View.GONE);
         }
 
@@ -271,7 +253,7 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
     }
 
     void refresh() {
-        if(photoPagerAdapter == null) {
+        if (photoPagerAdapter == null) {
             photoPagerAdapter = new PhotoPagerAdapter(contextHelper, nanum.getPhotos());
             viewPhotoMain.setAdapter(photoPagerAdapter);
             photoPagerAdapter.setOnPhotoPagerListener(new PhotoPagerAdapter.OnPhotoPagerListener() {
@@ -318,19 +300,19 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
 
         photoScrollView.refresh(contextHelper);
 
-        if(TextUtils.isEmpty(nanum.getDescription())) {
+        if (TextUtils.isEmpty(nanum.getDescription())) {
             btnDescription.setText("상세설명");
         } else {
             btnDescription.setText(nanum.getDescription());
         }
 
-        if(TextUtils.isEmpty(nanum.getAddressFake())) {
+        if (TextUtils.isEmpty(nanum.getAddressFake())) {
             btnLocation.setText("위치");
         } else {
             btnLocation.setText(nanum.getAddressFakeShorter());
         }
 
-        if(nanum.getAmount() > 0) {
+        if (nanum.getAmount() > 0) {
             btnAmount.setText(nanum.getAmount() + "개");
         } else {
             btnAmount.setText("수량");
@@ -345,27 +327,27 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
         tvSelect.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.gray));
         tvRandom.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.gray));
 
-        if(nanum.getMethod().equals(Nanum.METHOD_ARRIVAL)) {
+        if (nanum.getMethod().equals(Nanum.METHOD_ARRIVAL)) {
             cbArrival.setChecked(true);
             tvArrival.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.green));
 
-        } else if(nanum.getMethod().equals(Nanum.METHOD_SELECT)) {
+        } else if (nanum.getMethod().equals(Nanum.METHOD_SELECT)) {
             cbSelect.setChecked(true);
             tvSelect.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.green));
 
-        } else if(nanum.getMethod().equals(Nanum.METHOD_RANDOM)) {
+        } else if (nanum.getMethod().equals(Nanum.METHOD_RANDOM)) {
             cbRandom.setChecked(true);
             tvRandom.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.green));
         }
 
-        if(!isModify && !isAsker)
+        if (!isModify && !isAsker)
             ConfigManager.getInstance(contextHelper).getPreference().putNanumParam(nanum);
     }
 
 
     public void onButtonClicked(View v) {
 
-        switch(v.getId()) {
+        switch (v.getId()) {
             case R.id.btnDescription: {
                 photosBuffer = nanum.getPhotos();
 
@@ -385,7 +367,7 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
             }
             break;
             case R.id.btnAmount: {
-                if(isModify) {
+                if (isModify) {
                     new SweetAlertDialog(getContext()).setContentText("수정하실 수 없습니다.").show();
                 } else {
                     new SweetAlertDialog(getContext(), SweetAlertDialog.NUMBERPICKER_TYPE)
@@ -409,8 +391,8 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
             }
             break;
             case R.id.viewArrival:
-            case R.id.cbArrival:{
-                if(isModify) {
+            case R.id.cbArrival: {
+                if (isModify) {
                     new SweetAlertDialog(getContext()).setContentText("수정하실 수 없습니다.").show();
                 } else {
                     nanum.setMethod(Nanum.METHOD_ARRIVAL);
@@ -419,8 +401,8 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
             }
             break;
             case R.id.viewSelect:
-            case R.id.cbSelect:{
-                if(isModify) {
+            case R.id.cbSelect: {
+                if (isModify) {
                     new SweetAlertDialog(getContext()).setContentText("수정하실 수 없습니다.").show();
                 } else {
                     nanum.setMethod(Nanum.METHOD_SELECT);
@@ -429,8 +411,8 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
             }
             break;
             case R.id.viewRandom:
-            case R.id.cbRandom:{
-                if(isModify) {
+            case R.id.cbRandom: {
+                if (isModify) {
                     new SweetAlertDialog(getContext()).setContentText("수정하실 수 없습니다.").show();
                 } else {
                     nanum.setMethod(Nanum.METHOD_RANDOM);
@@ -465,40 +447,40 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (resultCode) {
             case Activity.RESULT_OK:
-                if(requestCode >= ABaseFragmentAcitivty.REQUEST_CROP_IMAGE) {
+                if (requestCode >= ABaseFragmentAcitivty.REQUEST_CROP_IMAGE) {
 
                     nanum.getPhotos().get(requestCode - ABaseFragmentAcitivty.REQUEST_CROP_IMAGE).setPath(PhotoManager.getInstance(contextHelper).getPathCropped());
                     nanum.getPhotos().get(requestCode - ABaseFragmentAcitivty.REQUEST_CROP_IMAGE).makeBitmap(contextHelper);
                     refresh();
 
-                } else if(requestCode == ABaseFragmentAcitivty.REQUEST_DESCRIPTION) {
+                } else if (requestCode == ABaseFragmentAcitivty.REQUEST_DESCRIPTION) {
                     nanum = Nanum.getNanum(data.getStringExtra("nanum"));
                     nanum.setPhotos(photosBuffer);
 
                     refresh();
-                } else if(requestCode == ABaseFragmentAcitivty.REQUEST_POSTCODE) {
+                } else if (requestCode == ABaseFragmentAcitivty.REQUEST_POSTCODE) {
                     nanum = Nanum.getNanum(data.getStringExtra("nanum"));
                     nanum.setPhotos(photosBuffer);
 
                     refresh();
-                } else if(requestCode >= ABaseFragmentAcitivty.REQUEST_PICK_IMAGE) {
+                } else if (requestCode >= ABaseFragmentAcitivty.REQUEST_PICK_IMAGE) {
 
-                    if(data != null && data.getParcelableArrayListExtra("photos") != null) {
+                    if (data != null && data.getParcelableArrayListExtra("photos") != null) {
                         List<Photo> photos = data.getParcelableArrayListExtra("photos");
 
                         int index = requestCode - ABaseFragmentAcitivty.REQUEST_PICK_IMAGE;
 
-                        for(Photo _photo : photos) {
+                        for (Photo _photo : photos) {
                             _photo.setPath(null);
                             _photo.makeBitmap(contextHelper);
 
                             nanum.getPhotos().set(index++, _photo);
                         }
                     } else {
-                        String uri = PhotoManager.getInstance(contextHelper).getPickImageResultUri(data).toString();
-                        int orientation = PhotoManager.getInstance(contextHelper).getExifRotation(data.getData());
+                        Uri uri = PhotoManager.getInstance(contextHelper).getPickImageResultUri(data);
+                        int orientation = PhotoManager.getInstance(contextHelper).getExifRotation(uri);
 
-                        Photo photo = new Photo(uri, orientation);
+                        Photo photo = new Photo(uri.toString(), orientation);
                         photo.setType(Photo.TYPE_PHOTO);
                         photo.setPath(null);
                         photo.makeBitmap(contextHelper);
@@ -506,7 +488,7 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
                         nanum.getPhotos().set(requestCode - ABaseFragmentAcitivty.REQUEST_PICK_IMAGE, photo);
                     }
 
-                    if(!isModify && !isAsker)
+                    if (!isModify && !isAsker)
                         ConfigManager.getInstance(contextHelper).getPreference().putNanumParam(nanum);
                 }
                 break;
@@ -519,43 +501,42 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
 
     public void onEditTextChanged(UltraEditText editText) {
         nanum.setTitle(editText.getText().toString());
-        if(!isModify && !isAsker)
+        if (!isModify && !isAsker)
             ConfigManager.getInstance(contextHelper).getPreference().putNanumParam(nanum);
     }
 
 
     void varify() {
-        if(nanum.getPhotoCnt() < 3) {
+        if (nanum.getPhotoCnt() < 3) {
             new SweetAlertDialog(getContext()).setContentText("사진은 3장 이상 등록해야 합니다.").show();
             return;
         }
 
-        if(TextUtils.isEmpty(nanum.getTitle())) {
+        if (TextUtils.isEmpty(nanum.getTitle())) {
             new SweetAlertDialog(getContext()).setContentText("나눔명을 입력하세요.").show();
             return;
         }
 
-        if(UserManager.getInstance(contextHelper).getMe().getRole() != null &&
+        if (UserManager.getInstance(contextHelper).getMe().getRole() != null &&
                 !UserManager.getInstance(contextHelper).getMe().getRole().equals("ADMIN")) {
-            if(TextUtils.isEmpty(nanum.getAddressFake())) {
+            if (TextUtils.isEmpty(nanum.getAddressFake())) {
                 new SweetAlertDialog(getContext()).setContentText("위치를 입력하세요.").show();
                 return;
             }
         }
 
-        if(nanum.getAmount() == 0) {
+        if (nanum.getAmount() == 0) {
             new SweetAlertDialog(getContext()).setContentText("수량을 입력하세요.").show();
             return;
         }
 
-        if(TextUtils.isEmpty(nanum.getDescription())) {
+        if (TextUtils.isEmpty(nanum.getDescription())) {
             new SweetAlertDialog(getContext()).setContentText("상세설명을 입력하세요.").show();
             return;
         }
 
 
-
-        if(isModify) {
+        if (isModify) {
             submit();
         } else {
 
@@ -597,7 +578,7 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
         contextHelper.showProgress("");
         final CountDownLatch latchCreate = new CountDownLatch(1);
 
-        if(isModify) {
+        if (isModify) {
             latchCreate.countDown();
         } else {
             new Thread(new Runnable() {
@@ -610,7 +591,7 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
                                     public void onResponse(NanumData response) {
                                         if (response.isSuccess()) {
                                             //response.shop.patch(contextHelper);
-                                            if(response.user != null) {
+                                            if (response.user != null) {
                                                 UserManager.getInstance(contextHelper).setMe(response.user);
 
                                             }
@@ -712,11 +693,11 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
 
                                 PhotoManager.getInstance(contextHelper).clearCache();
 
-                                if(isModify) {
+                                if (isModify) {
                                     EventBus.getDefault().post(new PushMessage().setActionCode(PushMessage.ACTIONCODE_CHANGE_NANUM).setObject(nanum));
                                     contextHelper.getActivity().finish();
                                     Toast.makeText(contextHelper.getContext(), "수정하였습니다.", Toast.LENGTH_SHORT).show();
-                                } else if(isAsker) {
+                                } else if (isAsker) {
                                     EventBus.getDefault().post(new PushMessage().setActionCode(PushMessage.ACTIONCODE_ADDED_NANUM).setObject(nanum));
                                     contextHelper.getActivity().finish();
                                     Toast.makeText(contextHelper.getContext(), "등록하였습니다.", Toast.LENGTH_SHORT).show();
@@ -731,7 +712,6 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
                                             .setContentText("등록하였습니다.")
                                             .show();
                                 }
-
 
 
                             } catch (Exception e) {

@@ -1,12 +1,5 @@
 package com.yongtrim.lib.model;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.text.TextUtils;
-import android.util.Log;
-
-import com.nuums.nuums.AppController;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
@@ -16,8 +9,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonRequest;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
+import com.nuums.nuums.AppController;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.log.Logger;
 import com.yongtrim.lib.model.user.LoginManager;
@@ -153,10 +146,8 @@ public class GsonBodyRequest<T> extends JsonRequest<T> {
                 @Override
                 public void run() {
                     try {
-                        PackageInfo pinfo = mContextHelper.getContext().getPackageManager().getPackageInfo(mContextHelper.getContext().getPackageName(), 0);
-
                         SweetAlertDialog dialog = new SweetAlertDialog(mContextHelper.getContext())
-                                .setContentText("네트웍 장애입니다. 네트워크 확인후 다시 실행해주세요~" + pinfo.versionName)
+                                .setContentText("네트웍 장애입니다. 네트워크 확인후 다시 실행해주세요~")
                                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                     @Override
                                     public void onClick(SweetAlertDialog sDialog) {

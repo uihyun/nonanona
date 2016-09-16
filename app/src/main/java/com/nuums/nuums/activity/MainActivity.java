@@ -39,25 +39,21 @@ import me.tangke.slidemenu.SlideMenu;
 
 /**
  * nuums / com.nuums.nuums
- * <p/>
+ * <p>
  * Created by yongtrim.com on 15.12. 7..
  */
 public class MainActivity extends ABaseFragmentAcitivty {
     private final String TAG = getClass().getSimpleName();
-    private EventBus bus = EventBus.getDefault();
-
-    private final int MY_PERMISSION_REQUEST_LOCATION = 0;
-
-    private View viewDim;
+    private final int MY_PERMISSION_REQUEST_LOCATION = 2;
+    public boolean isKeywordEditMode = true;
     SlideMenuExt slideMenu;
     SlideMenuView slideMenuView;
-
     PagerSlidingTabStrip tabbar;
-
     ViewPager pager;
-
     java.util.ArrayList<Talk> talks;
-
+    private EventBus bus = EventBus.getDefault();
+    private View viewDim;
+    private BackPressCloseHandler backPressCloseHandler;
 
     void setLeftDrawer() {
         ImageButton btnBack = contextHelper.getActivity().setBackButtonAndVisiable(R.drawable.leftdr_button);
@@ -71,6 +67,7 @@ public class MainActivity extends ABaseFragmentAcitivty {
         });
 
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,7 +105,7 @@ public class MainActivity extends ABaseFragmentAcitivty {
 
             @Override
             public void onPageSelected(int position) {
-                switch(position) {
+                switch (position) {
                     case 0:
                         contextHelper.getActivity().setupActionBar(""/*"나눔목록"*/);
                         contextHelper.getActivity().backgroundColor(ContextCompat.getColor(contextHelper.getContext(), R.color.green));
@@ -185,20 +182,20 @@ public class MainActivity extends ABaseFragmentAcitivty {
 
         tabbar.setChatBadge(UserManager.getInstance(contextHelper).getMe().getUnreadCnt());
 
-        if(!UserManager.getInstance(contextHelper).getMe().isLogin()) {
+        if (!UserManager.getInstance(contextHelper).getMe().isLogin()) {
             finish();
             Intent i = new Intent(contextHelper.getContext(), SplashActivity.class);
             contextHelper.getContext().startActivity(i);
         }
 
-        if(contextHelper.getActivity().getIntent().hasExtra("to")) {
+        if (contextHelper.getActivity().getIntent().hasExtra("to")) {
             Intent i = new Intent(contextHelper.getContext(), BaseActivity.class);
             i.putExtra("activityCode", BaseActivity.ActivityCode.CHAT.ordinal());
             i.putExtra("to", contextHelper.getActivity().getIntent().getStringExtra("to"));
             contextHelper.getContext().startActivity(i);
         }
 
-        if(contextHelper.getActivity().getIntent().hasExtra("nanum_id")) {
+        if (contextHelper.getActivity().getIntent().hasExtra("nanum_id")) {
             Intent i = new Intent(contextHelper.getContext(), BaseActivity.class);
             i.putExtra("activityCode", BaseActivity.ActivityCode.NANUMVIEWER.ordinal());
             i.putExtra("nanum_id", contextHelper.getActivity().getIntent().getStringExtra("nanum_id"));
@@ -206,28 +203,28 @@ public class MainActivity extends ABaseFragmentAcitivty {
         }
 
 
-        if(!UserManager.getInstance(contextHelper).isReadTutorial()) {
+        if (!UserManager.getInstance(contextHelper).isReadTutorial()) {
             Intent i = new Intent(this, Base3Activity.class);
             i.putExtra("activityCode", Base3Activity.ActivityCode.TUTORIAL.ordinal());
             startActivity(i);
             UserManager.getInstance(contextHelper).readTutorial();
         }
 
-        checkPermission();
+//        checkPermission();
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 
-        if(intent.hasExtra("to")) {
+        if (intent.hasExtra("to")) {
             Intent i = new Intent(contextHelper.getContext(), BaseActivity.class);
             i.putExtra("activityCode", BaseActivity.ActivityCode.CHAT.ordinal());
             i.putExtra("to", intent.getStringExtra("to"));
             contextHelper.getContext().startActivity(i);
         }
 
-        if(intent.hasExtra("nanum_id")) {
+        if (intent.hasExtra("nanum_id")) {
             Intent i = new Intent(contextHelper.getContext(), BaseActivity.class);
             i.putExtra("activityCode", BaseActivity.ActivityCode.NANUMVIEWER.ordinal());
             i.putExtra("nanum_id", intent.getStringExtra("nanum_id"));
@@ -286,7 +283,7 @@ public class MainActivity extends ABaseFragmentAcitivty {
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         bus.unregister(this);
         super.onDestroy();
     }
@@ -297,10 +294,10 @@ public class MainActivity extends ABaseFragmentAcitivty {
     }
 
     public void onButtonClicked(View v) {
-        TabsPagerAdapter adapter = (TabsPagerAdapter)pager.getAdapter();
-        ((ABaseFragment)adapter.getRegisteredFragment(pager.getCurrentItem())).onButtonClicked(v);
+        TabsPagerAdapter adapter = (TabsPagerAdapter) pager.getAdapter();
+        ((ABaseFragment) adapter.getRegisteredFragment(pager.getCurrentItem())).onButtonClicked(v);
 
-        if(slideMenuView.onButtonClicked(v)) {
+        if (slideMenuView.onButtonClicked(v)) {
             //slideMenu.close(false);
         }
 
@@ -329,6 +326,89 @@ public class MainActivity extends ABaseFragmentAcitivty {
 //        }
     }
 
+    public void refreshMain() {
+        TabsPagerAdapter adapter = (TabsPagerAdapter) pager.getAdapter();
+        ((MypageMainFragment) adapter.getRegisteredFragment(4)).refreshMyPageMain();
+    }
+
+
+    public void onEvent(final PushMessage pushMessage) {
+        slideMenuView.onEvent(pushMessage);
+        try {
+            FragmentManager fm = getSupportFragmentManager();
+            for (Fragment f : fm.getFragments()) { // to loop through fragments and checking their type
+                ((ABaseFragment) f).onEvent(pushMessage);
+            }
+        } catch (Exception e) {
+        }
+
+        switch (pushMessage.getActionCode()) {
+            case PushMessage.ACTIONCODE_CHANGE_LOGOUT: {
+                contextHelper.getActivity().finish();
+            }
+            break;
+            case PushMessage.ACTIONCODE_ADDED_NANUM: {
+                pager.setCurrentItem(0);
+            }
+            break;
+            case PushMessage.ACTIONCODE_CHANGETALKLIST: {
+                talks = (java.util.ArrayList<Talk>) pushMessage.getObject(contextHelper);
+                //ViewPager pager = (ViewPager) findViewById(R.id.pager);
+
+//                if(pager.getCurrentItem() == 2) {
+//                    contextHelper.getActivity().setImageButtonVisibility(talks != null && talks.size() > 0);
+//                }
+
+            }
+            break;
+            case PushMessage.ACTIONCODE_CHANGETALK: {
+                contextHelper.getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        final Talk talk = (Talk) pushMessage.getObject(contextHelper);
+
+                        if (talk.getMe(contextHelper) != null) {
+                            tabbar.setChatBadge(talk.getMe(contextHelper).getUnreadCnt());
+                        }
+                    }
+                });
+
+            }
+            break;
+            case PushMessage.ACTIONCODE_CHANGEUNREADCOUNT: {
+                contextHelper.getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        final Integer count = (Integer) pushMessage.getObject(contextHelper);
+                        tabbar.setChatBadge(count.intValue());
+                    }
+                });
+
+            }
+            break;
+
+
+        }
+    }
+
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        TabsPagerAdapter adapter = (TabsPagerAdapter) pager.getAdapter();
+        ((ABaseFragment) adapter.getRegisteredFragment(pager.getCurrentItem())).onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onBackPressed() {
+        backPressCloseHandler.onBackPressed();
+    }
+
+    public void toggleSlideMenu() {
+        if (slideMenu.isOpen()) {
+            slideMenu.close(true);
+        } else {
+            slideMenu.open(false, true);
+        }
+    }
 
     private class TabsPagerAdapter extends FragmentStatePagerAdapter implements PagerSlidingTabStrip.IconTabProvider {
         SparseArray<ABaseFragment> registeredFragments = new SparseArray<ABaseFragment>();
@@ -340,7 +420,7 @@ public class MainActivity extends ABaseFragmentAcitivty {
 
         @Override
         public Fragment getItem(int position) {
-            switch(position) {
+            switch (position) {
                 case 0:
                     return new NanumListFragment();
                 case 1:
@@ -390,85 +470,6 @@ public class MainActivity extends ABaseFragmentAcitivty {
         }
     }
 
-
-    public boolean isKeywordEditMode = true;
-
-    public void refreshMain() {
-        TabsPagerAdapter adapter = (TabsPagerAdapter)pager.getAdapter();
-        ((MypageMainFragment)adapter.getRegisteredFragment(4)).refreshMyPageMain();
-    }
-
-
-    public void onEvent(final PushMessage pushMessage) {
-        slideMenuView.onEvent(pushMessage);
-        try {
-            FragmentManager fm = getSupportFragmentManager();
-            for (Fragment f : fm.getFragments()) { // to loop through fragments and checking their type
-                ((ABaseFragment)f).onEvent(pushMessage);
-            }
-        } catch (Exception e) {
-        }
-
-        switch(pushMessage.getActionCode()) {
-            case PushMessage.ACTIONCODE_CHANGE_LOGOUT: {
-                contextHelper.getActivity().finish();
-            }
-            break;
-            case PushMessage.ACTIONCODE_ADDED_NANUM: {
-                pager.setCurrentItem(0);
-            }
-            break;
-            case PushMessage.ACTIONCODE_CHANGETALKLIST: {
-                talks = (java.util.ArrayList<Talk>)pushMessage.getObject(contextHelper);
-                //ViewPager pager = (ViewPager) findViewById(R.id.pager);
-
-//                if(pager.getCurrentItem() == 2) {
-//                    contextHelper.getActivity().setImageButtonVisibility(talks != null && talks.size() > 0);
-//                }
-
-            }
-            break;
-            case PushMessage.ACTIONCODE_CHANGETALK: {
-                contextHelper.getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        final Talk talk = (Talk) pushMessage.getObject(contextHelper);
-
-                        if (talk.getMe(contextHelper) != null) {
-                            tabbar.setChatBadge(talk.getMe(contextHelper).getUnreadCnt());
-                        }
-                    }
-                });
-
-            }
-            break;
-            case PushMessage.ACTIONCODE_CHANGEUNREADCOUNT: {
-                contextHelper.getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        final Integer count = (Integer) pushMessage.getObject(contextHelper);
-                        tabbar.setChatBadge(count.intValue());
-                    }
-                });
-
-            }
-            break;
-
-
-        }
-    }
-
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        TabsPagerAdapter adapter = (TabsPagerAdapter)pager.getAdapter();
-        ((ABaseFragment)adapter.getRegisteredFragment(pager.getCurrentItem())).onActivityResult(requestCode, resultCode, data);
-    }
-
-
-
-
-    private BackPressCloseHandler backPressCloseHandler;
-
     public class BackPressCloseHandler {
 
         private long backKeyPressedTime = 0;
@@ -500,32 +501,19 @@ public class MainActivity extends ABaseFragmentAcitivty {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        backPressCloseHandler.onBackPressed();
-    }
-
-
-    public void toggleSlideMenu() {
-        if (slideMenu.isOpen()) {
-            slideMenu.close(true);
-        } else {
-            slideMenu.open(false, true);
-        }
-    }
-
     class SlideMenuExt extends me.tangke.slidemenu.SlideMenu {
         public SlideMenuExt(Context context) {
             super(context);
         }
+
         @Override
         protected void setCurrentState(int currentState) {
             super.setCurrentState(currentState);
-            if(currentState == STATE_CLOSE) {
-                if(viewDim != null)
+            if (currentState == STATE_CLOSE) {
+                if (viewDim != null)
                     viewDim.setVisibility(View.GONE);
             } else {
-                if(viewDim != null)
+                if (viewDim != null)
                     viewDim.setVisibility(View.VISIBLE);
             }
         }

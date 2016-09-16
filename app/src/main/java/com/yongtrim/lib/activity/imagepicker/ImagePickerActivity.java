@@ -5,18 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.Matrix;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -28,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
@@ -37,12 +29,7 @@ import com.yongtrim.lib.Config;
 import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
 import com.yongtrim.lib.model.photo.Photo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -142,20 +129,20 @@ public class ImagePickerActivity extends ABaseFragmentAcitivty implements Adapte
 //        } else
 
         if (obj instanceof Photo) {
-            Photo photo = (Photo)obj;
+            Photo photo = (Photo) obj;
             Photo photoRemove = null;
 
             for (Photo __photo : selected) {
-                if(__photo.getUriOrg() == photo.getUriOrg()) {
+                if (__photo.getUriOrg() == photo.getUriOrg()) {
                     photoRemove = __photo;
                     break;
                 }
             }
 
-            if(photoRemove != null) {
+            if (photoRemove != null) {
                 selected.remove(photoRemove);
             } else {
-                if(selected.size() == maxPhotoCnt) {
+                if (selected.size() == maxPhotoCnt) {
                     Toast.makeText(ImagePickerActivity.this, "최대 " + maxPhotoCnt + "장 까지 가능합니다.", Toast.LENGTH_LONG).show();
                 } else {
                     selected.add((Photo) obj);
@@ -191,6 +178,82 @@ public class ImagePickerActivity extends ABaseFragmentAcitivty implements Adapte
             }
         }
     }
+
+    protected Context getContext() {
+        return this;
+    }
+
+
+//    private class SaveImageAsyncTask extends AsyncTask<Void, Void, String> implements MediaScannerConnection.MediaScannerConnectionClient {
+//        private final String mPath;
+//
+//        private final String mName;
+//
+//        private final MediaScannerConnection mMediaScannerConnection;
+//
+//        private Bitmap bitmap;
+//
+//        public SaveImageAsyncTask(Bitmap bitmap) {
+//            this.bitmap = bitmap;
+//
+//            this.mPath = Environment.getExternalStorageDirectory() + File.separator + Environment.DIRECTORY_PICTURES;
+//            this.mName = bitmap.hashCode() + ".jpg";
+//
+//            this.mMediaScannerConnection = new MediaScannerConnection(ImagePickerActivity.this, this);
+//        }
+//
+//        @Override
+//        protected String doInBackground(final Void... pParams) {
+//            File file = new File(mPath, mName);
+//            storeImage(bitmap, file);
+//
+//            this.mMediaScannerConnection.connect();
+//
+//            return file.getAbsolutePath();
+//        }
+//
+//        @Override
+//        public void onMediaScannerConnected() {
+//            this.mMediaScannerConnection.scanFile(this.mPath + "/" + this.mName, "*/*");
+//        }
+//
+//        @Override
+//        public void onScanCompleted(final String pPath, final Uri pUri) {
+//            this.mMediaScannerConnection.disconnect();
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String s) {
+//            super.onPostExecute(s);
+//
+//            gridView.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    loadThumbsFromGallery();
+//                }
+//            }, 500);
+//
+//        }
+//    }
+
+
+//    public static void storeImage(Bitmap image, File pictureFile) {
+//        if (pictureFile == null) {
+//            Log.d(TAG, "Error creating media file, check storage permissions: ");
+//            return;
+//        }
+//        try {
+//            FileOutputStream fos = new FileOutputStream(pictureFile);
+//            //image.compress(Bitmap.CompressFormat.PNG, 90, fos);
+//            image.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+//
+//            fos.close();
+//        } catch (FileNotFoundException e) {
+//            Log.d(TAG, "File not found: " + e.getMessage());
+//        } catch (IOException e) {
+//            Log.d(TAG, "Error accessing file: " + e.getMessage());
+//        }
+//    }
 
     class Adapter extends BaseAdapter {
 
@@ -280,81 +343,5 @@ public class ImagePickerActivity extends ABaseFragmentAcitivty implements Adapte
 
             return null;
         }
-    }
-
-
-//    private class SaveImageAsyncTask extends AsyncTask<Void, Void, String> implements MediaScannerConnection.MediaScannerConnectionClient {
-//        private final String mPath;
-//
-//        private final String mName;
-//
-//        private final MediaScannerConnection mMediaScannerConnection;
-//
-//        private Bitmap bitmap;
-//
-//        public SaveImageAsyncTask(Bitmap bitmap) {
-//            this.bitmap = bitmap;
-//
-//            this.mPath = Environment.getExternalStorageDirectory() + File.separator + Environment.DIRECTORY_PICTURES;
-//            this.mName = bitmap.hashCode() + ".jpg";
-//
-//            this.mMediaScannerConnection = new MediaScannerConnection(ImagePickerActivity.this, this);
-//        }
-//
-//        @Override
-//        protected String doInBackground(final Void... pParams) {
-//            File file = new File(mPath, mName);
-//            storeImage(bitmap, file);
-//
-//            this.mMediaScannerConnection.connect();
-//
-//            return file.getAbsolutePath();
-//        }
-//
-//        @Override
-//        public void onMediaScannerConnected() {
-//            this.mMediaScannerConnection.scanFile(this.mPath + "/" + this.mName, "*/*");
-//        }
-//
-//        @Override
-//        public void onScanCompleted(final String pPath, final Uri pUri) {
-//            this.mMediaScannerConnection.disconnect();
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String s) {
-//            super.onPostExecute(s);
-//
-//            gridView.postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    loadThumbsFromGallery();
-//                }
-//            }, 500);
-//
-//        }
-//    }
-
-
-//    public static void storeImage(Bitmap image, File pictureFile) {
-//        if (pictureFile == null) {
-//            Log.d(TAG, "Error creating media file, check storage permissions: ");
-//            return;
-//        }
-//        try {
-//            FileOutputStream fos = new FileOutputStream(pictureFile);
-//            //image.compress(Bitmap.CompressFormat.PNG, 90, fos);
-//            image.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-//
-//            fos.close();
-//        } catch (FileNotFoundException e) {
-//            Log.d(TAG, "File not found: " + e.getMessage());
-//        } catch (IOException e) {
-//            Log.d(TAG, "Error accessing file: " + e.getMessage());
-//        }
-//    }
-
-    protected Context getContext() {
-        return this;
     }
 }

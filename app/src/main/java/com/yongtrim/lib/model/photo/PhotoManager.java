@@ -36,36 +36,29 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * hair / com.yongtrim.lib.model.photo
- * <p/>
+ * <p>
  * Created by yongtrim.com on 15. 9. 4..
  */
 public class PhotoManager {
-    private final String fileNameTemp = Config.APPTAG + "img.jpg";
-
-    private final String TAG = getClass().getSimpleName();
-
     private static PhotoManager instance;
-
+    private final String fileNameTemp = Config.APPTAG + "img.jpg";
+    private final String TAG = getClass().getSimpleName();
+    int seedOfPath = 0;
+    String pathCropped;
     private ContextHelper contextHelper;
 
-    public interface OnPhotoUploadedListener {
-        public void onCompleted(List<Photo> photos);
-    }
-
-
     public static PhotoManager getInstance(ContextHelper contextHelper) {
-        if(instance == null) {
+        if (instance == null) {
             instance = new PhotoManager();
         }
         instance.contextHelper = contextHelper;
         return instance;
     }
 
-
     public void uploadPhoto(final Photo photo,
                             final Response.Listener<Photo> listener,
                             final Response.ErrorListener errorListener
-                            ) {
+    ) {
 
         final UserManager userManager = UserManager.getInstance(contextHelper);
 
@@ -83,7 +76,7 @@ public class PhotoManager {
                 Cloudinary cloudinary = new Cloudinary(config);
 
                 try {
-                    org.cloudinary.json.JSONObject uploadResult= new org.cloudinary.json.JSONObject(cloudinary.uploader().upload(paths[0], ObjectUtils.asMap("folder", userManager.getMe().getId())));
+                    org.cloudinary.json.JSONObject uploadResult = new org.cloudinary.json.JSONObject(cloudinary.uploader().upload(paths[0], ObjectUtils.asMap("folder", userManager.getMe().getId())));
                     photo.setPubliId(uploadResult.getString("public_id"));
                     photo.setUrl(uploadResult.getString("url"));
                     photo.setId(uploadResult.getString("public_id"));
@@ -106,21 +99,10 @@ public class PhotoManager {
         }.execute(photo.getPath());
     }
 
-
-
-    class PhotoInfo {
-        Photo photo;
-        int index;
-        public PhotoInfo(Photo photo, int index) {
-            this.photo = photo;
-            this.index = index;
-        }
-    }
-
     public void uploadPhotos(final List<Photo> photos, final OnPhotoUploadedListener onPhotoUploadedListener) {
         ArrayList<PhotoInfo> arrShouldUpload = new ArrayList<>();
 
-        for(int i = 0;i < photos.size();i++) {
+        for (int i = 0; i < photos.size(); i++) {
             Photo photo = photos.get(i);
             if (photo != null && TextUtils.isEmpty(photo.getId()) && photo.hasPhoto()) {
                 arrShouldUpload.add(new PhotoInfo(photo, i));
@@ -128,13 +110,13 @@ public class PhotoManager {
         }
         //final SweetAlertDialog progress = new SweetAlertDialog(contextHelper.getContext(), SweetAlertDialog.PROGRESS_TYPE);
 
-        if(arrShouldUpload.size() > 0) {
+        if (arrShouldUpload.size() > 0) {
             //progress.setContentText("사진을 서버에 전송중입니다. (1/" + arrShouldUpload.size() + ")");
             Logger.debug(TAG, "사진을 서버에 전송중입니다. (1/" + arrShouldUpload.size() + ")");
 
             //progress.show();
             CountDownLatch beforelatchUpdatePhoto = null;
-            for(int i = 0;i < arrShouldUpload.size();i++) {
+            for (int i = 0; i < arrShouldUpload.size(); i++) {
                 final PhotoInfo photoInfo = arrShouldUpload.get(i);
 
                 CountDownLatch latchUpdatePhoto = new CountDownLatch(1);
@@ -224,7 +206,6 @@ public class PhotoManager {
     }
 
 
-
     public Intent getCropImageIntent(Uri source, boolean isSmall) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setType("image/*");
@@ -236,7 +217,7 @@ public class PhotoManager {
         } else {
             intent.setData(source);
 
-            if(isSmall) {
+            if (isSmall) {
                 intent.putExtra("outputX", Config.SMALL_SIZE);
                 intent.putExtra("outputY", Config.SMALL_SIZE);
             } else {
@@ -257,7 +238,7 @@ public class PhotoManager {
 
             Intent i = new Intent(intent);
             ResolveInfo res = list.get(0);
-            i.setComponent( new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
+            i.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
             return i;
         }
     }
@@ -283,9 +264,9 @@ public class PhotoManager {
     public Intent getPickImageChooserIntent(int maxphotocnt) {
 
         // Determine Uri of camera image to  save.
-        Uri outputFileUri =  getCaptureImageOutputUri();
+        Uri outputFileUri = getCaptureImageOutputUri();
 
-        ArrayList<Intent> allIntents = new  ArrayList<>();
+        ArrayList<Intent> allIntents = new ArrayList<>();
         PackageManager packageManager = contextHelper.getContext().getPackageManager();
 
 
@@ -299,36 +280,34 @@ public class PhotoManager {
         Intent intentCamera = null;
         Intent intentGallery = null;
 
-        // collect all camera intents
+        // TODO collect all camera intents. no need
         Intent captureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         List<ResolveInfo> listCam = packageManager.queryIntentActivities(captureIntent, 0);
         for (ResolveInfo res : listCam) {
-            Intent intent = new  Intent(captureIntent);
+            Intent intent = new Intent(captureIntent);
             intent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
             intent.setPackage(res.activityInfo.packageName);
             if (outputFileUri != null) {
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
             }
-            if(res.activityInfo.packageName.equals("com.sec.android.app.camera")) {
+            if (res.activityInfo.packageName.equals("com.sec.android.app.camera")) {
                 intentCamera = intent;
             } else {
                 allIntents.add(intent);
-
             }
-            //Logger.debug(TAG, "res.activityInfo.packageName = " + res.activityInfo.packageName);
-
+            Logger.debug(TAG, "res.activityInfo.packageName = " + res.activityInfo.packageName);
         }
 
-        // collect all gallery intents
-        Intent galleryIntent = new  Intent(Intent.ACTION_GET_CONTENT);
+        // TODO collect all gallery intents. no need
+        Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
         galleryIntent.setType("image/*");
-        List<ResolveInfo> listGallery =  packageManager.queryIntentActivities(galleryIntent, 0);
+        List<ResolveInfo> listGallery = packageManager.queryIntentActivities(galleryIntent, 0);
         for (ResolveInfo res : listGallery) {
-            Intent intent = new  Intent(galleryIntent);
-            intent.setComponent(new  ComponentName(res.activityInfo.packageName, res.activityInfo.name));
+            Intent intent = new Intent(galleryIntent);
+            intent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
             intent.setPackage(res.activityInfo.packageName);
             //intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-            if(res.activityInfo.packageName.equals("com.sec.android.gallery3d")) {
+            if (res.activityInfo.packageName.equals("com.sec.android.gallery3d")) {
                 intentGallery = intent;
             } else {
                 allIntents.add(intent);
@@ -337,30 +316,29 @@ public class PhotoManager {
         }
 
         // the main intent is the last in the  list (fucking android) so pickup the useless one
-        Intent mainIntent =  allIntents.get(allIntents.size() - 1);
+        Intent mainIntent = allIntents.get(allIntents.size() - 1);
         for (Intent intent : allIntents) {
-            if  (intent.getComponent().getClassName().equals("com.android.documentsui.DocumentsActivity"))  {
+            if (intent.getComponent().getClassName().equals("com.android.documentsui.DocumentsActivity")) {
                 mainIntent = intent;
                 break;
             }
         }
         allIntents.remove(mainIntent);
 
-        if(intentGallery != null) {
-            allIntents.add(0, intentGallery);
-        }
-
-
-        if(maxphotocnt > 1)
-            allIntents.add(0, intentMulti);
-
-        if(intentCamera != null) {
+        if (intentCamera != null) {
             allIntents.add(0, intentCamera);
         }
 
+        if (intentGallery != null) {
+            allIntents.add(0, intentGallery);
+        }
+
+        if (maxphotocnt > 1) {
+            allIntents.add(0, intentMulti);
+        }
 
         // Create a chooser from the main  intent
-        Intent chooserIntent =  Intent.createChooser(mainIntent, "선택하세요.");
+        Intent chooserIntent = Intent.createChooser(mainIntent, "선택하세요.");
 
         // Add all other intents
         chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, allIntents.toArray(new Parcelable[allIntents.size()]));
@@ -371,34 +349,29 @@ public class PhotoManager {
     /**
      * Get URI to image received from capture  by camera.
      */
-    private Uri getCaptureImageOutputUri() {
-//        Uri outputFileUri = null;
-//        File getImage = contextHelper.getContext().getExternalCacheDir();
-//        if (getImage != null) {
-//            outputFileUri = Uri.fromFile(new File(getImage.getPath(), fileNameTemp));
-//        }
-//        return outputFileUri;
-        return null;
+    public Uri getCaptureImageOutputUri() {
+        Uri outputFileUri = null;
+        File getImage = contextHelper.getContext().getExternalCacheDir();
+        if (getImage != null) {
+            outputFileUri = Uri.fromFile(new File(getImage.getPath(), fileNameTemp));
+        }
+        return outputFileUri;
     }
 
-
-    public Uri getPickImageResultUri(Intent  data) {
-        boolean isCamera = true;
-        if (data != null) {
-            String action = data.getAction();
-            isCamera = action != null  && action.equals(MediaStore.ACTION_IMAGE_CAPTURE);
-        }
-        return isCamera ? getCaptureImageOutputUri() : data.getData();
+    public Uri getPickImageResultUri(Intent data) {
+        if (data.getData() != null)
+            return data.getData();
+        return getCaptureImageOutputUri();
     }
 
     public void setPhotoLarge(CustomNetworkImageView imageView, Photo photo) {
-        if(photo == null) {
+        if (photo == null) {
             imageView.setImageUrl("", contextHelper.getImageLoader());
             imageView.setImageDrawable(null);
 
 
         } else {
-            if(photo.getBitmap() != null)
+            if (photo.getBitmap() != null)
                 imageView.setLocalImageBitmap(photo.getBitmap());
             else
                 imageView.setImageUrl(photo.getUrl(), contextHelper.getImageLoader());
@@ -406,13 +379,13 @@ public class PhotoManager {
     }
 
     public void setPhotoMedium(CustomNetworkImageView imageView, Photo photo) {
-        if(photo == null) {
+        if (photo == null) {
             imageView.setImageUrl("", contextHelper.getImageLoader());
             imageView.setImageDrawable(null);
 
 
         } else {
-            if(photo.getBitmap() != null)
+            if (photo.getBitmap() != null)
                 imageView.setLocalImageBitmap(photo.getBitmap());
             else
                 imageView.setImageUrl(photo.getMediumUrl(), contextHelper.getImageLoader());
@@ -420,12 +393,12 @@ public class PhotoManager {
     }
 
     public void setPhotoSmall(CustomNetworkImageView imageView, Photo photo) {
-        if(photo == null) {
+        if (photo == null) {
             imageView.setImageUrl("", contextHelper.getImageLoader());
             imageView.setImageDrawable(null);
 
         } else {
-            if(photo.getBitmap() != null)
+            if (photo.getBitmap() != null)
                 imageView.setLocalImageBitmap(photo.getBitmap());
             else {
                 imageView.setImageUrl(photo.getSmallUrl(), contextHelper.getImageLoader());
@@ -434,14 +407,13 @@ public class PhotoManager {
     }
 
     public String getPath(Uri uri) {
-        String[] projection = { MediaStore.Images.Media.DATA};
+        String[] projection = {MediaStore.Images.Media.DATA};
         Cursor cursor = contextHelper.getActivity().managedQuery(uri, projection, null, null, null);
         int column_index = cursor
                 .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
         return cursor.getString(column_index);
     }
-
 
 
     public int getExifRotation(Uri uri) {
@@ -462,38 +434,33 @@ public class PhotoManager {
                     default:
                         return 0;
                 }
-            }
-            else {
+            } else {
                 return 0;
             }
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             return 0;
         }
     }
 
-    int seedOfPath = 0;
     public String genderatePath() {
-        Long tsLong = System.currentTimeMillis()/1000;
+        Long tsLong = System.currentTimeMillis() / 1000;
         String ts = tsLong.toString();
 
         File dir = new File(Environment.getExternalStorageDirectory() + "/NONANONA/");
-        if(!dir.exists()) {
+        if (!dir.exists()) {
             dir.mkdirs();
         }
 
-        String path = Environment.getExternalStorageDirectory() + "/NONANONA/photo"+ts + "_" + (seedOfPath++);
+        String path = Environment.getExternalStorageDirectory() + "/NONANONA/photo" + ts + "_" + (seedOfPath++);
         return path;
-    }
-
-    String pathCropped;
-    public void setPathCropped(String path) {
-        pathCropped = path;
     }
 
     public String getPathCropped() {
         return pathCropped;
+    }
+
+    public void setPathCropped(String path) {
+        pathCropped = path;
     }
 
     public void clearCache() {
@@ -507,6 +474,20 @@ public class PhotoManager {
             }
         } catch (Exception e) {
             Log.i(TAG, "error " + e.toString());
+        }
+    }
+
+    public interface OnPhotoUploadedListener {
+        public void onCompleted(List<Photo> photos);
+    }
+
+    class PhotoInfo {
+        Photo photo;
+        int index;
+
+        public PhotoInfo(Photo photo, int index) {
+            this.photo = photo;
+            this.index = index;
         }
     }
 
