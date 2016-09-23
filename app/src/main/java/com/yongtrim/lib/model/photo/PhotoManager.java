@@ -36,8 +36,8 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * hair / com.yongtrim.lib.model.photo
- * <p>
- * Created by yongtrim.com on 15. 9. 4..
+ * <p/>
+ * Created by Uihyun on 15. 9. 4..
  */
 public class PhotoManager {
     private static PhotoManager instance;
@@ -359,8 +359,10 @@ public class PhotoManager {
     }
 
     public Uri getPickImageResultUri(Intent data) {
-        if (data.getData() != null)
-            return data.getData();
+        if (data != null) {
+            if (data.getData() != null)
+                return data.getData();
+        }
         return getCaptureImageOutputUri();
     }
 

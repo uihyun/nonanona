@@ -49,7 +49,7 @@ import de.greenrobot.event.EventBus;
 /**
  * nuums / com.nuums.nuums.fragment.nanum
  * <p>
- * Created by yongtrim.com on 15. 12. 20..
+ * Created by Uihyun on 15. 12. 20..
  */
 public class NanumEditFragment extends ABaseFragment implements UltraEditText.OnChangeListener {
     private final String TAG = getClass().getSimpleName();
