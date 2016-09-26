@@ -8,8 +8,8 @@ android {
         applicationId "com.nuums.nuums"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 6
-        versionName "1.0.4"
+        versionCode 7
+        versionName "1.0.5"
 
         multiDexEnabled true
     }
@@ -20,7 +20,7 @@ android {
             // to pre-dex each module and produce an APK that can be tested on
             // Android Lollipop without time consuming dex merging processes.
             //minSdkVersion 21
-            minSdkVersion 21
+            minSdkVersion 19
         }
         prod {
             // The actual minSdkVersion for the application.

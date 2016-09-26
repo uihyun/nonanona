@@ -1,13 +1,9 @@
 package com.nuums.nuums.fragment.talk;
 
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -20,14 +16,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
+import com.github.nkzawa.emitter.Emitter;
+import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
 import com.nuums.nuums.R;
 import com.nuums.nuums.activity.BaseActivity;
-import com.nuums.nuums.activity.MainActivity;
-import com.nuums.nuums.activity.SplashActivity;
 import com.nuums.nuums.adapter.ChatAdapter;
 import com.nuums.nuums.model.chat.Address;
 import com.nuums.nuums.model.chat.Chat;
-import com.nuums.nuums.model.chat.ChatData;
 import com.nuums.nuums.model.chat.ChatDate;
 import com.nuums.nuums.model.chat.ChatList;
 import com.nuums.nuums.model.chat.ChatListData;
@@ -36,23 +32,13 @@ import com.nuums.nuums.model.chat.Delivery;
 import com.nuums.nuums.model.chat.Talk;
 import com.nuums.nuums.model.chat.TalkData;
 import com.nuums.nuums.model.chat.TalkManager;
-import com.nuums.nuums.model.chat.UserInfo;
-import com.nuums.nuums.model.misc.Comment;
-import com.nuums.nuums.model.nanum.Nanum;
-import com.nuums.nuums.model.nanum.NanumData;
-import com.nuums.nuums.model.nanum.NanumManager;
 import com.nuums.nuums.model.report.Report;
 import com.nuums.nuums.model.user.NsUser;
-import com.yongtrim.lib.Application;
 import com.yongtrim.lib.Config;
-import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
 import com.yongtrim.lib.fragment.ListFragment;
-import com.yongtrim.lib.log.Logger;
-import com.yongtrim.lib.message.GcmIntentService;
 import com.yongtrim.lib.message.MessageManager;
 import com.yongtrim.lib.message.PushMessage;
-import com.yongtrim.lib.model.ACommonData;
 import com.yongtrim.lib.model.config.ConfigManager;
 import com.yongtrim.lib.model.list.List;
 import com.yongtrim.lib.model.photo.Photo;
@@ -64,34 +50,17 @@ import com.yongtrim.lib.ui.UltraListView;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
 import com.yongtrim.lib.util.DateUtil;
 
-import java.io.File;
-import java.text.Collator;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.Random;
-import java.util.UUID;
-
-
-import com.github.nkzawa.emitter.Emitter;
-import com.github.nkzawa.socketio.client.IO;
-import com.github.nkzawa.socketio.client.Socket;
-
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.net.URISyntaxException;
-import java.util.concurrent.CountDownLatch;
 
 import de.greenrobot.event.EventBus;
-import hirondelle.date4j.DateTime;
 
 /**
  * nuums / com.nuums.nuums.fragment.talk
  * <p/>
- * Created by yongtrim.com on 16. 1. 6..
+ * Created by Uihyun on 16. 1. 6..
  */
 public class ChatFragment extends ListFragment {
 
@@ -249,10 +218,10 @@ public class ChatFragment extends ListFragment {
                     dialogAddress.setAddress(postcode, basicaddress);
                 } else if(requestCode == ABaseFragmentAcitivty.REQUEST_PICK_IMAGE) {
 
-                    String uri = PhotoManager.getInstance(contextHelper).getPickImageResultUri(data).toString();
-                    int orientation = PhotoManager.getInstance(contextHelper).getExifRotation(data.getData());
+                    Uri uri = PhotoManager.getInstance(contextHelper).getPickImageResultUri(data);
+                    int orientation = PhotoManager.getInstance(contextHelper).getExifRotation(uri);
 
-                    final Photo photo = new Photo(uri, orientation);
+                    final Photo photo = new Photo(uri.toString(), orientation);
                     photo.setType(Photo.TYPE_PHOTO);
 
                     photo.setPath(null);

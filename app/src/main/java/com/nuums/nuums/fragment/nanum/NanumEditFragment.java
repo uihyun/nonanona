@@ -48,7 +48,7 @@ import de.greenrobot.event.EventBus;
 
 /**
  * nuums / com.nuums.nuums.fragment.nanum
- * <p>
+ * <p/>
  * Created by Uihyun on 15. 12. 20..
  */
 public class NanumEditFragment extends ABaseFragment implements UltraEditText.OnChangeListener {
@@ -454,13 +454,17 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
                     refresh();
 
                 } else if (requestCode == ABaseFragmentAcitivty.REQUEST_DESCRIPTION) {
-                    nanum = Nanum.getNanum(data.getStringExtra("nanum"));
-                    nanum.setPhotos(photosBuffer);
+                    if (data != null) {
+                        nanum = Nanum.getNanum(data.getStringExtra("nanum"));
+                        nanum.setPhotos(photosBuffer);
+                    }
 
                     refresh();
                 } else if (requestCode == ABaseFragmentAcitivty.REQUEST_POSTCODE) {
-                    nanum = Nanum.getNanum(data.getStringExtra("nanum"));
-                    nanum.setPhotos(photosBuffer);
+                    if (data != null) {
+                        nanum = Nanum.getNanum(data.getStringExtra("nanum"));
+                        nanum.setPhotos(photosBuffer);
+                    }
 
                     refresh();
                 } else if (requestCode >= ABaseFragmentAcitivty.REQUEST_PICK_IMAGE) {
@@ -491,12 +495,13 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
                     if (!isModify && !isAsker)
                         ConfigManager.getInstance(contextHelper).getPreference().putNanumParam(nanum);
                 }
-                break;
+        break;
 
-            default:
-                break;
-        }
+        default:
+        break;
     }
+
+}
 
 
     public void onEditTextChanged(UltraEditText editText) {

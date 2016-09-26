@@ -1,39 +1,23 @@
 package com.nuums.nuums.fragment.review;
 
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ResolveInfo;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
-import android.text.InputFilter;
-import android.text.SpannableString;
-import android.text.Spanned;
 import android.text.TextUtils;
-import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.MultiAutoCompleteTextView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -44,14 +28,8 @@ import com.kakao.kakaostory.KakaoStoryService;
 import com.kakao.kakaostory.MyStoryInfo;
 import com.kakao.kakaostory.PhotoKakaoStoryPostParamBuilder;
 import com.kakao.util.KakaoParameterException;
-import com.nuums.nuums.AppController;
 import com.nuums.nuums.R;
-import com.nuums.nuums.activity.BaseActivity;
-import com.nuums.nuums.adapter.PhotoPagerAdapter;
 import com.nuums.nuums.adapter.UserAdapter;
-import com.nuums.nuums.model.nanum.Nanum;
-import com.nuums.nuums.model.nanum.NanumData;
-import com.nuums.nuums.model.nanum.NanumManager;
 import com.nuums.nuums.model.review.Review;
 import com.nuums.nuums.model.review.ReviewData;
 import com.nuums.nuums.model.review.ReviewManager;
@@ -61,14 +39,11 @@ import com.nuums.nuums.view.KakaoButton;
 import com.sromku.simple.fb.SimpleFacebook;
 import com.sromku.simple.fb.entities.Privacy;
 import com.sromku.simple.fb.listeners.OnPublishListener;
-import com.yongtrim.lib.Config;
 import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
 import com.yongtrim.lib.fragment.ABaseFragment;
-import com.yongtrim.lib.log.Logger;
 import com.yongtrim.lib.message.PushMessage;
 import com.yongtrim.lib.model.config.ConfigManager;
 import com.yongtrim.lib.model.photo.Photo;
-import com.yongtrim.lib.model.photo.PhotoData;
 import com.yongtrim.lib.model.photo.PhotoManager;
 import com.yongtrim.lib.model.user.UserManager;
 import com.yongtrim.lib.sns.SNSLoginListener;
@@ -76,7 +51,6 @@ import com.yongtrim.lib.sns.SNSLoginoutListener;
 import com.yongtrim.lib.sns.SNSPostListner;
 import com.yongtrim.lib.sns.facebook.FacebookManager;
 import com.yongtrim.lib.sns.facebook.FacebookPreference;
-import com.yongtrim.lib.sns.googleplus.GooglePlusManager;
 import com.yongtrim.lib.sns.kakao.KakaoManager;
 import com.yongtrim.lib.sns.kakao.KakaoPreference;
 import com.yongtrim.lib.sns.twitter.TwitterManager;
@@ -85,17 +59,12 @@ import com.yongtrim.lib.ui.ChipsMultiAutoCompleteTextview;
 import com.yongtrim.lib.ui.CustomNetworkImageView;
 import com.yongtrim.lib.ui.UltraButton;
 import com.yongtrim.lib.ui.UltraEditText;
-import com.yongtrim.lib.ui.autoscrollviewpager.AutoScrollViewPager;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
 import com.yongtrim.lib.util.FileUtil;
-import com.yongtrim.lib.util.StringFilter;
 import com.yongtrim.lib.util.UIUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -105,7 +74,7 @@ import de.greenrobot.event.EventBus;
 /**
  * nuums / com.nuums.nuums.fragment.review
  * <p/>
- * Created by yongtrim.com on 16. 1. 18..
+ * Created by Uihyun on 16. 1. 18..
  */
 public class ReviewEditFragment extends ABaseFragment implements UltraEditText.OnChangeListener {
     private final String TAG = getClass().getSimpleName();
@@ -471,10 +440,10 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
                     review.getPhoto().setIsCropped(true);
 
                 }  else if(requestCode == ABaseFragmentAcitivty.REQUEST_PICK_IMAGE) {
-                    String uri = PhotoManager.getInstance(contextHelper).getPickImageResultUri(data).toString();
-                    int orientation = PhotoManager.getInstance(contextHelper).getExifRotation(data.getData());
+                    Uri uri = PhotoManager.getInstance(contextHelper).getPickImageResultUri(data);
+                    int orientation = PhotoManager.getInstance(contextHelper).getExifRotation(uri);
 
-                    Photo photo = new Photo(uri, orientation);
+                    Photo photo = new Photo(uri.toString(), orientation);
                     photo.setType(Photo.TYPE_PHOTO);
                     photo.setIsCropped(false);
                     review.setPhoto(photo);

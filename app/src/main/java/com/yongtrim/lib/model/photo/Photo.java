@@ -1,6 +1,5 @@
 package com.yongtrim.lib.model.photo;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,7 +13,6 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
-import com.google.gson.annotations.SerializedName;
 import com.nuums.nuums.AppController;
 import com.yongtrim.lib.Config;
 import com.yongtrim.lib.ContextHelper;
@@ -22,12 +20,11 @@ import com.yongtrim.lib.model.Model;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
 
 /**
  * hair / com.yongtrim.lib.model.photo
  * <p/>
- * Created by yongtrim.com on 15. 9. 4..
+ * Created by Uihyun on 15. 9. 4..
  */
 public class Photo extends Model implements Parcelable {
 

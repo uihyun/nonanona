@@ -1,16 +1,9 @@
 package com.nuums.nuums.fragment.misc;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.Looper;
-import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -21,52 +14,35 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.nuums.nuums.R;
 import com.nuums.nuums.adapter.UserAdapter;
-import com.nuums.nuums.model.nanum.Nanum;
 import com.nuums.nuums.model.report.Report;
 import com.nuums.nuums.model.report.ReportData;
 import com.nuums.nuums.model.report.ReportManager;
-import com.nuums.nuums.model.review.Review;
-import com.nuums.nuums.model.review.ReviewData;
-import com.nuums.nuums.model.review.ReviewManager;
 import com.nuums.nuums.model.user.NsUser;
 import com.nuums.nuums.model.user.NsUserSearch;
 import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
 import com.yongtrim.lib.fragment.ABaseFragment;
-import com.yongtrim.lib.message.MessageManager;
 import com.yongtrim.lib.message.PushMessage;
-import com.yongtrim.lib.model.config.ConfigManager;
 import com.yongtrim.lib.model.photo.Photo;
-import com.yongtrim.lib.model.photo.PhotoData;
 import com.yongtrim.lib.model.photo.PhotoManager;
 import com.yongtrim.lib.model.user.UserManager;
 import com.yongtrim.lib.ui.ChipsMultiAutoCompleteTextview;
 import com.yongtrim.lib.ui.CustomNetworkImageView;
-import com.yongtrim.lib.ui.UltraButton;
 import com.yongtrim.lib.ui.UltraEditText;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
 import com.yongtrim.lib.util.PixelUtil;
 
-import org.w3c.dom.Text;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
-
-import de.greenrobot.event.EventBus;
 
 /**
  * nuums / com.nuums.nuums.fragment.misc
  * <p/>
- * Created by yongtrim.com on 16. 1. 27..
+ * Created by Uihyun on 16. 1. 27..
  */
 public class ReportFragment extends ABaseFragment implements UltraEditText.OnChangeListener {
     private final String TAG = getClass().getSimpleName();
@@ -248,15 +224,14 @@ public class ReportFragment extends ABaseFragment implements UltraEditText.OnCha
             case Activity.RESULT_OK:
                 if(requestCode >= ABaseFragmentAcitivty.REQUEST_PICK_IMAGE) {
 
-                    String uri = PhotoManager.getInstance(contextHelper).getPickImageResultUri(data).toString();
-                    int orientation = PhotoManager.getInstance(contextHelper).getExifRotation(data.getData());
+                    Uri uri = PhotoManager.getInstance(contextHelper).getPickImageResultUri(data);
+                    int orientation = PhotoManager.getInstance(contextHelper).getExifRotation(uri);
 
-                    Photo photo = new Photo(uri, orientation);
+                    Photo photo = new Photo(uri.toString(), orientation);
                     photo.setType(Photo.TYPE_PHOTO);
 
 
                     report.setPhoto(requestCode - ABaseFragmentAcitivty.REQUEST_PICK_IMAGE, photo);
-                    //ConfigManager.getInstance(contextHelper).getPreference().putReportParam(report.getType(), report);
                 }
                 break;
             default:
