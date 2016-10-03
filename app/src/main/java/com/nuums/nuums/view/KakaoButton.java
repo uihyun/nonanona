@@ -13,7 +13,7 @@ import com.nuums.nuums.R;
 /**
  * nuums / com.nuums.nuums.view
  * <p/>
- * Created by yongtrim.com on 16. 1. 19..
+ * Created by Uihyun on 16. 1. 19..
  */
 public class KakaoButton extends LoginButton {
 

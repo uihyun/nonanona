@@ -2,9 +2,6 @@ package com.yongtrim.lib.model.misc;
 
 import android.os.AsyncTask;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.yongtrim.lib.util.MiscUtil;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +19,7 @@ import javax.net.ssl.HttpsURLConnection;
 /**
  * nuums / com.yongtrim.lib.model.misc
  * <p/>
- * Created by yongtrim.com on 16. 1. 22..
+ * Created by Uihyun on 16. 1. 22..
  */
 public class LocationToAddressTask extends AsyncTask<Void, Void, Void> {
 

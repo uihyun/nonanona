@@ -14,7 +14,7 @@ import com.yongtrim.lib.ContextHelper;
 /**
  * hair / com.yongtrim.lib.plugin.message
  * <p/>
- * Created by yongtrim.com on 15. 9. 23..
+ * Created by Uihyun on 15. 9. 23..
  */
 public class PushMessage {
     public static final int ACTIONCODE_CHANGE_ME = 1;

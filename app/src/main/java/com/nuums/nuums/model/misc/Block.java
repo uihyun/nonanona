@@ -7,7 +7,7 @@ import com.nuums.nuums.model.user.NsUser;
 /**
  * nuums / com.nuums.nuums.model.misc
  * <p/>
- * Created by yongtrim.com on 16. 1. 9..
+ * Created by Uihyun on 16. 1. 9..
  */
 public class Block {
     @SerializedName("user")

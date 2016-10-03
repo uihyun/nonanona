@@ -45,7 +45,7 @@ import java.util.List;
  * http://kpbird.com/2013/02/android-chips-edittext-token-edittext.html
  * https://www.codeofaninja.com/2013/12/android-autocompletetextview-custom-arrayadapter-sqlite.html
  *
- * Created by yongtrim.com on 16. 1. 14..
+ * Created by Uihyun on 16. 1. 14..
  */
 public class ChipsMultiAutoCompleteTextview extends MultiAutoCompleteTextView implements OnItemClickListener {
 

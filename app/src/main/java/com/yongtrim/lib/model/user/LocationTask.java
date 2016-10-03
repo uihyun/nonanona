@@ -23,7 +23,7 @@ import java.util.Map;
 /**
  * hair / com.yongtrim.lib.model.user
  * <p/>
- * Created by yongtrim.com on 15. 9. 23..
+ * Created by Uihyun on 15. 9. 23..
  */
 public class LocationTask extends AsyncTask<Void, Void, Void>
 {

@@ -6,7 +6,7 @@ import com.yongtrim.lib.model.ACommonData;
 /**
  * hair / com.yongtrim.lib.model.config
  * <p/>
- * Created by yongtrim.com on 15. 9. 2..
+ * Created by Uihyun on 15. 9. 2..
  */
 public class ConfigData extends ACommonData {
     @SerializedName("config")

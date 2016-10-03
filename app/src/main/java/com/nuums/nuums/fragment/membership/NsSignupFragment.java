@@ -53,7 +53,7 @@ import de.greenrobot.event.EventBus;
 /**
  * nuums / com.nuums.nuums.fragment.membership
  * <p/>
- * Created by yongtrim.com on 15. 12. 11..
+ * Created by Uihyun on 15. 12. 11..
  */
 public class NsSignupFragment extends SignupFragment implements UltraEditText.OnChangeListener {
 

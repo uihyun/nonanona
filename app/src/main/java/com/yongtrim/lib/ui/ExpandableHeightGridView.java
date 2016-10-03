@@ -8,7 +8,7 @@ import android.widget.GridView;
 /**
  * hair / com.yongtrim.lib.ui
  * <p/>
- * Created by yongtrim.com on 15. 9. 29..
+ * Created by Uihyun on 15. 9. 29..
  */
 public class ExpandableHeightGridView extends GridView
 {

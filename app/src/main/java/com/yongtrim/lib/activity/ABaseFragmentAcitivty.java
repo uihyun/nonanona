@@ -33,7 +33,7 @@ import com.yongtrim.lib.util.PixelUtil;
 /**
  * hair / com.yongtrim.lib.ui
  * <p/>
- * Created by yongtrim.com on 15. 8. 31..
+ * Created by Uihyun on 15. 8. 31..
  */
 public class ABaseFragmentAcitivty extends FragmentActivity {
     final String TAG = "ABaseFragmentAcitivty";

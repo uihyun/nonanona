@@ -8,7 +8,7 @@ import com.nuums.nuums.model.nanum.Nanum;
 /**
  * nuums / com.nuums.nuums.model.alarm
  * <p/>
- * Created by yongtrim.com on 16. 1. 20..
+ * Created by Uihyun on 16. 1. 20..
  */
 public class AlarmParam {
     @SerializedName("nanum")

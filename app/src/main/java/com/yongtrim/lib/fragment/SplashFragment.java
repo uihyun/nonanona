@@ -23,7 +23,7 @@ import java.util.concurrent.CountDownLatch;
 /**
  * hair / com.yongtrim.lib.fragment
  * <p/>
- * Created by yongtrim.com on 15. 9. 14..
+ * Created by Uihyun on 15. 9. 14..
  */
 public class SplashFragment extends ABaseFragment {
     private final String TAG = getClass().getSimpleName();

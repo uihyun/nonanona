@@ -23,11 +23,8 @@ import com.yongtrim.lib.model.user.UserManager;
 import com.yongtrim.lib.ui.UltraButton;
 import com.yongtrim.lib.ui.UltraEditText;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
-import com.yongtrim.lib.util.PixelUtil;
 
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 import me.grantland.widget.AutofitHelper;
 import me.grantland.widget.AutofitTextView;
@@ -35,7 +32,7 @@ import me.grantland.widget.AutofitTextView;
 /**
  * nuums / com.nuums.nuums.fragment.membership
  * <p/>
- * Created by yongtrim.com on 15. 12. 13..
+ * Created by Uihyun on 15. 12. 13..
  */
 public class FindAccountFragment extends ABaseFragment implements UltraEditText.OnChangeListener {
 

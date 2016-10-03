@@ -38,7 +38,7 @@ import java.util.concurrent.CountDownLatch;
 /**
  * nuums / com.nuums.nuums.fragment.misc
  * <p>
- * Created by yongtrim.com on 16. 1. 21..
+ * Created by Uihyun on 16. 1. 21..
  */
 public class SettingFragment extends ABaseFragment {
     private final String TAG = getClass().getSimpleName();

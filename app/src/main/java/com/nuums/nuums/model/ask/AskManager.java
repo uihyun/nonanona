@@ -16,7 +16,7 @@ import org.json.JSONObject;
 /**
  * nuums / com.nuums.nuums.model.ask
  * <p/>
- * Created by yongtrim.com on 16. 1. 22..
+ * Created by Uihyun on 16. 1. 22..
  */
 public class AskManager {
     private final String TAG = getClass().getSimpleName();

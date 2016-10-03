@@ -3,7 +3,7 @@ package com.nuums.nuums.model.user;
 /**
  * nuums / com.nuums.nuums.model.user
  * <p/>
- * Created by yongtrim.com on 16. 1. 15..
+ * Created by Uihyun on 16. 1. 15..
  */
 public class NsUserSearch {
 

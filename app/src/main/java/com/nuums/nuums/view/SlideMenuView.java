@@ -39,7 +39,7 @@ import java.util.concurrent.CountDownLatch;
 /**
  * nuums / com.nuums.nuums.view
  * <p>
- * Created by yongtrim.com on 15. 12. 12..
+ * Created by Uihyun on 15. 12. 12..
  */
 public class SlideMenuView extends LinearLayout {
     final String TAG = "SlideMenuView";

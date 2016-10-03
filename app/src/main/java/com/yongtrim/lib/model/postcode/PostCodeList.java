@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * nuums / com.yongtrim.lib.model.postcode
  * <p/>
- * Created by yongtrim.com on 15. 12. 20..
+ * Created by Uihyun on 15. 12. 20..
  */
 public class PostCodeList extends List {
     private java.util.ArrayList<PostCode> data;

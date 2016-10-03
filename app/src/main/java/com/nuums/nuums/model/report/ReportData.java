@@ -10,7 +10,7 @@ import com.yongtrim.lib.model.ACommonData;
 /**
  * nuums / com.nuums.nuums.model.report
  * <p/>
- * Created by yongtrim.com on 16. 1. 27..
+ * Created by Uihyun on 16. 1. 27..
  */
 public class ReportData extends ACommonData {
 

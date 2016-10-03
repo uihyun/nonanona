@@ -7,7 +7,7 @@ import com.yongtrim.lib.util.BasePreferenceUtil;
 /**
  * Hair / com.yongtrim.lib.sns.kakao
  * <p/>
- * Created by yongtrim.com on 15. 9. 14..
+ * Created by Uihyun on 15. 9. 14..
  */
 public class KakaoPreference extends BasePreferenceUtil {
     private static KakaoPreference mInstance = null;

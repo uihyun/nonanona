@@ -59,7 +59,7 @@ import java.util.List;
 /**
  * hair / com.yongtrim.lib.ui.sweetalert
  * <p/>
- * Created by yongtrim.com on 15. 9. 17..
+ * Created by Uihyun on 15. 9. 17..
  */
 public class SweetAlertDialog extends Dialog implements View.OnClickListener {
 

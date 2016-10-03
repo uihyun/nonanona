@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * hair / com.yongtrim.lib.model.post
  * <p/>
- * Created by yongtrim.com on 15. 10. 14..
+ * Created by Uihyun on 15. 10. 14..
  */
 public class PostList extends List {
     @SerializedName("data")

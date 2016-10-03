@@ -2,12 +2,7 @@ package com.nuums.nuums.fragment.review;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.location.Location;
 import android.os.Bundle;
-import android.os.Handler;
-import android.provider.Settings;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,46 +14,29 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.Response;
-import com.google.android.gms.maps.model.LatLng;
 import com.nuums.nuums.R;
 import com.nuums.nuums.activity.BaseActivity;
-import com.nuums.nuums.adapter.NanumAdapter;
 import com.nuums.nuums.adapter.ReviewAdapter;
-import com.nuums.nuums.model.nanum.Nanum;
-import com.nuums.nuums.model.nanum.NanumList;
-import com.nuums.nuums.model.nanum.NanumListData;
-import com.nuums.nuums.model.nanum.NanumManager;
 import com.nuums.nuums.model.review.Review;
 import com.nuums.nuums.model.review.ReviewList;
 import com.nuums.nuums.model.review.ReviewListData;
 import com.nuums.nuums.model.review.ReviewManager;
 import com.nuums.nuums.model.user.NsUser;
 import com.nuums.nuums.view.HeaderView;
-import com.yongtrim.lib.fragment.ABaseFragment;
 import com.yongtrim.lib.fragment.ListFragment;
-import com.yongtrim.lib.log.Logger;
 import com.yongtrim.lib.message.PushMessage;
 import com.yongtrim.lib.model.list.List;
-import com.yongtrim.lib.model.list.Page;
-import com.yongtrim.lib.model.location.GPSTracker;
-import com.yongtrim.lib.model.location.LocationManager;
 import com.yongtrim.lib.model.photo.PhotoManager;
 import com.yongtrim.lib.model.user.UserManager;
 import com.yongtrim.lib.ui.CircularNetworkImageView;
 import com.yongtrim.lib.ui.UltraButton;
 import com.yongtrim.lib.ui.UltraListView;
-import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
 import com.yongtrim.lib.util.PixelUtil;
-
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.concurrent.CountDownLatch;
 
 /**
  * nuums / com.nuums.nuums.fragment.review
  * <p/>
- * Created by yongtrim.com on 15. 12. 20..
+ * Created by Uihyun on 15. 12. 20..
  */
 public class ReviewListFragment extends ListFragment {
     private final String TAG = getClass().getSimpleName();

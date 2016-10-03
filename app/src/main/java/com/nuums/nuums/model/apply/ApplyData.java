@@ -11,7 +11,7 @@ import com.yongtrim.lib.model.ACommonData;
 /**
  * nuums / com.nuums.nuums.model.apply
  * <p/>
- * Created by yongtrim.com on 16. 1. 10..
+ * Created by Uihyun on 16. 1. 10..
  */
 public class ApplyData extends ACommonData {
 

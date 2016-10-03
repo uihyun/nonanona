@@ -10,7 +10,7 @@ import com.yongtrim.lib.model.ACommonData;
 /**
  * nuums / com.nuums.nuums.model.yongdal
  * <p/>
- * Created by yongtrim.com on 16. 1. 31..
+ * Created by Uihyun on 16. 1. 31..
  */
 public class YongdalData extends ACommonData {
 

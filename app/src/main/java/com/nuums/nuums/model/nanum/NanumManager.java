@@ -15,7 +15,7 @@ import org.json.JSONObject;
 /**
  * nuums / com.nuums.nuums.model.nanum
  * <p/>
- * Created by yongtrim.com on 15. 12. 21..
+ * Created by Uihyun on 15. 12. 21..
  */
 public class NanumManager {
     private final String TAG = getClass().getSimpleName();

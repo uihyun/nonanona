@@ -36,7 +36,7 @@ import java.util.concurrent.CountDownLatch;
 /**
  * Hair / com.yongtrim.lib.sns.googleplus
  * <p/>
- * Created by yongtrim.com on 15. 9. 14..
+ * Created by Uihyun on 15. 9. 14..
  */
 public class GooglePlusManager implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener, PlusClient.OnPeopleLoadedListener{
     private final String TAG = getClass().getSimpleName();

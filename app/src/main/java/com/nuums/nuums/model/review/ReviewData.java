@@ -10,7 +10,7 @@ import com.yongtrim.lib.model.ACommonData;
 /**
  * nuums / com.nuums.nuums.model.review
  * <p/>
- * Created by yongtrim.com on 16. 1. 18..
+ * Created by Uihyun on 16. 1. 18..
  */
 public class ReviewData extends ACommonData {
 

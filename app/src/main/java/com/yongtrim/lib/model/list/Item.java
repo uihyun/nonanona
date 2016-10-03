@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * hair / com.yongtrim.lib.model.list
  * <p/>
- * Created by yongtrim.com on 15. 9. 15..
+ * Created by Uihyun on 15. 9. 15..
  */
 public class Item {
 

@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * nuums / com.nuums.nuums.adapter
  * <p/>
- * Created by yongtrim.com on 15. 12. 21..
+ * Created by Uihyun on 15. 12. 21..
  */
 public class PhotoPagerAdapter extends RecyclingPagerAdapter {
     private ContextHelper contextHelper;

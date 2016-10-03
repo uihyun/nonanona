@@ -68,7 +68,7 @@ import de.greenrobot.event.EventBus;
 /**
  * nuums / com.nuums.nuums.adapter
  * <p/>
- * Created by yongtrim.com on 16. 1. 18..
+ * Created by Uihyun on 16. 1. 18..
  */
 public class ReviewAdapter extends BaseAdapter {
 

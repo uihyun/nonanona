@@ -40,7 +40,7 @@ import de.greenrobot.event.EventBus;
 /**
  * nuums / com.nuums.nuums
  * <p/>
- * Created by yongtrim.com on 15.12. 7..
+ * Created by Uihyun on 15.12. 7..
  */
 public class BaseActivity extends ABaseFragmentAcitivty {
     ABaseFragment curFragment;

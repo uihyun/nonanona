@@ -16,7 +16,7 @@ import android.support.v4.content.ContextCompat;
 /**
  * hair / com.yongtrim.lib.plugin.location
  * <p/>
- * Created by yongtrim.com on 15. 9. 22..
+ * Created by Uihyun on 15. 9. 22..
  */
 public class GPSTracker extends Service implements LocationListener {
 

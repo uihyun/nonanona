@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 /**
  * hair / com.yongtrim.lib.util
  * <p/>
- * Created by yongtrim.com on 15. 9. 29..
+ * Created by Uihyun on 15. 9. 29..
  */
 public class DateUtil {
 //    protected static Log logger = LogFactory.getLog(DateUtil.class);

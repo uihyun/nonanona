@@ -44,7 +44,7 @@ import de.greenrobot.event.EventBus;
 /**
  * nuums / com.nuums.nuums.fragment.misc
  * <p/>
- * Created by yongtrim.com on 16. 1. 31..
+ * Created by Uihyun on 16. 1. 31..
  */
 public class YongdalFragment extends ABaseFragment implements UltraEditText.OnChangeListener {
     private final String TAG = getClass().getSimpleName();

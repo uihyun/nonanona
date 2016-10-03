@@ -20,7 +20,7 @@ import com.yongtrim.lib.ui.UltraListView;
 /**
  * hair / com.yongtrim.lib.fragment
  * <p/>
- * Created by yongtrim.com on 15. 9. 15..
+ * Created by Uihyun on 15. 9. 15..
  */
 public class ListFragment extends ABaseFragment {
 

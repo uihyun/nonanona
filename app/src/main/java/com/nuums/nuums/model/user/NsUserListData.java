@@ -6,7 +6,7 @@ import com.yongtrim.lib.model.ACommonData;
 /**
  * nuums / com.nuums.nuums
  * <p/>
- * Created by yongtrim.com on 15.12. 7..
+ * Created by Uihyun on 15.12. 7..
  */
 public class NsUserListData extends ACommonData {
     @SerializedName("results")

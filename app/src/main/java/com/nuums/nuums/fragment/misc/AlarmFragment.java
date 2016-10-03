@@ -34,7 +34,7 @@ import java.util.concurrent.CountDownLatch;
 /**
  * nuums / com.nuums.nuums.fragment.misc
  * <p/>
- * Created by yongtrim.com on 16. 1. 23..
+ * Created by Uihyun on 16. 1. 23..
  */
 public class AlarmFragment extends ABaseFragment {
     private final String TAG = getClass().getSimpleName();

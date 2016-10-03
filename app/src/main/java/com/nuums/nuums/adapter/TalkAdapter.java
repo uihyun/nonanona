@@ -26,7 +26,7 @@ import com.yongtrim.lib.util.MiscUtil;
 /**
  * nuums / com.nuums.nuums.adapter
  * <p/>
- * Created by yongtrim.com on 16. 1. 6..
+ * Created by Uihyun on 16. 1. 6..
  */
 public class TalkAdapter extends BaseAdapter {
 

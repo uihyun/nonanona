@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * nuums / com.nuums.nuums.model.apply
  * <p/>
- * Created by yongtrim.com on 16. 1. 21..
+ * Created by Uihyun on 16. 1. 21..
  */
 public class ApplyList extends List {
     @SerializedName("data")

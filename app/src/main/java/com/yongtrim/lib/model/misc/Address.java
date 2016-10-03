@@ -31,7 +31,7 @@ import javax.xml.transform.stream.StreamResult;
 /**
  * hair / com.yongtrim.lib.model.misc
  * <p/>
- * Created by yongtrim.com on 15. 11. 29..
+ * Created by Uihyun on 15. 11. 29..
  */
 public class Address extends AsyncTask<Void, Void, Void>
 {

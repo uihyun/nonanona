@@ -23,7 +23,7 @@ import com.yongtrim.lib.message.PushMessage;
 /**
  * hair / com.yongtrim.lib.fragment
  * <p/>
- * Created by yongtrim.com on 15. 9. 14..
+ * Created by Uihyun on 15. 9. 14..
  */
 public class ABaseFragment extends Fragment {
     final static String TAG = "ABaseFragment";

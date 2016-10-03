@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * nuums / com.nuums.nuums.adapter
  * <p/>
- * Created by yongtrim.com on 15. 12. 28..
+ * Created by Uihyun on 15. 12. 28..
  */
 public class CommentAdapter extends BaseAdapter {
 

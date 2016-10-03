@@ -14,7 +14,7 @@ import com.yongtrim.lib.util.PixelUtil;
 /**
  * nuums / com.yongtrim.lib.ui
  * <p/>
- * Created by yongtrim.com on 15. 12. 26..
+ * Created by Uihyun on 15. 12. 26..
  */
 public class DiagonalLineView extends View {
 

@@ -8,7 +8,7 @@ import com.yongtrim.lib.model.ACommonData;
 /**
  * hair / com.yongtrim.lib.model.post
  * <p/>
- * Created by yongtrim.com on 15. 9. 28..
+ * Created by Uihyun on 15. 9. 28..
  */
 public class PostData extends ACommonData {
 

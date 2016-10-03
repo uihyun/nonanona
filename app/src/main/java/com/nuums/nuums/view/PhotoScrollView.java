@@ -40,7 +40,7 @@ import java.util.concurrent.CountDownLatch;
 /**
  * nuums / com.nuums.nuums.view
  * <p/>
- * Created by yongtrim.com on 15. 12. 20..
+ * Created by Uihyun on 15. 12. 20..
  */
 public class PhotoScrollView extends LinearLayout {
     final String TAG = "PhotoScrollView";

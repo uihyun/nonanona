@@ -23,7 +23,7 @@ import com.yongtrim.lib.util.PixelUtil;
 /**
  * hair / com.yongtrim.lib.ui
  * <p/>
- * Created by yongtrim.com on 15. 9. 16..
+ * Created by Uihyun on 15. 9. 16..
  */
 public class CircularNetworkImageView extends CustomNetworkImageView {
 

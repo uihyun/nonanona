@@ -10,7 +10,7 @@ import com.nuums.nuums.R;
 /**
  * nuums / com.nuums.nuums.view
  * <p/>
- * Created by yongtrim.com on 15. 12. 22..
+ * Created by Uihyun on 15. 12. 22..
  */
 public class HeaderView extends LinearLayout {
 

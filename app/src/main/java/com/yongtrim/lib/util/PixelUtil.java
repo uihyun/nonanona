@@ -6,7 +6,7 @@ import android.util.DisplayMetrics;
 /**
  * hair / com.yongtrim.lib.util
  * <p/>
- * Created by yongtrim.com on 15. 9. 14..
+ * Created by Uihyun on 15. 9. 14..
  */
 public class PixelUtil {
     private PixelUtil() {

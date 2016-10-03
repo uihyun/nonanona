@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * hair / com.yongtrim.lib.model.post
  * <p/>
- * Created by yongtrim.com on 15. 9. 15..
+ * Created by Uihyun on 15. 9. 15..
  */
 public class Post extends Model {
 

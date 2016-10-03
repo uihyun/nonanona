@@ -7,7 +7,7 @@ import com.yongtrim.lib.util.BasePreferenceUtil;
 /**
  * Hair / com.yongtrim.lib.sns.twitter
  * <p/>
- * Created by yongtrim.com on 15. 9. 14..
+ * Created by Uihyun on 15. 9. 14..
  */
 public class TwitterPreference extends BasePreferenceUtil {
     private static TwitterPreference mInstance = null;

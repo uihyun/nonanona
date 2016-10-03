@@ -45,7 +45,7 @@ import com.yongtrim.lib.util.PixelUtil;
 /**
  * nuums / com.nuums.nuums.fragment.mypage
  * <p/>
- * Created by yongtrim.com on 16. 1. 19..
+ * Created by Uihyun on 16. 1. 19..
  */
 public class AlarmListFragment extends ListFragment {
     private final String TAG = getClass().getSimpleName();

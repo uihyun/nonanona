@@ -3,7 +3,7 @@ package com.yongtrim.lib;
 /**
  * hair / com.yongtrim.lib
  * <p/>
- * Created by yongtrim.com on 15. 9. 1..
+ * Created by Uihyun on 15. 9. 1..
  */
 public class Config {
 

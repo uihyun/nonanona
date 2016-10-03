@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * nuums / com.nuums.nuums.model.misc
  * <p/>
- * Created by yongtrim.com on 15. 12. 28..
+ * Created by Uihyun on 15. 12. 28..
  */
 public class Comment {
     @SerializedName("owner")

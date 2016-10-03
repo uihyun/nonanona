@@ -10,7 +10,7 @@ import com.yongtrim.lib.model.ACommonData;
 /**
  * nuums / com.nuums.nuums.model.ask
  * <p/>
- * Created by yongtrim.com on 16. 1. 22..
+ * Created by Uihyun on 16. 1. 22..
  */
 public class AskData extends ACommonData {
 

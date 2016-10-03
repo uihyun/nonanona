@@ -50,7 +50,7 @@ import de.greenrobot.event.EventBus;
 /**
  * nuums / com.nuums.nuums.view
  * <p/>
- * Created by yongtrim.com on 16. 1. 20..
+ * Created by Uihyun on 16. 1. 20..
  */
 public class MypageView extends LinearLayout {
 

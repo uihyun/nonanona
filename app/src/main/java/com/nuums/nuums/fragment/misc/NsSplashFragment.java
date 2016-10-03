@@ -31,7 +31,7 @@ import java.util.concurrent.CountDownLatch;
 /**
  * nuums / com.nuums.nuums.fragment.misc
  * <p/>
- * Created by yongtrim.com on 15. 12. 8..
+ * Created by Uihyun on 15. 12. 8..
  */
 public class NsSplashFragment extends SplashFragment {
     private final String TAG = getClass().getSimpleName();

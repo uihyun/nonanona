@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * nuums / com.nuums.nuums
  * <p/>
- * Created by yongtrim.com on 15.12. 7..
+ * Created by Uihyun on 15.12. 7..
  */
 public class NsUser extends User {
 

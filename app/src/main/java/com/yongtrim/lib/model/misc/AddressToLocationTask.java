@@ -22,7 +22,7 @@ import javax.net.ssl.HttpsURLConnection;
 /**
  * nuums / com.yongtrim.lib.model.misc
  * <p/>
- * Created by yongtrim.com on 16. 1. 22..
+ * Created by Uihyun on 16. 1. 22..
  */
 public class AddressToLocationTask extends AsyncTask<Void, Void, Void> {
 

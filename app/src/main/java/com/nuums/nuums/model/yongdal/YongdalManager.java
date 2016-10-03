@@ -16,7 +16,7 @@ import org.json.JSONObject;
 /**
  * nuums / com.nuums.nuums.model.yongdal
  * <p/>
- * Created by yongtrim.com on 16. 1. 31..
+ * Created by Uihyun on 16. 1. 31..
  */
 public class YongdalManager {
     private final String TAG = getClass().getSimpleName();

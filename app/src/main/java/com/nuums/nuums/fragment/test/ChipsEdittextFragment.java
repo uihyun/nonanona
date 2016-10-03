@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * nuums / com.nuums.nuums.fragment.test
  * <p/>
- * Created by yongtrim.com on 16. 1. 14..
+ * Created by Uihyun on 16. 1. 14..
  */
 public class ChipsEdittextFragment extends ABaseFragment {
     private final String TAG = getClass().getSimpleName();

@@ -66,7 +66,7 @@ import de.greenrobot.event.EventBus;
 /**
  * hair / com.yongtrim.lib
  * <p/>
- * Created by yongtrim.com on 15. 9. 4..
+ * Created by Uihyun on 15. 9. 4..
  */
 public class ContextHelper {
 

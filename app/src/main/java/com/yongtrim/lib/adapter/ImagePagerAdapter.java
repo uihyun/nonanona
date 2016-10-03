@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * hair / com.yongtrim.lib.adapter
  * <p/>
- * Created by yongtrim.com on 15. 9. 15..
+ * Created by Uihyun on 15. 9. 15..
  */
 public class ImagePagerAdapter extends RecyclingPagerAdapter {
 

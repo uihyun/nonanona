@@ -39,7 +39,7 @@ import de.greenrobot.event.EventBus;
 /**
  * nuums / com.nuums.nuums.fragment.misc
  * <p/>
- * Created by yongtrim.com on 16. 1. 30..
+ * Created by Uihyun on 16. 1. 30..
  */
 public class PostListFragment extends ListFragment {
     private final String TAG = getClass().getSimpleName();

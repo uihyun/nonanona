@@ -36,7 +36,7 @@ import twitter4j.User;
 /**
  * Hair / com.yongtrim.lib.sns.twitter
  * <p/>
- * Created by yongtrim.com on 15. 9. 14..
+ * Created by Uihyun on 15. 9. 14..
  */
 public class TwitterManager {
     final String TAG = "TwittSharing";

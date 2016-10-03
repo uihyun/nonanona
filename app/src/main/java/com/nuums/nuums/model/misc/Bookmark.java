@@ -8,7 +8,7 @@ import com.nuums.nuums.model.user.NsUser;
 /**
  * nuums / com.nuums.nuums.model.misc
  * <p/>
- * Created by yongtrim.com on 15. 12. 29..
+ * Created by Uihyun on 15. 12. 29..
  */
 public class Bookmark {
     @SerializedName("owner")

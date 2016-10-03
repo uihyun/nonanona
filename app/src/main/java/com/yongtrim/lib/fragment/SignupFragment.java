@@ -13,7 +13,7 @@ import java.util.concurrent.CountDownLatch;
 /**
  * hair / com.yongtrim.lib.fragment
  * <p/>
- * Created by yongtrim.com on 15. 9. 19..
+ * Created by Uihyun on 15. 9. 19..
  */
 public class SignupFragment extends ABaseFragment {
     final String TAG = "SignupFragment";

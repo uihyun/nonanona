@@ -14,7 +14,7 @@ import org.json.JSONObject;
 /**
  * nuums / com.nuums.nuums.model.chat
  * <p/>
- * Created by yongtrim.com on 16. 1. 6..
+ * Created by Uihyun on 16. 1. 6..
  */
 public class TalkManager {
     private final String TAG = getClass().getSimpleName();

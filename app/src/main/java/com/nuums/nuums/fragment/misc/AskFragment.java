@@ -56,7 +56,7 @@ import de.greenrobot.event.EventBus;
 /**
  * nuums / com.nuums.nuums.fragment.misc
  * <p/>
- * Created by yongtrim.com on 16. 1. 22..
+ * Created by Uihyun on 16. 1. 22..
  */
 public class AskFragment extends ListFragment {
     final String TAG = "AskFragment";

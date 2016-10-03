@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * nuums / com.nuums.nuums.model.yongdal
  * <p/>
- * Created by yongtrim.com on 16. 1. 31..
+ * Created by Uihyun on 16. 1. 31..
  */
 public class Yongdal extends Model {
     public static final String TYPE_NORMAL = "TYPE_NORMAL";

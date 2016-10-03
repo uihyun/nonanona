@@ -43,7 +43,7 @@ import de.greenrobot.event.EventBus;
 /**
  * nuums / com.nuums.nuums.adapter
  * <p/>
- * Created by yongtrim.com on 15. 12. 22..
+ * Created by Uihyun on 15. 12. 22..
  */
 public class NanumAdapter extends BaseAdapter {
 

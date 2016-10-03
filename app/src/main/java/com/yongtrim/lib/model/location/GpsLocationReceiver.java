@@ -12,7 +12,7 @@ import de.greenrobot.event.EventBus;
 /**
  * hair / com.yongtrim.lib.model.location
  * <p/>
- * Created by yongtrim.com on 15. 12. 4..
+ * Created by Uihyun on 15. 12. 4..
  */
 public class GpsLocationReceiver extends BroadcastReceiver {
     @Override

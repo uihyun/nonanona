@@ -27,7 +27,7 @@ import de.greenrobot.event.EventBus;
 /**
  * Hair / com.yongtrim.lib.sns.kakao
  * <p/>
- * Created by yongtrim.com on 15. 9. 14..
+ * Created by Uihyun on 15. 9. 14..
  */
 public class KakaoManager {
     final String TAG = "KakaoManager";

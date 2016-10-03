@@ -36,7 +36,7 @@ import com.yongtrim.lib.util.DateUtil;
 /**
  * nuums / com.nuums.nuums.adapter
  * <p/>
- * Created by yongtrim.com on 16. 1. 6..
+ * Created by Uihyun on 16. 1. 6..
  */
 public class ChatAdapter extends BaseAdapter {
 

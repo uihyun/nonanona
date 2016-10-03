@@ -21,7 +21,7 @@ import com.yongtrim.lib.util.UIUtil;
 /**
  * nuums / com.nuums.nuums.fragment.misc
  * <p/>
- * Created by yongtrim.com on 16. 1. 2..
+ * Created by Uihyun on 16. 1. 2..
  */
 public class PostViewerFragment extends ABaseFragment {
 

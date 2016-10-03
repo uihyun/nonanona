@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * hair / com.yongtrim.lib.model
  * <p/>
- * Created by yongtrim.com on 15. 9. 21..
+ * Created by Uihyun on 15. 9. 21..
  */
 public class KeyValue {
     @SerializedName("key")

@@ -20,7 +20,7 @@ import java.io.IOException;
 /**
  * hair / com.yongtrim.lib.util
  * <p/>
- * Created by yongtrim.com on 15. 9. 17..
+ * Created by Uihyun on 15. 9. 17..
  */
 public class OptAnimationLoader {
     public static Animation loadAnimation(Context context, int id)

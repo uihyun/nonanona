@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * nuums / com.nuums.nuums.adapter
  * <p/>
- * Created by yongtrim.com on 16. 1. 29..
+ * Created by Uihyun on 16. 1. 29..
  */
 public class EventAdapter extends BaseAdapter {
 

@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * hair / com.yongtrim.lib.plugin
  * <p/>
- * Created by yongtrim.com on 15. 9. 22..
+ * Created by Uihyun on 15. 9. 22..
  */
 public class LocationManager {
 

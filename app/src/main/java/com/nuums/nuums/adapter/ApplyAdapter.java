@@ -47,7 +47,7 @@ import de.greenrobot.event.EventBus;
 /**
  * nuums / com.nuums.nuums.adapter
  * <p/>
- * Created by yongtrim.com on 16. 1. 21..
+ * Created by Uihyun on 16. 1. 21..
  */
 public class ApplyAdapter extends BaseAdapter {
 

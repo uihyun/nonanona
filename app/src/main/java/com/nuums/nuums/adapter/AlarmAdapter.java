@@ -1,29 +1,16 @@
 package com.nuums.nuums.adapter;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Typeface;
-import android.support.v4.content.ContextCompat;
-import android.text.SpannableString;
-import android.text.TextPaint;
-import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
-import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.nuums.nuums.R;
 import com.nuums.nuums.model.alarm.Alarm;
 import com.yongtrim.lib.ContextHelper;
-import com.yongtrim.lib.model.photo.Photo;
 import com.yongtrim.lib.model.photo.PhotoManager;
-import com.yongtrim.lib.model.user.UserManager;
 import com.yongtrim.lib.ui.CircularNetworkImageView;
 import com.yongtrim.lib.util.MiscUtil;
 
@@ -32,7 +19,7 @@ import java.util.List;
 /**
  * nuums / com.nuums.nuums.adapter
  * <p/>
- * Created by yongtrim.com on 16. 1. 20..
+ * Created by Uihyun on 16. 1. 20..
  */
 public class AlarmAdapter extends BaseAdapter {
 

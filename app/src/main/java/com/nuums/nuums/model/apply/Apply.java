@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * nuums / com.nuums.nuums.model.apply
  * <p/>
- * Created by yongtrim.com on 16. 1. 10..
+ * Created by Uihyun on 16. 1. 10..
  */
 public class Apply extends Model {
 

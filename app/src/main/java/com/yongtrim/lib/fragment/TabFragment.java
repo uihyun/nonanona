@@ -16,7 +16,7 @@ import com.yongtrim.lib.message.PushMessage;
 /**
  * hair / com.yongtrim.lib.fragment
  * <p/>
- * Created by yongtrim.com on 15. 10. 11..
+ * Created by Uihyun on 15. 10. 11..
  */
 public class TabFragment extends ABaseFragment {
     final static String TAG = "TabFragment";

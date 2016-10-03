@@ -26,7 +26,7 @@ import com.yongtrim.lib.util.MiscUtil;
 /**
  * nuums / com.nuums.nuums.fragment.membership
  * <p/>
- * Created by yongtrim.com on 15. 12. 11..
+ * Created by Uihyun on 15. 12. 11..
  */
 public class SigninFragment extends LoginFragment {
 

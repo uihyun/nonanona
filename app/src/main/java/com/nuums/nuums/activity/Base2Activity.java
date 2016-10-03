@@ -7,7 +7,6 @@ import android.view.View;
 
 import com.nuums.nuums.R;
 import com.nuums.nuums.fragment.membership.SigninFragment;
-import com.nuums.nuums.fragment.misc.TutorialFragment;
 import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
 import com.yongtrim.lib.fragment.ABaseFragment;
 import com.yongtrim.lib.message.PushMessage;
@@ -17,7 +16,7 @@ import de.greenrobot.event.EventBus;
 /**
  * nuums / com.nuums.nuums.activity
  * <p/>
- * Created by yongtrim.com on 15. 12. 11..
+ * Created by Uihyun on 15. 12. 11..
  */
 public class Base2Activity extends ABaseFragmentAcitivty {
     ABaseFragment curFragment;

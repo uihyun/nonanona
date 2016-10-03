@@ -26,7 +26,7 @@ import org.json.JSONObject;
 /**
  * hair / com.yongtrim.lib.model.user
  * <p/>
- * Created by yongtrim.com on 15. 9. 1..
+ * Created by Uihyun on 15. 9. 1..
  */
 public class UserManager extends ModelManager {
 

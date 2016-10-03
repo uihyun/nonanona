@@ -6,7 +6,7 @@ import com.yongtrim.lib.model.ACommonData;
 /**
  * hair / com.yongtrim.lib.model.photo
  * <p/>
- * Created by yongtrim.com on 15. 9. 4..
+ * Created by Uihyun on 15. 9. 4..
  */
 public class PhotoData extends ACommonData {
 

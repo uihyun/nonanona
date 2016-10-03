@@ -26,7 +26,7 @@ import de.greenrobot.event.EventBus;
 /**
  * nuums / com.nuums.nuums.fragment.mypage
  * <p>
- * Created by yongtrim.com on 15. 12. 13..
+ * Created by Uihyun on 15. 12. 13..
  */
 public class MypageMainFragment extends ABaseFragment {
     private final String TAG = getClass().getSimpleName();

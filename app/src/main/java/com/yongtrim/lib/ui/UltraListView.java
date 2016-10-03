@@ -15,7 +15,7 @@ import com.nuums.nuums.R;
 /**
  * hair / com.yongtrim.lib.ui
  * <p/>
- * Created by yongtrim.com on 15. 9. 14..
+ * Created by Uihyun on 15. 9. 14..
  */
 public class UltraListView extends ListView implements AbsListView.OnScrollListener{
     private static final String TAG = "UltraListview";

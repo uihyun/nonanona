@@ -20,7 +20,7 @@ import com.nuums.nuums.R;
 /**
  * hair / com.yongtrim.lib.ui
  * <p/>
- * Created by yongtrim.com on 15. 10. 28..
+ * Created by Uihyun on 15. 10. 28..
  */
 public class SegmentedGroup extends RadioGroup {
 

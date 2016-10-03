@@ -76,7 +76,7 @@ import de.greenrobot.event.EventBus;
 /**
  * nuums / com.nuums.nuums.fragment.nanum
  * <p/>
- * Created by yongtrim.com on 15. 12. 12..
+ * Created by Uihyun on 15. 12. 12..
  */
 public class NanumListFragment extends ListFragment implements GPSTracker.LocationListener {
     private final String TAG = getClass().getSimpleName();

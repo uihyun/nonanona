@@ -8,7 +8,7 @@ import com.yongtrim.lib.model.misc.CodeName;
 /**
  * nuums / com.nuums.nuums.model.chat
  * <p/>
- * Created by yongtrim.com on 16. 1. 10..
+ * Created by Uihyun on 16. 1. 10..
  */
 public class Delivery {
     @SerializedName("company")

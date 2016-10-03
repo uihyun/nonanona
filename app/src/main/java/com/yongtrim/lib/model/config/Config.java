@@ -8,7 +8,7 @@ import com.yongtrim.lib.model.Model;
 /**
  * hair / com.yongtrim.lib.model.config
  * <p/>
- * Created by yongtrim.com on 15. 9. 2..
+ * Created by Uihyun on 15. 9. 2..
  */
 public class Config extends Model {
     @SerializedName("type")

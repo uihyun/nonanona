@@ -9,7 +9,7 @@ import android.widget.RelativeLayout;
 /**
  * hair / com.yongtrim.lib.util
  * <p/>
- * Created by yongtrim.com on 15. 9. 23..
+ * Created by Uihyun on 15. 9. 23..
  */
 public class UIUtil {
     public static void setRatio(View view, Context context, int xRatio, int yRatio) {

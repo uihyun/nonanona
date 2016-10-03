@@ -40,7 +40,7 @@ import de.greenrobot.event.EventBus;
 /**
  * nuums / com.nuums.nuums.fragment.talk
  * <p/>
- * Created by yongtrim.com on 15. 12. 20..
+ * Created by Uihyun on 15. 12. 20..
  */
 public class TalkListFragment extends ListFragment {
 

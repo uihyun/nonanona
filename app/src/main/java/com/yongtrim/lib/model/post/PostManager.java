@@ -7,13 +7,10 @@ import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.model.GsonBodyRequest;
 import com.yongtrim.lib.model.RequestManager;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 /**
  * hair / com.yongtrim.lib.model.post
  * <p/>
- * Created by yongtrim.com on 15. 9. 28..
+ * Created by Uihyun on 15. 9. 28..
  */
 public class PostManager {
     private final String TAG = getClass().getSimpleName();

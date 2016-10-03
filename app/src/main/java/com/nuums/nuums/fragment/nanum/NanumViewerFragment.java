@@ -89,7 +89,7 @@ import de.greenrobot.event.EventBus;
 /**
  * nuums / com.nuums.nuums.fragment.nanum
  * <p/>
- * Created by yongtrim.com on 15. 12. 27..
+ * Created by Uihyun on 15. 12. 27..
  */
 public class NanumViewerFragment extends ABaseFragment {
     private final String TAG = getClass().getSimpleName();

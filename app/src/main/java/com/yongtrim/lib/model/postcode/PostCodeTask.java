@@ -32,7 +32,7 @@ import javax.xml.transform.stream.StreamResult;
  * nuums / com.yongtrim.lib.model.postcode
  * <p/>
  * http://cafe.naver.com/citrineframework/1476
- * Created by yongtrim.com on 15. 12. 20..
+ * Created by Uihyun on 15. 12. 20..
  */
 public class PostCodeTask extends AsyncTask<Void, Void, Void> {
     public final static String serviceKey = "b7P1WpFMuYvH9tmoSj6qL%2B7h6h7jXfYVNT248%2BlutNnYy5hvfJjeR%2Bru5bhkq26RWhAFC9%2FrsjM7xxTcMx5BPg%3D%3D";
