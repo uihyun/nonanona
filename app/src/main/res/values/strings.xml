@@ -11,7 +11,6 @@
     <string name="twitter_key" translatable="false">QdjzLj3YzuzQkx0UwoXYsnehK</string>
     <string name="twitter_secret" translatable="false">VdgV4LY4aaegHQxpCb1SvQPxoJKDxMg4P2kfCLUdY5cjJDDWZa</string>
 
-
     <string name="crash_toast_text">에러가 발생하였습니다. </string>
     <string name="crash_dialog_title">NONANONA 에러 발생ㅠㅠ</string>
     <string name="crash_dialog_text">관리자에 내용 전달해주시면 앱 개선에 도움이 됩니다.</string>
@@ -23,5 +22,6 @@
     <string name="pattern_alphanumeric_hangul">^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ\u318D\u119E\u11A2\u2022\u2025a\u00B7\uFE55]+$</string>
     <string name="input_error_alphanum">영문자와 숫자만 허용합니다.</string>
     <string name="input_error_alphanumeric_hangul">영문자와 숫자, 한글만 허용합니다.</string>
-    
+
+    <string name="hint_description">나눔물건:\n거래방법:\n선정기준:\n물건상태 및 파손여부:</string>
 </resources>

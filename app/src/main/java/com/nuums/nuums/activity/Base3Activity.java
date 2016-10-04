@@ -1,34 +1,12 @@
 package com.nuums.nuums.activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 
 import com.nuums.nuums.R;
-import com.nuums.nuums.fragment.membership.FindAccountFragment;
-import com.nuums.nuums.fragment.membership.NsSignupFragment;
-import com.nuums.nuums.fragment.membership.SigninFragment;
-import com.nuums.nuums.fragment.misc.AlarmFragment;
-import com.nuums.nuums.fragment.misc.ApplyFragment;
-import com.nuums.nuums.fragment.misc.AskFragment;
-import com.nuums.nuums.fragment.misc.PostListFragment;
-import com.nuums.nuums.fragment.misc.PostViewerFragment;
-import com.nuums.nuums.fragment.misc.PostcodeFragment;
-import com.nuums.nuums.fragment.misc.ReportFragment;
-import com.nuums.nuums.fragment.misc.SettingFragment;
 import com.nuums.nuums.fragment.misc.TutorialFragment;
-import com.nuums.nuums.fragment.misc.YongdalFragment;
-import com.nuums.nuums.fragment.nanum.DiscriptionEditFragment;
-import com.nuums.nuums.fragment.nanum.MapFragment;
-import com.nuums.nuums.fragment.nanum.NanumEditFragment;
-import com.nuums.nuums.fragment.nanum.NanumListFragment;
-import com.nuums.nuums.fragment.nanum.NanumViewerFragment;
-import com.nuums.nuums.fragment.review.ReviewEditFragment;
-import com.nuums.nuums.fragment.review.ReviewListFragment;
-import com.nuums.nuums.fragment.talk.ChatFragment;
-import com.nuums.nuums.fragment.test.ChipsEdittextFragment;
 import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
 import com.yongtrim.lib.fragment.ABaseFragment;
 import com.yongtrim.lib.message.PushMessage;

@@ -9,7 +9,6 @@ import android.view.View;
 import com.nuums.nuums.R;
 import com.nuums.nuums.fragment.membership.FindAccountFragment;
 import com.nuums.nuums.fragment.membership.NsSignupFragment;
-import com.nuums.nuums.fragment.membership.SigninFragment;
 import com.nuums.nuums.fragment.misc.AlarmFragment;
 import com.nuums.nuums.fragment.misc.ApplyFragment;
 import com.nuums.nuums.fragment.misc.AskFragment;
@@ -18,10 +17,9 @@ import com.nuums.nuums.fragment.misc.PostViewerFragment;
 import com.nuums.nuums.fragment.misc.PostcodeFragment;
 import com.nuums.nuums.fragment.misc.ReportFragment;
 import com.nuums.nuums.fragment.misc.SettingFragment;
-import com.nuums.nuums.fragment.misc.TutorialFragment;
 import com.nuums.nuums.fragment.misc.UserListFragment;
 import com.nuums.nuums.fragment.misc.YongdalFragment;
-import com.nuums.nuums.fragment.nanum.DiscriptionEditFragment;
+import com.nuums.nuums.fragment.nanum.DescriptionEditFragment;
 import com.nuums.nuums.fragment.nanum.MapFragment;
 import com.nuums.nuums.fragment.nanum.NanumEditFragment;
 import com.nuums.nuums.fragment.nanum.NanumListFragment;
@@ -32,7 +30,6 @@ import com.nuums.nuums.fragment.talk.ChatFragment;
 import com.nuums.nuums.fragment.test.ChipsEdittextFragment;
 import com.yongtrim.lib.fragment.ABaseFragment;
 import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
-import com.yongtrim.lib.fragment.SignupFragment;
 import com.yongtrim.lib.message.PushMessage;
 
 import de.greenrobot.event.EventBus;
@@ -135,7 +132,7 @@ public class BaseActivity extends ABaseFragmentAcitivty {
                 curFragment = addFragment(curFragment);
                 break;
             case DESCRIPTIONEDIT:
-                curFragment = new DiscriptionEditFragment();
+                curFragment = new DescriptionEditFragment();
                 curFragment = addFragment(curFragment);
                 break;
             case NANUMVIEWER:

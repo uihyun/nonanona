@@ -3,38 +3,27 @@ package com.nuums.nuums.view;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.text.InputType;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.nuums.nuums.R;
 import com.nuums.nuums.activity.BaseActivity;
 import com.nuums.nuums.activity.MainActivity;
-import com.nuums.nuums.fragment.mypage.MypageMainFragment;
-import com.nuums.nuums.model.misc.CommentManager;
-import com.nuums.nuums.model.nanum.NanumData;
 import com.nuums.nuums.model.user.NsUser;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
-import com.yongtrim.lib.message.PushMessage;
 import com.yongtrim.lib.model.photo.Photo;
-import com.yongtrim.lib.model.photo.PhotoData;
 import com.yongtrim.lib.model.photo.PhotoManager;
 import com.yongtrim.lib.model.user.UserManager;
 import com.yongtrim.lib.ui.CircularNetworkImageView;
@@ -42,10 +31,7 @@ import com.yongtrim.lib.ui.UltraButton;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
 import com.yongtrim.lib.util.PixelUtil;
 
-import java.io.File;
 import java.util.concurrent.CountDownLatch;
-
-import de.greenrobot.event.EventBus;
 
 /**
  * nuums / com.nuums.nuums.view
@@ -256,7 +242,7 @@ public class MypageView extends LinearLayout {
                 });
 
                 btnKeyword[i].setEnabled(true, false);
-                btnKeyword[i].setGravity(false);
+                btnKeyword[i].setGravity(true);
 //                } else {
 //                    btnKeyword[i].setIconResource(0);
 //                    btnKeyword[i].setOnClickListener(null);
