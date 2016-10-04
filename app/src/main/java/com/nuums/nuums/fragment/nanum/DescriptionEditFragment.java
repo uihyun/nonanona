@@ -3,7 +3,6 @@ package com.nuums.nuums.fragment.nanum;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
@@ -12,33 +11,21 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.nuums.nuums.R;
-import com.nuums.nuums.activity.BaseActivity;
-import com.nuums.nuums.adapter.PhotoPagerAdapter;
 import com.nuums.nuums.model.nanum.Nanum;
-import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
 import com.yongtrim.lib.fragment.ABaseFragment;
-import com.yongtrim.lib.message.PushMessage;
 import com.yongtrim.lib.model.config.ConfigManager;
-import com.yongtrim.lib.model.photo.Photo;
-import com.yongtrim.lib.model.photo.PhotoManager;
-import com.yongtrim.lib.ui.LimitedEditText;
-import com.yongtrim.lib.ui.autoscrollviewpager.AutoScrollViewPager;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
-import com.yongtrim.lib.util.UIUtil;
-
-import java.util.ArrayList;
 
 /**
  * nuums / com.nuums.nuums.fragment.nanum
  * <p/>
  * Created by Uihyun on 15. 12. 21..
  */
-public class DiscriptionEditFragment extends ABaseFragment {
+public class DescriptionEditFragment extends ABaseFragment {
     private final String TAG = getClass().getSimpleName();
 
     Nanum nanum;
@@ -48,12 +35,9 @@ public class DiscriptionEditFragment extends ABaseFragment {
 
     int MAX_CHARACTER = 1000;
 
-    final String message = "나눔물건:\n" +
-            "거래지역:\n" +
-            "선정기준:\n" +
-            "파손여부:";
+    String message = "";
 
-    String orinalDescription;
+    String originalDescription;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -61,6 +45,7 @@ public class DiscriptionEditFragment extends ABaseFragment {
         contextHelper.getActivity().setupActionBar("상세설명");
         contextHelper.getActivity().setImageButtonAndVisiable(R.drawable.tresh);
         nanum = Nanum.getNanum(contextHelper.getActivity().getIntent().getStringExtra("nanum"));
+        this.message = contextHelper.getContext().getString(R.string.hint_description);
     }
 
     @Override
@@ -89,10 +74,10 @@ public class DiscriptionEditFragment extends ABaseFragment {
 
         if(TextUtils.isEmpty(nanum.getDescription())) {
             etDescription.setText(message);
-            orinalDescription = message;
+            originalDescription = message;
         } else {
             etDescription.setText(nanum.getDescription());
-            orinalDescription = nanum.getDescription();
+            originalDescription = nanum.getDescription();
         }
 
         TextView tvCaution = (TextView)view.findViewById(R.id.tvCaution);
@@ -158,7 +143,7 @@ public class DiscriptionEditFragment extends ABaseFragment {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             //preventing default implementation previous to android.os.Build.VERSION_CODES.ECLAIR
-            if(orinalDescription.equals(etDescription.getText().toString())) {
+            if(originalDescription.equals(etDescription.getText().toString())) {
                 return false;
             } else {
                 new SweetAlertDialog(getContext())
