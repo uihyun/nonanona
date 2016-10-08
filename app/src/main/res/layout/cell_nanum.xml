@@ -256,31 +256,24 @@
                 </LinearLayout>
 
 
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/viewFinish"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#b4c0c2c3"
-                    android:gravity="center"
-                    android:orientation="vertical"
+                    android:background="#30000000"
                     android:visibility="gone">
 
                     <ImageView
-                        android:layout_width="140dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="5dp"
                         android:adjustViewBounds="true"
-                        android:alpha="0.5"
-                        android:src="@drawable/logo_white"/>
+                        android:src="@drawable/finish_small"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="나눔 마감되었습니다."
-                        android:textColor="#50fefffb"
-                        android:textSize="15dp"/>
-
-                </LinearLayout>
+                </RelativeLayout>
 
                 <include
                     android:id="@+id/viewTimer"

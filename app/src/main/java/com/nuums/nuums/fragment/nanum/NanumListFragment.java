@@ -9,15 +9,10 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -33,19 +28,15 @@ import com.android.volley.Response;
 import com.google.android.gms.maps.model.LatLng;
 import com.nuums.nuums.R;
 import com.nuums.nuums.activity.BaseActivity;
-import com.nuums.nuums.activity.MainActivity;
 import com.nuums.nuums.adapter.NanumAdapter;
 import com.nuums.nuums.fragment.mypage.MypageMainFragment;
 import com.nuums.nuums.model.nanum.Nanum;
 import com.nuums.nuums.model.nanum.NanumList;
 import com.nuums.nuums.model.nanum.NanumListData;
 import com.nuums.nuums.model.nanum.NanumManager;
-import com.nuums.nuums.model.review.Review;
 import com.nuums.nuums.model.user.NsUser;
 import com.nuums.nuums.view.HeaderView;
 import com.nuums.nuums.view.MypageView;
-import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
-import com.yongtrim.lib.fragment.ABaseFragment;
 import com.yongtrim.lib.fragment.ListFragment;
 import com.yongtrim.lib.log.Logger;
 import com.yongtrim.lib.message.PushMessage;
@@ -64,13 +55,8 @@ import com.yongtrim.lib.util.PixelUtil;
 
 import org.json.JSONObject;
 
-import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.concurrent.CountDownLatch;
-
-import de.greenrobot.event.EventBus;
 
 
 /**

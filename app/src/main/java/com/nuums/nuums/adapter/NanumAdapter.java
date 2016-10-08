@@ -1,15 +1,11 @@
 package com.nuums.nuums.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.support.v4.content.ContextCompat;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.toolbox.ImageLoader;
@@ -17,25 +13,15 @@ import com.nuums.nuums.AppController;
 import com.nuums.nuums.R;
 import com.nuums.nuums.activity.BaseActivity;
 import com.nuums.nuums.holder.NanumHolder;
-import com.nuums.nuums.model.misc.CommentManager;
 import com.nuums.nuums.model.nanum.Nanum;
 import com.nuums.nuums.model.nanum.NanumData;
 import com.nuums.nuums.model.nanum.NanumManager;
-import com.yongtrim.lib.Config;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.message.PushMessage;
 import com.yongtrim.lib.model.photo.PhotoManager;
-import com.yongtrim.lib.model.postcode.PostCode;
 import com.yongtrim.lib.model.user.UserManager;
-import com.yongtrim.lib.ui.CircularNetworkImageView;
-import com.yongtrim.lib.ui.CustomNetworkImageView;
-import com.yongtrim.lib.ui.UltraButton;
-import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
 import com.yongtrim.lib.util.MiscUtil;
-import com.yongtrim.lib.util.PixelUtil;
-import com.yongtrim.lib.util.UIUtil;
 
-import java.util.Date;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -56,25 +42,21 @@ public class NanumAdapter extends BaseAdapter {
         this.contextHelper = contextHelper;
     }
 
-
-    public void setData(List<Nanum> nanums) {
-        this.nanums = nanums;
-    }
-
-
     public void setKeyword(String keyword) {
 
     }
-
 
     public List<Nanum> getData() {
         return this.nanums;
     }
 
+    public void setData(List<Nanum> nanums) {
+        this.nanums = nanums;
+    }
 
     @Override
     public int getCount() {
-        if(nanums == null)
+        if (nanums == null)
             return 0;
         return nanums.size();
     }
@@ -95,10 +77,10 @@ public class NanumAdapter extends BaseAdapter {
         ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
         if (convertView == null) {
-            LayoutInflater mInflater = (LayoutInflater)parent.getContext().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater mInflater = (LayoutInflater) parent.getContext().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = new NanumHolder().set(mInflater.inflate(R.layout.cell_nanum, parent, false), parent.getContext(), true);
         }
-        final NanumHolder h = (NanumHolder)convertView.getTag();
+        final NanumHolder h = (NanumHolder) convertView.getTag();
 
         final Nanum nanum = nanums.get(position);
 
@@ -123,7 +105,7 @@ public class NanumAdapter extends BaseAdapter {
         });
 
 
-        if(nanum.isAdmin()) {
+        if (nanum.isAdmin()) {
             h.viewAddress.setVisibility(View.GONE);
         } else {
             h.viewAddress.setVisibility(View.VISIBLE);
@@ -142,13 +124,13 @@ public class NanumAdapter extends BaseAdapter {
 
         h.tvDate.setText(MiscUtil.getPostTime(nanum.getTimeCreated()));
 
-        for(int i = 0;i < 3;i++) {
-            if(i < nanum.getPhotoSafe().size()) {
+        for (int i = 0; i < 3; i++) {
+            if (i < nanum.getPhotoSafe().size()) {
                 h.ivThumb[i].setImageUrl(nanum.getPhotoSafe().get(i).getSmallUrl(), imageLoader);
             }
         }
 
-        if(position == 0) {
+        if (position == 0) {
             h.padding0.setVisibility(View.GONE);
             h.padding1.setVisibility(View.GONE);
             h.padding2.setVisibility(View.GONE);
@@ -161,13 +143,13 @@ public class NanumAdapter extends BaseAdapter {
         h.setMark(nanum, parent.getContext());
         h.setTimer(nanum, parent.getContext());
 
-        if(nanum.getStatus().equals(Nanum.STATUS_FINISH_TIME) || nanum.getStatus().equals(Nanum.STATUS_FINISH_SELECT)) {
+        if (nanum.getStatus().equals(Nanum.STATUS_FINISH_TIME) || nanum.getStatus().equals(Nanum.STATUS_FINISH_SELECT)) {
             h.viewFinish.setVisibility(View.VISIBLE);
         } else {
             h.viewFinish.setVisibility(View.GONE);
         }
 
-        if(nanum.isBookmark()) {
+        if (nanum.isBookmark()) {
             h.btnBookmark.setIconResource(R.drawable.big_like_on);
         } else {
             h.btnBookmark.setIconResource(R.drawable.big_like_off);
@@ -188,7 +170,7 @@ public class NanumAdapter extends BaseAdapter {
                 NanumManager.getInstance(contextHelper).setIsBookmarking(true);
 
                 //h.btnBookmark.setProgressBar(true);
-                if(!nanum.isBookmark()) {
+                if (!nanum.isBookmark()) {
                     h.btnBookmark.setIconResource(R.drawable.big_like_on);
                 } else {
                     h.btnBookmark.setIconResource(R.drawable.big_like_off);
@@ -216,11 +198,8 @@ public class NanumAdapter extends BaseAdapter {
         });
 
 
-
-
         return convertView;
     }
-
 
 
 }
