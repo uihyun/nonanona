@@ -20,7 +20,7 @@ android {
             // to pre-dex each module and produce an APK that can be tested on
             // Android Lollipop without time consuming dex merging processes.
             //minSdkVersion 21
-            minSdkVersion 19
+            minSdkVersion 21
         }
         prod {
             // The actual minSdkVersion for the application.
