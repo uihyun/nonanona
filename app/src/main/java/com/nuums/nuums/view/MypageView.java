@@ -63,8 +63,6 @@ public class MypageView extends LinearLayout {
     }
 
 
-
-
     private void init() {
 
         LayoutInflater li = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -73,18 +71,18 @@ public class MypageView extends LinearLayout {
 
         btnKeyword = new UltraButton[9];
 
-        btnKeyword[0] = (UltraButton)mainView.findViewById(R.id.btnKeyword0);
-        btnKeyword[1] = (UltraButton)mainView.findViewById(R.id.btnKeyword1);
-        btnKeyword[2] = (UltraButton)mainView.findViewById(R.id.btnKeyword2);
-        btnKeyword[3] = (UltraButton)mainView.findViewById(R.id.btnKeyword3);
-        btnKeyword[4] = (UltraButton)mainView.findViewById(R.id.btnKeyword4);
-        btnKeyword[5] = (UltraButton)mainView.findViewById(R.id.btnKeyword5);
-        btnKeyword[6] = (UltraButton)mainView.findViewById(R.id.btnKeyword6);
-        btnKeyword[7] = (UltraButton)mainView.findViewById(R.id.btnKeyword7);
-        btnKeyword[8] = (UltraButton)mainView.findViewById(R.id.btnKeyword8);
+        btnKeyword[0] = (UltraButton) mainView.findViewById(R.id.btnKeyword0);
+        btnKeyword[1] = (UltraButton) mainView.findViewById(R.id.btnKeyword1);
+        btnKeyword[2] = (UltraButton) mainView.findViewById(R.id.btnKeyword2);
+        btnKeyword[3] = (UltraButton) mainView.findViewById(R.id.btnKeyword3);
+        btnKeyword[4] = (UltraButton) mainView.findViewById(R.id.btnKeyword4);
+        btnKeyword[5] = (UltraButton) mainView.findViewById(R.id.btnKeyword5);
+        btnKeyword[6] = (UltraButton) mainView.findViewById(R.id.btnKeyword6);
+        btnKeyword[7] = (UltraButton) mainView.findViewById(R.id.btnKeyword7);
+        btnKeyword[8] = (UltraButton) mainView.findViewById(R.id.btnKeyword8);
 
 
-        ivAvatar = (CircularNetworkImageView)mainView.findViewById(R.id.ivAvatar);
+        ivAvatar = (CircularNetworkImageView) mainView.findViewById(R.id.ivAvatar);
         ivAvatar.setStrokeColorAndWidth(ContextCompat.getColor(getContext(), R.color.white), 0);
 
         ivAvatar.setOnClickListener(new OnClickListener() {
@@ -108,7 +106,7 @@ public class MypageView extends LinearLayout {
                                                 ABaseFragmentAcitivty.REQUEST_PICK_IMAGE);
                                         break;
                                     case 1:
-                                        if(user.getPhoto() != null && user.getPhoto().hasPhoto()) {
+                                        if (user.getPhoto() != null && user.getPhoto().hasPhoto()) {
                                             contextHelper.showProgress(null);
                                             user.setPhoto(null);
                                             patchUser(null);
@@ -179,7 +177,7 @@ public class MypageView extends LinearLayout {
     public void refresh() {
         final NsUser user = UserManager.getInstance(contextHelper).getMe();
 
-        TextView tvNickname = (TextView)mainView.findViewById(R.id.tvNickname);
+        TextView tvNickname = (TextView) mainView.findViewById(R.id.tvNickname);
         tvNickname.setText(user.getNicknameSafe());
         tvNickname.setOnClickListener(new OnClickListener() {
             @Override
@@ -193,7 +191,7 @@ public class MypageView extends LinearLayout {
                             public void onClick(SweetAlertDialog sDialog) {
                                 sDialog.dismissWithAnimation();
 
-                                if(TextUtils.isEmpty(sDialog.getEditTextValue()) || sDialog.getEditTextValue().length() < 2) {
+                                if (TextUtils.isEmpty(sDialog.getEditTextValue()) || sDialog.getEditTextValue().length() < 2) {
                                     new SweetAlertDialog(contextHelper.getContext()).setContentText("2자이상 입력해주세요.").show();
                                 } else {
                                     user.setNickname(sDialog.getEditTextValue());
@@ -209,14 +207,14 @@ public class MypageView extends LinearLayout {
 
         PhotoManager.getInstance(contextHelper).setPhotoMedium(ivAvatar, user.getPhoto());
 
-        MainActivity activity = (MainActivity)contextHelper.getActivity();
+        MainActivity activity = (MainActivity) contextHelper.getActivity();
 
 
-        for(int i = 0;i < 9;i++) {
-            if(user.getKeywords() != null && user.getKeywords().size() > i && !TextUtils.isEmpty(user.getKeywords().get(i))) {
+        for (int i = 0; i < 9; i++) {
+            if (user.getKeywords() != null && user.getKeywords().size() > i && !TextUtils.isEmpty(user.getKeywords().get(i))) {
                 btnKeyword[i].setText(user.getKeywords().get(i));
                 //if(activity.isKeywordEditMode) {
-                btnKeyword[i].setIconResource(R.drawable.keyword_minus);
+                btnKeyword[i].setIconResource(0);
                 btnKeyword[i].setTextSize(PixelUtil.dpToPx(getContext(), 15));
                 btnKeyword[i].setTextColor(ContextCompat.getColor(getContext(), R.color.green));
 
@@ -256,7 +254,7 @@ public class MypageView extends LinearLayout {
                 btnKeyword[i].setTextColor(ContextCompat.getColor(getContext(), R.color.gray));
 
                 //if(activity.isKeywordEditMode) {
-                    //btnKeyword[i].setIconResource(R.drawable.keyword_plus);
+                //btnKeyword[i].setIconResource(R.drawable.keyword_plus);
                 btnKeyword[i].setIconResource(0);
                 final int index = i;
 
@@ -290,8 +288,8 @@ public class MypageView extends LinearLayout {
             }
         }
 
-        UltraButton tvUnreadNanum = (UltraButton)mainView.findViewById(R.id.tvUnreadNanum);
-        if(user.getUnreadAsk() > 0) {
+        UltraButton tvUnreadNanum = (UltraButton) mainView.findViewById(R.id.tvUnreadNanum);
+        if (user.getUnreadAsk() > 0) {
             tvUnreadNanum.setVisibility(View.VISIBLE);
             tvUnreadNanum.setText("" + user.getUnreadAsk());
         } else {
@@ -303,7 +301,7 @@ public class MypageView extends LinearLayout {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         final NsUser user = UserManager.getInstance(contextHelper).getMe();
 
-        if(requestCode == ABaseFragmentAcitivty.REQUEST_PICK_IMAGE) {
+        if (requestCode == ABaseFragmentAcitivty.REQUEST_PICK_IMAGE) {
             if (resultCode == Activity.RESULT_OK) {
 
                 Uri source = PhotoManager.getInstance(contextHelper).getPickImageResultUri(data);
@@ -312,7 +310,7 @@ public class MypageView extends LinearLayout {
                         PhotoManager.getInstance(contextHelper).getCropImageIntent(source, true),
                         ABaseFragmentAcitivty.REQUEST_CROP_IMAGE);
             }
-        } else if(requestCode == ABaseFragmentAcitivty.REQUEST_CROP_IMAGE) {
+        } else if (requestCode == ABaseFragmentAcitivty.REQUEST_CROP_IMAGE) {
             if (resultCode == Activity.RESULT_OK) {
 
                 contextHelper.showProgress(null);
@@ -357,7 +355,7 @@ public class MypageView extends LinearLayout {
     void patchUser(final CountDownLatch latchWait) {
         final NsUser user = UserManager.getInstance(contextHelper).getMe();
 
-        final MainActivity activity = (MainActivity)contextHelper.getActivity();
+        final MainActivity activity = (MainActivity) contextHelper.getActivity();
 
         final CountDownLatch latchUpdate = new CountDownLatch(1);
         contextHelper.updateUser(user, latchWait, latchUpdate);
