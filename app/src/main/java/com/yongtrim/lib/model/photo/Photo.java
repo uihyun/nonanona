@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcel;
@@ -221,7 +222,7 @@ public class Photo extends Model implements Parcelable {
         dest.writeBundle(bundle);
     }
 
-    public void makeBitmap(ContextHelper contextHelper) {
+    public void makeBitmap(ContextHelper contextHelper, boolean isThumbnail) {
         setId(null);
 
         if (path == null) {
@@ -250,8 +251,9 @@ public class Photo extends Model implements Parcelable {
                 options.inPreferredConfig = Bitmap.Config.ARGB_8888;
                 bitmap = BitmapFactory.decodeFile(imagePath, options);
             }
-            // thumbnail은 사각형으로 scale을 맞추기 때문에 쓰지 않음.
-//            bitmap = ThumbnailUtils.extractThumbnail(bitmap, 720, 720);
+            // thumbnail은 size와 함께 사각형으로 scaling 해줌.
+            if (isThumbnail)
+                bitmap = ThumbnailUtils.extractThumbnail(bitmap, 720, 720);
 
             if (orientation == 90 || orientation == 270) {
                 Matrix matrix = new Matrix();

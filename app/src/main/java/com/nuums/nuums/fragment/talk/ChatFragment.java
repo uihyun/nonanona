@@ -225,7 +225,7 @@ public class ChatFragment extends ListFragment {
                     photo.setType(Photo.TYPE_PHOTO);
 
                     photo.setPath(null);
-                    photo.makeBitmap(contextHelper);
+                    photo.makeBitmap(contextHelper, false);
 
                     new SweetAlertDialog(getContext(), SweetAlertDialog.PHOTO_TYPE)
                             .setTitleText("사진전송")

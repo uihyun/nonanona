@@ -198,7 +198,7 @@ public class ReportFragment extends ABaseFragment implements UltraEditText.OnCha
             if(photo != null) {
                 if(photo.isLocalBitmap()) {
                     photo.setPath(null);
-                    photo.makeBitmap(contextHelper);
+                    photo.makeBitmap(contextHelper, true);
                 }
             }
 

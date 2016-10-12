@@ -1,41 +1,22 @@
 package com.nuums.nuums.view;
 
-import android.app.Activity;
-import android.content.ClipData;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.StateListDrawable;
-import android.os.Handler;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
-import android.view.DragEvent;
 import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.nuums.nuums.R;
 import com.nuums.nuums.adapter.PhotoCellAdapter;
 import com.yongtrim.lib.Config;
 import com.yongtrim.lib.ContextHelper;
-import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
-import com.yongtrim.lib.log.Logger;
 import com.yongtrim.lib.model.photo.Photo;
 import com.yongtrim.lib.util.PixelUtil;
 
 import org.askerov.dynamicgrid.DynamicGridView;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 
 /**
  * nuums / com.nuums.nuums.view
@@ -194,7 +175,7 @@ public class PhotoScrollView extends LinearLayout {
             Photo photo = photoNews.get(i);
 
             if(photo.isLocalBitmap() && !photo.hasPhoto()) {
-                photo.makeBitmap(contextHelper);
+                photo.makeBitmap(contextHelper, true);
                 photos.set(startIndex + i, photo);
             }
         }

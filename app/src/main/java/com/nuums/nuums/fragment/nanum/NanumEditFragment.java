@@ -450,7 +450,7 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
                 if (requestCode >= ABaseFragmentAcitivty.REQUEST_CROP_IMAGE) {
 
                     nanum.getPhotos().get(requestCode - ABaseFragmentAcitivty.REQUEST_CROP_IMAGE).setPath(PhotoManager.getInstance(contextHelper).getPathCropped());
-                    nanum.getPhotos().get(requestCode - ABaseFragmentAcitivty.REQUEST_CROP_IMAGE).makeBitmap(contextHelper);
+                    nanum.getPhotos().get(requestCode - ABaseFragmentAcitivty.REQUEST_CROP_IMAGE).makeBitmap(contextHelper, true);
                     refresh();
 
                 } else if (requestCode == ABaseFragmentAcitivty.REQUEST_DESCRIPTION) {
@@ -476,7 +476,7 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
 
                         for (Photo _photo : photos) {
                             _photo.setPath(null);
-                            _photo.makeBitmap(contextHelper);
+                            _photo.makeBitmap(contextHelper, true);
 
                             nanum.getPhotos().set(index++, _photo);
                         }
@@ -487,7 +487,7 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
                         Photo photo = new Photo(uri.toString(), orientation);
                         photo.setType(Photo.TYPE_PHOTO);
                         photo.setPath(null);
-                        photo.makeBitmap(contextHelper);
+                        photo.makeBitmap(contextHelper, true);
 
                         nanum.getPhotos().set(requestCode - ABaseFragmentAcitivty.REQUEST_PICK_IMAGE, photo);
                     }

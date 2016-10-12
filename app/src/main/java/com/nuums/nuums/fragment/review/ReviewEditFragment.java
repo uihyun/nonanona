@@ -246,7 +246,7 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
                     photo.setPath(null);
                 }
 
-                photo.makeBitmap(contextHelper);
+                photo.makeBitmap(contextHelper, true);
             }
         }
 
