@@ -65,42 +65,48 @@ import java.util.concurrent.CountDownLatch;
  * Created by Uihyun on 15. 12. 12..
  */
 public class NanumListFragment extends ListFragment implements GPSTracker.LocationListener {
-    private final String TAG = getClass().getSimpleName();
     private static final int REQUEST_CALL = 1;
-
-    NanumAdapter nanumAdapter;
-    NanumList nanumList;
-    View mainView;
-    TextView tvTitleNodata;
-
-    Handler timerHandler;
-    Runnable timerRunnable;
-
-    final int SORT_TIME = 0;
-    final int SORT_DISTANCE = 1;
-    final int SORT_BOOKMARK = 2;
-
-    int sort = SORT_TIME;
-
-    LatLng curLocation;
-
-    UltraButton btnNew;
-
     public static int LISTTYPE_ALL = 0;
     public static int LISTTYPE_MINE = 1;
     public static int LISTTYPE_APPLY = 2;
     public static int LISTTYPE_WON = 3;
-
-    int listType = LISTTYPE_ALL;
+    final int SORT_TIME = 0;
+    final int SORT_DISTANCE = 1;
+    final int SORT_BOOKMARK = 2;
+    private final String TAG = getClass().getSimpleName();
     public MypageView mypageView;
-
+    NanumAdapter nanumAdapter;
+    NanumList nanumList;
+    View mainView;
+    TextView tvTitleNodata;
+    Handler timerHandler;
+    Runnable timerRunnable;
+    int sort = SORT_TIME;
+    LatLng curLocation;
+    UltraButton btnNew;
+    int listType = LISTTYPE_ALL;
     boolean isSearch;
 
     PagerSlidingTabStrip2 tabbar;
 
     UltraEditText etSearch;
     String keyword;
+    ArrayList<Nanum> adminOngoingList;
 
+
+    //    public NanumListFragment setPager(ViewPager pager) {
+//        this.pager = pager;
+//        return this;
+//    }
+    ArrayList<Nanum> adminFinishList;
+    ArrayList<Nanum> ongoingList;
+    ArrayList<Nanum> finishList;
+    Page adminOngoing;
+    Page adminFinish;
+    Page ongoing;
+    Page finish;
+    NanumList nanumListTemp;
+    JSONObject option = null;
 
     public static NanumListFragment create(int listType) {
         NanumListFragment fragment = new NanumListFragment();
@@ -108,26 +114,17 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
         return fragment;
     }
 
-
-
-//    public NanumListFragment setPager(ViewPager pager) {
-//        this.pager = pager;
-//        return this;
-//    }
-
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putInt("listType", listType);
     }
 
-
-
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
 
-        if(saveInstanceState != null) {
+        if (saveInstanceState != null) {
             listType = saveInstanceState.getInt("listType");
         }
         isSearch = contextHelper.getActivity().getIntent().getBooleanExtra("isSearch", false);
@@ -136,14 +133,14 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
         timerRunnable = new Runnable() {
             @Override
             public void run() {
-                if(nanumAdapter != null)
+                if (nanumAdapter != null)
                     nanumAdapter.notifyDataSetChanged();
                 timerHandler.postDelayed(this, 60000); //run every minute
             }
         };
 
 
-        if(isSearch) {
+        if (isSearch) {
             etSearch = contextHelper.getActivity().setupActionBarSearch();
             etSearch.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
             etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -164,12 +161,12 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
 
         mainView = inflater.inflate(R.layout.fragment_nanumlist, container, false);
 
-        btnNew = (UltraButton)mainView.findViewById(R.id.btnNew);
+        btnNew = (UltraButton) mainView.findViewById(R.id.btnNew);
 
-        UltraListView listView = (UltraListView)mainView.findViewById(R.id.listView);
+        UltraListView listView = (UltraListView) mainView.findViewById(R.id.listView);
         nanumAdapter = new NanumAdapter(contextHelper);
 
-        if(nanumList == null) {
+        if (nanumList == null) {
             nanumList = new NanumList();
         }
 
@@ -180,13 +177,13 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
         setListInfo(nanumList);
         setAddedLayer(mainView.findViewById(R.id.layerTop), mainView.findViewById(R.id.layerBottom));
 
-        tvTitleNodata = (TextView)mainView.findViewById(R.id.tvTitleNodata);
+        tvTitleNodata = (TextView) mainView.findViewById(R.id.tvTitleNodata);
 
         listView.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                if(id < 0 || id >= nanumList.getNanums().size())
+                if (id < 0 || id >= nanumList.getNanums().size())
                     return;
 
                 Nanum nanumSelected = nanumList.getNanums().get((int) id);
@@ -200,10 +197,9 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
 
         HeaderView headerView = new HeaderView(getContext());
 
-        if(isSearch == true) {
+        if (isSearch == true) {
             mainView.findViewById(R.id.layerBottom).setVisibility(View.GONE);
-        }
-        else if(listType == LISTTYPE_ALL) {
+        } else if (listType == LISTTYPE_ALL) {
             mainView.findViewById(R.id.layerSort).setVisibility(View.VISIBLE);
         } else {
             mainView.findViewById(R.id.layerTabbar).setVisibility(View.VISIBLE);
@@ -212,10 +208,10 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
             headerView.addView(mypageView);
             headerView.addView(PixelUtil.dpToPx(getContext(), 60));
 
-            tabbar = (PagerSlidingTabStrip2)mainView.findViewById(R.id.tabbar);
+            tabbar = (PagerSlidingTabStrip2) mainView.findViewById(R.id.tabbar);
             tabbar.setContextHelper(contextHelper);
             tabbar.setVisibility(View.VISIBLE);
-            tabbar.setViewPager(((MypageMainFragment)getParentFragment()).pager);
+            tabbar.setViewPager(((MypageMainFragment) getParentFragment()).pager);
         }
 
         setHeader(headerView);
@@ -224,7 +220,7 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
         refreshBottom();
 
 
-        if(isSearch) {
+        if (isSearch) {
             tvTitleNodata.setText("검색어로 나눔을 찾아보세요.");
 
         } else {
@@ -243,10 +239,9 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(mypageView != null)
+        if (mypageView != null)
             mypageView.onActivityResult(requestCode, resultCode, data);
     }
-
 
     @Override
     public void onResume() {
@@ -254,7 +249,6 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
         super.onResume();
 
     }
-
 
     @Override
     public void onStart() {
@@ -266,7 +260,6 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
         super.onStop();
     }
 
-
     @Override
     public void onPause() {
         timerHandler.removeCallbacks(timerRunnable);
@@ -277,19 +270,19 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
     public void setMenuVisibility(final boolean visible) {
         super.setMenuVisibility(visible);
         if (!visible) {
-            if(listView != null)
+            if (listView != null)
                 listView.setSelection(0);
         }
     }
 
     void find(String keyword) {
-        if(TextUtils.isEmpty(keyword))
+        if (TextUtils.isEmpty(keyword))
             return;
 
         try {
             InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
-        } catch(Exception e) {
+        } catch (Exception e) {
 
         }
 
@@ -299,16 +292,15 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
         loadList(null);
     }
 
-
     public void refreshTop() {
-        if(listType != LISTTYPE_ALL)
+        if (listType != LISTTYPE_ALL)
             return;
-        if(isSearch)
+        if (isSearch)
             return;
 
-        UltraButton btnZim = (UltraButton)mainView.findViewById(R.id.btnZim);
-        UltraButton btnDistance = (UltraButton)mainView.findViewById(R.id.btnDistance);
-        UltraButton btnTime = (UltraButton)mainView.findViewById(R.id.btnTime);
+        UltraButton btnZim = (UltraButton) mainView.findViewById(R.id.btnZim);
+        UltraButton btnDistance = (UltraButton) mainView.findViewById(R.id.btnDistance);
+        UltraButton btnTime = (UltraButton) mainView.findViewById(R.id.btnTime);
 
         btnZim.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.white));
         btnZim.setTextStyleColor(Typeface.DEFAULT);
@@ -320,11 +312,11 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
         btnTime.setTextStyleColor(Typeface.DEFAULT);
 
 
-        if(sort == SORT_TIME) {
+        if (sort == SORT_TIME) {
             btnTime.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.green));
             //btnTime.setTextStyleColor(Typeface.DEFAULT_BOLD);
 
-        } else if(sort == SORT_DISTANCE) {
+        } else if (sort == SORT_DISTANCE) {
             btnDistance.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.green));
             //btnDistance.setTextStyleColor(Typeface.DEFAULT_BOLD);
 
@@ -337,20 +329,19 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
     public void refreshBottom() {
     }
 
-
     public void onEvent(final PushMessage pushMessage) {
-        switch(pushMessage.getActionCode()) {
+        switch (pushMessage.getActionCode()) {
             case PushMessage.ACTIONCODE_CHANGE_ME:
-                if(tabbar != null) {
+                if (tabbar != null) {
                     tabbar.notifyDataSetChanged();
                     loadList(null);
                 }
 
-                if(mypageView != null)
+                if (mypageView != null)
                     mypageView.refresh();
                 break;
             case PushMessage.ACTIONCODE_ADDED_NANUM:
-            case PushMessage.ACTIONCODE_DELETE_NANUM:{
+            case PushMessage.ACTIONCODE_DELETE_NANUM: {
                 try {
                     contextHelper.getActivity().runOnUiThread(new Runnable() {
                         @Override
@@ -360,13 +351,13 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
                         }
                     });
 
-                } catch(Exception e) {
+                } catch (Exception e) {
 
                 }
             }
             break;
             case PushMessage.ACTIONCODE_ADDED_NANUM_OTHER:
-                if(listType == LISTTYPE_ALL && sort == SORT_TIME) {
+                if (listType == LISTTYPE_ALL && sort == SORT_TIME) {
                     contextHelper.getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -377,11 +368,11 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
                 }
                 break;
             case PushMessage.ACTIONCODE_CHANGE_NANUM: {
-                Nanum nanum = (Nanum)pushMessage.getObject(contextHelper);
+                Nanum nanum = (Nanum) pushMessage.getObject(contextHelper);
 
                 java.util.List<Nanum> nanums = nanumAdapter.getData();
-                for(int i = 0;i < nanums.size();i++) {
-                    if(nanums.get(i).isSame(nanum)) {
+                for (int i = 0; i < nanums.size(); i++) {
+                    if (nanums.get(i).isSame(nanum)) {
                         nanums.set(i, nanum);
                         break;
                     }
@@ -399,7 +390,7 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
                 contextHelper.getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if(LocationManager.getInstance(contextHelper).isGpsOn()) {
+                        if (LocationManager.getInstance(contextHelper).isGpsOn()) {
                             curLocation = LocationManager.getInstance(contextHelper).getCurrentLocation(NanumListFragment.this);
 
                         } else {
@@ -421,13 +412,12 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
         }
     }
 
-
     public void onButtonClicked(View v) {
         super.onButtonClicked(v);
         switch (v.getId()) {
             case R.id.actionbarImageButton:
-                if(listType == LISTTYPE_ALL) {
-                    if(isSearch) {
+                if (listType == LISTTYPE_ALL) {
+                    if (isSearch) {
                         find(etSearch.getText().toString());
                     } else {
                         Intent i = new Intent(getContext(), BaseActivity.class);
@@ -437,7 +427,7 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
                         getContext().startActivity(i);
                     }
                 }
-            break;
+                break;
             case R.id.btnNew:
 
                 listView.smoothScrollToPosition(0);
@@ -452,7 +442,7 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
                 break;
 
             case R.id.btnDistance:
-                if(!LocationManager.getInstance(contextHelper).isGpsOn()) {
+                if (!LocationManager.getInstance(contextHelper).isGpsOn()) {
                     new SweetAlertDialog(getContext())
                             .setContentText("위치 서비스 사용 설정이 꺼져있습니다.\n거리순을 보시려면 휴대폰 설정에서 위치 서비스 사용을 허용해주세요.")
                             .showCancelButton(true)
@@ -486,17 +476,17 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
             }
             break;
             case R.id.btnYondal: {
-                Intent callIntent=new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + ConfigManager.getInstance(contextHelper).getConfigHello().getParams().getYongdalPhone()));
-                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE)!= PackageManager.PERMISSION_GRANTED){
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CALL_PHONE},REQUEST_CALL);
-                }else {
+                Intent callIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + ConfigManager.getInstance(contextHelper).getConfigHello().getParams().getYongdalPhone()));
+                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+                } else {
                     startActivity(callIntent);
                 }
 //                Intent i = new Intent(getContext(), BaseActivity.class);
 //                i.putExtra("activityCode", BaseActivity.ActivityCode.YONGDAL.ordinal());
 //                getContext().startActivity(i);
             }
-                break;
+            break;
 
 
         }
@@ -504,14 +494,13 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode){
-            case REQUEST_CALL:
-            {
-                Intent callIntent=new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + ConfigManager.getInstance(contextHelper).getConfigHello().getParams().getYongdalPhone()));
+        switch (requestCode) {
+            case REQUEST_CALL: {
+                Intent callIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + ConfigManager.getInstance(contextHelper).getConfigHello().getParams().getYongdalPhone()));
 
-                if (grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     startActivity(callIntent);
-                }else{
+                } else {
                     ////
                 }
             }
@@ -523,11 +512,8 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
         startActivity(i);
     }
 
-
-
-
     public void onLocationChanged(Location location) {
-        if(curLocation == null) {
+        if (curLocation == null) {
             curLocation = LocationManager.getInstance(contextHelper).getCurrentLocation(null);
             if (sort == SORT_DISTANCE) {
                 loadList(null);
@@ -535,22 +521,11 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
         }
     }
 
-    ArrayList<Nanum> adminOngoingList;
-    ArrayList<Nanum> adminFinishList;
-    ArrayList<Nanum> ongoingList;
-    ArrayList<Nanum> finishList;
-    Page adminOngoing;
-    Page adminFinish;
-    Page ongoing;
-    Page finish;
-    NanumList nanumListTemp;
-    JSONObject option = null;
-
     public synchronized void loadList(final List list) {
 
         final int limit = 20;
 
-        if(list == null) {
+        if (list == null) {
             adminOngoing = null;
             adminFinish = null;
             ongoing = null;
@@ -561,11 +536,11 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
 
         final NsUser user = UserManager.getInstance(contextHelper).getMe();
 
-        if(isSearch) {
+        if (isSearch) {
             JSONObject option = new JSONObject();
             try {
                 option.put("keyword", keyword);
-            } catch(Exception e) {
+            } catch (Exception e) {
 
             }
 
@@ -591,17 +566,16 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
                     null
             );
             return;
-        }
-        else if(listType != LISTTYPE_ALL) {
+        } else if (listType != LISTTYPE_ALL) {
             super.loadList(list);
 
             String type = "MINE";
 
-            if(listType == LISTTYPE_MINE) {
+            if (listType == LISTTYPE_MINE) {
                 type = "MINE";
-            } else if(listType == LISTTYPE_APPLY) {
+            } else if (listType == LISTTYPE_APPLY) {
                 type = "APPLY";
-            } else if(listType == LISTTYPE_WON) {
+            } else if (listType == LISTTYPE_WON) {
                 type = "WON";
             }
 
@@ -612,11 +586,11 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
                         @Override
                         public void onResponse(NanumListData response) {
 
-                            if(listType == LISTTYPE_MINE) {
+                            if (listType == LISTTYPE_MINE) {
                                 tvTitleNodata.setText("나의 나눔이 없습니다.");
-                            } else if(listType == LISTTYPE_APPLY) {
+                            } else if (listType == LISTTYPE_APPLY) {
                                 tvTitleNodata.setText("신청한 나눔이 없습니다.");
-                            } else if(listType == LISTTYPE_WON) {
+                            } else if (listType == LISTTYPE_WON) {
                                 tvTitleNodata.setText("받은 나눔이 없습니다.");
                             }
 
@@ -635,7 +609,7 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
             return;
         }
 
-        if(sort == SORT_TIME || sort == SORT_BOOKMARK) {
+        if (sort == SORT_TIME || sort == SORT_BOOKMARK) {
             super.loadList(list);
             NanumManager.getInstance(contextHelper).find(user.getId(),
                     sort == SORT_TIME ? "TIME" : "BOOKMARK",
@@ -662,7 +636,7 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
         }
 
 
-        if(!LocationManager.getInstance(contextHelper).isGpsOn()) {
+        if (!LocationManager.getInstance(contextHelper).isGpsOn()) {
             new SweetAlertDialog(getContext())
                     .setContentText("위치 서비스 사용 설정이 꺼져있습니다.\n거리순을 보시려면 휴대폰 설정에서 위치 서비스 사용을 허용해주세요.")
                     .showCancelButton(true)
@@ -679,7 +653,7 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
             this.refreshLayout.setRefreshing(false);
             return;
         }
-        if(curLocation == null) {
+        if (curLocation == null) {
             this.refreshLayout.setRefreshing(false);
             return;
         }
@@ -692,12 +666,12 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
             option.put("center_lng", curLocation.longitude);
             option.put("center_lat", curLocation.latitude);
 
-        } catch(Exception e) {
+        } catch (Exception e) {
         }
 
 
         final CountDownLatch latchAdminOngoing = new CountDownLatch(1);
-        if(adminOngoing == null || adminOngoing.isHasNext()) {
+        if (adminOngoing == null || adminOngoing.isHasNext()) {
             NanumManager.getInstance(contextHelper).find(user.getId(),
                     "ADMIN_ONGOING",
                     adminOngoing == null ? 1 : adminOngoing.getNext(), limit, null,
@@ -717,14 +691,14 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
                     null
             );
         } else {
-            if(adminOngoingList != null)
+            if (adminOngoingList != null)
                 adminOngoingList.clear();
             latchAdminOngoing.countDown();
         }
 
         final CountDownLatch latchOngoing = new CountDownLatch(1);
 
-        if(ongoing == null || ongoing.isHasNext()) {
+        if (ongoing == null || ongoing.isHasNext()) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -754,15 +728,14 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
                 }
             }).start();
         } else {
-            if(ongoingList != null)
+            if (ongoingList != null)
                 ongoingList.clear();
             latchOngoing.countDown();
         }
 
 
-
         final CountDownLatch latchAdminFinish = new CountDownLatch(1);
-        if(adminFinish == null || adminFinish.isHasNext()) {
+        if (adminFinish == null || adminFinish.isHasNext()) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -793,7 +766,7 @@ public class NanumListFragment extends ListFragment implements GPSTracker.Locati
                 }
             }).start();
         } else {
-            if(adminFinishList != null)
+            if (adminFinishList != null)
                 adminFinishList.clear();
             latchAdminFinish.countDown();
         }

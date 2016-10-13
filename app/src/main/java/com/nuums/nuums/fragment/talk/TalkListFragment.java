@@ -11,7 +11,6 @@ import android.widget.ListView;
 import com.android.volley.Response;
 import com.nuums.nuums.R;
 import com.nuums.nuums.activity.BaseActivity;
-import com.nuums.nuums.activity.MainActivity;
 import com.nuums.nuums.adapter.TalkAdapter;
 import com.nuums.nuums.fragment.misc.UserListFragment;
 import com.nuums.nuums.model.chat.Talk;
@@ -19,19 +18,10 @@ import com.nuums.nuums.model.chat.TalkData;
 import com.nuums.nuums.model.chat.TalkList;
 import com.nuums.nuums.model.chat.TalkListData;
 import com.nuums.nuums.model.chat.TalkManager;
-import com.nuums.nuums.model.nanum.Nanum;
-import com.nuums.nuums.model.report.Report;
-import com.nuums.nuums.model.user.NsUser;
 import com.yongtrim.lib.Application;
-import com.yongtrim.lib.ContextHelper;
-import com.yongtrim.lib.fragment.ABaseFragment;
 import com.yongtrim.lib.fragment.ListFragment;
-import com.yongtrim.lib.log.Logger;
-import com.yongtrim.lib.message.GcmIntentService;
 import com.yongtrim.lib.message.PushMessage;
-import com.yongtrim.lib.model.ACommonData;
 import com.yongtrim.lib.model.list.List;
-import com.yongtrim.lib.model.user.UserManager;
 import com.yongtrim.lib.ui.UltraListView;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
 
@@ -45,10 +35,8 @@ import de.greenrobot.event.EventBus;
 public class TalkListFragment extends ListFragment {
 
     final static String TAG = "TalkListFragment";
-
-    private UltraListView listView;
-
     public TalkList talkList;
+    private UltraListView listView;
     private TalkAdapter talkAdapter;
 
     public static TalkListFragment create() {
@@ -66,11 +54,11 @@ public class TalkListFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         View view = inflater.inflate(R.layout.fragment_talklist, container, false);
 
-        listView = (UltraListView)view.findViewById(R.id.listView);
+        listView = (UltraListView) view.findViewById(R.id.listView);
 
         talkAdapter = new TalkAdapter(contextHelper, listView);
 
-        if(talkList == null) {
+        if (talkList == null) {
             talkList = new TalkList();
         }
 
@@ -84,13 +72,13 @@ public class TalkListFragment extends ListFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Talk talkSelected = talkList.getTalks().get((int) position);
 
-                if(talkAdapter.isOutMode()) {
-                    Boolean select = (Boolean)talkSelected.getTag();
+                if (talkAdapter.isOutMode()) {
+                    Boolean select = (Boolean) talkSelected.getTag();
 
-                    if(select != null && select.booleanValue()) {
+                    if (select != null && select.booleanValue()) {
                         talkSelected.setTag(new Boolean(false));
                     } else {
-                        for(Talk talk : talkList.getTalks()) {
+                        for (Talk talk : talkList.getTalks()) {
                             talk.setTag(new Boolean(false));
                         }
                         talkSelected.setTag(new Boolean(true));
@@ -130,7 +118,7 @@ public class TalkListFragment extends ListFragment {
 
     public void onButtonClicked(View v) {
 
-        switch(v.getId()) {
+        switch (v.getId()) {
             case R.id.btnSearchUser:
                 Intent i = new Intent(getContext(), BaseActivity.class);
                 i.putExtra("activityCode", BaseActivity.ActivityCode.USERLIST.ordinal());
@@ -139,20 +127,20 @@ public class TalkListFragment extends ListFragment {
                 getContext().startActivity(i);
                 break;
             case R.id.actionbarImageButton:
-                if(talkAdapter.isOutMode()) {
+                if (talkAdapter.isOutMode()) {
                     Talk talkChecked = null;
 
-                    for(Talk talk : talkList.getTalks()) {
+                    for (Talk talk : talkList.getTalks()) {
 
-                        Boolean select = (Boolean)talk.getTag();
+                        Boolean select = (Boolean) talk.getTag();
 
-                        if(select != null && select.booleanValue()) {
+                        if (select != null && select.booleanValue()) {
                             talkChecked = talk;
                             break;
                         }
                     }
 
-                    if(talkChecked != null) {
+                    if (talkChecked != null) {
 
                         final Talk talkCheckedfinal = talkChecked;
                         new SweetAlertDialog(getContext())
@@ -206,7 +194,7 @@ public class TalkListFragment extends ListFragment {
                                     switch (index) {
 
                                         case 0: {
-                                            if(talkList.getTalks().size() == 0) {
+                                            if (talkList.getTalks().size() == 0) {
                                                 new SweetAlertDialog(getContext()).setContentText("대화 목록이 없습니다.").show();
                                             } else {
                                                 contextHelper.getActivity().setImageButtonAndVisiable(R.drawable.roomout);
@@ -232,14 +220,14 @@ public class TalkListFragment extends ListFragment {
     }
 
     public void onEvent(PushMessage pushMessage) {
-        switch(pushMessage.getActionCode()) {
+        switch (pushMessage.getActionCode()) {
             case PushMessage.ACTIONCODE_DELETETALK:
                 loadList(null);
                 break;
             case PushMessage.ACTIONCODE_CHANGETALK: {
-                final Talk talk = (Talk)pushMessage.getObject(contextHelper);
+                final Talk talk = (Talk) pushMessage.getObject(contextHelper);
 
-                if(talk.getMe(contextHelper) != null) {
+                if (talk.getMe(contextHelper) != null) {
                     Application.setBadge(contextHelper.getContext(), talk.getMe(contextHelper).getUnreadCnt());
                 }
 
@@ -248,13 +236,12 @@ public class TalkListFragment extends ListFragment {
                     public void run() {
                         boolean has = false;
                         java.util.List<Talk> talks = talkList.getTalks();
-                        for(int i = 0;i < talks.size();i++) {
-                            if(talk.getId() != null && talks.get(i).isSame(talk)) {
+                        for (int i = 0; i < talks.size(); i++) {
+                            if (talk.getId() != null && talks.get(i).isSame(talk)) {
                                 talks.set(i, talk);
                                 has = true;
                                 break;
-                            }
-                            else if(talks.get(i).getRoomName().equals(talk.getRoomName())) {
+                            } else if (talks.get(i).getRoomName().equals(talk.getRoomName())) {
                                 Talk _talk = talks.get(i);
                                 _talk.setTimeUpdated(talk.getTimeUpdated());
                                 _talk.setMessageRecent(talk.getMessageRecent());
@@ -262,7 +249,7 @@ public class TalkListFragment extends ListFragment {
                                 break;
                             }
                         }
-                        if(has) {
+                        if (has) {
                             talkAdapter.notifyDataSetChanged();
                         } else {
                             loadList(null);
@@ -306,7 +293,6 @@ public class TalkListFragment extends ListFragment {
                 null
         );
     }
-
 
 
 //    public static boolean hasNew(ContextHelper contextHelper) {

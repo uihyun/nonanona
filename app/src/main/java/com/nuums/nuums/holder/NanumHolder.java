@@ -7,16 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.volley.toolbox.ImageLoader;
-import com.nuums.nuums.AppController;
 import com.nuums.nuums.R;
 import com.nuums.nuums.model.nanum.Nanum;
 import com.yongtrim.lib.Config;
-import com.yongtrim.lib.log.Logger;
 import com.yongtrim.lib.ui.CircularNetworkImageView;
 import com.yongtrim.lib.ui.CustomNetworkImageView;
 import com.yongtrim.lib.ui.UltraButton;
-import com.yongtrim.lib.util.MiscUtil;
 import com.yongtrim.lib.util.PixelUtil;
 import com.yongtrim.lib.util.UIUtil;
 
@@ -60,18 +56,18 @@ public class NanumHolder {
         this.context = context;
         v.setTag(this);
 
-        btnBookmark = (UltraButton)v.findViewById(R.id.btnBookmark);
+        btnBookmark = (UltraButton) v.findViewById(R.id.btnBookmark);
 
-        ivAvatar = (CircularNetworkImageView)v.findViewById(R.id.ivAvatar);
-        tvNickname = (TextView)v.findViewById(R.id.tvNickname);
-        tvTitle = (TextView)v.findViewById(R.id.tvTitle);
-        tvAddress = (TextView)v.findViewById(R.id.tvAddress);
-        tvDate = (TextView)v.findViewById(R.id.tvDate);
+        ivAvatar = (CircularNetworkImageView) v.findViewById(R.id.ivAvatar);
+        tvNickname = (TextView) v.findViewById(R.id.tvNickname);
+        tvTitle = (TextView) v.findViewById(R.id.tvTitle);
+        tvAddress = (TextView) v.findViewById(R.id.tvAddress);
+        tvDate = (TextView) v.findViewById(R.id.tvDate);
         viewAddress = v.findViewById(R.id.viewAddress);
 
-        ivThumb[0] = (CustomNetworkImageView)v.findViewById(R.id.ivThumb0);
-        ivThumb[1] = (CustomNetworkImageView)v.findViewById(R.id.ivThumb1);
-        ivThumb[2] = (CustomNetworkImageView)v.findViewById(R.id.ivThumb2);
+        ivThumb[0] = (CustomNetworkImageView) v.findViewById(R.id.ivThumb0);
+        ivThumb[1] = (CustomNetworkImageView) v.findViewById(R.id.ivThumb1);
+        ivThumb[2] = (CustomNetworkImageView) v.findViewById(R.id.ivThumb2);
         UIUtil.setDivided(ivThumb, v.getContext());
 
         padding0 = v.findViewById(R.id.padding0);
@@ -83,9 +79,9 @@ public class NanumHolder {
 
 
         viewFinish = v.findViewById(R.id.viewFinish);
-        if(isCell) {
-            tvTimerHour = (TextView)v.findViewById(R.id.tvTimerHour);
-            tvTimerMinute = (TextView)v.findViewById(R.id.tvTimerMinute);
+        if (isCell) {
+            tvTimerHour = (TextView) v.findViewById(R.id.tvTimerHour);
+            tvTimerMinute = (TextView) v.findViewById(R.id.tvTimerMinute);
 
             viewTimer = v.findViewById(R.id.viewTimer);
 
@@ -94,14 +90,14 @@ public class NanumHolder {
         } else {
             viewTimer = v.findViewById(R.id.viewTimerBig);
 
-            tvTimerHour = (TextView)viewTimer.findViewById(R.id.tvTimerHour);
-            tvTimerMinute = (TextView)viewTimer.findViewById(R.id.tvTimerMinute);
+            tvTimerHour = (TextView) viewTimer.findViewById(R.id.tvTimerHour);
+            tvTimerMinute = (TextView) viewTimer.findViewById(R.id.tvTimerMinute);
 
             tvTimerHour.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
             tvTimerMinute.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
 
-            TextView tvHourTag = (TextView)viewTimer.findViewById(R.id.tvHourTag);
-            TextView tvMinuteTag = (TextView)viewTimer.findViewById(R.id.tvMinuteTag);
+            TextView tvHourTag = (TextView) viewTimer.findViewById(R.id.tvHourTag);
+            TextView tvMinuteTag = (TextView) viewTimer.findViewById(R.id.tvMinuteTag);
 
             tvHourTag.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 8);
             tvMinuteTag.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 8);
@@ -118,7 +114,7 @@ public class NanumHolder {
         viewMarkLeft.setVisibility(View.VISIBLE);
         viewMarkRight.setVisibility(View.VISIBLE);
 
-        if(nanum.getOwner().getRole() != null && nanum.getOwner().getRole().equals("ADMIN")) {
+        if (nanum.getOwner().getRole() != null && nanum.getOwner().getRole().equals("ADMIN")) {
             ViewGroup.LayoutParams param = viewMarkLeft.getLayoutParams();
             param.height = ViewGroup.LayoutParams.MATCH_PARENT;
             viewMarkLeft.setLayoutParams(param);
@@ -136,14 +132,14 @@ public class NanumHolder {
             viewMarkLeft.setBackgroundColor(ContextCompat.getColor(context, R.color.green));
 
             viewMarkRight.setVisibility(View.GONE);
-            switch(nanum.getMethod()) {
+            switch (nanum.getMethod()) {
                 case Nanum.METHOD_ARRIVAL:
                     viewMarkLeft.setBackgroundColor(ContextCompat.getColor(context, R.color.red));
                     break;
                 case Nanum.METHOD_SELECT:
                     viewMarkLeft.setBackgroundColor(ContextCompat.getColor(context, R.color.green));
                     break;
-                case Nanum. METHOD_RANDOM:
+                case Nanum.METHOD_RANDOM:
                     viewMarkLeft.setBackgroundColor(ContextCompat.getColor(context, R.color.black));
                     break;
             }
@@ -151,7 +147,7 @@ public class NanumHolder {
     }
 
     public void setTimer(Nanum nanum, Context context) {
-        if(!nanum.getStatus().equals(Nanum.STATUS_ONGOING)) {
+        if (!nanum.getStatus().equals(Nanum.STATUS_ONGOING)) {
             viewTimer.setVisibility(View.GONE);
             return;
         }
@@ -163,7 +159,7 @@ public class NanumHolder {
         long hoursInMilli = minutesInMilli * 60;
         long daysInMilli = hoursInMilli * 24;
 
-        long different = hoursInMilli* Config.NANUM_HOUR - (date.getTime() - nanum.getTimeOngoing().getTime());
+        long different = hoursInMilli * Config.NANUM_HOUR - (date.getTime() - nanum.getTimeOngoing().getTime());
         //long different = minutesInMilli*2  - (date.getTime() - nanum.getTimeOngoing().getTime());
         long diff = different;
 
@@ -178,7 +174,7 @@ public class NanumHolder {
 
         long elapsedSeconds = different / secondsInMilli;
 
-        if(diff > 0) {
+        if (diff > 0) {
             tvTimerHour.setText(String.format("%02d", elapsedHours));
             tvTimerMinute.setText(String.format("%02d", elapsedMinutes));
             viewTimer.setVisibility(View.VISIBLE);

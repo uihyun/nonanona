@@ -1,10 +1,8 @@
 package com.yongtrim.lib.activity;
 
 import android.app.ActionBar;
-import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -12,12 +10,8 @@ import android.support.v4.content.ContextCompat;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,8 +19,6 @@ import android.widget.TextView;
 import com.nuums.nuums.R;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.fragment.ABaseFragment;
-import com.yongtrim.lib.log.Logger;
-import com.yongtrim.lib.message.PushMessage;
 import com.yongtrim.lib.ui.UltraEditText;
 import com.yongtrim.lib.util.PixelUtil;
 
@@ -36,36 +28,29 @@ import com.yongtrim.lib.util.PixelUtil;
  * Created by Uihyun on 15. 8. 31..
  */
 public class ABaseFragmentAcitivty extends FragmentActivity {
-    final String TAG = "ABaseFragmentAcitivty";
-
     //public static int REQUEST_TAKE_PICTURE  = 0b0100000000000000;
     //public static int REQUEST_ADDRESS       = 0b1100000000000000;
     //public static int REQUEST_AREA      = 0b0000100000000000;
-    public static int REQUEST_PICK_IMAGE        = 0b0000000000000000;
-    public static int REQUEST_POSTCODE          = 0b1000000000000000;
-    public static int REQUEST_DESCRIPTION       = 0b0100000000000000;
-    public static int REQUEST_CROP_IMAGE        = 0b1100000000000000;
+    public static int REQUEST_PICK_IMAGE = 0b0000000000000000;
+    public static int REQUEST_POSTCODE = 0b1000000000000000;
+    public static int REQUEST_DESCRIPTION = 0b0100000000000000;
+    public static int REQUEST_CROP_IMAGE = 0b1100000000000000;
 
-
+    final String TAG = "ABaseFragmentAcitivty";
 
     protected ContextHelper contextHelper;
-
-    private Button buttonText;
-    private ImageButton buttonImage;
     ImageButton btnBack;
-
     boolean isBackbuttonDisable = false;
-
     ViewGroup viewButton;
     View viewActionBar;
-
     UltraEditText etSearch;
+    private Button buttonText;
+    private ImageButton buttonImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //
         // 화면 캡쳐
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
 //                WindowManager.LayoutParams.FLAG_SECURE);
@@ -84,14 +69,13 @@ public class ABaseFragmentAcitivty extends FragmentActivity {
         super.onStop();
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
     }
 
     public void setupActionBar(String title) {
         viewActionBar = getLayoutInflater().inflate(R.layout.actionbar_normal, null);
-        buttonText = (Button)viewActionBar.findViewById(R.id.actionbarTextButton);
-        buttonImage = (ImageButton)viewActionBar.findViewById(R.id.actionbarImageButton);
-        viewButton = (ViewGroup)viewActionBar.findViewById(R.id.viewButton);
+        buttonText = (Button) viewActionBar.findViewById(R.id.actionbarTextButton);
+        buttonImage = (ImageButton) viewActionBar.findViewById(R.id.actionbarImageButton);
+        viewButton = (ViewGroup) viewActionBar.findViewById(R.id.viewButton);
 
         ActionBar actionBar = getActionBar();
 
@@ -103,10 +87,10 @@ public class ABaseFragmentAcitivty extends FragmentActivity {
         final int actionBarColor = ContextCompat.getColor(getBaseContext(), R.color.green);
         actionBar.setBackgroundDrawable(new ColorDrawable(actionBarColor));
 
-        TextView tvTitle = (TextView)viewActionBar.findViewById(R.id.tvTitle);
+        TextView tvTitle = (TextView) viewActionBar.findViewById(R.id.tvTitle);
         tvTitle.setText(title);
 
-        btnBack = (ImageButton)viewActionBar.findViewById(R.id.btnBack);
+        btnBack = (ImageButton) viewActionBar.findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,7 +98,7 @@ public class ABaseFragmentAcitivty extends FragmentActivity {
                     return;
                 try {
                     onKeyDown(KeyEvent.KEYCODE_BACK, null);
-                } catch(Exception e) {
+                } catch (Exception e) {
                     finish();
                 }
             }
@@ -128,7 +112,7 @@ public class ABaseFragmentAcitivty extends FragmentActivity {
             }
         });
 
-        if(buttonImage != null) {
+        if (buttonImage != null) {
             buttonImage.setVisibility(View.GONE);
             buttonImage.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -142,8 +126,8 @@ public class ABaseFragmentAcitivty extends FragmentActivity {
 
     public UltraEditText setupActionBarSearch() {
         viewActionBar = getLayoutInflater().inflate(R.layout.actionbar_search, null);
-        buttonImage = (ImageButton)viewActionBar.findViewById(R.id.actionbarImageButton);
-        viewButton = (ViewGroup)viewActionBar.findViewById(R.id.viewButton);
+        buttonImage = (ImageButton) viewActionBar.findViewById(R.id.actionbarImageButton);
+        viewButton = (ViewGroup) viewActionBar.findViewById(R.id.viewButton);
 
         ActionBar actionBar = getActionBar();
 
@@ -156,7 +140,7 @@ public class ABaseFragmentAcitivty extends FragmentActivity {
         actionBar.setBackgroundDrawable(new ColorDrawable(actionBarColor));
 
 
-        btnBack = (ImageButton)viewActionBar.findViewById(R.id.btnBack);
+        btnBack = (ImageButton) viewActionBar.findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -164,7 +148,7 @@ public class ABaseFragmentAcitivty extends FragmentActivity {
                     return;
                 try {
                     onKeyDown(KeyEvent.KEYCODE_BACK, null);
-                } catch(Exception e) {
+                } catch (Exception e) {
                     finish();
                 }
             }
@@ -174,10 +158,7 @@ public class ABaseFragmentAcitivty extends FragmentActivity {
         etSearch = (UltraEditText) viewActionBar.findViewById(R.id.etSearch);
 
 
-
-
-
-        if(buttonImage != null) {
+        if (buttonImage != null) {
             buttonImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -190,7 +171,7 @@ public class ABaseFragmentAcitivty extends FragmentActivity {
     }
 
     public void setBackButtonEnable(boolean enable) {
-        if(enable) {
+        if (enable) {
             btnBack.setVisibility(View.VISIBLE);
         } else {
             btnBack.setVisibility(View.INVISIBLE);
@@ -200,7 +181,7 @@ public class ABaseFragmentAcitivty extends FragmentActivity {
     }
 
     public void setBackButtonVisibility(boolean enable) {
-        if(enable) {
+        if (enable) {
             btnBack.setVisibility(View.VISIBLE);
         } else {
             btnBack.setVisibility(View.INVISIBLE);
@@ -218,7 +199,7 @@ public class ABaseFragmentAcitivty extends FragmentActivity {
     public void setTextButtonEnable(boolean enable) {
         buttonText.setEnabled(enable);
 
-        if(enable) {
+        if (enable) {
             buttonText.setTextColor(ContextCompat.getColor(getBaseContext(), R.color.white));
         } else {
             buttonText.setTextColor(ContextCompat.getColor(getBaseContext(), R.color.gray));
@@ -227,7 +208,7 @@ public class ABaseFragmentAcitivty extends FragmentActivity {
 
 
     public ImageButton setBackButtonAndVisiable(int resid) {
-        if(resid == 0) {
+        if (resid == 0) {
             btnBack.setVisibility(View.GONE);
             return btnBack;
         }
@@ -238,7 +219,7 @@ public class ABaseFragmentAcitivty extends FragmentActivity {
 
 
     public void setImageButtonAndVisiable(int resid) {
-        if(resid == 0) {
+        if (resid == 0) {
             buttonImage.setVisibility(View.GONE);
             return;
         }
@@ -247,9 +228,9 @@ public class ABaseFragmentAcitivty extends FragmentActivity {
     }
 
     public void setImageButtonVisibility(boolean enable) {
-        if(buttonImage == null)
+        if (buttonImage == null)
             return;
-        if(enable) {
+        if (enable) {
             buttonImage.setVisibility(View.VISIBLE);
         } else {
             buttonImage.setVisibility(View.INVISIBLE);
@@ -258,7 +239,7 @@ public class ABaseFragmentAcitivty extends FragmentActivity {
 
 
     public void setRightButtonMarginRight(int dp) {
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)viewButton.getLayoutParams();
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) viewButton.getLayoutParams();
         params.setMargins(0, 0, PixelUtil.dpToPx(contextHelper.getContext(), dp), 0);
         viewButton.setLayoutParams(params);
 
@@ -266,7 +247,7 @@ public class ABaseFragmentAcitivty extends FragmentActivity {
 
 
     public void setLeftButtonMarginLeft(int dp) {
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)btnBack.getLayoutParams();
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) btnBack.getLayoutParams();
         params.setMargins(PixelUtil.dpToPx(contextHelper.getContext(), dp), 0, 0, 0);
         btnBack.setLayoutParams(params);
 
@@ -285,8 +266,8 @@ public class ABaseFragmentAcitivty extends FragmentActivity {
 
     protected ABaseFragment addFragment(ABaseFragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        if(fragmentManager.getFragments() != null && fragmentManager.getFragments().size() > 0)
-            return (ABaseFragment)fragmentManager.getFragments().get(0);
+        if (fragmentManager.getFragments() != null && fragmentManager.getFragments().size() > 0)
+            return (ABaseFragment) fragmentManager.getFragments().get(0);
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.frame_layout, fragment);
@@ -304,6 +285,4 @@ public class ABaseFragmentAcitivty extends FragmentActivity {
 
     public void onButtonClicked(View v) {
     }
-
-
 }

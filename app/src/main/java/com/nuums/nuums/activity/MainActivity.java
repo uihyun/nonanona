@@ -44,6 +44,7 @@ import me.tangke.slidemenu.SlideMenu;
  */
 public class MainActivity extends ABaseFragmentAcitivty {
     private final String TAG = getClass().getSimpleName();
+
     private final int MY_PERMISSION_REQUEST_LOCATION = 2;
     public boolean isKeywordEditMode = true;
     SlideMenuExt slideMenu;
@@ -90,7 +91,6 @@ public class MainActivity extends ABaseFragmentAcitivty {
 
         viewDim = contentView.findViewById(R.id.viewDim);
 
-        //
         // TAB
         tabbar = (PagerSlidingTabStrip) findViewById(R.id.tabbar);
         pager = (ViewPager) findViewById(R.id.pager);

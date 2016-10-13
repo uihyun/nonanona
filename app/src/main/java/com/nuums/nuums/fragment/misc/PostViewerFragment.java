@@ -34,14 +34,15 @@ public class PostViewerFragment extends ABaseFragment {
     ImagePagerAdapter imagePagerMainAdapter;
     TextView tvTitle;
     TextView tvContent;
+
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
 
-        if(contextHelper.getActivity().getIntent().hasExtra("post")) {
+        if (contextHelper.getActivity().getIntent().hasExtra("post")) {
             post = Post.getPost(contextHelper.getActivity().getIntent().getStringExtra("post"));
             contextHelper.getActivity().setupActionBar(post.getTitle());
-        } else if(contextHelper.getActivity().getIntent().hasExtra("title")) {
+        } else if (contextHelper.getActivity().getIntent().hasExtra("title")) {
             contextHelper.getActivity().setupActionBar(contextHelper.getActivity().getIntent().getStringExtra("title"));
         }
 
@@ -54,12 +55,11 @@ public class PostViewerFragment extends ABaseFragment {
 
         viewTop = view.findViewById(R.id.viewTop);
         UIUtil.setRatio(viewTop, getContext(), 1, 1);
-        viewPhotoMain = (AutoScrollViewPager)view.findViewById(R.id.viewPhoto);
-        pageIndicator = (CirclePageIndicator)view.findViewById(R.id.pageIndicator);
+        viewPhotoMain = (AutoScrollViewPager) view.findViewById(R.id.viewPhoto);
+        pageIndicator = (CirclePageIndicator) view.findViewById(R.id.pageIndicator);
 
-        tvTitle = (TextView)view.findViewById(R.id.tvTitle);
-        tvContent = (TextView)view.findViewById(R.id.tvContent);
-
+        tvTitle = (TextView) view.findViewById(R.id.tvTitle);
+        tvContent = (TextView) view.findViewById(R.id.tvContent);
 
 
         return view;
@@ -67,15 +67,15 @@ public class PostViewerFragment extends ABaseFragment {
 
     public void refresh() {
 
-        if(post.getPhotos().size() > 0) {
+        if (post.getPhotos().size() > 0) {
             viewTop.setVisibility(View.VISIBLE);
-            if(imagePagerMainAdapter == null) {
+            if (imagePagerMainAdapter == null) {
                 imagePagerMainAdapter = new ImagePagerAdapter(getContext(), post.getMediumUrlArray()).setInfiniteLoop(false);
                 viewPhotoMain.setAdapter(imagePagerMainAdapter);
             }
 
             String urlTag = post.getUrlTag(true);
-            if(!urlTag.equals(imagePagerMainAdapter.getUrlTag())) {
+            if (!urlTag.equals(imagePagerMainAdapter.getUrlTag())) {
                 imagePagerMainAdapter = new ImagePagerAdapter(getContext(), post.getMediumUrlArray()).setInfiniteLoop(false);
                 viewPhotoMain.setAdapter(imagePagerMainAdapter);
             }
@@ -86,7 +86,7 @@ public class PostViewerFragment extends ABaseFragment {
             viewTop.setVisibility(View.GONE);
         }
 
-        if(post.getTitle() != null) {
+        if (post.getTitle() != null) {
             tvTitle.setVisibility(View.VISIBLE);
             tvTitle.setText(post.getTitle());
         } else {
@@ -94,7 +94,7 @@ public class PostViewerFragment extends ABaseFragment {
 
         }
 
-        if(post.getContent() != null) {
+        if (post.getContent() != null) {
             tvContent.setVisibility(View.VISIBLE);
             tvContent.setText(post.getContent());
 
@@ -103,16 +103,15 @@ public class PostViewerFragment extends ABaseFragment {
 
         } else {
             tvContent.setVisibility(View.GONE);
-
         }
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if(post != null) {
+        if (post != null) {
             refresh();
-        } else if(contextHelper.getActivity().getIntent().hasExtra("type")){
+        } else if (contextHelper.getActivity().getIntent().hasExtra("type")) {
             contextHelper.showProgress(null);
             PostManager.getInstance(contextHelper).read(
                     contextHelper.getActivity().getIntent().getStringExtra("type"),
@@ -127,8 +126,8 @@ public class PostViewerFragment extends ABaseFragment {
                                         try {
                                             contextHelper.hideProgress();
                                             refresh();
-                                        } catch (Exception e){
-
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
                                         }
                                     }
                                 });
@@ -151,11 +150,10 @@ public class PostViewerFragment extends ABaseFragment {
 
 
     public void onEvent(PushMessage pushMessage) {
-        switch(pushMessage.getActionCode()) {
+        switch (pushMessage.getActionCode()) {
 
         }
     }
-
 }
 
 

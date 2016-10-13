@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.MultiAutoCompleteTextView;
 
-
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
 import com.yongtrim.lib.message.PushMessage;
@@ -33,13 +32,12 @@ public class ABaseFragment extends Fragment {
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
-        contextHelper = new ContextHelper((ABaseFragmentAcitivty)getActivity());
+        contextHelper = new ContextHelper((ABaseFragmentAcitivty) getActivity());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         //View view = inflater.inflate(R.layout.fragment_shoplist, container, false);
-
         return null;
     }
 
@@ -89,7 +87,7 @@ public class ABaseFragment extends Fragment {
             try {
                 InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
-            } catch(Exception e) {
+            } catch (Exception e) {
 
             }
         }

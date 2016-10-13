@@ -1,26 +1,13 @@
 package com.nuums.nuums.fragment.nanum;
 
-import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ResolveInfo;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
-import android.provider.MediaStore;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
-import android.text.InputFilter;
 import android.text.InputType;
-import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,26 +15,21 @@ import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.nuums.nuums.R;
 import com.nuums.nuums.activity.BaseActivity;
 import com.nuums.nuums.adapter.CommentAdapter;
-import com.nuums.nuums.adapter.PhotoPagerAdapter;
 import com.nuums.nuums.holder.NanumHolder;
 import com.nuums.nuums.model.misc.Comment;
 import com.nuums.nuums.model.misc.CommentManager;
 import com.nuums.nuums.model.nanum.Nanum;
 import com.nuums.nuums.model.nanum.NanumData;
 import com.nuums.nuums.model.nanum.NanumManager;
-import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
 import com.yongtrim.lib.adapter.ImagePagerAdapter;
 import com.yongtrim.lib.fragment.ABaseFragment;
 import com.yongtrim.lib.message.PushMessage;
@@ -55,34 +37,20 @@ import com.yongtrim.lib.model.banner.Banner;
 import com.yongtrim.lib.model.banner.BannerData;
 import com.yongtrim.lib.model.banner.BannerManager;
 import com.yongtrim.lib.model.config.ConfigManager;
-import com.yongtrim.lib.model.photo.Photo;
 import com.yongtrim.lib.model.photo.PhotoManager;
-import com.yongtrim.lib.model.post.Post;
-import com.yongtrim.lib.model.post.PostData;
-import com.yongtrim.lib.model.post.PostList;
-import com.yongtrim.lib.model.post.PostManager;
 import com.yongtrim.lib.model.user.UserManager;
 import com.yongtrim.lib.ui.UltraButton;
-import com.yongtrim.lib.ui.UltraEditText;
 import com.yongtrim.lib.ui.autoscrollviewpager.AutoScrollViewPager;
 import com.yongtrim.lib.ui.autoscrollviewpager.ClickedCallback;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
 import com.yongtrim.lib.ui.viewpagerindicator.CirclePageIndicator;
 import com.yongtrim.lib.util.MiscUtil;
-import com.yongtrim.lib.util.StringFilter;
 import com.yongtrim.lib.util.UIUtil;
 
-import org.json.JSONArray;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.CountDownLatch;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import de.greenrobot.event.EventBus;
 
@@ -93,6 +61,7 @@ import de.greenrobot.event.EventBus;
  */
 public class NanumViewerFragment extends ABaseFragment {
     private final String TAG = getClass().getSimpleName();
+
     Nanum nanum;
 
     ViewGroup viewMain;
@@ -129,7 +98,7 @@ public class NanumViewerFragment extends ABaseFragment {
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
 
-        if(nanum_id != null) {
+        if (nanum_id != null) {
             nanum = new Nanum();
             contextHelper.getActivity().setupActionBar("로딩중");
             contextHelper.getActivity().runOnUiThread(new Runnable() {
@@ -152,7 +121,7 @@ public class NanumViewerFragment extends ABaseFragment {
 
                                             try {
                                                 refresh();
-                                            } catch(Exception e) {
+                                            } catch (Exception e) {
 
                                             }
                                         } else {
@@ -174,7 +143,7 @@ public class NanumViewerFragment extends ABaseFragment {
                                 null
                         );
                     } catch (Exception e) {
-
+                        e.printStackTrace();
                     }
                 }
             });
@@ -193,7 +162,7 @@ public class NanumViewerFragment extends ABaseFragment {
 
                 try {
                     refresh();
-                } catch(Exception e) {
+                } catch (Exception e) {
 
                 }
                 timerHandler.postDelayed(this, 60000); //run every minute
@@ -274,8 +243,8 @@ public class NanumViewerFragment extends ABaseFragment {
 
                                                                                 try {
                                                                                     refresh();
-                                                                                } catch(Exception e) {
-
+                                                                                } catch (Exception e) {
+                                                                                    e.printStackTrace();
                                                                                 }
 
                                                                             } else {
@@ -294,7 +263,7 @@ public class NanumViewerFragment extends ABaseFragment {
                                             break;
                                         case 1:
 
-                                            if(nanum.getOwner().isMe(contextHelper)) {
+                                            if (nanum.getOwner().isMe(contextHelper)) {
                                                 contextHelper.showProgress(null);
                                                 CommentManager.getInstance(contextHelper).deleteInNanum(nanum, comment.getIndex(),
                                                         new Response.Listener<NanumData>() {
@@ -307,7 +276,7 @@ public class NanumViewerFragment extends ABaseFragment {
 
                                                                     EventBus.getDefault().post(new PushMessage().setActionCode(PushMessage.ACTIONCODE_CHANGE_NANUM).setObject(response.nanum));
 
-                                                                    if(response.user != null) {
+                                                                    if (response.user != null) {
                                                                         UserManager.getInstance(contextHelper).setMe(response.user);
                                                                         EventBus.getDefault().post(new PushMessage().setActionCode(PushMessage.ACTIONCODE_CHANGE_ME).setObject(response.user));
                                                                     }
@@ -315,8 +284,8 @@ public class NanumViewerFragment extends ABaseFragment {
 
                                                                     try {
                                                                         refresh();
-                                                                    } catch(Exception e) {
-
+                                                                    } catch (Exception e) {
+                                                                        e.printStackTrace();
                                                                     }
                                                                 } else {
                                                                     new SweetAlertDialog(getContext())
@@ -352,8 +321,8 @@ public class NanumViewerFragment extends ABaseFragment {
 
                                                                                     try {
                                                                                         refresh();
-                                                                                    } catch(Exception e) {
-
+                                                                                    } catch (Exception e) {
+                                                                                        e.printStackTrace();
                                                                                     }
 
                                                                                 } else {
@@ -380,15 +349,15 @@ public class NanumViewerFragment extends ABaseFragment {
                             })
                             .show();
                 } else {
-                    if(isSelectMode) {
-                        if(nanum.getSelectCount() == nanum.getAmount()) {
+                    if (isSelectMode) {
+                        if (nanum.getSelectCount() == nanum.getAmount()) {
                             comment.isSelect = false;
                         } else {
                             comment.isSelect = !comment.isSelect;
                         }
                         try {
                             refresh();
-                        } catch(Exception e) {
+                        } catch (Exception e) {
 
                         }
                     }
@@ -398,15 +367,14 @@ public class NanumViewerFragment extends ABaseFragment {
 
 
         viewBannerRoot = viewMain.findViewById(R.id.viewBannerRoot);
-        viewBanner = (AutoScrollViewPager)viewMain.findViewById(R.id.viewBanner);
+        viewBanner = (AutoScrollViewPager) viewMain.findViewById(R.id.viewBanner);
         viewBanner.setAutoScrollDurationFactor(10.0);
         viewBanner.setInterval(5000);
         viewBanner.startAutoScroll();
         UIUtil.setRatio(viewMain.findViewById(R.id.viewBannerRoot), getContext(), 720, 90);
 
 
-        bannerIndicator = (CirclePageIndicator)viewMain.findViewById(R.id.bannerIndicator);
-
+        bannerIndicator = (CirclePageIndicator) viewMain.findViewById(R.id.bannerIndicator);
 
 
         refresh();
@@ -435,11 +403,11 @@ public class NanumViewerFragment extends ABaseFragment {
 
         final Banner banner = ConfigManager.getInstance(contextHelper).getBanner();
 
-        if(banner != null) {
+        if (banner != null) {
             viewBannerRoot.setVisibility(View.VISIBLE);
             List<String> listUrl = new ArrayList<>();
 
-            if(banner.getPhotos() != null && banner.getPhotos().size() > 0)
+            if (banner.getPhotos() != null && banner.getPhotos().size() > 0)
                 listUrl.add(banner.getPhotos().get(0).getUrl());
             else {
                 listUrl.add("");
@@ -454,7 +422,7 @@ public class NanumViewerFragment extends ABaseFragment {
                 @Override
                 public void clicked(int position) {
 
-                    if(!TextUtils.isEmpty(banner.getUrl())) {
+                    if (!TextUtils.isEmpty(banner.getUrl())) {
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(banner.getUrl()));
                         startActivity(browserIntent);
 
@@ -476,6 +444,7 @@ public class NanumViewerFragment extends ABaseFragment {
             viewBannerRoot.setVisibility(View.GONE);
         }
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -509,22 +478,22 @@ public class NanumViewerFragment extends ABaseFragment {
 
         switch (v.getId()) {
             case R.id.btnSelect:
-                if(nanum.getMethod().equals(Nanum.METHOD_SELECT) && nanum.getSelectCount() < nanum.getAmount()) {
+                if (nanum.getMethod().equals(Nanum.METHOD_SELECT) && nanum.getSelectCount() < nanum.getAmount()) {
                     new SweetAlertDialog(getContext()).setContentText("당첨자 수가 모자랍니다.").show();
                 } else {
 
                     String message = "확정 후에는 당첨자를 변경할 수 없습니다. 진행 하시겠습니까?";
-                    if(nanum.getMethod().equals(Nanum.METHOD_RANDOM)) {
+                    if (nanum.getMethod().equals(Nanum.METHOD_RANDOM)) {
                         message = "추첨을 시작하면 결과를 번복할 수 없습니다. 추첨을 시작하겠습니까?";
                         List<Comment> applys = nanum.getApplys();
                         Collections.shuffle(applys, new Random(System.nanoTime()));
 
-                        if(applys.size() < nanum.getAmount()) {
+                        if (applys.size() < nanum.getAmount()) {
                             new SweetAlertDialog(getContext()).setContentText("신청자 수가 모자랍니다.").show();
                             return;
                         }
 
-                        for(int i = 0;i < nanum.getAmount();i++) {
+                        for (int i = 0; i < nanum.getAmount(); i++) {
                             Comment apply = applys.get(i);
                             apply.isSelect = true;
                         }
@@ -554,8 +523,8 @@ public class NanumViewerFragment extends ABaseFragment {
 
                                                         try {
                                                             refresh();
-                                                        } catch(Exception e) {
-
+                                                        } catch (Exception e) {
+                                                            e.printStackTrace();
                                                         }
                                                     } else {
                                                         new SweetAlertDialog(getContext())
@@ -621,7 +590,7 @@ public class NanumViewerFragment extends ABaseFragment {
 
                                                                             if (response.isSuccess()) {
 
-                                                                                if(response.user != null) {
+                                                                                if (response.user != null) {
                                                                                     UserManager.getInstance(contextHelper).setMe(response.user);
                                                                                     EventBus.getDefault().post(new PushMessage().setActionCode(PushMessage.ACTIONCODE_CHANGE_ME).setObject(response.user));
                                                                                 }
@@ -691,7 +660,7 @@ public class NanumViewerFragment extends ABaseFragment {
                             try {
                                 refresh();
                             } catch (Exception e) {
-
+                                e.printStackTrace();
                             }
                         }
                     });
@@ -707,11 +676,11 @@ public class NanumViewerFragment extends ABaseFragment {
 
     void refresh() {
 
-        if(isLoading)
+        if (isLoading)
             return;
 
 
-        if(nanum.isAdmin()) {
+        if (nanum.isAdmin()) {
             viewMain.findViewById(R.id.viewAddress).setVisibility(View.GONE);
         } else {
             viewMain.findViewById(R.id.viewAddress).setVisibility(View.VISIBLE);
@@ -739,7 +708,6 @@ public class NanumViewerFragment extends ABaseFragment {
         });
 
 
-
         holder.tvAddress.setText(nanum.getAddressFake());
         holder.tvAddress.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -756,7 +724,7 @@ public class NanumViewerFragment extends ABaseFragment {
         holder.setMark(nanum, getContext());
         holder.setTimer(nanum, getContext());
 
-        TextView tvAmountMethod = (TextView)viewMain.findViewById(R.id.tvAmountMethod);
+        TextView tvAmountMethod = (TextView) viewMain.findViewById(R.id.tvAmountMethod);
         tvAmountMethod.setText("나눔수량 " + nanum.getAmount() + "개 | " + nanum.getMethodDesc());
 
         if (imagePagerAdapter == null) {
@@ -784,7 +752,7 @@ public class NanumViewerFragment extends ABaseFragment {
         pageIndicator.setViewPager(viewPicture);
 
 
-        if(nanum.getStatus().equals(Nanum.STATUS_FINISH_TIME) || nanum.getStatus().equals(Nanum.STATUS_FINISH_SELECT)) {
+        if (nanum.getStatus().equals(Nanum.STATUS_FINISH_TIME) || nanum.getStatus().equals(Nanum.STATUS_FINISH_SELECT)) {
             viewMain.findViewById(R.id.viewFinishBig).setVisibility(View.VISIBLE);
         } else {
             viewMain.findViewById(R.id.viewFinishBig).setVisibility(View.GONE);
@@ -793,10 +761,10 @@ public class NanumViewerFragment extends ABaseFragment {
         TextView tvDiscription = (TextView) viewMain.findViewById(R.id.tvDiscription);
         tvDiscription.setText(nanum.getDescription());
 
-        final UltraButton btnApply = (UltraButton)viewMain.findViewById(R.id.btnApply);
+        final UltraButton btnApply = (UltraButton) viewMain.findViewById(R.id.btnApply);
         btnApply.setText("" + nanum.getApplyCount());
 
-        if(nanum.getComments().size() == 0) {
+        if (nanum.getComments().size() == 0) {
             viewMain.findViewById(R.id.viewSeparator).setVisibility(View.GONE);
             listView.setVisibility(View.GONE);
         } else {
@@ -819,13 +787,13 @@ public class NanumViewerFragment extends ABaseFragment {
                 });
 
 
-        final UltraButton btnBookmarkCnt = (UltraButton)viewMain.findViewById(R.id.btnBookmarkCnt);
-        final UltraButton btnBookmark = (UltraButton)viewMain.findViewById(R.id.btnBookmark);
+        final UltraButton btnBookmarkCnt = (UltraButton) viewMain.findViewById(R.id.btnBookmarkCnt);
+        final UltraButton btnBookmark = (UltraButton) viewMain.findViewById(R.id.btnBookmark);
 
 
         btnBookmarkCnt.setText("" + nanum.getBookmarks().size());
 
-        if(nanum.isBookmark()) {
+        if (nanum.isBookmark()) {
             btnBookmark.setIconResource(R.drawable.big_like_on);
         } else {
             btnBookmark.setIconResource(R.drawable.big_like_off);
@@ -844,7 +812,7 @@ public class NanumViewerFragment extends ABaseFragment {
 
                 //btnBookmark.setProgressBar(true);
 
-                if(!nanum.isBookmark()) {
+                if (!nanum.isBookmark()) {
                     btnBookmark.setIconResource(R.drawable.big_like_on);
                 } else {
                     btnBookmark.setIconResource(R.drawable.big_like_off);
@@ -867,10 +835,9 @@ public class NanumViewerFragment extends ABaseFragment {
 
                                     try {
                                         refresh();
-                                    } catch(Exception e) {
-
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
                                     }
-                                } else {
                                 }
                             }
                         },
@@ -881,20 +848,20 @@ public class NanumViewerFragment extends ABaseFragment {
 
 
         viewMain.findViewById(R.id.viewSelect).setVisibility(View.GONE);
-        UltraButton btnSelect = (UltraButton)viewMain.findViewById(R.id.btnSelect);
+        UltraButton btnSelect = (UltraButton) viewMain.findViewById(R.id.btnSelect);
         isSelectMode = false;
 
         if (UserManager.getInstance(contextHelper).getMe().isSame(nanum.getOwner())) {
-            if((nanum.getStatus().equals(Nanum.STATUS_ONGOING) ||  nanum.getStatus().equals(Nanum.STATUS_FINISH_TIME))
+            if ((nanum.getStatus().equals(Nanum.STATUS_ONGOING) || nanum.getStatus().equals(Nanum.STATUS_FINISH_TIME))
                     && nanum.getAmount() <= nanum.getApplyCount()) {
 
                 viewMain.findViewById(R.id.viewSelect).setVisibility(View.VISIBLE);
 
-                if(nanum.getMethod().equals(Nanum.METHOD_SELECT)) {
+                if (nanum.getMethod().equals(Nanum.METHOD_SELECT)) {
                     btnSelect.setText("나눔 선정하기 (" + nanum.getSelectCount() + "/" + nanum.getAmount() + ")");
                     isSelectMode = true;
 
-                } else if(nanum.getMethod().equals(Nanum.METHOD_RANDOM)) {
+                } else if (nanum.getMethod().equals(Nanum.METHOD_RANDOM)) {
                     btnSelect.setText("나눔 추첨하기");
                 }
             }
@@ -934,7 +901,7 @@ public class NanumViewerFragment extends ABaseFragment {
 
                             EventBus.getDefault().post(new PushMessage().setActionCode(PushMessage.ACTIONCODE_CHANGE_NANUM).setObject(response.nanum));
 
-                            if(response.user != null) {
+                            if (response.user != null) {
                                 UserManager.getInstance(contextHelper).setMe(response.user);
                                 EventBus.getDefault().post(new PushMessage().setActionCode(PushMessage.ACTIONCODE_CHANGE_ME).setObject(response.user));
                             }
@@ -942,8 +909,8 @@ public class NanumViewerFragment extends ABaseFragment {
 
                             try {
                                 refresh();
-                            } catch(Exception e) {
-
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
                             etInput.setText("");
 
@@ -951,7 +918,7 @@ public class NanumViewerFragment extends ABaseFragment {
                                 InputMethodManager im = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                                 im.hideSoftInputFromWindow(etInput.getWindowToken(), 0);
                             } catch (Exception e) {
-
+                                e.printStackTrace();
                             }
 
                         } else {
@@ -968,12 +935,9 @@ public class NanumViewerFragment extends ABaseFragment {
     }
 
 
-
-
     void deleteAndfinish(Nanum nanum) {
         contextHelper.getActivity().finish();
         EventBus.getDefault().post(new PushMessage().setActionCode(PushMessage.ACTIONCODE_DELETE_NANUM).setObject(nanum));
-
     }
 }
 

@@ -52,9 +52,9 @@ public class DescriptionEditFragment extends ABaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         View view = inflater.inflate(R.layout.fragment_descriptionedit, container, false);
 
-        tvStatus = (TextView)view.findViewById(R.id.tvStatus);
+        tvStatus = (TextView) view.findViewById(R.id.tvStatus);
 
-        etDescription = (EditText)view.findViewById(R.id.etDescription);
+        etDescription = (EditText) view.findViewById(R.id.etDescription);
         etDescription.setFilters(new InputFilter[]{new InputFilter.LengthFilter(MAX_CHARACTER)});
 
         etDescription.addTextChangedListener(new TextWatcher() {
@@ -72,7 +72,7 @@ public class DescriptionEditFragment extends ABaseFragment {
             }
         });
 
-        if(TextUtils.isEmpty(nanum.getDescription())) {
+        if (TextUtils.isEmpty(nanum.getDescription())) {
             etDescription.setText(message);
             originalDescription = message;
         } else {
@@ -80,7 +80,7 @@ public class DescriptionEditFragment extends ABaseFragment {
             originalDescription = nanum.getDescription();
         }
 
-        TextView tvCaution = (TextView)view.findViewById(R.id.tvCaution);
+        TextView tvCaution = (TextView) view.findViewById(R.id.tvCaution);
         tvCaution.setText(ConfigManager.getInstance(contextHelper).getConfigHello().getParams().getNanumCaution());
         refresh();
         return view;
@@ -108,7 +108,7 @@ public class DescriptionEditFragment extends ABaseFragment {
 
     public void onButtonClicked(View v) {
 
-        switch(v.getId()) {
+        switch (v.getId()) {
             case R.id.actionbarImageButton:
                 new SweetAlertDialog(getContext())
                         .setContentText("입력한 내용을 모두 지웁니다.")
@@ -143,7 +143,7 @@ public class DescriptionEditFragment extends ABaseFragment {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             //preventing default implementation previous to android.os.Build.VERSION_CODES.ECLAIR
-            if(originalDescription.equals(etDescription.getText().toString())) {
+            if (originalDescription.equals(etDescription.getText().toString())) {
                 return false;
             } else {
                 new SweetAlertDialog(getContext())

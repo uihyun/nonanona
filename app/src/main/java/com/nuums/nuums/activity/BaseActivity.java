@@ -28,8 +28,8 @@ import com.nuums.nuums.fragment.review.ReviewEditFragment;
 import com.nuums.nuums.fragment.review.ReviewListFragment;
 import com.nuums.nuums.fragment.talk.ChatFragment;
 import com.nuums.nuums.fragment.test.ChipsEdittextFragment;
-import com.yongtrim.lib.fragment.ABaseFragment;
 import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
+import com.yongtrim.lib.fragment.ABaseFragment;
 import com.yongtrim.lib.message.PushMessage;
 
 import de.greenrobot.event.EventBus;
@@ -45,51 +45,12 @@ public class BaseActivity extends ABaseFragmentAcitivty {
 
     private EventBus bus = EventBus.getDefault();
 
-    public static enum ActivityCode {
-        SIGNUP(0),
-        FINDACCOUNT(1),
-        POSTCODE(2),
-        DESCRIPTIONEDIT(3),
-        NANUMVIEWER(4),
-        NANUMEDT(5),
-        POST_VIEWER(6),
-        CHAT(7),
-        APPLY(8),
-        TEXT_CHIPSEDITTEXT(9),
-        REVIEWEDIT(10),
-        REVIEWLIST(11),
-        SETTING(12),
-        NANUMASK(13),
-        ALARM(14),
-        REPORT(15),
-        POSTLIST(16),
-        YONGDAL(17),
-        NANUMLIST(18),
-        MAP(19),
-        USERLIST(20);
-
-        private final int mActivityCode;
-        private ActivityCode(int value) {
-            mActivityCode = value;
-        }
-
-        public static ActivityCode valueOf(int value) {
-            for (ActivityCode status : values()) {
-                if (status.mActivityCode == value) {
-                    return status;
-                }
-            }
-            return null;
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skin);
 
         bus.register(this);
-
 
         ActivityCode activityCode;
 
@@ -101,16 +62,15 @@ public class BaseActivity extends ABaseFragmentAcitivty {
                     nanum_id = uri.getQueryParameter("nanum_id");
                 }
             }
-        } catch(Exception e) {
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-
-        if(getIntent().hasExtra("nanum_id")) {
+        if (getIntent().hasExtra("nanum_id")) {
             nanum_id = getIntent().getStringExtra("nanum_id");
         }
 
-        if(nanum_id != null) {
+        if (nanum_id != null) {
             activityCode = ActivityCode.NANUMVIEWER;
         } else {
             activityCode = ActivityCode.valueOf(getIntent().getIntExtra("activityCode", 0));
@@ -118,7 +78,7 @@ public class BaseActivity extends ABaseFragmentAcitivty {
 
         curActivity = activityCode;
 
-        switch(activityCode) {
+        switch (activityCode) {
             case SIGNUP:
                 curFragment = new NsSignupFragment();
                 curFragment = addFragment(curFragment);
@@ -137,7 +97,7 @@ public class BaseActivity extends ABaseFragmentAcitivty {
                 break;
             case NANUMVIEWER:
                 curFragment = new NanumViewerFragment();
-                if(nanum_id != null) {
+                if (nanum_id != null) {
                     ((NanumViewerFragment) curFragment).setNanumId(nanum_id);
                 }
                 curFragment = addFragment(curFragment);
@@ -215,31 +175,28 @@ public class BaseActivity extends ABaseFragmentAcitivty {
         curFragment.onActivityResult(requestCode, resultCode, data);
     }
 
-
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         bus.unregister(this);
         super.onDestroy();
     }
 
-
     public void onEvent(PushMessage pushMessage) {
-        if(curFragment != null) {
+        if (curFragment != null) {
             curFragment.onEvent(pushMessage);
         }
     }
-
 
     public void onButtonClicked(View v) {
         curFragment.onButtonClicked(v);
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(curFragment.onKeyDown(keyCode, event)) {
+        if (curFragment.onKeyDown(keyCode, event)) {
             return true;
         }
 
-        if(event != null)
+        if (event != null)
             return super.onKeyDown(keyCode, event);
         else {
             finish();
@@ -247,5 +204,43 @@ public class BaseActivity extends ABaseFragmentAcitivty {
         }
     }
 
+    public static enum ActivityCode {
+        SIGNUP(0),
+        FINDACCOUNT(1),
+        POSTCODE(2),
+        DESCRIPTIONEDIT(3),
+        NANUMVIEWER(4),
+        NANUMEDT(5),
+        POST_VIEWER(6),
+        CHAT(7),
+        APPLY(8),
+        TEXT_CHIPSEDITTEXT(9),
+        REVIEWEDIT(10),
+        REVIEWLIST(11),
+        SETTING(12),
+        NANUMASK(13),
+        ALARM(14),
+        REPORT(15),
+        POSTLIST(16),
+        YONGDAL(17),
+        NANUMLIST(18),
+        MAP(19),
+        USERLIST(20);
+
+        private final int mActivityCode;
+
+        private ActivityCode(int value) {
+            mActivityCode = value;
+        }
+
+        public static ActivityCode valueOf(int value) {
+            for (ActivityCode status : values()) {
+                if (status.mActivityCode == value) {
+                    return status;
+                }
+            }
+            return null;
+        }
+    }
 }
 

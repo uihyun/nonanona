@@ -495,13 +495,13 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
                     if (!isModify && !isAsker)
                         ConfigManager.getInstance(contextHelper).getPreference().putNanumParam(nanum);
                 }
-        break;
+                break;
 
-        default:
-        break;
+            default:
+                break;
+        }
+
     }
-
-}
 
 
     public void onEditTextChanged(UltraEditText editText) {

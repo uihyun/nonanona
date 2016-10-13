@@ -104,7 +104,6 @@ public class NanumAdapter extends BaseAdapter {
             }
         });
 
-
         if (nanum.isAdmin()) {
             h.viewAddress.setVisibility(View.GONE);
         } else {

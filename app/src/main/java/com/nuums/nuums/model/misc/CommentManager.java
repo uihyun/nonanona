@@ -11,7 +11,6 @@ import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.model.GsonBodyRequest;
 import com.yongtrim.lib.model.RequestManager;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,13 +20,12 @@ import org.json.JSONObject;
  * Created by Uihyun on 15. 12. 28..
  */
 public class CommentManager {
-    private final String TAG = getClass().getSimpleName();
     private static CommentManager instance;
-
+    private final String TAG = getClass().getSimpleName();
     private ContextHelper contextHelper;
 
-    public static CommentManager getInstance(ContextHelper contextHelper){
-        if(instance == null) {
+    public static CommentManager getInstance(ContextHelper contextHelper) {
+        if (instance == null) {
             instance = new CommentManager();
         }
         instance.contextHelper = contextHelper;
@@ -36,9 +34,9 @@ public class CommentManager {
 
 
     public void createInNanum(Nanum nanum,
-                             String message,
-                             final Response.Listener<NanumData> listener,
-                             final Response.ErrorListener errorListener) {
+                              String message,
+                              final Response.Listener<NanumData> listener,
+                              final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
         url.append(Config.url);
         url.append("/nanum/");
@@ -49,7 +47,8 @@ public class CommentManager {
 
         try {
             body.put("message", message);
-        } catch(JSONException e) {
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
         GsonBodyRequest<NanumData> request = new GsonBodyRequest<NanumData>(contextHelper,
@@ -65,10 +64,10 @@ public class CommentManager {
 
 
     public void updateInNanum(Nanum nanum,
-                             int index,
-                             String message,
-                             final Response.Listener<NanumData> listener,
-                             final Response.ErrorListener errorListener) {
+                              int index,
+                              String message,
+                              final Response.Listener<NanumData> listener,
+                              final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
         url.append(Config.url);
         url.append("/nanum/");
@@ -80,7 +79,8 @@ public class CommentManager {
         try {
             body.put("message", message);
             body.put("index", index);
-        } catch(JSONException e) {
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
         GsonBodyRequest<NanumData> request = new GsonBodyRequest<NanumData>(contextHelper,
@@ -96,15 +96,15 @@ public class CommentManager {
 
 
     public void deleteInNanum(Nanum nanum,
-                             int index,
-                             final Response.Listener<NanumData> listener,
-                             final Response.ErrorListener errorListener) {
+                              int index,
+                              final Response.Listener<NanumData> listener,
+                              final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
         url.append(Config.url);
         url.append("/nanum/");
         url.append(nanum.getId());
         url.append("/comment");
-        url.append("?index="+index);
+        url.append("?index=" + index);
 
 
         GsonBodyRequest<NanumData> request = new GsonBodyRequest<NanumData>(contextHelper,
@@ -119,12 +119,10 @@ public class CommentManager {
     }
 
 
-
-
     public void createInReview(Review review,
-                              String message,
-                              final Response.Listener<ReviewData> listener,
-                              final Response.ErrorListener errorListener) {
+                               String message,
+                               final Response.Listener<ReviewData> listener,
+                               final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
         url.append(Config.url);
         url.append("/review/");
@@ -135,7 +133,8 @@ public class CommentManager {
 
         try {
             body.put("message", message);
-        } catch(JSONException e) {
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
         GsonBodyRequest<ReviewData> request = new GsonBodyRequest<ReviewData>(contextHelper,
@@ -151,10 +150,10 @@ public class CommentManager {
 
 
     public void updateInReview(Review review,
-                              int index,
-                              String message,
-                              final Response.Listener<ReviewData> listener,
-                              final Response.ErrorListener errorListener) {
+                               int index,
+                               String message,
+                               final Response.Listener<ReviewData> listener,
+                               final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
         url.append(Config.url);
         url.append("/review/");
@@ -166,7 +165,8 @@ public class CommentManager {
         try {
             body.put("message", message);
             body.put("index", index);
-        } catch(JSONException e) {
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
         GsonBodyRequest<ReviewData> request = new GsonBodyRequest<ReviewData>(contextHelper,
@@ -182,15 +182,15 @@ public class CommentManager {
 
 
     public void deleteInReview(Review review,
-                              int index,
-                              final Response.Listener<ReviewData> listener,
-                              final Response.ErrorListener errorListener) {
+                               int index,
+                               final Response.Listener<ReviewData> listener,
+                               final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
         url.append(Config.url);
         url.append("/review/");
         url.append(review.getId());
         url.append("/comment");
-        url.append("?index="+index);
+        url.append("?index=" + index);
 
 
         GsonBodyRequest<ReviewData> request = new GsonBodyRequest<ReviewData>(contextHelper,
@@ -203,6 +203,5 @@ public class CommentManager {
 
         RequestManager.getRequestQueue().add(request);
     }
-
 }
 
