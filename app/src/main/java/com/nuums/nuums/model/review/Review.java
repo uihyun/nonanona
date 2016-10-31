@@ -1,6 +1,5 @@
 package com.nuums.nuums.model.review;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import com.nuums.nuums.AppController;
@@ -23,45 +22,42 @@ import java.util.List;
  */
 public class Review extends Model {
 
+    public int startDummy = 0;
     boolean isStarted;
-
     @SerializedName("owner")
     NsUser owner;
-
-    @SerializedName("photo")
-    private Photo photo;
-
-    @SerializedName("content")
-    private String content;
-
-    @SerializedName("stars")
-    private List<Bookmark> stars;
-
-    @SerializedName("tags")
-    private List<NsUser> tags;
-
     @SerializedName("comments")
     List<Comment> comments;
-
+    @SerializedName("photo")
+    private Photo photo;
+    @SerializedName("content")
+    private String content;
+    @SerializedName("stars")
+    private List<Bookmark> stars;
+    @SerializedName("tags")
+    private List<NsUser> tags;
     @SerializedName("timeCreated")
     private Date timeCreated;
-
     @SerializedName("timeUpdated")
     private Date timeUpdated;
-
     @SerializedName("tagids")
     private List<String> tagids;
+
+    public static Review getReview(String jsonString) {
+        Gson gson = AppController.getInstance().getGson();
+        Review review = gson.fromJson(jsonString, Review.class);
+        return review;
+    }
 
     public void setTagids(List<NsUser> tags) {
 
         tagids = new ArrayList<>();
 
-        for(NsUser tag : tags) {
+        for (NsUser tag : tags) {
             tagids.add(tag.getId());
         }
 
     }
-
 
     public boolean isStarted() {
         return isStarted;
@@ -99,12 +95,9 @@ public class Review extends Model {
         return stars;
     }
 
-    public int startDummy = 0;
-
     public void setStars(List<Bookmark> stars) {
         this.stars = stars;
     }
-
 
     public List<NsUser> getTags() {
         return tags;
@@ -142,21 +135,13 @@ public class Review extends Model {
         NsUser me = UserManager.getInstance(contextHelper).getMe();
 
         isStarted = false;
-        if(stars != null) {
-            for(Bookmark bookmark : stars) {
-                if(bookmark.getOwner().isSame(me))
+        if (stars != null) {
+            for (Bookmark bookmark : stars) {
+                if (bookmark.getOwner().isSame(me))
                     isStarted = true;
             }
         }
 
     }
-
-    public static Review getReview(String jsonString) {
-        Gson gson = AppController.getInstance().getGson();
-        Review review = gson.fromJson(jsonString, Review.class);
-        return review;
-    }
-
-
 }
 

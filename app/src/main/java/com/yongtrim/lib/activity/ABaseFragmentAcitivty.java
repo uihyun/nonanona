@@ -35,6 +35,7 @@ public class ABaseFragmentAcitivty extends FragmentActivity {
     public static int REQUEST_POSTCODE = 0b1000000000000000;
     public static int REQUEST_DESCRIPTION = 0b0100000000000000;
     public static int REQUEST_CROP_IMAGE = 0b1100000000000000;
+    public static int REQUEST_ROTATE_IMAGE = 0b0010000000000000;
 
     final String TAG = "ABaseFragmentAcitivty";
 

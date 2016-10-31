@@ -66,10 +66,12 @@ public class Photo extends Model implements Parcelable {
         this.uriOrg = uriOrg;
         this.orientation = orientation;
     }
+
     public Photo(String uriOrg) {
         super();
         this.uriOrg = uriOrg;
     }
+
     public Photo() {
         super();
     }
@@ -102,6 +104,10 @@ public class Photo extends Model implements Parcelable {
 
     public int getOrientation() {
         return orientation;
+    }
+
+    public void setOrientation(int orientation) {
+        this.orientation = orientation;
     }
 
     public boolean isLocalBitmap() {

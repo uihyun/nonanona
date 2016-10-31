@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white2"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:ultra="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white2"
     >
 
     <ScrollView
         android:id="@+id/scrollView"
-        android:orientation="vertical"
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         >
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
 
             <RelativeLayout
@@ -33,10 +33,10 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
                     android:background="@color/trans"
-
                     android:onClick="onButtonClicked"
+
+                    android:scaleType="centerCrop"
                     />
 
 
@@ -44,8 +44,8 @@
                     android:id="@+id/ivAdd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/big_plus"
-                    android:layout_centerInParent="true"/>
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/big_plus"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -57,31 +57,42 @@
                         android:id="@+id/btnDelete"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/trans"
                         android:minHeight="1dp"
                         android:minWidth="1dp"
+                        android:onClick="onButtonClicked"
+                        android:text="삭제"
                         android:textColor="@color/green"
                         android:textSize="9dp"
-                        android:text="삭제"
-                        android:background="@color/trans"
-                        android:layout_marginRight="10dp"
-                        android:onClick="onButtonClicked"
                         />
 
                     <Button
                         android:id="@+id/btnModify"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/trans"
                         android:minHeight="1dp"
                         android:minWidth="1dp"
-
+                        android:onClick="onButtonClicked"
+                        android:text="자르기"
                         android:textColor="@color/green"
                         android:textSize="9dp"
-                        android:text="편집"
-                        android:background="@color/trans"
-                        android:onClick="onButtonClicked"
                         />
 
-
+                    <Button
+                        android:id="@+id/btnRotate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/trans"
+                        android:minHeight="1dp"
+                        android:minWidth="1dp"
+                        android:onClick="onButtonClicked"
+                        android:text="회전"
+                        android:textColor="@color/green"
+                        android:textSize="9dp"
+                        />
                 </LinearLayout>
 
 
@@ -91,36 +102,36 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
+                android:layout_marginTop="0dp"
 
                 android:orientation="vertical">
 
                 <com.yongtrim.lib.ui.UltraEditText
-                    android:layout_weight="1"
                     android:id="@+id/etContent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:bgStyle="white"
                     app:hint="나눔받은 후기를 작성해주세요."
                     app:multiline="true"
-                    app:bgStyle="white"
                     />
 
 
                 <com.yongtrim.lib.ui.ChipsMultiAutoCompleteTextview
 
-                    android:layout_marginTop="10dp"
                     android:id="@+id/etTags"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="태그하기(태그할 닉네임을 적어주세요)"
-                    android:textColorHint="@color/gray"
-                    android:textSize="14dp"
-                    android:padding="8dp"
-
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/roundbox_gray"
+                    android:hint="태그하기(태그할 닉네임을 적어주세요)"
+                    android:padding="8dp"
+                    android:textColorHint="@color/gray"
+
+                    android:textSize="14dp"
                     />
 
 
@@ -128,89 +139,83 @@
                     android:id="@+id/viewShare"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_gravity="right"
-                    android:layout_margin="10dp">
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
 
                     <ImageButton
                         android:id="@+id/btnTweet"
-                        android:onClick="onButtonClicked"
-                        android:layout_margin="2dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/twitter"
-                        android:background="@color/trans"/>
+                        android:layout_margin="2dp"
+                        android:background="@color/trans"
+                        android:onClick="onButtonClicked"
+                        android:src="@drawable/twitter"/>
 
 
                     <ImageButton
                         android:id="@+id/btnFacebook"
-                        android:onClick="onButtonClicked"
-                        android:layout_margin="2dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/facebook"
-                        android:background="@color/trans"/>
+                        android:layout_margin="2dp"
+                        android:background="@color/trans"
+                        android:onClick="onButtonClicked"
+                        android:src="@drawable/facebook"/>
 
 
                     <ImageButton
                         android:id="@+id/btnInsta"
-                        android:onClick="onButtonClicked"
-
-                        android:layout_margin="2dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/instagram"
-                        android:background="@color/trans"/>
 
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:background="@color/trans"
+                        android:onClick="onButtonClicked"
+                        android:src="@drawable/instagram"/>
 
 
                     <com.nuums.nuums.view.KakaoButton
                         android:id="@+id/btnKas"
-                        android:layout_margin="2dp"
-
                         android:layout_width="wrap_content"
+
                         android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
                         android:visibility="gone"
                         />
 
 
                     <ImageButton
                         android:id="@+id/btnKasOn"
-                        android:onClick="onButtonClicked"
-                        android:layout_margin="2dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/kakaostory"
-                        android:background="@color/trans"/>
-
+                        android:layout_margin="2dp"
+                        android:background="@color/trans"
+                        android:onClick="onButtonClicked"
+                        android:src="@drawable/kakaostory"/>
 
 
                 </LinearLayout>
-
 
 
                 <com.yongtrim.lib.ui.UltraButton
                     android:id="@+id/btnSubmit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginRight="25dp"
-                    android:layout_marginLeft="25dp"
                     android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="30dp"
                     android:onClick="onButtonClicked"
-                    ultra:style="center"
-                    ultra:borderWidth="1px"
+                    android:padding="8dp"
                     ultra:borderColor="@color/white"
-                    ultra:radius="10dp"
+                    ultra:borderWidth="1px"
                     ultra:defaultColor="@color/green"
                     ultra:focusColor="@color/buttonsel_bg"
+                    ultra:radius="10dp"
+                    ultra:style="center"
                     ultra:text="등록하기"
-                    ultra:textSize="20dp"
-                    ultra:textColor="@color/white" />
-
-
-
+                    ultra:textColor="@color/white"
+                    ultra:textSize="20dp"/>
 
 
             </LinearLayout>

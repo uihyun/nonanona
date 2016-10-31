@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -14,9 +13,7 @@ import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -31,36 +28,23 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.Response;
-import com.android.volley.toolbox.ImageLoader;
-import com.nuums.nuums.AppController;
 import com.nuums.nuums.R;
 import com.nuums.nuums.activity.BaseActivity;
-import com.nuums.nuums.holder.NanumHolder;
 import com.nuums.nuums.model.misc.CommentManager;
-import com.nuums.nuums.model.nanum.Nanum;
-import com.nuums.nuums.model.nanum.NanumData;
-import com.nuums.nuums.model.nanum.NanumManager;
 import com.nuums.nuums.model.report.Report;
 import com.nuums.nuums.model.review.Review;
 import com.nuums.nuums.model.review.ReviewData;
 import com.nuums.nuums.model.review.ReviewManager;
 import com.nuums.nuums.model.user.NsUser;
-import com.yongtrim.lib.Config;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.message.PushMessage;
-import com.yongtrim.lib.model.ACommonData;
-import com.yongtrim.lib.model.photo.PhotoManager;
-import com.yongtrim.lib.model.post.Post;
 import com.yongtrim.lib.model.user.UserManager;
-import com.yongtrim.lib.ui.CircularNetworkImageView;
 import com.yongtrim.lib.ui.CustomNetworkImageView;
 import com.yongtrim.lib.ui.UltraButton;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
 import com.yongtrim.lib.util.MiscUtil;
-import com.yongtrim.lib.util.PixelUtil;
 import com.yongtrim.lib.util.UIUtil;
 
-import java.util.Date;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -72,98 +56,26 @@ import de.greenrobot.event.EventBus;
  */
 public class ReviewAdapter extends BaseAdapter {
 
+    public EditText editTextFocus;
     private List<Review> reviews;
     private ContextHelper contextHelper;
-
-    public EditText editTextFocus;
-
-    class Holder {
-
-        //public View viewLine;
-
-        public TextView tvNickname;
-        public TextView tvDate;
-        public CustomNetworkImageView ivPhoto;
-
-        public UltraButton btnStar;
-        public TextView tvStarCnt;
-
-        //public UltraButton btnComment;
-        public UltraButton btnMore;
-        public TextView tvContent;
-
-        Context context;
-
-        public ListView listViewComment;
-        CommentInReviewAdapter commentAdapter;
-
-        EditText etComment;
-        UltraButton btnEnter;
-
-
-        public View set(View v, Context context) {
-            this.context = context;
-            v.setTag(this);
-
-            //viewLine = v.findViewById(R.id.viewLine);
-
-            tvNickname = (TextView)v.findViewById(R.id.tvNickname);
-            tvDate = (TextView)v.findViewById(R.id.tvDate);
-
-            ivPhoto = (CustomNetworkImageView)v.findViewById(R.id.ivPhoto);
-            UIUtil.setRatio(ivPhoto, context, 320, 300);
-
-            btnStar = (UltraButton)v.findViewById(R.id.btnStar);
-            tvStarCnt = (TextView)v.findViewById(R.id.tvStarCnt);
-
-            //btnComment = (UltraButton)v.findViewById(R.id.btnComment);
-            btnMore = (UltraButton)v.findViewById(R.id.btnMore);
-            tvDate = (TextView)v.findViewById(R.id.tvDate);
-            tvContent = (TextView)v.findViewById(R.id.tvContent);
-
-            listViewComment = (ListView)v.findViewById(R.id.listViewComment);
-            commentAdapter = new CommentInReviewAdapter(contextHelper);
-            listViewComment.setAdapter(commentAdapter);
-
-            etComment = (EditText)v.findViewById(R.id.etComment);
-            btnEnter = (UltraButton)v.findViewById(R.id.btnEnter);
-
-
-            etComment.addTextChangedListener(new MyWatcher(etComment));
-
-
-//            commentAdapter = new CommentAdapter(contextHelper, listViewComment);
-//            //--commentAdapter.setData(nanum.getComments());
-//            listView.setAdapter(commentAdapter);
-
-
-
-            return v;
-        }
-
-    }
-
 
     public ReviewAdapter(ContextHelper contextHelper) {
         super();
         this.contextHelper = contextHelper;
     }
 
+    public List<Review> getData() {
+        return this.reviews;
+    }
 
     public void setData(List<Review> reviews) {
         this.reviews = reviews;
     }
 
-
-
-    public List<Review> getData() {
-        return this.reviews;
-    }
-
-
     @Override
     public int getCount() {
-        if(reviews == null)
+        if (reviews == null)
             return 0;
         return reviews.size();
     }
@@ -178,9 +90,8 @@ public class ReviewAdapter extends BaseAdapter {
         return reviews.get(position);
     }
 
-
     void refreshStartCount(TextView tvStarCnt, int count) {
-        if(count > 0) {
+        if (count > 0) {
             tvStarCnt.setVisibility(View.VISIBLE);
         } else {
             tvStarCnt.setVisibility(View.GONE);
@@ -191,11 +102,11 @@ public class ReviewAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            LayoutInflater mInflater = (LayoutInflater)parent.getContext().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater mInflater = (LayoutInflater) parent.getContext().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = new Holder().set(mInflater.inflate(R.layout.cell_review, parent, false), parent.getContext());
 
         }
-        final Holder h = (Holder)convertView.getTag();
+        final Holder h = (Holder) convertView.getTag();
 
         final Review review = reviews.get(position);
 
@@ -224,7 +135,7 @@ public class ReviewAdapter extends BaseAdapter {
         contextHelper.setPhoto(h.ivPhoto, review.getPhoto());
         refreshStartCount(h.tvStarCnt, (review.getStars().size() + review.startDummy));
 
-        if(review.isStarted()) {
+        if (review.isStarted()) {
             h.btnStar.setIconResource(R.drawable.grayheart_on);
         } else {
             h.btnStar.setIconResource(R.drawable.grayheart);
@@ -245,7 +156,7 @@ public class ReviewAdapter extends BaseAdapter {
 
                 review.setStarted(!review.isStarted());
 
-                if(review.isStarted()) {
+                if (review.isStarted()) {
                     h.btnStar.setIconResource(R.drawable.grayheart_on);
                     review.startDummy = 1;
                     refreshStartCount(h.tvStarCnt, (review.getStars().size() + review.startDummy));
@@ -253,7 +164,7 @@ public class ReviewAdapter extends BaseAdapter {
                     h.btnStar.setIconResource(R.drawable.grayheart);
                     review.startDummy = -1;
                 }
-                h.tvStarCnt.setText("" + (review.getStars().size()+review.startDummy));
+                h.tvStarCnt.setText("" + (review.getStars().size() + review.startDummy));
                 ReviewManager.getInstance(contextHelper).star(
                         review, review.isStarted(),
                         new Response.Listener<ReviewData>() {
@@ -277,7 +188,7 @@ public class ReviewAdapter extends BaseAdapter {
 
 
         h.etComment.setTag(review);
-        h.etComment.setText((String)review.getTag());
+        h.etComment.setText((String) review.getTag());
 
         h.etComment.setImeOptions(EditorInfo.IME_ACTION_SEND);
         h.etComment.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -292,17 +203,17 @@ public class ReviewAdapter extends BaseAdapter {
             }
         });
 
-        h.etComment.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+        h.etComment.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus) {
+                if (hasFocus) {
                     editTextFocus = h.etComment;
                     h.etComment.setGravity(Gravity.LEFT);
-                } else if(TextUtils.isEmpty(h.etComment.getText().toString())) {
+                } else if (TextUtils.isEmpty(h.etComment.getText().toString())) {
                     h.etComment.setGravity(Gravity.RIGHT);
                     editTextFocus = null;
                 }
             }
-         });
+        });
 
         h.btnEnter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -314,13 +225,10 @@ public class ReviewAdapter extends BaseAdapter {
         });
 
 
-
-
-
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(review.getContent());
-        if(review.getTags() != null) {
-            for(NsUser user : review.getTags()) {
+        if (review.getTags() != null) {
+            for (NsUser user : review.getTags()) {
                 stringBuilder.append(" @" + user.getNicknameSafe());
             }
         }
@@ -328,10 +236,10 @@ public class ReviewAdapter extends BaseAdapter {
         int offset = 0;
         SpannableString text = new SpannableString(stringBuilder.toString());
         offset += review.getContent().length();
-        if(review.getTags() != null) {
-            for(NsUser user : review.getTags()) {
+        if (review.getTags() != null) {
+            for (NsUser user : review.getTags()) {
                 offset++;
-                setLink(text, offset,  user.getNicknameSafe().length() + 1, user);
+                setLink(text, offset, user.getNicknameSafe().length() + 1, user);
                 offset += user.getNicknameSafe().length() + 1;
 
                 stringBuilder.append(" @" + user.getNicknameSafe());
@@ -377,7 +285,6 @@ public class ReviewAdapter extends BaseAdapter {
         });
 
 
-
         h.commentAdapter.setData(review, review.getComments());
         h.commentAdapter.notifyDataSetChanged();
 
@@ -394,7 +301,6 @@ public class ReviewAdapter extends BaseAdapter {
                         contextHelper.setListViewHeightBasedOnChildren(h.listViewComment);
                     }
                 });
-
 
 
         h.btnMore.setOnClickListener(new View.OnClickListener() {
@@ -439,9 +345,9 @@ public class ReviewAdapter extends BaseAdapter {
 
                                                                             contextHelper.hideProgress();
                                                                             if (response.isSuccess()) {
-                                                                                if(response.user != null)
+                                                                                if (response.user != null)
                                                                                     UserManager.getInstance(contextHelper).setMe(response.user);
-                                                                                
+
                                                                                 response.review.patch(contextHelper);
                                                                                 EventBus.getDefault().post(new PushMessage().setActionCode(PushMessage.ACTIONCODE_DELETE_REVIEW).setObject(response.review));
 
@@ -484,7 +390,7 @@ public class ReviewAdapter extends BaseAdapter {
 
                                             contextHelper.getContext().startActivity(i);
                                         }
-                                            break;
+                                        break;
                                     }
                                 }
                             })
@@ -497,11 +403,100 @@ public class ReviewAdapter extends BaseAdapter {
         return convertView;
     }
 
-
     private void setLink(SpannableString text, int offset, int length, NsUser user) {
         //text.setSpan(new StyleSpan(Typeface.BOLD), offset, offset + length, 0);
         PolicyClickableSpan clickableSpan = new PolicyClickableSpan(user);
         text.setSpan(clickableSpan, offset, offset + length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    }
+
+    void sendComment(Review review, String comment) {
+
+        if (TextUtils.isEmpty(comment))
+            return;
+
+        contextHelper.showProgress(null);
+
+        CommentManager.getInstance(contextHelper).createInReview(review, comment,
+                new Response.Listener<ReviewData>() {
+                    @Override
+                    public void onResponse(ReviewData response) {
+                        contextHelper.hideProgress();
+                        if (response.isSuccess()) {
+                            response.review.patch(contextHelper);
+                            EventBus.getDefault().post(new PushMessage().setActionCode(PushMessage.ACTIONCODE_CHANGE_REVIEW).setObject(response.review));
+
+                        } else {
+                            new SweetAlertDialog(contextHelper.getContext())
+                                    .setContentText(response.getErrorMessage())
+                                    .show();
+                        }
+                    }
+                },
+                null
+        );
+    }
+
+    class Holder {
+
+        //public View viewLine;
+
+        public TextView tvNickname;
+        public TextView tvDate;
+        public CustomNetworkImageView ivPhoto;
+
+        public UltraButton btnStar;
+        public TextView tvStarCnt;
+
+        //public UltraButton btnComment;
+        public UltraButton btnMore;
+        public TextView tvContent;
+        public ListView listViewComment;
+        Context context;
+        CommentInReviewAdapter commentAdapter;
+
+        EditText etComment;
+        UltraButton btnEnter;
+
+
+        public View set(View v, Context context) {
+            this.context = context;
+            v.setTag(this);
+
+            //viewLine = v.findViewById(R.id.viewLine);
+
+            tvNickname = (TextView) v.findViewById(R.id.tvNickname);
+            tvDate = (TextView) v.findViewById(R.id.tvDate);
+
+            ivPhoto = (CustomNetworkImageView) v.findViewById(R.id.ivPhoto);
+            UIUtil.setRatio(ivPhoto, context, 320, 300);
+
+            btnStar = (UltraButton) v.findViewById(R.id.btnStar);
+            tvStarCnt = (TextView) v.findViewById(R.id.tvStarCnt);
+
+            //btnComment = (UltraButton)v.findViewById(R.id.btnComment);
+            btnMore = (UltraButton) v.findViewById(R.id.btnMore);
+            tvDate = (TextView) v.findViewById(R.id.tvDate);
+            tvContent = (TextView) v.findViewById(R.id.tvContent);
+
+            listViewComment = (ListView) v.findViewById(R.id.listViewComment);
+            commentAdapter = new CommentInReviewAdapter(contextHelper);
+            listViewComment.setAdapter(commentAdapter);
+
+            etComment = (EditText) v.findViewById(R.id.etComment);
+            btnEnter = (UltraButton) v.findViewById(R.id.btnEnter);
+
+
+            etComment.addTextChangedListener(new MyWatcher(etComment));
+
+
+//            commentAdapter = new CommentAdapter(contextHelper, listViewComment);
+//            //--commentAdapter.setData(nanum.getComments());
+//            listView.setAdapter(commentAdapter);
+
+
+            return v;
+        }
+
     }
 
     class PolicyClickableSpan extends ClickableSpan {
@@ -532,6 +527,7 @@ public class ReviewAdapter extends BaseAdapter {
 
         private EditText edit;
         private Review review;
+
         public MyWatcher(EditText edit) {
             this.edit = edit;
         }
@@ -543,11 +539,11 @@ public class ReviewAdapter extends BaseAdapter {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             //Log.d("TAG", "onTextChanged: " + s);
-            this.review = (Review)edit.getTag();
+            this.review = (Review) edit.getTag();
             if (review != null) {
                 review.setTag(s.toString());
             }
-            if (s.length() > 0){
+            if (s.length() > 0) {
                 // position the text type in the left top corner
                 edit.setGravity(Gravity.LEFT);
             } else {
@@ -560,37 +556,6 @@ public class ReviewAdapter extends BaseAdapter {
         public void afterTextChanged(Editable s) {
         }
     }
-
-
-    void sendComment(Review review, String comment) {
-
-        if(TextUtils.isEmpty(comment))
-            return;
-
-        contextHelper.showProgress(null);
-
-        CommentManager.getInstance(contextHelper).createInReview(review, comment,
-                new Response.Listener<ReviewData>() {
-                    @Override
-                    public void onResponse(ReviewData response) {
-                        contextHelper.hideProgress();
-                        if (response.isSuccess()) {
-                            response.review.patch(contextHelper);
-                            EventBus.getDefault().post(new PushMessage().setActionCode(PushMessage.ACTIONCODE_CHANGE_REVIEW).setObject(response.review));
-
-                        } else {
-                            new SweetAlertDialog(contextHelper.getContext())
-                                    .setContentText(response.getErrorMessage())
-                                    .show();
-                        }
-                    }
-                },
-                null
-        );
-    }
-
-
-
 }
 
 

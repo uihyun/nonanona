@@ -2,6 +2,7 @@ package com.nuums.nuums.fragment.nanum;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -84,13 +85,11 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
 
     List<Photo> photosBuffer;
 
-
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putString("nanum", nanum.toString());
     }
-
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -259,12 +258,25 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
             photoPagerAdapter.setOnPhotoPagerListener(new PhotoPagerAdapter.OnPhotoPagerListener() {
                 @Override
                 public void modify(int index) {
-
-                    Uri source = Uri.parse(nanum.getPhotos().get(index).getUriOrg());
+                    Uri uri = Uri.parse(nanum.getPhotos().get(index).getUriOrg());
 
                     contextHelper.getActivity().startActivityForResult(
-                            PhotoManager.getInstance(contextHelper).getCropImageIntent(source, false),
+                            PhotoManager.getInstance(contextHelper).getCropImageIntent(uri, false),
                             ABaseFragmentAcitivty.REQUEST_CROP_IMAGE + index);
+                }
+
+                @Override
+                public void rotate(int index) {
+                    Bitmap bitmap = nanum.getPhotos().get(index).getBitmap();
+
+                    if (bitmap == null)
+                        return;
+
+                    bitmap = PhotoManager.getInstance(contextHelper).rotateImage(bitmap, 90);
+                    nanum.getPhotos().get(index).setBitmap(bitmap);
+                    nanum.getPhotos().get(index).setIsCropped(true);
+                    nanum.getPhotos().get(index).setPath(PhotoManager.getInstance(contextHelper).getPathCropped());
+                    refresh();
                 }
 
                 @Override
@@ -283,7 +295,6 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
                                 }
                             })
                             .show();
-
                 }
 
                 @Override
@@ -458,15 +469,15 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
                         nanum = Nanum.getNanum(data.getStringExtra("nanum"));
                         nanum.setPhotos(photosBuffer);
                     }
-
                     refresh();
+
                 } else if (requestCode == ABaseFragmentAcitivty.REQUEST_POSTCODE) {
                     if (data != null) {
                         nanum = Nanum.getNanum(data.getStringExtra("nanum"));
                         nanum.setPhotos(photosBuffer);
                     }
-
                     refresh();
+
                 } else if (requestCode >= ABaseFragmentAcitivty.REQUEST_PICK_IMAGE) {
 
                     if (data != null && data.getParcelableArrayListExtra("photos") != null) {
@@ -676,7 +687,7 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
                     );
 
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
             }
         }).start();
@@ -720,13 +731,13 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
 
 
                             } catch (Exception e) {
-
+                                e.printStackTrace();
                             }
                         }
                     });
 
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
             }
         }).start();

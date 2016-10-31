@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -28,6 +30,7 @@ import com.yongtrim.lib.ui.CustomNetworkImageView;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,17 +58,37 @@ public class PhotoManager {
         return instance;
     }
 
+    public Bitmap rotateImage(Bitmap source, float angle) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+
+        Bitmap bitmap = Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix,
+                true);
+
+        String path = genderatePath();
+        setPathCropped(path);
+
+        try {
+            FileOutputStream out = new FileOutputStream(path);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, out);
+
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return bitmap;
+    }
+
     public void uploadPhoto(final Photo photo,
                             final Response.Listener<Photo> listener,
-                            final Response.ErrorListener errorListener
-    ) {
+                            final Response.ErrorListener errorListener) {
 
         final UserManager userManager = UserManager.getInstance(contextHelper);
 
         new AsyncTask<String, Void, String>() {
             protected String doInBackground(String... paths) {
                 HashMap config = new HashMap();
-
 
                 Log.i(TAG, ">>> path = " + paths[0]);
 
@@ -148,13 +171,11 @@ public class PhotoManager {
 
         } else {
             onPhotoUploadedListener.onCompleted(photos);
-
         }
     }
 
-
-    void patchPhoto(final List<Photo> photos, final PhotoInfo photoInfo, final CountDownLatch latchWait, final CountDownLatch latchCount,
-                    final SweetAlertDialog progress, final int index, final int total) {
+    void patchPhoto(final List<Photo> photos, final PhotoInfo photoInfo, final CountDownLatch latchWait,
+                    final CountDownLatch latchCount, final SweetAlertDialog progress, final int index, final int total) {
         new Thread(new Runnable() {
 
             @Override
@@ -184,7 +205,6 @@ public class PhotoManager {
 
                                     //final int __size = arrShouldUpload.size();
 
-
                                 }
                             },
                             new Response.ErrorListener() {
@@ -204,7 +224,6 @@ public class PhotoManager {
 
 
     }
-
 
     public Intent getCropImageIntent(Uri source, boolean isSmall) {
         Intent intent = new Intent("com.android.camera.action.CROP");
