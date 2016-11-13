@@ -13,9 +13,6 @@ import org.xml.sax.InputSource;
 
 import java.io.StringWriter;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -36,18 +33,9 @@ import javax.xml.transform.stream.StreamResult;
  */
 public class PostCodeTask extends AsyncTask<Void, Void, Void> {
     public final static String serviceKey = "b7P1WpFMuYvH9tmoSj6qL%2B7h6h7jXfYVNT248%2BlutNnYy5hvfJjeR%2Bru5bhkq26RWhAFC9%2FrsjM7xxTcMx5BPg%3D%3D";
-
-
-    public interface AServiceCallback {
-        void success(PostCodeList result);
-        void failure(int errorCode, String message);
-    }
-
     AServiceCallback callback;
     PostCodeList postCodeList;
-
     String keyword;
-
     int currentPage = 1;
 
     public PostCodeTask(String keyword, int page, AServiceCallback callback) {
@@ -55,12 +43,6 @@ public class PostCodeTask extends AsyncTask<Void, Void, Void> {
         this.keyword = keyword;
         this.currentPage = page;
         postCodeList = new PostCodeList();
-    }
-
-
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
     }
 
     public static String xmlToString(Node node) {
@@ -79,6 +61,11 @@ public class PostCodeTask extends AsyncTask<Void, Void, Void> {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
     }
 
     @Override
@@ -104,14 +91,14 @@ public class PostCodeTask extends AsyncTask<Void, Void, Void> {
             doc.getDocumentElement().normalize();
 
 
-            Element cmmMsgHeader = (Element)doc.getElementsByTagName("cmmMsgHeader").item(0);
+            Element cmmMsgHeader = (Element) doc.getElementsByTagName("cmmMsgHeader").item(0);
 
             int totalPage = Integer.parseInt(cmmMsgHeader.getElementsByTagName("totalPage").item(0).getTextContent());
             int currentPage = Integer.parseInt(cmmMsgHeader.getElementsByTagName("currentPage").item(0).getTextContent());
 
             Page page = new Page();
 
-            if(totalPage > currentPage) {
+            if (totalPage > currentPage) {
                 page.setIsHasNext(true);
                 page.setNext(currentPage + 1);
             } else {
@@ -125,12 +112,11 @@ public class PostCodeTask extends AsyncTask<Void, Void, Void> {
 
             for (int i = 0; i < nodeList.getLength(); i++) {
                 Node node = nodeList.item(i);
-                Element fstElmnt = (Element)node;
+                Element fstElmnt = (Element) node;
 
                 Node zipNo = fstElmnt.getElementsByTagName("zipNo").item(0);
                 Node lnmAdres = fstElmnt.getElementsByTagName("lnmAdres").item(0);
                 Node rnAdres = fstElmnt.getElementsByTagName("rnAdres").item(0);
-
 
 
                 PostCode postCode = new PostCode();
@@ -155,6 +141,12 @@ public class PostCodeTask extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);
         callback.success(postCodeList);
+    }
+
+    public interface AServiceCallback {
+        void success(PostCodeList result);
+
+        void failure(int errorCode, String message);
     }
 
 }

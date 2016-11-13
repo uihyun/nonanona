@@ -3,7 +3,6 @@ package com.nuums.nuums.fragment.misc;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Address;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -15,43 +14,25 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Response;
 import com.google.android.gms.maps.model.LatLng;
 import com.nuums.nuums.R;
 import com.nuums.nuums.adapter.PostcodeAdapter;
-import com.nuums.nuums.model.chat.TalkData;
-import com.nuums.nuums.model.chat.TalkManager;
 import com.nuums.nuums.model.nanum.Nanum;
-import com.nuums.nuums.model.user.NsUser;
 import com.nuums.nuums.model.yongdal.Yongdal;
 import com.yongtrim.lib.fragment.ListFragment;
-import com.yongtrim.lib.log.Logger;
 import com.yongtrim.lib.message.PushMessage;
-import com.yongtrim.lib.model.config.ConfigManager;
-import com.yongtrim.lib.model.misc.LocationToAddressTask;
 import com.yongtrim.lib.model.postcode.PostCode;
 import com.yongtrim.lib.model.postcode.PostCodeList;
 import com.yongtrim.lib.model.postcode.PostCodeTask;
 import com.yongtrim.lib.model.user.LocationTask;
-import com.yongtrim.lib.model.user.UserData;
-import com.yongtrim.lib.model.user.UserManager;
 import com.yongtrim.lib.ui.UltraButton;
 import com.yongtrim.lib.ui.UltraListView;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
 
-import org.json.JSONObject;
-
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.CountDownLatch;
-
-import de.greenrobot.event.EventBus;
 
 /**
  * nuums / com.nuums.nuums.fragment.misc
@@ -73,6 +54,7 @@ public class PostcodeFragment extends ListFragment {
 
     Yongdal yongdal;
     boolean isStart;
+
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -91,10 +73,10 @@ public class PostcodeFragment extends ListFragment {
 
         View view = inflater.inflate(R.layout.fragment_postcode, container, false);
 
-        UltraListView listView = (UltraListView)view.findViewById(R.id.listView);
+        UltraListView listView = (UltraListView) view.findViewById(R.id.listView);
         postcodeAdapter = new PostcodeAdapter();
 
-        if(postCodeList == null) {
+        if (postCodeList == null) {
             postCodeList = new PostCodeList();
         }
 
@@ -110,7 +92,7 @@ public class PostcodeFragment extends ListFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final PostCode postCode = postCodeList.getPostCodes().get((int) position);
 
-                if(nanum != null) {
+                if (nanum != null) {
                     new SweetAlertDialog(getContext())
                             .setContentText("\'" + postCode.oldAddress + "\'(을)를 거래지역으로 등록합니다.")
                             .showCancelButton(true)
@@ -129,8 +111,8 @@ public class PostcodeFragment extends ListFragment {
                                 }
                             })
                             .show();
-                } else if(yongdal != null) {
-                    if(isStart)
+                } else if (yongdal != null) {
+                    if (isStart)
                         yongdal.setAddressStart(postCode.code + "/" + postCode.newAddress);
                     else
                         yongdal.setAddressEnd(postCode.code + "/" + postCode.newAddress);
@@ -233,14 +215,14 @@ public class PostcodeFragment extends ListFragment {
     }
 
     void find(String keyword) {
-        if(TextUtils.isEmpty(keyword))
+        if (TextUtils.isEmpty(keyword))
             return;
 
         try {
             InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
-        } catch(Exception e) {
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         this.keyword = keyword;
 
@@ -281,19 +263,47 @@ public class PostcodeFragment extends ListFragment {
     void processLocation(PostCode postCode) {
 
         contextHelper.showProgress(null);
-        final CountDownLatch latchLocation = new CountDownLatch(1);
 
-        LocationTask location = new LocationTask(postCode.oldAddress, new LocationTask.AServiceCallback() {
+        LocationTask location = new LocationTask(postCode.oldAddress, postCode.newAddress, new LocationTask.AServiceCallback() {
             @Override
             public void success(Object object) {
                 Map<String, Object> map = (HashMap<String, Object>) object;
                 LatLng location = (LatLng) map.get("location");
-                if(nanum != null)
+                if (nanum != null)
                     nanum.setLocation(location);
-                else if(yongdal != null) {
+                else if (yongdal != null) {
                     yongdal.setLocation(location, isStart);
                 }
-                latchLocation.countDown();
+
+                String seqAddress = (String) map.get("address");
+
+                if (nanum != null)
+                    nanum.setAddressFake(seqAddress);
+                else if (yongdal != null) {
+                    if (isStart)
+                        yongdal.setAddressStartFake(seqAddress);
+                    else
+                        yongdal.setAddressEndFake(seqAddress);
+                }
+                contextHelper.getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        contextHelper.hideProgress();
+                        Intent intent = new Intent();
+
+                        if (nanum != null)
+                            intent.putExtra("nanum", nanum.toString());
+
+                        else if (yongdal != null) {
+                            intent.putExtra("yongdal", yongdal.toString());
+                        }
+
+
+                        contextHelper.getActivity().setResult(Activity.RESULT_OK, intent);
+                        contextHelper.getActivity().finish();
+                    }
+                });
             }
 
             @Override
@@ -304,71 +314,6 @@ public class PostcodeFragment extends ListFragment {
         });
 
         location.execute();
-
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                try {
-                    latchLocation.await();
-
-                    LatLng location = null;
-
-                    if(nanum != null) {
-                        location = nanum.getLocation();
-                    } else if(yongdal != null) {
-                        location = yongdal.getLocation(isStart);
-                    }
-
-                    LocationToAddressTask locationToAddressTask = new LocationToAddressTask(location.latitude, location.longitude, new LocationToAddressTask.AServiceCallback() {
-                        @Override
-                        public void success(Object object) {
-                            Map<String, Object> map = (HashMap<String, Object>) object;
-
-                            String seqAddress = (String)map.get("addressShort");
-
-                            if(nanum != null)
-                                nanum.setAddressFake(seqAddress);
-                            else if(yongdal != null) {
-                                if(isStart)
-                                    yongdal.setAddressStartFake(seqAddress);
-                                else
-                                    yongdal.setAddressEndFake(seqAddress);
-                            }
-                            contextHelper.getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-
-                                    contextHelper.hideProgress();
-                                    Intent intent = new Intent();
-
-                                    if(nanum != null)
-                                        intent.putExtra("nanum", nanum.toString());
-
-                                    else if(yongdal != null) {
-                                        intent.putExtra("yongdal", yongdal.toString());
-                                    }
-
-
-                                    contextHelper.getActivity().setResult(Activity.RESULT_OK, intent);
-                                    contextHelper.getActivity().finish();
-                                }
-                            });
-                        }
-
-                        @Override
-                        public void failure(int errorCode, String message) {
-
-                        }
-                    });
-
-                    locationToAddressTask.execute();
-
-                } catch (Exception e) {
-
-                }
-            }
-        }).start();
     }
 }
 

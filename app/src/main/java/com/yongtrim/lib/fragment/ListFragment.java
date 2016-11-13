@@ -2,18 +2,14 @@ package com.yongtrim.lib.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 
 import com.nuums.nuums.R;
-import com.yongtrim.lib.log.Logger;
 import com.yongtrim.lib.model.list.List;
 import com.yongtrim.lib.ui.UltraListView;
 
@@ -25,42 +21,35 @@ import com.yongtrim.lib.ui.UltraListView;
 public class ListFragment extends ABaseFragment {
 
     final String TAG = "ListFragment";
-
+    final int STATE_ONSCREEN = 0;
+    final int STATE_OFFSCREEN = 1;
+    final int STATE_RETURNING = 2;
     protected UltraListView listView;
+    protected SwipeRefreshLayout refreshLayout;
     View viewNodata;
     BaseAdapter listAdapter;
     List list;
-
     View mHeader;
     View mPlaceHolder;
     int mCachedVerticalScrollRange;
     View layerTop;
     int nTopHeight;
-
     View layerBottom;
     int nBottomHeight;
-
-    final int STATE_ONSCREEN = 0;
-    final int STATE_OFFSCREEN = 1;
-    final int STATE_RETURNING = 2;
     int mScrollY;
-
     int mState_Bottom = STATE_ONSCREEN;
     int mMinRawY_Bottom = 0;
     int mState_Top = STATE_ONSCREEN;
     int mMinRawY_Top = 0;
-
     TranslateAnimation anim;
-
-    protected SwipeRefreshLayout refreshLayout;
 
     protected void setupView(final UltraListView listView, View viewNoddate, View refreshLayout, BaseAdapter listAdapter) {
         this.viewNodata = viewNoddate;
         this.listAdapter = listAdapter;
         this.listView = listView;
 
-        if(refreshLayout != null) {
-            this.refreshLayout = (SwipeRefreshLayout)refreshLayout;
+        if (refreshLayout != null) {
+            this.refreshLayout = (SwipeRefreshLayout) refreshLayout;
             listView.setSwipeRefreshLayout(this.refreshLayout);
         }
 
@@ -149,11 +138,11 @@ public class ListFragment extends ABaseFragment {
                 }
 
 
-                if(layerTop != null) {
+                if (layerTop != null) {
 
                     int placeHolderTopPos = 0;
 
-                    if(mPlaceHolder != null)
+                    if (mPlaceHolder != null)
                         placeHolderTopPos = mPlaceHolder.getTop();
 
                     int rawY_Top = placeHolderTopPos - Math.min(mCachedVerticalScrollRange - listView.getHeight(), mScrollY);
@@ -225,8 +214,8 @@ public class ListFragment extends ABaseFragment {
 
 
     private void checkListZeroSize() {
-        if(viewNodata != null) {
-            if(list != null && listAdapter.getCount() == 0) {
+        if (viewNodata != null) {
+            if (list != null && listAdapter.getCount() == 0) {
                 viewNodata.setVisibility(View.VISIBLE);
             } else {
                 viewNodata.setVisibility(View.GONE);
@@ -242,11 +231,11 @@ public class ListFragment extends ABaseFragment {
 
 
     protected void loadList(List list) {
-        if(list == null && this.refreshLayout != null) {
+        if (list == null && this.refreshLayout != null) {
             this.refreshLayout.setRefreshing(true);
         }
 
-        if(list == null)
+        if (list == null)
             listView.addFooter();
 
         this.list = list;
@@ -262,7 +251,7 @@ public class ListFragment extends ABaseFragment {
         listAdapter.notifyDataSetChanged();
         calculateListSize();
 
-        if(list.getPages() == null || !list.getPages().isHasNext())
+        if (list.getPages() == null || !list.getPages().isHasNext())
             listView.removeFooter();
     }
 
@@ -284,7 +273,7 @@ public class ListFragment extends ABaseFragment {
                             listView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                         }
 
-                        if(layerTop != null) {
+                        if (layerTop != null) {
                             nTopHeight = layerTop.getHeight();
                         }
 

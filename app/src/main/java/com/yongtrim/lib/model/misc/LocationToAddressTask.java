@@ -23,26 +23,17 @@ import javax.net.ssl.HttpsURLConnection;
  */
 public class LocationToAddressTask extends AsyncTask<Void, Void, Void> {
 
-    public interface AServiceCallback {
-        void success(Object object);
-        void failure(int errorCode, String message);
-    }
-
     AServiceCallback callback;
     double latitude;
     double longitude;
-
     boolean isError = false;
-
-    Map<String,Object> map =  new HashMap<String,Object>();
-
+    Map<String, Object> map = new HashMap<String, Object>();
 
     public LocationToAddressTask(double latitude, double longitude, AServiceCallback callback) {
         this.callback = callback;
         this.latitude = latitude;
         this.longitude = longitude;
     }
-
 
     @Override
     protected void onPreExecute() {
@@ -66,34 +57,35 @@ public class LocationToAddressTask extends AsyncTask<Void, Void, Void> {
             conn.setDoInput(true);
             conn.setDoOutput(true);
 
-            int responseCode=conn.getResponseCode();
+            int responseCode = conn.getResponseCode();
 
             if (responseCode == HttpsURLConnection.HTTP_OK) {
                 String line;
-                BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                while ((line=br.readLine()) != null) {
+                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                while ((line = br.readLine()) != null) {
                     stringBuilder.append(line);
                 }
             }
             conn.disconnect();
 
         } catch (IOException e) {
+            e.printStackTrace();
         }
 
         try {
 
             JSONObject json = new JSONObject(stringBuilder.toString());
 
-            JSONArray arrResults = json.getJSONArray( "results" );
+            JSONArray arrResults = json.getJSONArray("results");
 
-            JSONObject object = (JSONObject)arrResults.get(0);
-            String address = (String)object.get("formatted_address");
+            JSONObject object = (JSONObject) arrResults.get(0);
+            String address = (String) object.get("formatted_address");
 
             address = address.replace("대한민국 ", "");
 
             map.put("address", address);
 
-            if(arrResults.length() > 3) {
+            if (arrResults.length() > 3) {
                 JSONObject objectShort = (JSONObject) arrResults.get(arrResults.length() - 3);
 
                 String addressShort = (String) objectShort.get("formatted_address");
@@ -105,20 +97,27 @@ public class LocationToAddressTask extends AsyncTask<Void, Void, Void> {
                 map.put("addressShort", address);
             }
         } catch (JSONException e) {
+            e.printStackTrace();
         }
         return null;
     }
-
 
     @Override
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);
 
-        if(isError) {
+        if (isError) {
             callback.failure(-1, "주소를 추출할 수 없는 위치입니다.");
         } else {
             callback.success(map);
         }
+    }
+
+
+    public interface AServiceCallback {
+        void success(Object object);
+
+        void failure(int errorCode, String message);
     }
 }
 
