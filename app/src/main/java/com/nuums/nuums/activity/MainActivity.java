@@ -20,6 +20,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+import com.nuums.nuums.AppController;
 import com.nuums.nuums.R;
 import com.nuums.nuums.fragment.mypage.MypageMainFragment;
 import com.nuums.nuums.fragment.nanum.NanumEditFragment;
@@ -211,6 +214,10 @@ public class MainActivity extends ABaseFragmentAcitivty {
         }
 
         checkPermission();
+
+        Tracker t = AppController.getInstance().getTracker(AppController.TrackerName.APP_TRACKER);
+        t.setScreenName("MainActivity");
+        t.send(new HitBuilders.AppViewBuilder().build());
     }
 
     @Override

@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.multidex.MultiDexApplication;
 
-import com.nuums.nuums.R;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
@@ -25,11 +24,11 @@ import com.kakao.auth.Session;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.nuums.nuums.R;
 import com.sromku.simple.fb.Permission;
 import com.sromku.simple.fb.SimpleFacebook;
 import com.sromku.simple.fb.SimpleFacebookConfiguration;
 import com.yongtrim.lib.log.Logger;
-import com.yongtrim.lib.message.PushMessage;
 import com.yongtrim.lib.model.RequestManager;
 import com.yongtrim.lib.util.images.ImageCacheManager;
 
@@ -46,52 +45,77 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import de.greenrobot.event.EventBus;
-
 /**
  * hair / com.yongtrim.lib
  * <p/>
  * Created by Uihyun on 15. 9. 1..
  */
 @ReportsCrashes
-(
-    // Google Docs 로 전송시에만 사용됨 비워두면 된다.
-    formKey                 = "",
-    // Crash 발생 즉시 Toast 메시지로 알림 : Toast 내용
-    resToastText            = R.string.crash_toast_text,
-    // Dialog 형태로 알림
-    mode                    = ReportingInteractionMode.DIALOG,
-    // Dialog 표시 아이콘
-    resDialogIcon           = android.R.drawable.ic_dialog_info,
-    // Dialog Title 표시 문구
-    resDialogTitle          = R.string.crash_dialog_title,
-    // Dialog 본문 표시 문구
-    resDialogText           = R.string.crash_dialog_text,
-    // Dialog OK 선택시 발생 Toast
-    resDialogOkToast        = R.string.crash_dialog_ok_toast,
-    customReportContent = { ReportField.APP_VERSION_CODE,
-            ReportField.APP_VERSION_NAME,
-            ReportField.ANDROID_VERSION,
-            ReportField.PHONE_MODEL,
-            ReportField.CUSTOM_DATA,
-            ReportField.STACK_TRACE,
-            ReportField.LOGCAT,
-            ReportField.USER_APP_START_DATE,
-    },
-    //formUri = "http://192.168.200.187:3000/logs"
-    formUri = "https://nuums.herokuapp.com/logs"
-)
+        (
+                // Google Docs 로 전송시에만 사용됨 비워두면 된다.
+                formKey = "",
+                // Crash 발생 즉시 Toast 메시지로 알림 : Toast 내용
+                resToastText = R.string.crash_toast_text,
+                // Dialog 형태로 알림
+                mode = ReportingInteractionMode.DIALOG,
+                // Dialog 표시 아이콘
+                resDialogIcon = android.R.drawable.ic_dialog_info,
+                // Dialog Title 표시 문구
+                resDialogTitle = R.string.crash_dialog_title,
+                // Dialog 본문 표시 문구
+                resDialogText = R.string.crash_dialog_text,
+                // Dialog OK 선택시 발생 Toast
+                resDialogOkToast = R.string.crash_dialog_ok_toast,
+                customReportContent = {ReportField.APP_VERSION_CODE,
+                        ReportField.APP_VERSION_NAME,
+                        ReportField.ANDROID_VERSION,
+                        ReportField.PHONE_MODEL,
+                        ReportField.CUSTOM_DATA,
+                        ReportField.STACK_TRACE,
+                        ReportField.LOGCAT,
+                        ReportField.USER_APP_START_DATE,
+                },
+                //formUri = "http://192.168.200.187:3000/logs"
+                formUri = "https://nuums.herokuapp.com/logs"
+        )
 public class Application extends MultiDexApplication {
 
-    final String TAG = "Application";
-
-    private static int DISK_IMAGECACHE_SIZE = 1024*1024*10;
+    private static int DISK_IMAGECACHE_SIZE = 1024 * 1024 * 10;
     private static Bitmap.CompressFormat DISK_IMAGECACHE_COMPRESS_FORMAT = Bitmap.CompressFormat.JPEG;
     private static int DISK_IMAGECACHE_QUALITY = 100;  //PNG is lossless so quality is ignored but must be provided
-
-    private RequestQueue mRequestQueue;
+    final String TAG = "Application";
     Gson gson;
 
+    private RequestQueue mRequestQueue;
+
+    public static boolean isApplicationInBackground(Context context) {
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+
+        List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
+
+        if (!tasks.isEmpty()) {
+            ComponentName topActivity = tasks.get(0).topActivity;
+
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static void setBadge(Context context, int count) {
+        int badgeCount = count < 0 ? 0 : count;
+        Intent intent = new Intent("android.intent.action.BADGE_COUNT_UPDATE");
+
+        intent.putExtra("badge_count", badgeCount);
+        // 메인 메뉴에 나타나는 어플의  패키지 명
+        intent.putExtra("badge_count_package_name", "com.nuums.nuums");
+        // 메인메뉴에 나타나는 어플의 클래스 명
+        intent.putExtra("badge_count_class_name", "com.nuums.nuums.activity.SplashActivity");
+        context.sendBroadcast(intent);
+
+    }
 
     @Override
     public void onCreate() {
@@ -123,7 +147,7 @@ public class Application extends MultiDexApplication {
 
         //
         // facebook
-        Permission[] permissions = new Permission[] {
+        Permission[] permissions = new Permission[]{
                 Permission.PUBLIC_PROFILE,
                 Permission.EMAIL,
                 Permission.USER_BIRTHDAY,
@@ -143,9 +167,17 @@ public class Application extends MultiDexApplication {
         try {
             Session.initialize(this);
         } catch (Exception e) {
-                Logger.debug(TAG, e.toString());
+            Logger.debug(TAG, e.toString());
         }
     }
+
+//    public HjUser getMe() {
+//        return me;
+//    }
+//
+//    public void setMe(HjUser user) {
+//        this.me = user;
+//    }
 
     public RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
@@ -159,17 +191,9 @@ public class Application extends MultiDexApplication {
         return ImageCacheManager.getInstance().getImageLoader();
     }
 
-//    public HjUser getMe() {
-//        return me;
-//    }
-//
-//    public void setMe(HjUser user) {
-//        this.me = user;
-//    }
-
     public Gson getGson() {
 
-        if(gson == null) {
+        if (gson == null) {
             GsonBuilder gsonBuilder = new GsonBuilder();
             gsonBuilder.registerTypeAdapter(Date.class, new gsonUTCdateAdapter());
             //gsonBuilder.setDateFormat("yyyy-MM-dd'T'HH:mm:ss");
@@ -179,7 +203,7 @@ public class Application extends MultiDexApplication {
         return gson;
     }
 
-    public static class gsonUTCdateAdapter implements JsonSerializer<Date>,JsonDeserializer<Date> {
+    public static class gsonUTCdateAdapter implements JsonSerializer<Date>, JsonDeserializer<Date> {
 
         private final DateFormat dateFormat;
 
@@ -201,38 +225,6 @@ public class Application extends MultiDexApplication {
                 throw new JsonParseException(e);
             }
         }
-    }
-
-    public static boolean isApplicationInBackground(Context context) {
-        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-
-        List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
-
-        if (!tasks.isEmpty())
-        {
-            ComponentName topActivity = tasks.get(0).topActivity;
-
-            if (!topActivity.getPackageName().equals(context.getPackageName()))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-
-    public static void setBadge(Context context, int count) {
-        int badgeCount = count < 0 ? 0 : count;
-        Intent intent = new Intent("android.intent.action.BADGE_COUNT_UPDATE");
-
-        intent.putExtra("badge_count", badgeCount);
-        // 메인 메뉴에 나타나는 어플의  패키지 명
-        intent.putExtra("badge_count_package_name", "com.nuums.nuums");
-        // 메인메뉴에 나타나는 어플의 클래스 명
-        intent.putExtra("badge_count_class_name", "com.nuums.nuums.activity.SplashActivity");
-        context.sendBroadcast(intent);
-
     }
 }
 
