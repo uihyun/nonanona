@@ -77,9 +77,7 @@ public class NsUser extends User {
     public NsUserSearch[] getSearchList(ContextHelper contextHelper, String keyword, java.util.ArrayList<NsUser> userNetwork) {
         HashMap<String, NsUser> map = new HashMap<String, NsUser>();
 
-        //HashSet hs = new HashSet();
         for (NanumInfo nanumInfo : nanums) {
-
             if (nanumInfo.getNanum() != null) {
                 for (Comment comment : nanumInfo.getNanum().getWons()) {
                     if (!comment.getOwner().isAdmin() && comment.getOwner().getNicknameSafe().contains(keyword))
@@ -93,19 +91,11 @@ public class NsUser extends User {
                 map.put(nanumInfo.getNanum().getOwner().getUsername(), nanumInfo.getNanum().getOwner());
         }
 
-//        NsUser userA = new NsUser();
-//        userA.setNickname("용트림2");
-//
-//        if(userA.getNicknameSafe().contains(keyword))
-//            map.put(userA.getNicknameSafe(), userA);
-
-
         List<NsUser> list = new ArrayList<NsUser>(map.values());
 
         final Comparator<NsUser> comparator = new Comparator<NsUser>() {
             @Override
             public int compare(NsUser lhs, NsUser rhs) {
-
                 return Collator.getInstance().compare(lhs.getNickname(), rhs.getNickname());
             }
         };

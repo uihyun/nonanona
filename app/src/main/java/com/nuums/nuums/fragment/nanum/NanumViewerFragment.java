@@ -122,7 +122,7 @@ public class NanumViewerFragment extends ABaseFragment {
                                             try {
                                                 refresh();
                                             } catch (Exception e) {
-
+                                                e.printStackTrace();
                                             }
                                         } else {
                                             SweetAlertDialog dialog = new SweetAlertDialog(getContext());
@@ -163,7 +163,7 @@ public class NanumViewerFragment extends ABaseFragment {
                 try {
                     refresh();
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
                 timerHandler.postDelayed(this, 60000); //run every minute
             }
@@ -358,7 +358,7 @@ public class NanumViewerFragment extends ABaseFragment {
                         try {
                             refresh();
                         } catch (Exception e) {
-
+                            e.printStackTrace();
                         }
                     }
                 }
@@ -373,9 +373,7 @@ public class NanumViewerFragment extends ABaseFragment {
         viewBanner.startAutoScroll();
         UIUtil.setRatio(viewMain.findViewById(R.id.viewBannerRoot), getContext(), 720, 90);
 
-
         bannerIndicator = (CirclePageIndicator) viewMain.findViewById(R.id.bannerIndicator);
-
 
         refresh();
 

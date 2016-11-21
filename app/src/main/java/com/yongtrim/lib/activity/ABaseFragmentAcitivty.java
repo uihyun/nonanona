@@ -16,7 +16,6 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.analytics.GoogleAnalytics;
 import com.nuums.nuums.R;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.fragment.ABaseFragment;
@@ -64,16 +63,12 @@ public class ABaseFragmentAcitivty extends FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        GoogleAnalytics.getInstance(this).reportActivityStart(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
-        GoogleAnalytics.getInstance(this).reportActivityStop(this);
     }
 
     public void setupActionBar(String title) {

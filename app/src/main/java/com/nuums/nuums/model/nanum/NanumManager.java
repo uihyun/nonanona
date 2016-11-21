@@ -18,18 +18,16 @@ import org.json.JSONObject;
  * Created by Uihyun on 15. 12. 21..
  */
 public class NanumManager {
-    private final String TAG = getClass().getSimpleName();
     private static NanumManager instance;
-
-    private ContextHelper contextHelper;
+    private final String TAG = getClass().getSimpleName();
     boolean isBookmarking;
-
+    private ContextHelper contextHelper;
 
     public static NanumManager getInstance(ContextHelper contextHelper) {
-        if(instance == null) {
+        if (instance == null) {
             instance = new NanumManager();
         }
-        if(instance.contextHelper == null || contextHelper == null || instance.contextHelper.getActivity() != contextHelper.getActivity()) {
+        if (instance.contextHelper == null || contextHelper == null || instance.contextHelper.getActivity() != contextHelper.getActivity()) {
             instance.isBookmarking = false;
         }
         instance.contextHelper = contextHelper;
@@ -85,7 +83,7 @@ public class NanumManager {
         url.append(Config.url);
         url.append("/nanum/");
 
-        if(id != null)
+        if (id != null)
             url.append(id);
 
         GsonBodyRequest<NanumData> request = new GsonBodyRequest<NanumData>(contextHelper,
@@ -98,7 +96,6 @@ public class NanumManager {
 
         RequestManager.getRequestQueue().add(request);
     }
-
 
 
     public void update(final Nanum nanum,
@@ -115,7 +112,8 @@ public class NanumManager {
         try {
             body.put("nanum", nanum.toString());
 
-        } catch(JSONException e) {
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
         GsonBodyRequest<NanumData> request = new GsonBodyRequest<NanumData>(contextHelper,
@@ -168,7 +166,7 @@ public class NanumManager {
             JSONObject option,
             final Response.Listener<NanumListData> listener,
             final Response.ErrorListener errorListener
-    ){
+    ) {
         StringBuffer url = new StringBuffer();
         url.append(com.yongtrim.lib.Config.url);
         url.append("/nanumfind?");
@@ -182,7 +180,8 @@ public class NanumManager {
         try {
             body.put("option", option);
 
-        } catch(JSONException e) {
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
         GsonBodyRequest<NanumListData> request = new GsonBodyRequest<NanumListData>(contextHelper,
@@ -210,14 +209,15 @@ public class NanumManager {
 
         try {
             JSONArray select = new JSONArray();
-            for(Comment comment : nanum.getComments()) {
-                if(comment.isSelect) {
+            for (Comment comment : nanum.getComments()) {
+                if (comment.isSelect) {
                     select.put(comment.getOwner().getId());
                 }
             }
             body.put("select", select);
 
-        } catch(JSONException e) {
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
         GsonBodyRequest<NanumData> request = new GsonBodyRequest<NanumData>(contextHelper,
