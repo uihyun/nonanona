@@ -43,7 +43,6 @@ public class NanumAdapter extends BaseAdapter {
     }
 
     public void setKeyword(String keyword) {
-
     }
 
     public List<Nanum> getData() {
@@ -195,11 +194,7 @@ public class NanumAdapter extends BaseAdapter {
                 );
             }
         });
-
-
         return convertView;
     }
-
-
 }
 

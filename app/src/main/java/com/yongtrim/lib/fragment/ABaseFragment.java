@@ -59,7 +59,6 @@ public class ABaseFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-
     }
 
     @Override
@@ -72,13 +71,10 @@ public class ABaseFragment extends Fragment {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
     }
 
     public void onEvent(PushMessage pushMessage) {
-
     }
-
 
     @Override
     public void setMenuVisibility(final boolean visible) {

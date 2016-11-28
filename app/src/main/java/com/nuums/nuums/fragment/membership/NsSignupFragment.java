@@ -1,10 +1,6 @@
 package com.nuums.nuums.fragment.membership;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.text.InputType;
@@ -17,35 +13,25 @@ import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.nuums.nuums.R;
 import com.nuums.nuums.activity.BaseActivity;
 import com.nuums.nuums.model.user.NsUser;
-import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
 import com.yongtrim.lib.fragment.SignupFragment;
 import com.yongtrim.lib.log.Logger;
 import com.yongtrim.lib.message.PushMessage;
 import com.yongtrim.lib.model.ACommonData;
 import com.yongtrim.lib.model.config.ConfigManager;
-import com.yongtrim.lib.model.photo.Photo;
-import com.yongtrim.lib.model.photo.PhotoData;
-import com.yongtrim.lib.model.photo.PhotoManager;
 import com.yongtrim.lib.model.post.Post;
 import com.yongtrim.lib.model.user.UserData;
 import com.yongtrim.lib.model.user.UserManager;
-import com.yongtrim.lib.ui.CircularNetworkImageView;
-import com.yongtrim.lib.ui.SegmentedGroup;
 import com.yongtrim.lib.ui.UltraButton;
 import com.yongtrim.lib.ui.UltraEditText;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
 import com.yongtrim.lib.util.MiscUtil;
 
-import java.io.InputStream;
 import java.util.concurrent.CountDownLatch;
 
 import de.greenrobot.event.EventBus;
@@ -89,7 +75,6 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
         contextHelper.getActivity().setImageButtonAndVisiable(R.drawable.del);
 
 
-
     }
 
     @Override
@@ -98,7 +83,7 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
         View view = inflater.inflate(R.layout.fragment_signup, container, false);
 
         user = ConfigManager.getInstance(contextHelper).getPreference().getSignupParam();
-        if(user == null) {
+        if (user == null) {
             user = new NsUser();
             user.setLoginType("EMAIL");
         }
@@ -113,27 +98,27 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
 
     public void setupUI(View view) {
 
-        btnSignin = (UltraButton)view.findViewById(R.id.btnSignin);
+        btnSignin = (UltraButton) view.findViewById(R.id.btnSignin);
 
-        etEmail = (UltraEditText)view.findViewById(R.id.etEmail);
+        etEmail = (UltraEditText) view.findViewById(R.id.etEmail);
         etEmail.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS | InputType.TYPE_CLASS_TEXT);
         etEmail.setText(user.getEmail());
 
-        etRealName = (UltraEditText)view.findViewById(R.id.etRealName);
+        etRealName = (UltraEditText) view.findViewById(R.id.etRealName);
         etRealName.setMaxCharacters(16);
         etRealName.setText(user.getRealname());
 
-        etNickName = (UltraEditText)view.findViewById(R.id.etNickName);
+        etNickName = (UltraEditText) view.findViewById(R.id.etNickName);
         etNickName.setMaxCharacters(8);
         etNickName.setMinCharacters(2);
         etNickName.setText(user.getNickname());
 
-        etPassword = (UltraEditText)view.findViewById(R.id.etPassword);
+        etPassword = (UltraEditText) view.findViewById(R.id.etPassword);
         etPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT);
         etPassword.setMaxCharacters(16);
         etPassword.setMinCharacters(6);
 
-        etConfirm = (UltraEditText)view.findViewById(R.id.etConfirm);
+        etConfirm = (UltraEditText) view.findViewById(R.id.etConfirm);
         etConfirm.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT);
         etConfirm.setMaxCharacters(16);
         etConfirm.setMinCharacters(6);
@@ -161,11 +146,11 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
 
         setLink(text, offset, str3.length(), Post.TYPE_POLICY);
 
-        TextView tvPolicy = (TextView)view.findViewById(R.id.tvPolicy);
+        TextView tvPolicy = (TextView) view.findViewById(R.id.tvPolicy);
         tvPolicy.setText(text);
         tvPolicy.setMovementMethod(LinkMovementMethod.getInstance());
 
-        if(!TextUtils.isEmpty(user.getNickname())) {
+        if (!TextUtils.isEmpty(user.getNickname())) {
             UserManager.getInstance(contextHelper).checkNickname(etNickName.getText(),
                     new Response.Listener<ACommonData>() {
                         @Override
@@ -188,10 +173,7 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
     }
 
 
-
     public void verify() {
-
-
         user.setUsername(etEmail.getText());
         user.setEmail(etEmail.getText());
         user.setRealname(etRealName.getText());
@@ -199,14 +181,13 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
         user.setPasswordChanged(etPassword.getText());
 
         ConfigManager.getInstance(contextHelper).getPreference().putSignupParam(user);
-
     }
 
     public void onEditTextChanged(UltraEditText editText) {
-        if(editText == etEmail) {
+        if (editText == etEmail) {
             String email = etEmail.getText();
-            if(!TextUtils.isEmpty(email)) {
-                if(!MiscUtil.isValidEmail(email)) {
+            if (!TextUtils.isEmpty(email)) {
+                if (!MiscUtil.isValidEmail(email)) {
                     etEmail.setErrorMessage("이메일 형식이 아닙니다.");
                     isGoodEmail = false;
                 } else {
@@ -228,11 +209,11 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
 
         }
 
-        if(editText == etNickName) {
-            if(etNickName.getText().toString().contains(" ")) {
+        if (editText == etNickName) {
+            if (etNickName.getText().toString().contains(" ")) {
                 etNickName.setErrorMessage("공백은 허용하지 않습니다.");
                 isGoodNickName = false;
-            } else if(etNickName.validate()) {
+            } else if (etNickName.validate()) {
                 UserManager.getInstance(contextHelper).checkNickname(etNickName.getText(),
                         new Response.Listener<ACommonData>() {
                             @Override
@@ -255,11 +236,11 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
             }
         }
 
-        if(editText == etRealName) {
-            if(etRealName.getText().toString().contains(" ")) {
+        if (editText == etRealName) {
+            if (etRealName.getText().toString().contains(" ")) {
                 etRealName.setErrorMessage("공백은 허용하지 않습니다.");
                 isGoodRealName = false;
-            } else if(etRealName.validate()) {
+            } else if (etRealName.validate()) {
                 etRealName.setErrorMessage("");
                 isGoodRealName = true;
             }
@@ -349,7 +330,7 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
                                                 .setContentText("인증 이메일을 발송하였습니다. 인증메일 확인후 잠시만 기다려주세요.");
                                         dialogSender.show();
 
-                                    } else if(response.isCerified()) {
+                                    } else if (response.isCerified()) {
                                         contextHelper.getActivity().runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {
@@ -357,8 +338,7 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
                                                 signup();
                                             }
                                         });
-                                    }
-                                    else {
+                                    } else {
                                         new SweetAlertDialog(getContext())
                                                 .setContentText(response.getErrorMessage())
                                                 .show();
@@ -419,7 +399,7 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
                     }).start();
 
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
             }
         }).start();
@@ -429,7 +409,7 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
     }
 
     public void onButtonClicked(View v) {
-        switch(v.getId()) {
+        switch (v.getId()) {
             case R.id.btnSignin:
                 prevSignup();
                 break;
@@ -444,6 +424,44 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
         PolicyClickableSpan clickableSpan = new PolicyClickableSpan(type);
         text.setSpan(clickableSpan, offset, offset + length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
+
+    public void onEvent(final PushMessage pushMessage) {
+
+        switch (pushMessage.getActionCode()) {
+            case PushMessage.ACTIONCODE_CERTIFYEMAIL_SIGNUP: {
+                contextHelper.getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+
+                            if (dialogSender != null && dialogSender.isShowing())
+                                dialogSender.dismissWithAnimation();
+
+                            if (!isSignuping) {
+                                SweetAlertDialog dialog = new SweetAlertDialog(contextHelper.getContext())
+                                        .setContentText("인증되었습니다.")
+                                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                            @Override
+                                            public void onClick(SweetAlertDialog sDialog) {
+                                                sDialog.dismissWithAnimation();
+                                                signup();
+                                            }
+                                        });
+                                dialog.setCancelable(false);
+                                dialog.show();
+                            }
+
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+            break;
+        }
+    }
+
     class PolicyClickableSpan extends ClickableSpan {
         private String type;
 
@@ -453,7 +471,7 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
 
         @Override
         public void onClick(View view) {
-            if(type.equals(Post.TYPE_POLICY)) {
+            if (type.equals(Post.TYPE_POLICY)) {
                 Intent i = new Intent(getContext(), BaseActivity.class);
                 i.putExtra("activityCode", BaseActivity.ActivityCode.POST_VIEWER.ordinal());
                 i.putExtra("title", "서비스 이용 약관");
@@ -475,44 +493,6 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
             ds.linkColor = ContextCompat.getColor(getContext(), R.color.red);
             ds.setColor(ds.linkColor);
             //ds.setUnderlineText(false);
-        }
-    }
-
-
-    public void onEvent(final PushMessage pushMessage) {
-
-        switch(pushMessage.getActionCode()) {
-            case PushMessage.ACTIONCODE_CERTIFYEMAIL_SIGNUP: {
-                contextHelper.getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-
-                            if(dialogSender != null && dialogSender.isShowing())
-                                dialogSender.dismissWithAnimation();
-
-                            if(!isSignuping) {
-                                SweetAlertDialog dialog = new SweetAlertDialog(contextHelper.getContext())
-                                        .setContentText("인증되었습니다.")
-                                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                            @Override
-                                            public void onClick(SweetAlertDialog sDialog) {
-                                                sDialog.dismissWithAnimation();
-                                                signup();
-                                            }
-                                        });
-                                dialog.setCancelable(false);
-                                dialog.show();
-                            }
-
-
-                        } catch(Exception e) {
-
-                        }
-                    }
-                });
-            }
-            break;
         }
     }
 }

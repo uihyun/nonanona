@@ -30,19 +30,18 @@ public class GalleryActivity extends ABaseFragmentAcitivty {
         setContentView(R.layout.activity_gallery);
 
 
-
         Photo photo = Photo.getPhoto(contextHelper.getActivity().getIntent().getStringExtra("photo"));
 
         List<String> items = new ArrayList<String>();
         try {
-                items.add(photo.getUrl());
+            items.add(photo.getUrl());
         } catch (Exception e) {
         }
 
 
         UrlPagerAdapter pagerAdapter = new UrlPagerAdapter(this, items);
 
-        viewPager = (GalleryViewPager)findViewById(R.id.viewer);
+        viewPager = (GalleryViewPager) findViewById(R.id.viewer);
         viewPager.setOffscreenPageLimit(1);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setCurrentItem(0);
@@ -58,7 +57,7 @@ public class GalleryActivity extends ABaseFragmentAcitivty {
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
     }
 

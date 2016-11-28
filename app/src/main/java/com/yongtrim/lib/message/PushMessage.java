@@ -1,8 +1,8 @@
 package com.yongtrim.lib.message;
 
-import com.nuums.nuums.AppController;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
+import com.nuums.nuums.AppController;
 import com.nuums.nuums.model.alarm.Alarm;
 import com.nuums.nuums.model.chat.Chat;
 import com.nuums.nuums.model.chat.Talk;
@@ -26,9 +26,9 @@ public class PushMessage {
     public static final int ACTIONCODE_CERTIFYEMAIL_SIGNUP = 11;
 
     public static final int ACTIONCODE_CHANGE_NANUM = 20;
-    public static final int ACTIONCODE_ADDED_NANUM  = 21;
-    public static final int ACTIONCODE_DELETE_NANUM  = 23;
-    public static final int ACTIONCODE_ADDED_NANUM_OTHER  = 24;
+    public static final int ACTIONCODE_ADDED_NANUM = 21;
+    public static final int ACTIONCODE_DELETE_NANUM = 23;
+    public static final int ACTIONCODE_ADDED_NANUM_OTHER = 24;
 
 
     public static final int ACTIONCODE_CHANGETALK = 30;
@@ -39,15 +39,15 @@ public class PushMessage {
     public static final int ACTIONCODE_DELETETALK = 41;
 
     public static final int ACTIONCODE_CHANGE_REVIEW = 50;
-    public static final int ACTIONCODE_ADDED_REVIEW  = 51;
-    public static final int ACTIONCODE_DELETE_REVIEW  = 52;
+    public static final int ACTIONCODE_ADDED_REVIEW = 51;
+    public static final int ACTIONCODE_DELETE_REVIEW = 52;
 
     public static final int ACTIONCODE_CHANGE_APPLY = 60;
 
-    public static final int ACTIONCODE_ADDED_ASK_OTHER  = 70;
+    public static final int ACTIONCODE_ADDED_ASK_OTHER = 70;
 
 
-    public static final int ACTIONCODE_ADDED_POST_OTHER  = 80;
+    public static final int ACTIONCODE_ADDED_POST_OTHER = 80;
 
 
     public static final int ACTIONCODE_PUSH = 100;
@@ -87,17 +87,22 @@ public class PushMessage {
     @SerializedName("alarm")
     private Alarm alarm;
 
-
-
     public PushMessage() {
+    }
+
+    public static PushMessage getPushMessage(String jsonString) {
+        Gson gson = AppController.getInstance().getGson();
+        PushMessage pushMessage = gson.fromJson(jsonString, PushMessage.class);
+        return pushMessage;
+    }
+
+    public int getActionCode() {
+        return actionCode;
     }
 
     public PushMessage setActionCode(int actionCode) {
         this.actionCode = actionCode;
         return this;
-    }
-    public int getActionCode() {
-        return actionCode;
     }
 
     public PushMessage setObject(Object object) {
@@ -107,29 +112,27 @@ public class PushMessage {
     }
 
     public Object getObject(ContextHelper contextHelper) {
-        if(user != null)
+        if (user != null)
             return user;
-        if(nanum != null) {
+        if (nanum != null) {
             nanum.patch(contextHelper);
             return nanum;
         }
-        if(chat != null) {
+        if (chat != null) {
             return chat;
         }
-        if(talk != null) {
+        if (talk != null) {
             return talk;
         }
-        if(review != null) {
+        if (review != null) {
             return review;
         }
 
-        if(alarm != null)
+        if (alarm != null)
             return alarm;
-
 
         return object;
     }
-
 
     public int getResultCode() {
         return resultCode;
@@ -137,12 +140,5 @@ public class PushMessage {
 
     public String getMessage() {
         return message;
-    }
-
-
-    public static PushMessage getPushMessage(String jsonString) {
-        Gson gson = AppController.getInstance().getGson();
-        PushMessage pushMessage = gson.fromJson(jsonString, PushMessage.class);
-        return pushMessage;
     }
 }

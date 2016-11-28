@@ -14,7 +14,7 @@ import com.yongtrim.lib.message.PushMessage;
 import de.greenrobot.event.EventBus;
 
 /**
- * Created by YongTrim on 16. 6. 15. for nuums_ad
+ * Created by Uihyun on 16. 6. 15. for nuums_ad
  */
 public class Base3Activity extends ABaseFragmentAcitivty {
     ABaseFragment curFragment;
@@ -22,31 +22,12 @@ public class Base3Activity extends ABaseFragmentAcitivty {
 
     private EventBus bus = EventBus.getDefault();
 
-    public static enum ActivityCode {
-        TUTORIAL(0);
-
-        private final int mActivityCode;
-        private ActivityCode(int value) {
-            mActivityCode = value;
-        }
-
-        public static ActivityCode valueOf(int value) {
-            for (ActivityCode status : values()) {
-                if (status.mActivityCode == value) {
-                    return status;
-                }
-            }
-            return null;
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skin);
 
         bus.register(this);
-
 
         ActivityCode activityCode;
 
@@ -74,14 +55,13 @@ public class Base3Activity extends ABaseFragmentAcitivty {
 
         curActivity = activityCode;
 
-        switch(activityCode) {
-               case TUTORIAL:
+        switch (activityCode) {
+            case TUTORIAL:
                 curFragment = new TutorialFragment();
                 curFragment = addFragment(curFragment);
                 break;
         }
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -90,33 +70,50 @@ public class Base3Activity extends ABaseFragmentAcitivty {
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         bus.unregister(this);
         super.onDestroy();
     }
 
-
     public void onEvent(PushMessage pushMessage) {
-        if(curFragment != null) {
+        if (curFragment != null) {
             curFragment.onEvent(pushMessage);
         }
     }
-
 
     public void onButtonClicked(View v) {
         curFragment.onButtonClicked(v);
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(curFragment.onKeyDown(keyCode, event)) {
+        if (curFragment.onKeyDown(keyCode, event)) {
             return true;
         }
 
-        if(event != null)
+        if (event != null)
             return super.onKeyDown(keyCode, event);
         else {
             finish();
             return true;
+        }
+    }
+
+    public static enum ActivityCode {
+        TUTORIAL(0);
+
+        private final int mActivityCode;
+
+        private ActivityCode(int value) {
+            mActivityCode = value;
+        }
+
+        public static ActivityCode valueOf(int value) {
+            for (ActivityCode status : values()) {
+                if (status.mActivityCode == value) {
+                    return status;
+                }
+            }
+            return null;
         }
     }
 

@@ -645,7 +645,6 @@ public class NanumViewerFragment extends ABaseFragment {
         }
     }
 
-
     public void onEvent(PushMessage pushMessage) {
         switch (pushMessage.getActionCode()) {
             case PushMessage.ACTIONCODE_CHANGE_NANUM: {
@@ -928,10 +927,7 @@ public class NanumViewerFragment extends ABaseFragment {
                 },
                 null
         );
-
-
     }
-
 
     void deleteAndfinish(Nanum nanum) {
         contextHelper.getActivity().finish();

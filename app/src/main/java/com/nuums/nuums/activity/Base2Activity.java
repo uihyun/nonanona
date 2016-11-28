@@ -24,31 +24,12 @@ public class Base2Activity extends ABaseFragmentAcitivty {
 
     private EventBus bus = EventBus.getDefault();
 
-    public static enum ActivityCode {
-        SIGNIN(0);
-
-        private final int mActivityCode;
-        private ActivityCode(int value) {
-            mActivityCode = value;
-        }
-
-        public static ActivityCode valueOf(int value) {
-            for (ActivityCode status : values()) {
-                if (status.mActivityCode == value) {
-                    return status;
-                }
-            }
-            return null;
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skin);
 
         bus.register(this);
-
 
         ActivityCode activityCode;
 
@@ -76,14 +57,13 @@ public class Base2Activity extends ABaseFragmentAcitivty {
 
         curActivity = activityCode;
 
-        switch(activityCode) {
+        switch (activityCode) {
             case SIGNIN:
                 curFragment = new SigninFragment();
                 curFragment = addFragment(curFragment);
                 break;
         }
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -92,33 +72,50 @@ public class Base2Activity extends ABaseFragmentAcitivty {
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         bus.unregister(this);
         super.onDestroy();
     }
 
-
     public void onEvent(PushMessage pushMessage) {
-        if(curFragment != null) {
+        if (curFragment != null) {
             curFragment.onEvent(pushMessage);
         }
     }
-
 
     public void onButtonClicked(View v) {
         curFragment.onButtonClicked(v);
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(curFragment.onKeyDown(keyCode, event)) {
+        if (curFragment.onKeyDown(keyCode, event)) {
             return true;
         }
 
-        if(event != null)
+        if (event != null)
             return super.onKeyDown(keyCode, event);
         else {
             finish();
             return true;
+        }
+    }
+
+    public static enum ActivityCode {
+        SIGNIN(0);
+
+        private final int mActivityCode;
+
+        private ActivityCode(int value) {
+            mActivityCode = value;
+        }
+
+        public static ActivityCode valueOf(int value) {
+            for (ActivityCode status : values()) {
+                if (status.mActivityCode == value) {
+                    return status;
+                }
+            }
+            return null;
         }
     }
 

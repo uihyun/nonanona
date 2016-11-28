@@ -13,33 +13,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.nuums.nuums.R;
-import com.nuums.nuums.activity.BaseActivity;
-import com.nuums.nuums.model.alarm.Alarm;
 import com.nuums.nuums.model.apply.Apply;
 import com.nuums.nuums.model.apply.ApplyData;
 import com.nuums.nuums.model.apply.ApplyManager;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.message.PushMessage;
-import com.yongtrim.lib.model.misc.CodeName;
-import com.yongtrim.lib.model.photo.PhotoManager;
-import com.yongtrim.lib.model.post.Post;
-import com.yongtrim.lib.model.post.PostData;
-import com.yongtrim.lib.model.post.PostManager;
-import com.yongtrim.lib.ui.CircularNetworkImageView;
 import com.yongtrim.lib.ui.UltraButton;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
 import com.yongtrim.lib.util.DateUtil;
-import com.yongtrim.lib.util.MiscUtil;
 
-import java.lang.reflect.Type;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -54,44 +41,22 @@ public class ApplyAdapter extends BaseAdapter {
     private List<Apply> applys;
     private ContextHelper contextHelper;
 
-    class Holder {
-        TextView tvDate;
-        TextView tvTitle;
-        TextView tvCompany;
-        TextView tvStatus;
-        UltraButton btnConfirm;
-
-        View viewLine;
-
-        public View set(View v) {
-            v.setTag(this);
-            tvDate = (TextView) v.findViewById(R.id.tvDate);
-            tvTitle = (TextView) v.findViewById(R.id.tvTitle);
-            tvCompany = (TextView) v.findViewById(R.id.tvCompany);
-            tvStatus = (TextView) v.findViewById(R.id.tvStatus);
-            btnConfirm = (UltraButton)v.findViewById(R.id.btnConfirm);
-            viewLine = v.findViewById(R.id.viewLine);
-
-            return v;
-        }
-    }
-
     public ApplyAdapter(ContextHelper contextHelper) {
         super();
         this.contextHelper = contextHelper;
-    }
-
-    public void setData(List<Apply> applys) {
-        this.applys = applys;
     }
 
     public List<Apply> getData() {
         return this.applys;
     }
 
+    public void setData(List<Apply> applys) {
+        this.applys = applys;
+    }
+
     @Override
     public int getCount() {
-        if(applys == null)
+        if (applys == null)
             return 0;
         return applys.size();
     }
@@ -106,15 +71,14 @@ public class ApplyAdapter extends BaseAdapter {
         return applys.get(position);
     }
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
-            LayoutInflater mInflater = (LayoutInflater)parent.getContext().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater mInflater = (LayoutInflater) parent.getContext().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = new Holder().set(mInflater.inflate(R.layout.cell_apply, parent, false));
         }
-        final Holder h = (Holder)convertView.getTag();
+        final Holder h = (Holder) convertView.getTag();
 
         final Apply apply = applys.get(position);
 
@@ -126,12 +90,12 @@ public class ApplyAdapter extends BaseAdapter {
         h.tvStatus.setVisibility(View.GONE);
 
 
-        if(apply.getCompany() != null) {
+        if (apply.getCompany() != null) {
             h.tvCompany.setText(apply.getCompany().getName());
         } else {
             h.tvCompany.setText("-");
         }
-        switch(apply.getStatus()) {
+        switch (apply.getStatus()) {
             case Apply.STATUS_ACCEPT:
                 h.tvStatus.setVisibility(View.VISIBLE);
                 h.tvStatus.setText("배송준비");
@@ -147,7 +111,7 @@ public class ApplyAdapter extends BaseAdapter {
 
 
             }
-                break;
+            break;
             case Apply.STATUS_DONE:
                 h.btnConfirm.setVisibility(View.VISIBLE);
 
@@ -193,7 +157,7 @@ public class ApplyAdapter extends BaseAdapter {
                 break;
         }
 
-        if(position == getCount() - 1) {
+        if (position == getCount() - 1) {
             h.viewLine.setVisibility(View.GONE);
         } else {
             h.viewLine.setVisibility(View.VISIBLE);
@@ -202,13 +166,33 @@ public class ApplyAdapter extends BaseAdapter {
         return convertView;
     }
 
-
     private void setLink(SpannableString text, int offset, int length, Apply apply) {
         //text.setSpan(new StyleSpan(Typeface.BOLD), offset, offset + length, 0);
         PolicyClickableSpan clickableSpan = new PolicyClickableSpan(apply);
         text.setSpan(clickableSpan, offset, offset + length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
 
+    class Holder {
+        TextView tvDate;
+        TextView tvTitle;
+        TextView tvCompany;
+        TextView tvStatus;
+        UltraButton btnConfirm;
+
+        View viewLine;
+
+        public View set(View v) {
+            v.setTag(this);
+            tvDate = (TextView) v.findViewById(R.id.tvDate);
+            tvTitle = (TextView) v.findViewById(R.id.tvTitle);
+            tvCompany = (TextView) v.findViewById(R.id.tvCompany);
+            tvStatus = (TextView) v.findViewById(R.id.tvStatus);
+            btnConfirm = (UltraButton) v.findViewById(R.id.btnConfirm);
+            viewLine = v.findViewById(R.id.viewLine);
+
+            return v;
+        }
+    }
 
     class PolicyClickableSpan extends ClickableSpan {
         Apply apply;

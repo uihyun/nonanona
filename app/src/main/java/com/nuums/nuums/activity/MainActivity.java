@@ -63,14 +63,12 @@ public class MainActivity extends ABaseFragmentAcitivty {
     void setLeftDrawer() {
         ImageButton btnBack = contextHelper.getActivity().setBackButtonAndVisiable(R.drawable.leftdr_button);
         contextHelper.getActivity().setLeftButtonMarginLeft(12);
-
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 toggleSlideMenu();
             }
         });
-
     }
 
     @Override
@@ -118,12 +116,10 @@ public class MainActivity extends ABaseFragmentAcitivty {
                         contextHelper.getActivity().setImageButtonAndVisiable(R.drawable.search);
                         contextHelper.getActivity().setRightButtonMarginRight(10);
 
-
                         break;
                     case 1:
                         contextHelper.getActivity().setupActionBar(""/*"대화하기"*/);
                         contextHelper.getActivity().backgroundColor(ContextCompat.getColor(contextHelper.getContext(), R.color.green));
-
 
                         setLeftDrawer();
 
@@ -137,7 +133,6 @@ public class MainActivity extends ABaseFragmentAcitivty {
                         contextHelper.getActivity().setupActionBar(""/*"나눔등록"*/);
                         contextHelper.getActivity().backgroundColor(ContextCompat.getColor(contextHelper.getContext(), R.color.green));
 
-
                         setLeftDrawer();
 
                         contextHelper.getActivity().setImageButtonAndVisiable(R.drawable.tresh);
@@ -146,7 +141,6 @@ public class MainActivity extends ABaseFragmentAcitivty {
                     case 3:
                         contextHelper.getActivity().setupActionBar(""/*"후기"*/);
                         contextHelper.getActivity().backgroundColor(ContextCompat.getColor(contextHelper.getContext(), R.color.green));
-
 
                         setLeftDrawer();
 
@@ -169,7 +163,6 @@ public class MainActivity extends ABaseFragmentAcitivty {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
 

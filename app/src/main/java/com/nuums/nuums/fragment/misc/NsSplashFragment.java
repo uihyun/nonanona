@@ -2,7 +2,6 @@ package com.nuums.nuums.fragment.misc;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,16 +11,13 @@ import android.widget.ImageView;
 import com.android.volley.Response;
 import com.nuums.nuums.R;
 import com.nuums.nuums.activity.Base2Activity;
-import com.nuums.nuums.activity.BaseActivity;
 import com.nuums.nuums.activity.MainActivity;
 import com.nuums.nuums.model.user.NsUser;
 import com.yongtrim.lib.fragment.SplashFragment;
-import com.yongtrim.lib.log.Logger;
 import com.yongtrim.lib.message.MessageManager;
 import com.yongtrim.lib.model.banner.BannerData;
 import com.yongtrim.lib.model.banner.BannerManager;
 import com.yongtrim.lib.model.config.ConfigManager;
-import com.yongtrim.lib.model.location.LocationManager;
 import com.yongtrim.lib.model.post.PostListData;
 import com.yongtrim.lib.model.post.PostManager;
 import com.yongtrim.lib.model.user.UserManager;
@@ -44,11 +40,8 @@ public class NsSplashFragment extends SplashFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_splash, container, false);
-
-        ivAniLoading = (ImageView)view.findViewById(R.id.ivAnimation);
-
+        ivAniLoading = (ImageView) view.findViewById(R.id.ivAnimation);
         return view;
     }
 
@@ -62,7 +55,7 @@ public class NsSplashFragment extends SplashFragment {
             return;
         }
 
-        if(requestCode == PLAY_SERVICES_RESOLUTION_REQUEST) {
+        if (requestCode == PLAY_SERVICES_RESOLUTION_REQUEST) {
             doProcess();
         }
     }
@@ -90,12 +83,11 @@ public class NsSplashFragment extends SplashFragment {
 //        ivAniLoading.setBackgroundResource(R.drawable.frame_loading);
 //        AnimationDrawable frameAniLoading = (AnimationDrawable) ivAniLoading.getBackground();
 //        frameAniLoading.start();
-        //
+
         // get gcm
         CountDownLatch latchGcm = new CountDownLatch(1);
         MessageManager.getInstance(contextHelper).initialize(null, latchGcm);
 
-        //
         // get config
         CountDownLatch latchConfig = new CountDownLatch(1);
         getConfig(latchGcm, latchConfig);
@@ -104,7 +96,6 @@ public class NsSplashFragment extends SplashFragment {
         contextHelper.userInfo(latchConfig, latchUserInfo);
 
         getMisc(latchUserInfo, latchMain);
-
 
         MessageManager.getInstance(contextHelper).getPreference().putCurChatter(null);
 
@@ -122,15 +113,15 @@ public class NsSplashFragment extends SplashFragment {
                         latchWait.await();
 
                     NsUser user = UserManager.getInstance(contextHelper).getMe();
-                    if(user != null && UserManager.getInstance(contextHelper).getMe().isLogin()) {
-                        if(ConfigManager.getInstance(contextHelper).getPreference().getAutoLogin()) {
+                    if (user != null && UserManager.getInstance(contextHelper).getMe().isLogin()) {
+                        if (ConfigManager.getInstance(contextHelper).getPreference().getAutoLogin()) {
                             Intent i = new Intent(contextHelper.getContext(), MainActivity.class);
 
-                            if(contextHelper.getActivity().getIntent().hasExtra("to")) {
+                            if (contextHelper.getActivity().getIntent().hasExtra("to")) {
                                 i.putExtra("to", contextHelper.getActivity().getIntent().getStringExtra("to"));
                             }
 
-                            if(contextHelper.getActivity().getIntent().hasExtra("nanum_id")) {
+                            if (contextHelper.getActivity().getIntent().hasExtra("nanum_id")) {
                                 i.putExtra("nanum_id", contextHelper.getActivity().getIntent().getStringExtra("nanum_id"));
                             }
 
@@ -192,14 +183,12 @@ public class NsSplashFragment extends SplashFragment {
                     );
 
 
-
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
             }
         }).start();
     }
-
 
 
 }

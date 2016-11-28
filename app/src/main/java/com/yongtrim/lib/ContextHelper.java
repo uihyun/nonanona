@@ -4,14 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Address;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.SystemClock;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
-import android.text.InputType;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
@@ -21,15 +19,14 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.nuums.nuums.AppController;
-import com.nuums.nuums.R;
 import com.android.volley.Response;
 import com.android.volley.toolbox.ImageLoader;
-import com.google.android.gms.maps.model.LatLng;
 import com.kakao.kakaolink.AppActionBuilder;
 import com.kakao.kakaolink.AppActionInfoBuilder;
 import com.kakao.kakaolink.KakaoLink;
 import com.kakao.kakaolink.KakaoTalkLinkMessageBuilder;
+import com.nuums.nuums.AppController;
+import com.nuums.nuums.R;
 import com.nuums.nuums.activity.Base2Activity;
 import com.nuums.nuums.activity.BaseActivity;
 import com.nuums.nuums.model.nanum.Nanum;
@@ -37,17 +34,13 @@ import com.nuums.nuums.model.report.Report;
 import com.nuums.nuums.model.user.NsUser;
 import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
 import com.yongtrim.lib.log.Logger;
-import com.yongtrim.lib.model.location.LocationManager;
+import com.yongtrim.lib.message.PushMessage;
 import com.yongtrim.lib.model.photo.Photo;
-import com.yongtrim.lib.model.photo.PhotoManager;
 import com.yongtrim.lib.model.user.LoginManager;
 import com.yongtrim.lib.model.user.User;
 import com.yongtrim.lib.model.user.UserData;
 import com.yongtrim.lib.model.user.UserManager;
-import com.yongtrim.lib.message.PushMessage;
-import com.yongtrim.lib.ui.CircularNetworkImageView;
 import com.yongtrim.lib.ui.CustomNetworkImageView;
-import com.yongtrim.lib.ui.UltraButton;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
 import com.yongtrim.lib.util.BasePreferenceUtil;
 
@@ -55,8 +48,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -135,7 +126,7 @@ public class ContextHelper {
             public void run() {
                 try {
 
-                    if(latchWait != null)
+                    if (latchWait != null)
                         latchWait.await();
 
                     Logger.debug(TAG, "login() called");
@@ -152,7 +143,7 @@ public class ContextHelper {
                                         LoginManager.getInstance(ContextHelper.this).setLoginStatus(response.user);
                                         UserManager.getInstance(ContextHelper.this).setMe(response.user);
 
-                                        if(!isSignup) {
+                                        if (!isSignup) {
                                             EventBus.getDefault().post(new PushMessage().setActionCode(PushMessage.ACTIONCODE_CHANGE_ME).setObject(response.user));
                                             EventBus.getDefault().post(new PushMessage().setActionCode(PushMessage.ACTIONCODE_CHANGE_LOGIN).setObject(response.user));
                                         }
@@ -263,10 +254,10 @@ public class ContextHelper {
             public void run() {
                 try {
 
-                    if(latchWait != null)
+                    if (latchWait != null)
                         latchWait.await();
 
-                    if(LoginManager.getInstance(ContextHelper.this).getLoginStatus().equals(LoginManager.LOGINSTATUS_NONE)) {
+                    if (LoginManager.getInstance(ContextHelper.this).getLoginStatus().equals(LoginManager.LOGINSTATUS_NONE)) {
                         createGuest(latchCount);
                     } else {
                         Logger.debug(TAG, "userInfo() called " + LoginManager.getInstance(ContextHelper.this).getLoginStatus());
@@ -299,28 +290,28 @@ public class ContextHelper {
 
 
     public void showProgress(String message) {
-        if(progress != null) {
+        if (progress != null) {
             progress.dismissWithAnimation();
         }
         progress = new SweetAlertDialog(getContext(), SweetAlertDialog.PROGRESS_TYPE);
         //progress.setContentText(message == null ? "로딩중..." : message);
         try {
             progress.show();
-        } catch(Exception e) {
-            
+        } catch (Exception e) {
+
         }
     }
 
 
     public void hideProgress() {
-        if(progress != null && progress.isShowing()) {
+        if (progress != null && progress.isShowing()) {
             progress.dismissWithAnimation();
         }
     }
 
 
     public void setProgressMessage(String message) {
-        if(progress != null) {
+        if (progress != null) {
             progress.setContentText(message);
         }
     }
@@ -344,8 +335,6 @@ public class ContextHelper {
 //        ivAvatar.setDefaultImageResId(R.drawable.image_prifile);
 //        PhotoManager.getInstance(ContextHelper.this).setPhotoSmall(ivAvatar, user.getPhoto());
 //    }
-
-
 
 
     public SpannableString getMention(String message) {
@@ -398,7 +387,6 @@ public class ContextHelper {
 //                })
 //                .show();
 //    }
-
 
 
     public void report(final String targetType, final String targetId) {
@@ -483,51 +471,7 @@ public class ContextHelper {
         }).start();
     }
 
-
-    private class ContextPreference extends BasePreferenceUtil {
-//        private static final String PROPERTY_SHOPMAIN_ADDRESS = "shop_main_address";
-
-        public ContextPreference(Context context) {
-            super(context);
-        }
-
-//        public void putShopMainAddress(HcAddress address) {
-//            put(PROPERTY_SHOPMAIN_ADDRESS, address.toString());
-//        }
-//
-//        public HcAddress getShopMainAddress() {
-//            return HcAddress.getAddress(get(PROPERTY_SHOPMAIN_ADDRESS));
-//        }
-
-    }
-
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        CountDownLatch latchDown;
-        public DownloadImageTask(CountDownLatch latchDown) {
-            this.latchDown = latchDown;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(final Bitmap result) {
-            savePhoto(result);
-            latchDown.countDown();
-        }
-    }
-
-
-    private String savePhoto(Bitmap bmp)
-    {
+    private String savePhoto(Bitmap bmp) {
         //File imageFileFolder = new File(Environment.getExternalStorageDirectory(),"MyFolder"); //when you need to save the image inside your own folder in the SD Card
         File path = Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES
@@ -542,22 +486,20 @@ public class ContextHelper {
                 + fromInt(c.get(Calendar.MINUTE))
                 + fromInt(c.get(Calendar.SECOND));
         File imageFileName = new File(path, date.toString() + ".jpg"); //imageFileFolder
-        try
-        {
+        try {
             out = new FileOutputStream(imageFileName);
             bmp.compress(Bitmap.CompressFormat.JPEG, 100, out);
             out.flush();
             out.close();
             scanPhoto(imageFileName.toString());
             out = null;
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return imageFileName.toString();
     }
-    private String fromInt(int val)
-    {
+
+    private String fromInt(int val) {
         return String.valueOf(val);
     }
 
@@ -572,7 +514,6 @@ public class ContextHelper {
         getActivity().sendBroadcast(mediaScanIntent);
     }
 
-
     public void restart() {
         Intent i = getActivity().getBaseContext().getPackageManager()
                 .getLaunchIntentForPackage(getActivity().getBaseContext().getPackageName());
@@ -582,10 +523,8 @@ public class ContextHelper {
 
     }
 
-
-
     public void setUserAction(final NsUser user) {
-        if(user.isMe(ContextHelper.this))
+        if (user.isMe(ContextHelper.this))
             return;
 
         new SweetAlertDialog(getContext(), SweetAlertDialog.SELECT_TYPE)
@@ -598,7 +537,7 @@ public class ContextHelper {
                         sweetAlertDialog.dismissWithAnimation();
                         switch (index) {
                             case 0: {
-                                if(UserManager.getInstance(ContextHelper.this).getMe().isBlock(user)) {
+                                if (UserManager.getInstance(ContextHelper.this).getMe().isBlock(user)) {
 
                                     new SweetAlertDialog(getContext())
                                             .setContentText("차단한 회원입니다.\n차단 해제하시겠습니까?")
@@ -652,9 +591,8 @@ public class ContextHelper {
 
                                 getContext().startActivity(i);
                             }
-                                break;
-                            case 2:
-                            {
+                            break;
+                            case 2: {
                                 Intent i = new Intent(getContext(), BaseActivity.class);
                                 i.putExtra("activityCode", BaseActivity.ActivityCode.REPORT.ordinal());
                                 i.putExtra("type", Report.REPORTTYPE_REPORT);
@@ -663,16 +601,15 @@ public class ContextHelper {
                                 getContext().startActivity(i);
                             }
 
-                                break;
+                            break;
                         }
                     }
                 })
                 .show();
     }
 
-
     public void setUserAction2(final NsUser user) {
-        if(user.isMe(ContextHelper.this))
+        if (user.isMe(ContextHelper.this))
             return;
 
         new SweetAlertDialog(getContext(), SweetAlertDialog.SELECT_TYPE)
@@ -693,8 +630,7 @@ public class ContextHelper {
                                 getContext().startActivity(i);
                             }
                             break;
-                            case 1:
-                            {
+                            case 1: {
                                 Intent i = new Intent(getContext(), BaseActivity.class);
                                 i.putExtra("activityCode", BaseActivity.ActivityCode.REPORT.ordinal());
                                 i.putExtra("type", Report.REPORTTYPE_REPORT);
@@ -710,9 +646,6 @@ public class ContextHelper {
                 .show();
     }
 
-
-
-
     public void shareViaKakao(Nanum nanum) {
         try {
             final KakaoLink kakaoLink = KakaoLink.getKakaoLink(getContext());
@@ -722,7 +655,7 @@ public class ContextHelper {
 
             message += (nanum.getTitle() + "\n");
 
-            if(nanum.getAddressFake() != null) {
+            if (nanum.getAddressFake() != null) {
                 message += (nanum.getAddressFake() + "\n");
             }
             message += (nanum.getDescription());
@@ -757,8 +690,8 @@ public class ContextHelper {
             ivPhoto.setLocalImageBitmap(null);
         } else {
 
-            if(TextUtils.isEmpty(photo.getId())) {
-                if(photo.getBitmap() != null) {
+            if (TextUtils.isEmpty(photo.getId())) {
+                if (photo.getBitmap() != null) {
                     ivPhoto.setLocalImageBitmap(photo.getBitmap());
                 }
             } else {
@@ -770,7 +703,6 @@ public class ContextHelper {
         }
 
     }
-
 
     public void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
@@ -794,6 +726,47 @@ public class ContextHelper {
 
     }
 
+    private class ContextPreference extends BasePreferenceUtil {
+//        private static final String PROPERTY_SHOPMAIN_ADDRESS = "shop_main_address";
 
-    
+        public ContextPreference(Context context) {
+            super(context);
+        }
+
+//        public void putShopMainAddress(HcAddress address) {
+//            put(PROPERTY_SHOPMAIN_ADDRESS, address.toString());
+//        }
+//
+//        public HcAddress getShopMainAddress() {
+//            return HcAddress.getAddress(get(PROPERTY_SHOPMAIN_ADDRESS));
+//        }
+
+    }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        CountDownLatch latchDown;
+
+        public DownloadImageTask(CountDownLatch latchDown) {
+            this.latchDown = latchDown;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(final Bitmap result) {
+            savePhoto(result);
+            latchDown.countDown();
+        }
+    }
+
+
 }

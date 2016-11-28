@@ -1,23 +1,11 @@
 package com.nuums.nuums.fragment.misc;
 
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.ResolveInfo;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
-import android.text.InputFilter;
 import android.text.InputType;
-import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,31 +17,19 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.nuums.nuums.R;
 import com.nuums.nuums.activity.BaseActivity;
-import com.nuums.nuums.adapter.PhotoPagerAdapter;
 import com.nuums.nuums.model.apply.Apply;
 import com.nuums.nuums.model.apply.ApplyData;
 import com.nuums.nuums.model.apply.ApplyManager;
 import com.nuums.nuums.model.chat.Address;
-import com.yongtrim.lib.Config;
 import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
 import com.yongtrim.lib.fragment.ABaseFragment;
 import com.yongtrim.lib.message.PushMessage;
 import com.yongtrim.lib.model.config.ConfigManager;
-import com.yongtrim.lib.model.photo.Photo;
-import com.yongtrim.lib.model.photo.PhotoManager;
-import com.yongtrim.lib.model.user.UserData;
 import com.yongtrim.lib.model.user.UserManager;
 import com.yongtrim.lib.ui.UltraButton;
 import com.yongtrim.lib.ui.UltraEditText;
-import com.yongtrim.lib.ui.autoscrollviewpager.AutoScrollViewPager;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
-import com.yongtrim.lib.util.StringFilter;
-import com.yongtrim.lib.util.UIUtil;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import de.greenrobot.event.EventBus;
@@ -111,11 +87,11 @@ public class ApplyFragment extends ABaseFragment implements UltraEditText.OnChan
 
         apply = new Apply();
 
-        if(ConfigManager.getInstance(contextHelper).getPreference().getMyAddress() != null) {
+        if (ConfigManager.getInstance(contextHelper).getPreference().getMyAddress() != null) {
             apply.setAddressSender(ConfigManager.getInstance(contextHelper).getPreference().getMyAddress());
         }
 
-        if(contextHelper.getActivity().getIntent().hasExtra("receiver")) {
+        if (contextHelper.getActivity().getIntent().hasExtra("receiver")) {
             apply.setAddressReceiver(Address.getAddress(contextHelper.getActivity().getIntent().getStringExtra("receiver")));
         }
 
@@ -125,18 +101,18 @@ public class ApplyFragment extends ABaseFragment implements UltraEditText.OnChan
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         View view = inflater.inflate(R.layout.fragment_apply, container, false);
 
-        etTitle = (UltraEditText)view.findViewById(R.id.etTitle);
-        btnSize = (UltraButton)view.findViewById(R.id.btnSize);
-        etCaution = (UltraEditText)view.findViewById(R.id.etCaution);
-        tvCaution = (TextView)view.findViewById(R.id.tvCaution);
+        etTitle = (UltraEditText) view.findViewById(R.id.etTitle);
+        btnSize = (UltraButton) view.findViewById(R.id.btnSize);
+        etCaution = (UltraEditText) view.findViewById(R.id.etCaution);
+        tvCaution = (TextView) view.findViewById(R.id.tvCaution);
 
         tvCaution.setText(ConfigManager.getInstance(contextHelper).getConfigHello().getParams().getApplyCaution());
 
-        View viewSender = (View)view.findViewById(R.id.viewSender);
-        etSenderName = (UltraEditText)viewSender.findViewById(R.id.etName);
-        etSenderNumber0 = (UltraEditText)viewSender.findViewById(R.id.etNumber0);
-        etSenderNumber1 = (UltraEditText)viewSender.findViewById(R.id.etNumber1);
-        etSenderNumber2 = (UltraEditText)viewSender.findViewById(R.id.etNumber2);
+        View viewSender = (View) view.findViewById(R.id.viewSender);
+        etSenderName = (UltraEditText) viewSender.findViewById(R.id.etName);
+        etSenderNumber0 = (UltraEditText) viewSender.findViewById(R.id.etNumber0);
+        etSenderNumber1 = (UltraEditText) viewSender.findViewById(R.id.etNumber1);
+        etSenderNumber2 = (UltraEditText) viewSender.findViewById(R.id.etNumber2);
         etSenderNumber1.setEditTextId(R.id.number1);
         etSenderNumber2.setEditTextId(R.id.number2);
 
@@ -151,8 +127,8 @@ public class ApplyFragment extends ABaseFragment implements UltraEditText.OnChan
         etSenderNumber2.setMaxCharacters(4);
         etSenderNumber2.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
-        btnSenderPostNumber = (UltraButton)viewSender.findViewById(R.id.btnPostNumber);
-        btnSenderBasic = (UltraButton)viewSender.findViewById(R.id.btnBasic);
+        btnSenderPostNumber = (UltraButton) viewSender.findViewById(R.id.btnPostNumber);
+        btnSenderBasic = (UltraButton) viewSender.findViewById(R.id.btnBasic);
 
 
         btnSenderPostNumber.setOnClickListener(new View.OnClickListener() {
@@ -174,16 +150,16 @@ public class ApplyFragment extends ABaseFragment implements UltraEditText.OnChan
         });
 
 
-        etSenderDetail = (EditText)viewSender.findViewById(R.id.etDetail);
-        cbSenderRemember = (CheckBox)viewSender.findViewById(R.id.cbRemember);
+        etSenderDetail = (EditText) viewSender.findViewById(R.id.etDetail);
+        cbSenderRemember = (CheckBox) viewSender.findViewById(R.id.cbRemember);
 
 
-        View viewReceiver = (View)view.findViewById(R.id.viewReceiver);
-        etReceiverName = (UltraEditText)viewReceiver.findViewById(R.id.etName);
+        View viewReceiver = (View) view.findViewById(R.id.viewReceiver);
+        etReceiverName = (UltraEditText) viewReceiver.findViewById(R.id.etName);
         etReceiverName.setHint("받는 사람");
-        etReceiverNumber0 = (UltraEditText)viewReceiver.findViewById(R.id.etNumber0);
-        etReceiverNumber1 = (UltraEditText)viewReceiver.findViewById(R.id.etNumber1);
-        etReceiverNumber2 = (UltraEditText)viewReceiver.findViewById(R.id.etNumber2);
+        etReceiverNumber0 = (UltraEditText) viewReceiver.findViewById(R.id.etNumber0);
+        etReceiverNumber1 = (UltraEditText) viewReceiver.findViewById(R.id.etNumber1);
+        etReceiverNumber2 = (UltraEditText) viewReceiver.findViewById(R.id.etNumber2);
 
         etReceiverNumber1.setEditTextId(R.id.number1_1);
         etReceiverNumber2.setEditTextId(R.id.number1_2);
@@ -199,8 +175,8 @@ public class ApplyFragment extends ABaseFragment implements UltraEditText.OnChan
         etReceiverNumber2.setMaxCharacters(4);
         etReceiverNumber2.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
-        btnReceiverPostNumber = (UltraButton)viewReceiver.findViewById(R.id.btnPostNumber);
-        btnReceiverBasic = (UltraButton)viewReceiver.findViewById(R.id.btnBasic);
+        btnReceiverPostNumber = (UltraButton) viewReceiver.findViewById(R.id.btnPostNumber);
+        btnReceiverBasic = (UltraButton) viewReceiver.findViewById(R.id.btnBasic);
 
         btnReceiverPostNumber.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -221,17 +197,16 @@ public class ApplyFragment extends ABaseFragment implements UltraEditText.OnChan
         });
 
 
-
-        etReceiverDetail = (EditText)viewReceiver.findViewById(R.id.etDetail);
+        etReceiverDetail = (EditText) viewReceiver.findViewById(R.id.etDetail);
         viewReceiver.findViewById(R.id.viewRemember).setVisibility(View.GONE);
 
         viewCOD = view.findViewById(R.id.viewCOD);
-        cbCOD = (CheckBox)view.findViewById(R.id.cbCOD);
-        tvCOD = (TextView)view.findViewById(R.id.tvCOD);
+        cbCOD = (CheckBox) view.findViewById(R.id.cbCOD);
+        tvCOD = (TextView) view.findViewById(R.id.tvCOD);
 
         viewPrepaid = view.findViewById(R.id.viewPrepaid);
-        cbPrepaid = (CheckBox)view.findViewById(R.id.cbPrepaid);
-        tvPrepaid = (TextView)view.findViewById(R.id.tvPrepaid);
+        cbPrepaid = (CheckBox) view.findViewById(R.id.cbPrepaid);
+        tvPrepaid = (TextView) view.findViewById(R.id.tvPrepaid);
 
 
         Address addressSender = apply.getAddressSender();
@@ -241,13 +216,13 @@ public class ApplyFragment extends ABaseFragment implements UltraEditText.OnChan
         etSenderNumber1.setText(addressSender.getNumber1());
         etSenderNumber2.setText(addressSender.getNumber2());
 
-        if(TextUtils.isEmpty(addressSender.getPostCode())) {
+        if (TextUtils.isEmpty(addressSender.getPostCode())) {
             btnSenderPostNumber.setText("우편번호");
         } else {
             btnSenderPostNumber.setText(addressSender.getPostCode());
         }
 
-        if(TextUtils.isEmpty(addressSender.getAddressBasic())) {
+        if (TextUtils.isEmpty(addressSender.getAddressBasic())) {
             btnSenderBasic.setText("기본주소");
         } else {
             btnSenderBasic.setText(addressSender.getAddressBasic());
@@ -262,13 +237,13 @@ public class ApplyFragment extends ABaseFragment implements UltraEditText.OnChan
         etReceiverNumber1.setText(addressReceiver.getNumber1());
         etReceiverNumber2.setText(addressReceiver.getNumber2());
 
-        if(TextUtils.isEmpty(addressReceiver.getPostCode())) {
+        if (TextUtils.isEmpty(addressReceiver.getPostCode())) {
             btnReceiverPostNumber.setText("우편번호");
         } else {
             btnReceiverPostNumber.setText(addressReceiver.getPostCode());
         }
 
-        if(TextUtils.isEmpty(addressReceiver.getAddressBasic())) {
+        if (TextUtils.isEmpty(addressReceiver.getAddressBasic())) {
             btnReceiverBasic.setText("기본주소");
         } else {
             btnReceiverBasic.setText(addressReceiver.getAddressBasic());
@@ -304,7 +279,7 @@ public class ApplyFragment extends ABaseFragment implements UltraEditText.OnChan
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (resultCode) {
             case Activity.RESULT_OK:
-                if(requestCode == ABaseFragmentAcitivty.REQUEST_POSTCODE) {
+                if (requestCode == ABaseFragmentAcitivty.REQUEST_POSTCODE) {
                     String postcode = data.getStringExtra("postcode");
                     String basicaddress = data.getStringExtra("basicaddress");
 
@@ -316,7 +291,7 @@ public class ApplyFragment extends ABaseFragment implements UltraEditText.OnChan
                     btnSenderBasic.setText(address.getAddressBasic());
 
 
-                } else  if(requestCode == ABaseFragmentAcitivty.REQUEST_POSTCODE + 1) {
+                } else if (requestCode == ABaseFragmentAcitivty.REQUEST_POSTCODE + 1) {
                     String postcode = data.getStringExtra("postcode");
                     String basicaddress = data.getStringExtra("basicaddress");
 
@@ -338,10 +313,10 @@ public class ApplyFragment extends ABaseFragment implements UltraEditText.OnChan
 
 
     void refresh() {
-        if(TextUtils.isEmpty(apply.getSize())) {
+        if (TextUtils.isEmpty(apply.getSize())) {
             btnSize.setText("크기");
         } else {
-            switch(apply.getSize()) {
+            switch (apply.getSize()) {
                 case Apply.SIZE_SMALL:
                     btnSize.setText("소");
                     break;
@@ -360,11 +335,11 @@ public class ApplyFragment extends ABaseFragment implements UltraEditText.OnChan
         tvCOD.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.gray));
         tvPrepaid.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.gray));
 
-        if(apply.getPay().equals(Apply.PAY_COD)) {
+        if (apply.getPay().equals(Apply.PAY_COD)) {
             cbCOD.setChecked(true);
             tvCOD.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.green));
 
-        } else if(apply.getPay().equals(Apply.PAY_PREPAID)) {
+        } else if (apply.getPay().equals(Apply.PAY_PREPAID)) {
             cbPrepaid.setChecked(true);
             tvPrepaid.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.green));
         }
@@ -372,18 +347,18 @@ public class ApplyFragment extends ABaseFragment implements UltraEditText.OnChan
 
     public void onButtonClicked(View v) {
 
-        switch(v.getId()) {
+        switch (v.getId()) {
             case R.id.btnSubmit: {
                 varify();
             }
             case R.id.viewCOD:
-            case R.id.cbCOD:{
+            case R.id.cbCOD: {
                 apply.setPay(Apply.PAY_COD);
                 refresh();
             }
             break;
             case R.id.viewPrepaid:
-            case R.id.cbPrepaid:{
+            case R.id.cbPrepaid: {
                 apply.setPay(Apply.PAY_PREPAID);
                 refresh();
             }
@@ -428,7 +403,6 @@ public class ApplyFragment extends ABaseFragment implements UltraEditText.OnChan
     }
 
 
-
     public void onEditTextChanged(UltraEditText editText) {
 
     }
@@ -437,39 +411,39 @@ public class ApplyFragment extends ABaseFragment implements UltraEditText.OnChan
     void varify() {
         String errMessage = "";
 
-        if(TextUtils.isEmpty(etTitle.getText().toString())) {
+        if (TextUtils.isEmpty(etTitle.getText().toString())) {
             errMessage = "물품명을 입력해 주세요.";
-        } else if(TextUtils.isEmpty(apply.getSize())) {
+        } else if (TextUtils.isEmpty(apply.getSize())) {
             errMessage = "크기를 선택해 주세요.";
-        } else if(TextUtils.isEmpty(etSenderName.getText().toString())) {
+        } else if (TextUtils.isEmpty(etSenderName.getText().toString())) {
             errMessage = "보내는 사람 이름을 입력해 주세요.";
-        }else if(TextUtils.isEmpty(etSenderNumber0.getText().toString()) ||
+        } else if (TextUtils.isEmpty(etSenderNumber0.getText().toString()) ||
                 TextUtils.isEmpty(etSenderNumber1.getText().toString()) ||
                 TextUtils.isEmpty(etSenderNumber2.getText().toString())
                 ) {
             errMessage = "보내는 사람 연락처를 입력해 주세요.";
-        } else if(TextUtils.isEmpty(btnSenderPostNumber.getText())) {
+        } else if (TextUtils.isEmpty(btnSenderPostNumber.getText())) {
             errMessage = "보내는 사람 우편번호를 입력해 주세요.";
-        } else if(TextUtils.isEmpty(btnSenderBasic.getText())) {
+        } else if (TextUtils.isEmpty(btnSenderBasic.getText())) {
             errMessage = "보내는 사람 기본주소를 입력해 주세요.";
-        } else if(TextUtils.isEmpty(etSenderDetail.getText().toString())) {
+        } else if (TextUtils.isEmpty(etSenderDetail.getText().toString())) {
             errMessage = "보내는 사람 상세주소를 입력해 주세요.";
-        } else if(TextUtils.isEmpty(etReceiverName.getText().toString())) {
+        } else if (TextUtils.isEmpty(etReceiverName.getText().toString())) {
             errMessage = "받는 사람 이름을 입력해 주세요.";
-        }else if(TextUtils.isEmpty(etReceiverNumber0.getText().toString()) ||
+        } else if (TextUtils.isEmpty(etReceiverNumber0.getText().toString()) ||
                 TextUtils.isEmpty(etReceiverNumber1.getText().toString()) ||
                 TextUtils.isEmpty(etReceiverNumber2.getText().toString())
                 ) {
             errMessage = "받는 사람 연락처를 입력해 주세요.";
-        } else if(TextUtils.isEmpty(btnReceiverPostNumber.getText())) {
+        } else if (TextUtils.isEmpty(btnReceiverPostNumber.getText())) {
             errMessage = "받는 사람 우편번호를 입력해 주세요.";
-        } else if(TextUtils.isEmpty(btnReceiverBasic.getText())) {
+        } else if (TextUtils.isEmpty(btnReceiverBasic.getText())) {
             errMessage = "받는 사람 기본주소를 입력해 주세요.";
-        } else if(TextUtils.isEmpty(etReceiverDetail.getText().toString())) {
+        } else if (TextUtils.isEmpty(etReceiverDetail.getText().toString())) {
             errMessage = "받는 사람 상세주소를 입력해 주세요.";
         }
 
-        if(!TextUtils.isEmpty(errMessage)) {
+        if (!TextUtils.isEmpty(errMessage)) {
             new SweetAlertDialog(getContext()).setContentText(errMessage).show();
         } else {
 
@@ -497,16 +471,14 @@ public class ApplyFragment extends ABaseFragment implements UltraEditText.OnChan
             apply.getAddressReceiver().setAddressBasic(btnReceiverBasic.getText());
             apply.getAddressReceiver().setAddressDetail(etReceiverDetail.getText().toString());
 
-            if(cbSenderRemember.isChecked()) {
+            if (cbSenderRemember.isChecked()) {
                 ConfigManager.getInstance(contextHelper).getPreference().putMyAddress(apply.getAddressSender());
             } else {
                 ConfigManager.getInstance(contextHelper).getPreference().putMyAddress(null);
             }
 
             submit();
-
         }
-
     }
 
 
@@ -525,7 +497,7 @@ public class ApplyFragment extends ABaseFragment implements UltraEditText.OnChan
                                     if (response.isSuccess()) {
                                         //response.shop.patch(contextHelper);
 
-                                        if(response.user != null) {
+                                        if (response.user != null) {
                                             UserManager.getInstance(contextHelper).setMe(response.user);
                                         }
 
@@ -545,7 +517,7 @@ public class ApplyFragment extends ABaseFragment implements UltraEditText.OnChan
                     );
 
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
             }
         }).start();
@@ -583,7 +555,7 @@ public class ApplyFragment extends ABaseFragment implements UltraEditText.OnChan
                     );
 
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
             }
         }).start();

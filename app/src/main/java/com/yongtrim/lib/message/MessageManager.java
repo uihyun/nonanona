@@ -1,6 +1,5 @@
 package com.yongtrim.lib.message;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -9,7 +8,6 @@ import android.os.Looper;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.android.volley.Response;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -17,8 +15,6 @@ import com.nuums.nuums.model.user.NsUser;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.fragment.SplashFragment;
 import com.yongtrim.lib.log.Logger;
-import com.yongtrim.lib.model.config.ConfigData;
-import com.yongtrim.lib.model.config.ConfigManager;
 import com.yongtrim.lib.util.BasePreferenceUtil;
 
 import java.io.IOException;
@@ -26,42 +22,36 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * Created by studioyongtrim on 15. 8. 17..
- *
+ * <p>
  * reference : http://susemi99.kr/1012
  */
 public class MessageManager {
-    private final String TAG = "MessageManager";
-
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-
-
+    private static MessageManager instance;
+    private final String TAG = "MessageManager";
     private GoogleCloudMessaging gcm;
     private String regId;
-
     private MessagePreference preference;
     private ContextHelper contextHelper;
-
-    private static MessageManager instance;
-
 
     public static MessageManager getInstance(ContextHelper contextHelper) {
         if (instance == null) {
             instance = new MessageManager();
         }
 
-        if(instance.contextHelper != contextHelper) {
+        if (instance.contextHelper != contextHelper) {
             instance.setPreference(contextHelper);
         }
         instance.contextHelper = contextHelper;
         return instance;
     }
 
-    public void setPreference(ContextHelper contextHelper) {
-        preference = new MessagePreference(contextHelper.getContext());
-    }
-
     public MessagePreference getPreference() {
         return preference;
+    }
+
+    public void setPreference(ContextHelper contextHelper) {
+        preference = new MessagePreference(contextHelper.getContext());
     }
 
     public void initialize(final CountDownLatch latchWait, final CountDownLatch latchCount) {
@@ -72,14 +62,14 @@ public class MessageManager {
             public void run() {
                 try {
 
-                    if(latchWait != null)
+                    if (latchWait != null)
                         latchWait.await();
 
-                    if( checkPlayServices() ) {
+                    if (checkPlayServices()) {
                         gcm = GoogleCloudMessaging.getInstance(contextHelper.getContext());
                         regId = getRegistrationId();
 
-                        if( TextUtils.isEmpty(regId) ) {
+                        if (TextUtils.isEmpty(regId)) {
                             registerInBackground(latchCount);
                         } else {
                             latchCount.countDown();
@@ -100,8 +90,8 @@ public class MessageManager {
 
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(contextHelper.getContext());
 
-        if( resultCode != ConnectionResult.SUCCESS ) {
-            if( GooglePlayServicesUtil.isUserRecoverableError(resultCode) ) {
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
 
                 final int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(contextHelper.getContext());
                 if (status != ConnectionResult.SUCCESS) {
@@ -136,7 +126,7 @@ public class MessageManager {
 
     public String getRegistrationId() {
         String registrationId = preference.regId();
-        if( TextUtils.isEmpty(registrationId) ) {
+        if (TextUtils.isEmpty(registrationId)) {
             Logger.info(TAG, "getRegistrationId() | Registration not found. |");
             return "";
         }
@@ -151,7 +141,7 @@ public class MessageManager {
             protected String doInBackground(Void... params) {
                 String msg = "";
                 try {
-                    if(gcm == null) {
+                    if (gcm == null) {
                         gcm = GoogleCloudMessaging.getInstance(contextHelper.getContext());
                     }
                     regId = gcm.register(com.yongtrim.lib.Config.PROJECT_ID);
@@ -166,7 +156,7 @@ public class MessageManager {
             }
 
             @Override
-            protected  void onPostExecute(String msg) {
+            protected void onPostExecute(String msg) {
                 Logger.info(TAG, "onPostExecute() | " + msg + " |");
                 latchCount.countDown();
             }
@@ -197,7 +187,6 @@ public class MessageManager {
         private static final String PROPERTY_EVENT_FINISH = "property_event_finish";
 
 
-
         protected MessagePreference(Context context) {
             super(context);
         }
@@ -219,7 +208,6 @@ public class MessageManager {
         }
 
 
-
         public void putAlarm(NsUser me, NsUser target, boolean isOn) {
             put(me.getId() + "-" + target.getId(), isOn);
         }
@@ -231,7 +219,7 @@ public class MessageManager {
 
 
         public void putCurChatter(NsUser chatter) {
-            if(chatter == null)
+            if (chatter == null)
                 put(CUR_CHATTER, null);
             else
                 put(CUR_CHATTER, chatter.toString());
@@ -239,16 +227,12 @@ public class MessageManager {
 
         public NsUser getCurChatter() {
             String str = get(CUR_CHATTER);
-            if(TextUtils.isEmpty(str)) {
+            if (TextUtils.isEmpty(str)) {
                 return null;
-            } else{
+            } else {
                 return NsUser.getUser(str);
             }
         }
-
-
-
-
 
         public void putNanumComment(boolean isOn) {
             put(PROPERTY_NANUM_COMMENT, isOn);
@@ -342,5 +326,4 @@ public class MessageManager {
             return get(PROPERTY_EVENT_FINISH, true);
         }
     }
-
 }
