@@ -35,45 +35,64 @@ import java.lang.reflect.Field;
  */
 public class AutoScrollViewPager extends ViewPager {
 
-    public static final int        DEFAULT_INTERVAL            = 1500;
+    public static final int DEFAULT_INTERVAL = 1500;
 
-    public static final int        LEFT                        = 0;
-    public static final int        RIGHT                       = 1;
+    public static final int LEFT = 0;
+    public static final int RIGHT = 1;
 
-    /** do nothing when sliding at the last or first item **/
-    public static final int        SLIDE_BORDER_MODE_NONE      = 0;
-    /** cycle when sliding at the last or first item **/
-    public static final int        SLIDE_BORDER_MODE_CYCLE     = 1;
-    /** deliver event to parent when sliding at the last or first item **/
-    public static final int        SLIDE_BORDER_MODE_TO_PARENT = 2;
-
-    /** auto scroll time in milliseconds, default is {@link #DEFAULT_INTERVAL} **/
-    private long                   interval                    = DEFAULT_INTERVAL;
-    /** auto scroll direction, default is {@link #RIGHT} **/
-    private int                    direction                   = RIGHT;
-    /** whether automatic cycle when auto scroll reaching the last or first item, default is true **/
-    private boolean                isCycle                     = true;
-    /** whether stop auto scroll when touching, default is true **/
-    private boolean                stopScrollWhenTouch         = true;
-    /** how to process when sliding at the last or first item, default is {@link #SLIDE_BORDER_MODE_NONE} **/
-    private int                    slideBorderMode             = SLIDE_BORDER_MODE_NONE;
-    /** whether animating when auto scroll at the last or first item **/
-    private boolean                isBorderAnimation           = true;
-    /** scroll factor for auto scroll animation, default is 1.0 **/
-    private double                 autoScrollFactor            = 1.0;
-    /** scroll factor for swipe scroll animation, default is 1.0 **/
-    private double                 swipeScrollFactor           = 1.0;
-
-    private Handler handler;
-    private boolean                isAutoScroll                = false;
-    private boolean                isStopByTouch               = false;
-    private float                  touchX                      = 0f, downX = 0f;
-    private CustomDurationScroller scroller                    = null;
-
-    public static final int        SCROLL_WHAT                 = 0;
-
-
+    /**
+     * do nothing when sliding at the last or first item
+     **/
+    public static final int SLIDE_BORDER_MODE_NONE = 0;
+    /**
+     * cycle when sliding at the last or first item
+     **/
+    public static final int SLIDE_BORDER_MODE_CYCLE = 1;
+    /**
+     * deliver event to parent when sliding at the last or first item
+     **/
+    public static final int SLIDE_BORDER_MODE_TO_PARENT = 2;
+    public static final int SCROLL_WHAT = 0;
     ClickedCallback clickedCallback;
+    /**
+     * auto scroll time in milliseconds, default is {@link #DEFAULT_INTERVAL}
+     **/
+    private long interval = DEFAULT_INTERVAL;
+    /**
+     * auto scroll direction, default is {@link #RIGHT}
+     **/
+    private int direction = RIGHT;
+    /**
+     * whether automatic cycle when auto scroll reaching the last or first item, default is true
+     **/
+    private boolean isCycle = true;
+    /**
+     * whether stop auto scroll when touching, default is true
+     **/
+    private boolean stopScrollWhenTouch = true;
+    /**
+     * how to process when sliding at the last or first item, default is {@link #SLIDE_BORDER_MODE_NONE}
+     **/
+    private int slideBorderMode = SLIDE_BORDER_MODE_NONE;
+    /**
+     * whether animating when auto scroll at the last or first item
+     **/
+    private boolean isBorderAnimation = true;
+    /**
+     * scroll factor for auto scroll animation, default is 1.0
+     **/
+    private double autoScrollFactor = 1.0;
+    /**
+     * scroll factor for swipe scroll animation, default is 1.0
+     **/
+    private double swipeScrollFactor = 1.0;
+    private Handler handler;
+    private boolean isAutoScroll = false;
+    private boolean isStopByTouch = false;
+    private float touchX = 0f, downX = 0f;
+    private CustomDurationScroller scroller = null;
+    private boolean moved;
+    private int oldValue;
 
     public AutoScrollViewPager(Context paramContext) {
         super(paramContext);
@@ -88,6 +107,7 @@ public class AutoScrollViewPager extends ViewPager {
     public void setClickedCallback(ClickedCallback clickedCallback) {
         this.clickedCallback = clickedCallback;
     }
+
     private void init() {
         handler = new MyHandler();
         setViewPagerScroller();
@@ -98,7 +118,7 @@ public class AutoScrollViewPager extends ViewPager {
      */
     public void startAutoScroll() {
         isAutoScroll = true;
-        sendScrollMessage((long) (interval + scroller.getDuration()/ autoScrollFactor * swipeScrollFactor));
+        sendScrollMessage((long) (interval + scroller.getDuration() / autoScrollFactor * swipeScrollFactor));
     }
 
     /**
@@ -149,7 +169,7 @@ public class AutoScrollViewPager extends ViewPager {
             Field interpolatorField = ViewPager.class.getDeclaredField("sInterpolator");
             interpolatorField.setAccessible(true);
 
-            scroller = new CustomDurationScroller(getContext(), (Interpolator)interpolatorField.get(null));
+            scroller = new CustomDurationScroller(getContext(), (Interpolator) interpolatorField.get(null));
             scrollerField.set(this, scroller);
         } catch (Exception e) {
             e.printStackTrace();
@@ -181,9 +201,6 @@ public class AutoScrollViewPager extends ViewPager {
         }
     }
 
-    private boolean moved;
-
-    private int oldValue;
     /**
      * <ul>
      * if stopScrollWhenTouch is true
@@ -195,22 +212,22 @@ public class AutoScrollViewPager extends ViewPager {
     public boolean dispatchTouchEvent(MotionEvent ev) {
         int action = MotionEventCompat.getActionMasked(ev);
 
-        if(action == MotionEvent.ACTION_DOWN) {
+        if (action == MotionEvent.ACTION_DOWN) {
             moved = false;
-            oldValue = (int)ev.getX() + (int)ev.getY();
+            oldValue = (int) ev.getX() + (int) ev.getY();
         }
 
-        if(action == MotionEvent.ACTION_UP) {
-            if(!moved) {
-                if(clickedCallback != null) {
+        if (action == MotionEvent.ACTION_UP) {
+            if (!moved) {
+                if (clickedCallback != null) {
                     clickedCallback.clicked(getCurrentItem());
                 }
             }
         }
 
-        if(action == MotionEvent.ACTION_MOVE) {
-            int newValue = (int)ev.getX() + (int)ev.getY();
-            if(Math.abs(oldValue - newValue) > 50) {
+        if (action == MotionEvent.ACTION_MOVE) {
+            int newValue = (int) ev.getX() + (int) ev.getY();
+            if (Math.abs(oldValue - newValue) > 50) {
                 moved = true;
             }
         }
@@ -219,7 +236,6 @@ public class AutoScrollViewPager extends ViewPager {
             if ((action == MotionEvent.ACTION_DOWN) && isAutoScroll) {
                 isStopByTouch = true;
                 stopAutoScroll();
-
 
 
             } else if (ev.getAction() == MotionEvent.ACTION_UP && isStopByTouch) {
@@ -259,25 +275,6 @@ public class AutoScrollViewPager extends ViewPager {
         //getParent().requestDisallowInterceptTouchEvent(true);
 
         return super.dispatchTouchEvent(ev);
-    }
-
-
-    private class MyHandler extends Handler {
-
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-
-            switch (msg.what) {
-                case SCROLL_WHAT:
-                    scroller.setScrollDurationFactor(autoScrollFactor);
-                    scrollOnce();
-                    scroller.setScrollDurationFactor(swipeScrollFactor);
-                    sendScrollMessage(interval + scroller.getDuration());
-                default:
-                    break;
-            }
-        }
     }
 
     /**
@@ -356,7 +353,7 @@ public class AutoScrollViewPager extends ViewPager {
      * get how to process when sliding at the last or first item
      *
      * @return the slideBorderMode {@link #SLIDE_BORDER_MODE_NONE}, {@link #SLIDE_BORDER_MODE_TO_PARENT},
-     *         {@link #SLIDE_BORDER_MODE_CYCLE}, default is {@link #SLIDE_BORDER_MODE_NONE}
+     * {@link #SLIDE_BORDER_MODE_CYCLE}, default is {@link #SLIDE_BORDER_MODE_NONE}
      */
     public int getSlideBorderMode() {
         return slideBorderMode;
@@ -366,7 +363,7 @@ public class AutoScrollViewPager extends ViewPager {
      * set how to process when sliding at the last or first item
      *
      * @param slideBorderMode {@link #SLIDE_BORDER_MODE_NONE}, {@link #SLIDE_BORDER_MODE_TO_PARENT},
-     *        {@link #SLIDE_BORDER_MODE_CYCLE}, default is {@link #SLIDE_BORDER_MODE_NONE}
+     *                        {@link #SLIDE_BORDER_MODE_CYCLE}, default is {@link #SLIDE_BORDER_MODE_NONE}
      */
     public void setSlideBorderMode(int slideBorderMode) {
         this.slideBorderMode = slideBorderMode;
@@ -390,28 +387,44 @@ public class AutoScrollViewPager extends ViewPager {
         this.isBorderAnimation = isBorderAnimation;
     }
 
-
     public void setRatio(int xRatio, int yRatio) {
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         float height = 0;
         float width = 0;
 
-        if(metrics.widthPixels < metrics.heightPixels){
+        if (metrics.widthPixels < metrics.heightPixels) {
             width = metrics.widthPixels;
-            height= (float)(metrics.widthPixels/(float)xRatio) * (float)yRatio;
-
+            height = (float) (metrics.widthPixels / (float) xRatio) * (float) yRatio;
 
 
         } else {
-            height= metrics.heightPixels;
-            width= (float)(metrics.heightPixels/(float)xRatio) * (float)yRatio;
+            height = metrics.heightPixels;
+            width = (float) (metrics.heightPixels / (float) xRatio) * (float) yRatio;
         }
 
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams((int)width, (int)height);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams((int) width, (int) height);
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
 
         setLayoutParams(layoutParams);
+    }
+
+    private class MyHandler extends Handler {
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            switch (msg.what) {
+                case SCROLL_WHAT:
+                    scroller.setScrollDurationFactor(autoScrollFactor);
+                    scrollOnce();
+                    scroller.setScrollDurationFactor(swipeScrollFactor);
+                    sendScrollMessage(interval + scroller.getDuration());
+                default:
+                    break;
+            }
+        }
     }
 }
 

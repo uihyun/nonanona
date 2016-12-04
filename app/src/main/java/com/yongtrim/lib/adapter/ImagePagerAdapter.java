@@ -6,9 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.nuums.nuums.AppController;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.nuums.nuums.AppController;
 import com.yongtrim.lib.ui.salvage.RecyclingPagerAdapter;
 
 import java.util.List;
@@ -20,15 +20,12 @@ import java.util.List;
  */
 public class ImagePagerAdapter extends RecyclingPagerAdapter {
 
+    String urlTag;
+    ImageView.ScaleType scaleType = ImageView.ScaleType.CENTER_CROP;
     private Context context;
     private List<String> listUrl;
-
-    private int           size;
-    private boolean       isInfiniteLoop;
-
-    String urlTag;
-
-    ImageView.ScaleType scaleType = ImageView.ScaleType.CENTER_CROP;
+    private int size;
+    private boolean isInfiniteLoop;
 
 
     public ImagePagerAdapter(Context context, List<String> listUrl) {
@@ -44,17 +41,16 @@ public class ImagePagerAdapter extends RecyclingPagerAdapter {
 //        this.size = listUrl.size();
 //    }
 
+    public String getUrlTag() {
+        return urlTag;
+    }
 
     public void setUrlTag(String urlTag) {
         this.urlTag = urlTag;
     }
 
-    public String getUrlTag() {
-        return urlTag;
-    }
-
     @Override
-    public int getItemPosition(Object object){
+    public int getItemPosition(Object object) {
         return PagerAdapter.POSITION_NONE;
     }
 
@@ -90,14 +86,9 @@ public class ImagePagerAdapter extends RecyclingPagerAdapter {
             view.setTag(holder);
             holder.imageView.setBackgroundColor(0x00000000);
         }
-        holder = (ViewHolder)view.getTag();
+        holder = (ViewHolder) view.getTag();
         holder.imageView.setImageUrl(listUrl.get(getPosition(position)), imageLoader);
         return view;
-    }
-
-    private static class ViewHolder {
-
-        NetworkImageView imageView;
     }
 
     /**
@@ -113,5 +104,9 @@ public class ImagePagerAdapter extends RecyclingPagerAdapter {
     public ImagePagerAdapter setInfiniteLoop(boolean isInfiniteLoop) {
         this.isInfiniteLoop = isInfiniteLoop;
         return this;
+    }
+
+    private static class ViewHolder {
+        NetworkImageView imageView;
     }
 }
