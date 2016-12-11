@@ -21,30 +21,28 @@ public class Logger {
 
         Logger.isDebugReport = isDebugReport;
 
-        if(isDebugReport) {
+        if (isDebugReport) {
             ACRA.init(application);
             ACRA.getErrorReporter().setEnabled(true);
         }
 
-        //Log.i("rr_", "Reboot is good");
-        //
         packageName = application.getPackageName();
     }
 
     public static void info(String className, String string) {
-        if(isDebug) {
-            android.util.Log.i(packageName, "YTLOGGER | " + className + " | " + string);
+        if (isDebug) {
+            android.util.Log.i(packageName, "LOGGER | " + className + " | " + string);
         }
     }
 
     public static void debug(String className, String string) {
-        if(isDebug) {
-            android.util.Log.i(packageName, "YTLOGGER | " + className + " | " + string);
+        if (isDebug) {
+            android.util.Log.i(packageName, "LOGGER | " + className + " | " + string);
         }
     }
 
     public static void trace(String className, String string) {
-        if(isDebugReport) {
+        if (isDebugReport) {
             ACRA.getErrorReporter().handleSilentException(new Throwable(className + " | " + string));
         }
     }
