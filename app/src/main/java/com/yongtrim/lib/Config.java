@@ -22,6 +22,11 @@ public class Config {
     public static String cloudinary_api_key = "998582762694985";
     public static String cloudinary_api_secret = "s2vNXNUVjbkWERFjm69eE6tWcC8";
 
+    // test
+//    public static String cloudinary_cloud_name = "hu46oupq5";
+//    public static String cloudinary_api_key = "89656495367863";
+//    public static String cloudinary_api_secret = "kwEpVmLFvVXSD8TNx8n6Hhjw-EU";
+
 
 
 

@@ -2,13 +2,8 @@ package com.yongtrim.lib.model.user;
 
 import android.content.Context;
 
-
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.nuums.nuums.model.nanum.Nanum;
-import com.nuums.nuums.model.nanum.NanumData;
-import com.nuums.nuums.model.review.Review;
-import com.nuums.nuums.model.review.ReviewData;
 import com.nuums.nuums.model.user.NsUser;
 import com.nuums.nuums.model.user.NsUserListData;
 import com.yongtrim.lib.Config;
@@ -30,10 +25,8 @@ import org.json.JSONObject;
  */
 public class UserManager extends ModelManager {
 
-    private final String TAG = getClass().getSimpleName();
-
     private static UserManager instance;
-
+    private final String TAG = getClass().getSimpleName();
     private ContextHelper contextHelper;
     private UserPreference preference;
 
@@ -46,7 +39,7 @@ public class UserManager extends ModelManager {
             instance = new UserManager();
         }
 
-        if(instance.contextHelper != contextHelper) {
+        if (instance.contextHelper != contextHelper) {
             instance.setPreference(contextHelper);
         }
         instance.contextHelper = contextHelper;
@@ -71,15 +64,15 @@ public class UserManager extends ModelManager {
         url.append(Config.url);
         url.append("/user");
         url.append("?login_type=").append(loginType);
-        if(role != null)
+        if (role != null)
             url.append("&role=").append(role);
-        if(username != null)
+        if (username != null)
             url.append("&username=").append(username);
-        if(password != null)
+        if (password != null)
             url.append("&password=").append(password);
-        if(email != null)
+        if (email != null)
             url.append("&email=").append(email);
-        if(nickname != null)
+        if (nickname != null)
             url.append("&nickname=").append(nickname);
 
         url.append("&role=").append("MEMBER");
@@ -104,7 +97,7 @@ public class UserManager extends ModelManager {
         url.append(Config.url);
         url.append("/user/");
 
-        if(id != null)
+        if (id != null)
             url.append(id);
 
         GsonBodyRequest<UserData> request = new GsonBodyRequest<UserData>(contextHelper,
@@ -132,7 +125,7 @@ public class UserManager extends ModelManager {
         try {
             body.put("user", user.toString());
 
-        } catch(JSONException e) {
+        } catch (JSONException e) {
         }
 
         GsonBodyRequest<UserData> request = new GsonBodyRequest<UserData>(contextHelper,
@@ -151,7 +144,7 @@ public class UserManager extends ModelManager {
             JSONObject option,
             final Response.Listener<NsUserListData> listener,
             final Response.ErrorListener errorListener
-    ){
+    ) {
         StringBuffer url = new StringBuffer();
         url.append(com.yongtrim.lib.Config.url);
         url.append("/userfind?");
@@ -162,7 +155,7 @@ public class UserManager extends ModelManager {
         try {
             body.put("option", option);
 
-        } catch(JSONException e) {
+        } catch (JSONException e) {
         }
 
         GsonBodyRequest<NsUserListData> request = new GsonBodyRequest<NsUserListData>(contextHelper,
@@ -192,9 +185,9 @@ public class UserManager extends ModelManager {
         try {
             body.put("type", type);
             body.put("email", email);
-            if(realname != null)
+            if (realname != null)
                 body.put("realname", realname);
-        } catch(JSONException e) {
+        } catch (JSONException e) {
         }
 
         GsonBodyRequest<UserData> request = new GsonBodyRequest<UserData>(contextHelper,
@@ -231,8 +224,8 @@ public class UserManager extends ModelManager {
 
 
     public void checkValidCertifyFacebook(final String facebookId,
-                                             final Response.Listener<ACommonData> listener,
-                                             final Response.ErrorListener errorListener) {
+                                          final Response.Listener<ACommonData> listener,
+                                          final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
         url.append(Config.url);
         url.append("/user/checkfacebook/");
@@ -307,7 +300,7 @@ public class UserManager extends ModelManager {
         try {
             body.put("password", password.toString());
 
-        } catch(JSONException e) {
+        } catch (JSONException e) {
         }
         GsonBodyRequest<ACommonData> request = new GsonBodyRequest<ACommonData>(contextHelper,
                 Request.Method.POST,
@@ -321,13 +314,17 @@ public class UserManager extends ModelManager {
     }
 
     public NsUser getMe() {
-        if(me == null) {
+        if (me == null) {
             me = NsUser.getUser(preference.getMe());
         }
         return me;
     }
 
-
+    public void setMe(NsUser me) {
+        me.patch(contextHelper);
+        this.me = me;
+        preference.putMe(me.toString());
+    }
 
     public void readTutorial() {
         preference.readTutorial();
@@ -340,7 +337,7 @@ public class UserManager extends ModelManager {
     public void changePassword(final String username,
                                final String password,
                                final Response.Listener<UserData> listener,
-                       final Response.ErrorListener errorListener) {
+                               final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
         url.append(Config.url);
@@ -352,7 +349,7 @@ public class UserManager extends ModelManager {
         try {
             body.put("password", password);
 
-        } catch(JSONException e) {
+        } catch (JSONException e) {
         }
 
         GsonBodyRequest<UserData> request = new GsonBodyRequest<UserData>(contextHelper,
@@ -366,11 +363,10 @@ public class UserManager extends ModelManager {
         RequestManager.getRequestQueue().add(request);
     }
 
-
     public void block(final NsUser user,
-                         final boolean isBlock,
-                         final Response.Listener<UserData> listener,
-                         final Response.ErrorListener errorListener) {
+                      final boolean isBlock,
+                      final Response.Listener<UserData> listener,
+                      final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
         url.append(Config.url);
         url.append("/user/");
@@ -388,7 +384,6 @@ public class UserManager extends ModelManager {
 
         RequestManager.getRequestQueue().add(request);
     }
-
 
     public void delete(final NsUser user,
                        final Response.Listener<UserData> listener,
@@ -409,13 +404,6 @@ public class UserManager extends ModelManager {
                 errorListener);
 
         RequestManager.getRequestQueue().add(request);
-    }
-
-
-    public void setMe(NsUser me) {
-        me.patch(contextHelper);
-        this.me = me;
-        preference.putMe(me.toString());
     }
 
     public boolean isMe(NsUser user) {

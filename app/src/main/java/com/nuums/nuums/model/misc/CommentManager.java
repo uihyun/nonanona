@@ -35,6 +35,7 @@ public class CommentManager {
 
     public void createInNanum(Nanum nanum,
                               String message,
+                              boolean applymode,
                               final Response.Listener<NanumData> listener,
                               final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
@@ -47,6 +48,7 @@ public class CommentManager {
 
         try {
             body.put("message", message);
+            body.put("applymode", applymode);
         } catch (JSONException e) {
             e.printStackTrace();
         }

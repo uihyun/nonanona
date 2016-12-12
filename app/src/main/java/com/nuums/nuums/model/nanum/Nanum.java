@@ -14,6 +14,7 @@ import com.yongtrim.lib.model.user.UserManager;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -72,7 +73,7 @@ public class Nanum extends Model {
     @SerializedName("isAdmin")
     private boolean isAdmin;
     private boolean isBookmark;
-
+    private HashMap<String, String> applierMap;
 
     public Nanum() {
         photos = new ArrayList<>();
@@ -87,6 +88,14 @@ public class Nanum extends Model {
         Gson gson = AppController.getInstance().getGson();
         Nanum nanum = gson.fromJson(jsonString, Nanum.class);
         return nanum;
+    }
+
+    public HashMap<String, String> getApplierMap() {
+        return applierMap;
+    }
+
+    public void setApplierMap(HashMap<String, String> applierMap) {
+        this.applierMap = applierMap;
     }
 
     public boolean isAdmin() {
@@ -266,12 +275,15 @@ public class Nanum extends Model {
     }
 
     public int getApplyCount() {
-        int count = 0;
-        for (Comment comment : comments) {
-            if (!comment.getOwner().isSame(this.owner))
-                count++;
-        }
-        return count;
+//        int count = 0;
+//        for (Comment comment : comments) {
+//            if (!comment.getOwner().isSame(this.owner))
+//                count++;
+//        }
+        if (applierMap != null)
+            return applierMap.size();
+        else
+            return 0;
     }
 
     public List<Comment> getApplys() {

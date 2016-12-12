@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white2"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:ultra="http://schemas.android.com/apk/res-auto"
-    >
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:ultra="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white2">
 
     <View
         android:id="@+id/viewLine"
@@ -16,36 +14,35 @@
         android:background="@color/gray2"/>
 
     <ScrollView
-        android:layout_below="@+id/viewLine"
         android:id="@+id/scrollView"
-        android:orientation="vertical"
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        >
+        android:layout_height="match_parent"
+        android:layout_below="@+id/viewLine"
+        android:orientation="vertical">
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/viewTop"
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
-                android:background="@color/white"
-                >
+                android:background="@color/white">
+
                 <com.yongtrim.lib.ui.autoscrollviewpager.AutoScrollViewPager
                     android:id="@+id/viewPhoto"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    />
+                    android:layout_height="match_parent"/>
 
 
                 <TextView
-                    android:layout_above="@+id/photoScrollView"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginBottom="7dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_above="@+id/photoScrollView"
+                    android:layout_marginBottom="7dp"
+                    android:layout_marginLeft="20dp"
                     android:text="사진을 3장이상 등록해 주세요"
                     android:textColor="@color/gray"
                     android:textSize="13dp"/>
@@ -53,10 +50,10 @@
 
                 <com.nuums.nuums.view.PhotoScrollView
                     android:id="@+id/photoScrollView"
-                    android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:background="@color/gray_20"
-                    android:layout_alignParentBottom="true"/>
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/gray_20"/>
 
 
             </RelativeLayout>
@@ -65,66 +62,65 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
+                android:layout_marginTop="0dp"
 
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="bottom">
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
 
                     <com.yongtrim.lib.ui.UltraEditText
-                        android:layout_weight="1"
                         android:id="@+id/etTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:hint="나눔명"
+                        android:layout_weight="1"
                         app:bgStyle="white"
-                        />
+                        app:hint="나눔명"/>
 
                     <com.yongtrim.lib.ui.UltraButton
                         android:id="@+id/btnLocation"
                         android:layout_width="wrap_content"
-                        android:minWidth="70dp"
                         android:layout_height="wrap_content"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp"
                         android:layout_marginLeft="10dp"
+                        android:minWidth="70dp"
                         android:onClick="onButtonClicked"
-                        ultra:style="center"
-                        ultra:borderWidth="1px"
+                        android:paddingBottom="3dp"
+                        android:paddingTop="3dp"
                         ultra:borderColor="@color/green"
-                        ultra:radius="5dp"
+                        ultra:borderWidth="1px"
                         ultra:defaultColor="@color/green"
                         ultra:focusColor="@color/buttonsel_bg"
+                        ultra:radius="5dp"
+                        ultra:style="center"
                         ultra:text="위치"
-                        ultra:textSize="15dp"
-                        ultra:textColor="@color/white" />
+                        ultra:textColor="@color/white"
+                        ultra:textSize="15dp"/>
 
                     <com.yongtrim.lib.ui.UltraButton
                         android:id="@+id/btnAmount"
                         android:layout_width="wrap_content"
-                        android:minWidth="70dp"
                         android:layout_height="wrap_content"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp"
-
                         android:layout_marginLeft="10dp"
+                        android:minWidth="70dp"
                         android:onClick="onButtonClicked"
-                        ultra:style="center"
-                        ultra:borderWidth="1px"
+
+                        android:paddingBottom="3dp"
+                        android:paddingTop="3dp"
                         ultra:borderColor="@color/green"
-                        ultra:radius="5dp"
+                        ultra:borderWidth="1px"
                         ultra:defaultColor="@color/green"
                         ultra:focusColor="@color/buttonsel_bg"
+                        ultra:radius="5dp"
+                        ultra:style="center"
                         ultra:text="수량"
-                        ultra:textSize="15dp"
-                        ultra:textColor="@color/white" />
+                        ultra:textColor="@color/white"
+                        ultra:textSize="15dp"/>
 
                 </LinearLayout>
 
@@ -133,39 +129,38 @@
                     android:id="@+id/btnDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:onClick="onButtonClicked"
+                    android:paddingBottom="10dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:onClick="onButtonClicked"
-                    ultra:style="left"
-                    ultra:borderWidth="1px"
                     ultra:borderColor="@color/gray"
-                    ultra:radius="5dp"
+                    ultra:borderWidth="1px"
                     ultra:defaultColor="@color/trans"
                     ultra:focusColor="@color/buttonsel_bg"
+                    ultra:radius="5dp"
+                    ultra:style="left"
                     ultra:text="상세설명\n상세설명\n상세설명\n상세설명"
-                    ultra:textSize="16dp"
-                    ultra:textColor="@color/gray" />
+                    ultra:textColor="@color/gray"
+                    ultra:textSize="16dp"/>
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="5dp">
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="당첨방식"
-                        android:textSize="16dp"
                         android:textColor="@color/green"
-                        />
+                        android:textSize="16dp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -174,12 +169,12 @@
 
                         <LinearLayout
                             android:id="@+id/viewArrival"
-                            android:onClick="onButtonClicked"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
+                            android:layout_marginRight="10dp"
                             android:gravity="center_vertical"
-                            android:layout_marginRight="10dp">
+                            android:onClick="onButtonClicked"
+                            android:orientation="horizontal">
 
                             <CheckBox
                                 android:id="@+id/cbArrival"
@@ -196,19 +191,18 @@
                                 android:layout_height="wrap_content"
                                 android:text="선착순"
                                 android:textColor="@color/gray"
-                                android:textSize="15dp"
-                                />
+                                android:textSize="15dp"/>
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/viewSelect"
-                            android:onClick="onButtonClicked"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
+                            android:layout_marginRight="10dp"
                             android:gravity="center_vertical"
-                            android:layout_marginRight="10dp">
+                            android:onClick="onButtonClicked"
+                            android:orientation="horizontal">
 
                             <CheckBox
                                 android:id="@+id/cbSelect"
@@ -225,18 +219,17 @@
                                 android:layout_height="wrap_content"
                                 android:text="나눔자 선택"
                                 android:textColor="@color/gray"
-                                android:textSize="15dp"
-                                />
+                                android:textSize="15dp"/>
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/viewRandom"
-                            android:onClick="onButtonClicked"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical">
+                            android:gravity="center_vertical"
+                            android:onClick="onButtonClicked"
+                            android:orientation="horizontal">
 
                             <CheckBox
                                 android:id="@+id/cbRandom"
@@ -253,8 +246,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="추첨"
                                 android:textColor="@color/gray"
-                                android:textSize="15dp"
-                                />
+                                android:textSize="15dp"/>
 
                         </LinearLayout>
 
@@ -264,24 +256,22 @@
                         android:id="@+id/btnSubmit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="8dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="15dp"
                         android:layout_marginLeft="15dp"
-
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="10dp"
                         android:onClick="onButtonClicked"
-                        ultra:style="center"
-                        ultra:borderWidth="1px"
+                        android:padding="8dp"
                         ultra:borderColor="@color/white"
-                        ultra:radius="10dp"
+                        ultra:borderWidth="1px"
                         ultra:defaultColor="@color/green"
                         ultra:focusColor="@color/buttonsel_bg"
+                        ultra:radius="10dp"
+                        ultra:style="center"
                         ultra:text="등록하기"
-                        ultra:textSize="20dp"
-                        ultra:textColor="@color/white" />
+                        ultra:textColor="@color/white"
+                        ultra:textSize="20dp"/>
 
                 </LinearLayout>
-
 
 
             </LinearLayout>

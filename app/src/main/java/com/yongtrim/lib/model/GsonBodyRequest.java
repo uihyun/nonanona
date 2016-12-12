@@ -115,7 +115,7 @@ public class GsonBodyRequest<T> extends JsonRequest<T> {
             }
         });
 
-        if(error instanceof AuthFailureError || (error.getMessage() != null && error.getMessage().equals("java.io.IOException: No authentication challenges found"))) {
+        if (error instanceof AuthFailureError || (error.getMessage() != null && error.getMessage().equals("java.io.IOException: No authentication challenges found"))) {
             mContextHelper.getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {

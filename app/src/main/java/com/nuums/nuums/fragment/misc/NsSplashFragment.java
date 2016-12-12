@@ -141,7 +141,7 @@ public class NsSplashFragment extends SplashFragment {
                     getActivity().finish();
 
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
             }
         }).start();
@@ -182,14 +182,11 @@ public class NsSplashFragment extends SplashFragment {
                             null
                     );
 
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }).start();
     }
-
-
 }
 

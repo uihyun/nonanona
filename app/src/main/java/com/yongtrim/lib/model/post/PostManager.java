@@ -13,15 +13,14 @@ import com.yongtrim.lib.model.RequestManager;
  * Created by Uihyun on 15. 9. 28..
  */
 public class PostManager {
-    private final String TAG = getClass().getSimpleName();
     private static PostManager instance;
-
+    private final String TAG = getClass().getSimpleName();
     private ContextHelper contextHelper;
     private PostManager preference;
-    
+
 
     public static PostManager getInstance(ContextHelper contextHelper) {
-        if(instance == null) {
+        if (instance == null) {
             instance = new PostManager();
         }
 //        if(instance.contextHelper != contextHelper) {
@@ -58,8 +57,8 @@ public class PostManager {
 
 
     public void count(final String id,
-                     final Response.Listener<PostData> listener,
-                     final Response.ErrorListener errorListener) {
+                      final Response.Listener<PostData> listener,
+                      final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
         url.append(Config.url);
@@ -82,8 +81,8 @@ public class PostManager {
             String type,
             int page,
             final Response.Listener<PostListData> listener,
-            final Response.ErrorListener errorListener
-    ){
+            final Response.ErrorListener errorListener) {
+
         StringBuffer url = new StringBuffer();
         url.append(com.yongtrim.lib.Config.url);
         url.append("/postfind?");

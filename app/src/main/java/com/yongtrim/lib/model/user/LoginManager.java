@@ -3,7 +3,6 @@ package com.yongtrim.lib.model.user;
 import android.content.Context;
 import android.util.DisplayMetrics;
 
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.nuums.nuums.model.user.NsUser;
@@ -25,29 +24,20 @@ import java.util.concurrent.CountDownLatch;
  * Created by Uihyun on 15. 9. 1..
  */
 public class LoginManager {
-    private final String TAG = getClass().getSimpleName();
-
-    private static LoginManager instance;
-
-    ContextHelper contextHelper;
-    private LoginPreference preference;
-
-    public interface OnLogoutListener {
-        public void onLogout(NsUser userGuest);
-    }
-
-    private OnLogoutListener mOnLogoutListener;
-
     public static String LOGINSTATUS_NONE = "NONE"; // 최초 실행
     public static String LOGINSTATUS_LOGIN = "LOGIN"; // 멤버가 로그인 된 상태
     public static String LOGINSTATUS_LOGOUT = "LOGOUT"; // 게스트가 로그인 된 상태
-
+    private static LoginManager instance;
+    private final String TAG = getClass().getSimpleName();
+    ContextHelper contextHelper;
+    private LoginPreference preference;
+    private OnLogoutListener mOnLogoutListener;
 
     public static LoginManager getInstance(ContextHelper contextHelper) {
         if (instance == null) {
             instance = new LoginManager();
         }
-        if(instance.contextHelper != contextHelper) {
+        if (instance.contextHelper != contextHelper) {
             instance.setPreference(contextHelper);
         }
         instance.contextHelper = contextHelper;
@@ -58,36 +48,27 @@ public class LoginManager {
         preference = new LoginPreference(contextHelper.getContext());
     }
 
-
-
     public String getAccessToken() {
-        if(getLoginStatus().equals(LOGINSTATUS_LOGOUT))
+        if (getLoginStatus().equals(LOGINSTATUS_LOGOUT))
             return preference.getAccessToken(true);
-        else if(getLoginStatus().equals(LOGINSTATUS_LOGIN))
+        else if (getLoginStatus().equals(LOGINSTATUS_LOGIN))
             return preference.getAccessToken(false);
         return null;
     }
-
 
     public String getLoginStatus() {
         return preference.getLoginStatus();
     }
 
-    public String getRecentLoginUsername() {
-        return preference.getRecentLoginUsername();
-    }
-
-
-
-    public void setLoginStatus(NsUser user){
-        if(user != null) {
-            if(user.getLoginType().equals(User.LOGINTYPE_GUEST)) {
+    public void setLoginStatus(NsUser user) {
+        if (user != null) {
+            if (user.getLoginType().equals(User.LOGINTYPE_GUEST)) {
                 preference.putLoginStatus(LOGINSTATUS_LOGOUT);
                 preference.putAccessToken(user.getAccessToken(), true);
             } else {
                 preference.putLoginStatus(LOGINSTATUS_LOGIN);
 
-                if(user.getLoginType().equals(User.LOGINTYPE_EMAIL)) {
+                if (user.getLoginType().equals(User.LOGINTYPE_EMAIL)) {
                     preference.putRecentLoginUsername(user.getUsername());
                 }
 
@@ -99,15 +80,17 @@ public class LoginManager {
         }
     }
 
+    public String getRecentLoginUsername() {
+        return preference.getRecentLoginUsername();
+    }
+
     public void setInavalidCurrentUser() {
-        if(getLoginStatus().equals(LOGINSTATUS_LOGIN)) {
+        if (getLoginStatus().equals(LOGINSTATUS_LOGIN)) {
             preference.putLoginStatus(LOGINSTATUS_LOGOUT);
         } else {
             preference.putLoginStatus(LOGINSTATUS_NONE);
         }
     }
-
-
 
     void patchUser(final CountDownLatch latchWait, final CountDownLatch latchCount) {
         new Thread(new Runnable() {
@@ -127,11 +110,10 @@ public class LoginManager {
         }).start();
     }
 
-
     public void findPassword(final String email,
                              final Response.Listener<UserData> listener,
                              final Response.ErrorListener errorListener
-                             ) {
+    ) {
         StringBuffer url = new StringBuffer();
         url.append(Config.url);
         url.append("/login/forgot");
@@ -141,7 +123,7 @@ public class LoginManager {
         try {
             body.put("email", email);
 
-        } catch(JSONException e) {
+        } catch (JSONException e) {
         }
 
         GsonBodyRequest<UserData> request = new GsonBodyRequest<UserData>(contextHelper,
@@ -177,7 +159,7 @@ public class LoginManager {
             body.put("loginType", loginType);
             body.put("username", username);
 
-            if(loginType.equals(User.LOGINTYPE_GUEST)) {
+            if (loginType.equals(User.LOGINTYPE_GUEST)) {
                 body.put("password", "temp");
             } else {
                 body.put("password", password);
@@ -186,7 +168,7 @@ public class LoginManager {
             body.put("deviceType", "android");
             body.put("deviceToken", MessageManager.getInstance(contextHelper).getRegistrationId());
 
-            if(UserManager.getInstance(contextHelper).getMe() != null && UserManager.getInstance(contextHelper).getMe().getLoginType().equals("GUEST")) {
+            if (UserManager.getInstance(contextHelper).getMe() != null && UserManager.getInstance(contextHelper).getMe().getLoginType().equals("GUEST")) {
                 body.put("guest", UserManager.getInstance(contextHelper).getMe().getUsername());
             }
 
@@ -196,7 +178,7 @@ public class LoginManager {
             deviceInfo.put("OS_Version", System.getProperty("os.version") + "(" + android.os.Build.VERSION.INCREMENTAL + ")");
             deviceInfo.put("OS_API_Level", android.os.Build.VERSION.SDK_INT);
             deviceInfo.put("Device", android.os.Build.DEVICE);
-            deviceInfo.put("Model_Product", android.os.Build.MODEL + " ("+ android.os.Build.PRODUCT + ")");
+            deviceInfo.put("Model_Product", android.os.Build.MODEL + " (" + android.os.Build.PRODUCT + ")");
 
             DisplayMetrics dm = new DisplayMetrics();
             contextHelper.getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -208,7 +190,7 @@ public class LoginManager {
 
             body.put("deviceInfo", deviceInfo);
 
-        } catch(JSONException e) {
+        } catch (JSONException e) {
         }
 
         GsonBodyRequest<UserData> request = new GsonBodyRequest<UserData>(contextHelper,
@@ -222,7 +204,6 @@ public class LoginManager {
 
         RequestManager.getRequestQueue().add(request);
     }
-
 
     public void logout(
             final Response.Listener<UserData> listener,
@@ -242,7 +223,6 @@ public class LoginManager {
         RequestManager.getRequestQueue().add(request);
     }
 
-
     public void logout(OnLogoutListener listener) {
         mOnLogoutListener = listener;
 
@@ -254,6 +234,11 @@ public class LoginManager {
         final CountDownLatch latchPatch = new CountDownLatch(1);
         patchUser(latchUserInfo, latchPatch);
 
+    }
+
+
+    public interface OnLogoutListener {
+        public void onLogout(NsUser userGuest);
     }
 
     private class LoginPreference extends BasePreferenceUtil {

@@ -217,7 +217,6 @@ public class ContextHelper {
                 try {
                     Logger.debug(TAG, "createGuest() called");
 
-
                     UserManager.getInstance(ContextHelper.this).create(
                             User.LOGINTYPE_GUEST,
                             null,
@@ -240,7 +239,7 @@ public class ContextHelper {
                     );
 
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
             }
         }).start();
@@ -282,7 +281,7 @@ public class ContextHelper {
                     }
 
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
             }
         }).start();

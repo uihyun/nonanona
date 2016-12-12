@@ -1,36 +1,20 @@
 package com.yongtrim.lib.model.config;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.text.TextUtils;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
 import com.nuums.nuums.model.chat.Address;
 import com.nuums.nuums.model.nanum.Nanum;
-import com.nuums.nuums.model.report.Report;
-import com.nuums.nuums.model.review.Review;
 import com.nuums.nuums.model.user.NsUser;
-import com.yongtrim.lib.*;
-import com.yongtrim.lib.log.Logger;
+import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.model.GsonBodyRequest;
 import com.yongtrim.lib.model.ModelManager;
 import com.yongtrim.lib.model.RequestManager;
 import com.yongtrim.lib.model.banner.Banner;
-import com.yongtrim.lib.model.photo.PhotoData;
 import com.yongtrim.lib.model.post.PostList;
-import com.yongtrim.lib.model.post.PostListData;
 import com.yongtrim.lib.util.BasePreferenceUtil;
-import com.yongtrim.lib.util.FileUtil;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.File;
-import java.util.UUID;
 
 /**
  * hair / com.yongtrim.lib.model.config
@@ -38,8 +22,8 @@ import java.util.UUID;
  * Created by Uihyun on 15. 9. 2..
  */
 public class ConfigManager extends ModelManager {
-    private final String TAG = getClass().getSimpleName();
     private static ConfigManager instance;
+    private final String TAG = getClass().getSimpleName();
     private ContextHelper contextHelper;
     private ConfigPreference preference;
 
@@ -47,30 +31,29 @@ public class ConfigManager extends ModelManager {
     private Banner banner;
     private PostList events;
 
-    public static ConfigManager getInstance(ContextHelper contextHelper){
-        if(instance == null) {
+    public static ConfigManager getInstance(ContextHelper contextHelper) {
+        if (instance == null) {
             instance = new ConfigManager();
         }
 
-        if(instance.contextHelper != contextHelper) {
+        if (instance.contextHelper != contextHelper) {
             instance.setPreference(contextHelper);
         }
         instance.contextHelper = contextHelper;
         return instance;
     }
 
+    public ConfigPreference getPreference() {
+        return preference;
+    }
 
     public void setPreference(ContextHelper contextHelper) {
         preference = new ConfigPreference(contextHelper.getContext());
     }
 
-    public ConfigPreference getPreference() {
-        return preference;
-    }
-
     public void get(final Response.Listener<ConfigData> listener,
-                            final Response.ErrorListener errorListener,
-                            final String type){
+                    final Response.ErrorListener errorListener,
+                    final String type) {
 
 
         StringBuffer url = new StringBuffer();
@@ -91,7 +74,7 @@ public class ConfigManager extends ModelManager {
 
 
     public Config getConfigHello() {
-        if(configHello == null) {
+        if (configHello == null) {
             configHello = Config.getConfig(preference.getHello());
         }
         return configHello;
@@ -105,7 +88,7 @@ public class ConfigManager extends ModelManager {
 
 
     public Banner getBanner() {
-        if(banner == null) {
+        if (banner == null) {
             banner = preference.getBanner();
         }
         return banner;
@@ -118,7 +101,7 @@ public class ConfigManager extends ModelManager {
     }
 
     public PostList getEvents() {
-        if(events == null) {
+        if (events == null) {
             events = preference.getEvent();
         }
         return events;
@@ -143,13 +126,11 @@ public class ConfigManager extends ModelManager {
 
         //private static final String PROPERTY_BANNER = "config_banner";
         private static final String PROPERTY_BANNER2 = "config_banner2";
-        private static final String PROPERTY_EVENT= "config_event";
+        private static final String PROPERTY_EVENT = "config_event";
 
-        private static final String PROPERTY_MYADDRESS= "config_myaddress";
+        private static final String PROPERTY_MYADDRESS = "config_myaddress";
 
         private static final String PROPERTY_SHAREINSTAGRAM = "config_shareinstagram";
-
-
 
 
         public ConfigPreference(Context context) {
@@ -181,28 +162,28 @@ public class ConfigManager extends ModelManager {
         }
 
         public void putSignupParam(NsUser user) {
-            if(user == null)
+            if (user == null)
                 clear(PROPERTY_SIGNUPPARAM);
             else
                 put(PROPERTY_SIGNUPPARAM, user.toString());
         }
 
         public NsUser getSignupParam() {
-            if(!TextUtils.isEmpty(get(PROPERTY_SIGNUPPARAM))) {
+            if (!TextUtils.isEmpty(get(PROPERTY_SIGNUPPARAM))) {
                 return NsUser.getUser(get(PROPERTY_SIGNUPPARAM));
             }
             return null;
         }
 
         public void putNanumParam(Nanum nanum) {
-            if(nanum == null)
+            if (nanum == null)
                 clear(PROPERTY_NANUMEDITPARAM);
             else
                 put(PROPERTY_NANUMEDITPARAM, nanum.toString());
         }
 
         public Nanum getNanumParam() {
-            if(!TextUtils.isEmpty(get(PROPERTY_NANUMEDITPARAM))) {
+            if (!TextUtils.isEmpty(get(PROPERTY_NANUMEDITPARAM))) {
                 return Nanum.getNanum(get(PROPERTY_NANUMEDITPARAM));
             }
             return null;
@@ -265,7 +246,7 @@ public class ConfigManager extends ModelManager {
 
 
         public void putSort(int sort) {
-           put(PROPERTY_SORT, sort);
+            put(PROPERTY_SORT, sort);
         }
 
         public int getSort() {
@@ -274,7 +255,7 @@ public class ConfigManager extends ModelManager {
 
 
         public void putBanner(Banner banner) {
-            if(banner != null)
+            if (banner != null)
                 put(PROPERTY_BANNER2, banner.toString());
             else
                 clear(PROPERTY_BANNER2);
@@ -294,9 +275,8 @@ public class ConfigManager extends ModelManager {
         }
 
 
-
         public void putMyAddress(Address address) {
-            if(address == null)
+            if (address == null)
                 clear(PROPERTY_MYADDRESS);
             else
                 put(PROPERTY_MYADDRESS, address.toString());

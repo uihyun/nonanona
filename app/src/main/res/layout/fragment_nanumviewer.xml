@@ -3,16 +3,14 @@
               xmlns:ultra="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical"
-    >
+              android:orientation="vertical">
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,22 +21,19 @@
                 android:id="@+id/viewNanum"
                 layout="@layout/cell_nanum"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="wrap_content"/>
 
             <RelativeLayout
                 android:id="@+id/viewTop"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
-                android:visibility="gone"
-                >
+                android:visibility="gone">
 
                 <com.yongtrim.lib.ui.autoscrollviewpager.AutoScrollViewPager
                     android:id="@+id/viewPicture"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/gray"
-                    />
+                    android:background="@color/gray"/>
 
                 <com.yongtrim.lib.ui.viewpagerindicator.CirclePageIndicator
                     android:id="@+id/pageIndicator"
@@ -56,8 +51,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
                     android:layout_margin="10dp"
-                    android:visibility="gone"
-                    />
+                    android:visibility="gone"/>
 
                 <RelativeLayout
                     android:id="@+id/viewFinishBig"
@@ -104,8 +98,7 @@
                     ultra:style="center"
                     ultra:text="나눔 선정하기"
                     ultra:textColor="@color/white"
-                    ultra:textSize="15dp"
-                    />
+                    ultra:textSize="15dp"/>
 
                 <!--<com.yongtrim.lib.ui.UltraButton-->
                 <!--android:id="@+id/btnSelectConfirm"-->
@@ -158,8 +151,7 @@
                         ultra:text="-"
                         ultra:textColor="@color/black"
                         ultra:textSize="14dp"
-                        ultra:textStyle="bold"
-                        />
+                        ultra:textStyle="bold"/>
 
                     <com.yongtrim.lib.ui.UltraButton
 
@@ -180,8 +172,7 @@
                         ultra:text="-"
                         ultra:textColor="@color/black"
                         ultra:textSize="14dp"
-                        ultra:textStyle="bold"
-                        />
+                        ultra:textStyle="bold"/>
                 </LinearLayout>
 
                 <View
@@ -196,8 +187,7 @@
                     android:layout_height="wrap_content"
                     android:divider="@null"
                     android:dividerHeight="0dp"
-                    android:listSelector="@color/trans"
-                    />
+                    android:listSelector="@color/trans"/>
 
             </LinearLayout>
 
@@ -229,8 +219,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="top"
                         android:background="@drawable/picture_big_icon"
-                        android:scaleType="fitXY"
-                        />
+                        android:scaleType="fitXY"/>
 
                     <EditText
                         android:id="@+id/etInput"
@@ -242,8 +231,7 @@
                         android:background="@color/trans"
                         android:hint="메세지를 입력하세요"
                         android:padding="10dp"
-                        android:textSize="15dp"
-                        />
+                        android:textSize="15dp"/>
 
                     <com.yongtrim.lib.ui.UltraButton
                         android:id="@+id/btnEnter"
@@ -264,9 +252,7 @@
                         ultra:style="center"
                         ultra:text="전송"
                         ultra:textColor="@color/white"
-                        ultra:textSize="15dp"
-
-                        />
+                        ultra:textSize="15dp"/>
                 </LinearLayout>
 
                 <View
@@ -282,15 +268,13 @@
                 android:id="@+id/viewBannerRoot"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_marginTop="8dp"
-                >
+                android:layout_marginTop="8dp">
 
                 <com.yongtrim.lib.ui.autoscrollviewpager.AutoScrollViewPager
                     android:id="@+id/viewBanner"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/trans"
-                    />
+                    android:background="@color/trans"/>
 
                 <com.yongtrim.lib.ui.viewpagerindicator.CirclePageIndicator
                     android:id="@+id/bannerIndicator"

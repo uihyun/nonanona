@@ -27,9 +27,11 @@ import com.nuums.nuums.adapter.CommentAdapter;
 import com.nuums.nuums.holder.NanumHolder;
 import com.nuums.nuums.model.misc.Comment;
 import com.nuums.nuums.model.misc.CommentManager;
+import com.nuums.nuums.model.misc.NanumInfo;
 import com.nuums.nuums.model.nanum.Nanum;
 import com.nuums.nuums.model.nanum.NanumData;
 import com.nuums.nuums.model.nanum.NanumManager;
+import com.nuums.nuums.model.user.NsUser;
 import com.yongtrim.lib.adapter.ImagePagerAdapter;
 import com.yongtrim.lib.fragment.ABaseFragment;
 import com.yongtrim.lib.message.PushMessage;
@@ -38,6 +40,7 @@ import com.yongtrim.lib.model.banner.BannerData;
 import com.yongtrim.lib.model.banner.BannerManager;
 import com.yongtrim.lib.model.config.ConfigManager;
 import com.yongtrim.lib.model.photo.PhotoManager;
+import com.yongtrim.lib.model.user.UserData;
 import com.yongtrim.lib.model.user.UserManager;
 import com.yongtrim.lib.ui.UltraButton;
 import com.yongtrim.lib.ui.autoscrollviewpager.AutoScrollViewPager;
@@ -49,6 +52,7 @@ import com.yongtrim.lib.util.UIUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -80,7 +84,6 @@ public class NanumViewerFragment extends ABaseFragment {
     Runnable timerRunnable;
 
     boolean isLoading;
-
     boolean isSelectMode;
 
     String nanum_id;
@@ -89,6 +92,7 @@ public class NanumViewerFragment extends ABaseFragment {
     CirclePageIndicator bannerIndicator;
     AutoScrollViewPager viewBanner;
 
+    private HashMap<String, String> applierMap;
 
     public void setNanumId(String nanum_id) {
         this.nanum_id = nanum_id;
@@ -97,6 +101,8 @@ public class NanumViewerFragment extends ABaseFragment {
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
+
+        applierMap = new HashMap<>();
 
         if (nanum_id != null) {
             nanum = new Nanum();
@@ -118,6 +124,9 @@ public class NanumViewerFragment extends ABaseFragment {
                                             isLoading = false;
                                             contextHelper.getActivity().setupActionBar(nanum.getTitle());
                                             contextHelper.getActivity().setImageButtonAndVisiable(R.drawable.menu_3dotwhite);
+
+                                            // comment list에 apply/comment 구분하여 apply count를 보도록 함.
+                                            countApplier();
 
                                             try {
                                                 refresh();
@@ -150,16 +159,19 @@ public class NanumViewerFragment extends ABaseFragment {
 
         } else {
             nanum = Nanum.getNanum(contextHelper.getActivity().getIntent().getStringExtra("nanum"));
+
+            // comment list에 apply/comment 구분하여 apply count를 보도록 함.
+            countApplier();
+
             contextHelper.getActivity().setupActionBar(nanum.getTitle());
             contextHelper.getActivity().setImageButtonAndVisiable(R.drawable.menu_3dotwhite);
-
         }
+
 
         timerHandler = new Handler();
         timerRunnable = new Runnable() {
             @Override
             public void run() {
-
                 try {
                     refresh();
                 } catch (Exception e) {
@@ -375,6 +387,8 @@ public class NanumViewerFragment extends ABaseFragment {
 
         bannerIndicator = (CirclePageIndicator) viewMain.findViewById(R.id.bannerIndicator);
 
+        if (applierMap.size() > 0)
+            countApplier();
         refresh();
 
         BannerManager.getInstance(contextHelper).find(
@@ -476,23 +490,96 @@ public class NanumViewerFragment extends ABaseFragment {
 
         switch (v.getId()) {
             case R.id.btnSelect:
-                if (nanum.getMethod().equals(Nanum.METHOD_SELECT) && nanum.getSelectCount() < nanum.getAmount()) {
+                // 나눔 신청하기 버튼
+                if (!UserManager.getInstance(contextHelper).getMe().isSame(nanum.getOwner()) &&
+                        (nanum.getStatus().equals(Nanum.STATUS_READY) || nanum.getStatus().equals(Nanum.STATUS_ONGOING))) {
+                    new SweetAlertDialog(getContext())
+                            .setContentText("신청 후에는 변경할 수 없습니다. 신청하시겠습니까?")
+                            .showCancelButton(true)
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(final SweetAlertDialog sweetAlertDialog) {
+
+                                    sweetAlertDialog.dismissWithAnimation();
+
+                                    contextHelper.showProgress(null);
+
+                                    new SweetAlertDialog(getContext(), SweetAlertDialog.EDITTEXT_TYPE)
+                                            .setTitleText("신청 댓글 남기기")
+                                            .setEditTextValue("", null, InputType.TYPE_TEXT_FLAG_MULTI_LINE, 0)
+                                            .showCancelButton(true)
+                                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                                @Override
+                                                public void onClick(SweetAlertDialog sDialog) {
+                                                    sDialog.dismissWithAnimation();
+                                                    contextHelper.showProgress(null);
+
+                                                    CommentManager.getInstance(contextHelper).createInNanum(nanum, sDialog.getEditTextValue(), true,
+                                                            new Response.Listener<NanumData>() {
+                                                                @Override
+                                                                public void onResponse(NanumData response) {
+                                                                    contextHelper.hideProgress();
+                                                                    if (response.isSuccess()) {
+                                                                        nanum = response.nanum;
+                                                                        nanum.patch(contextHelper);
+
+                                                                        EventBus.getDefault().post(new PushMessage().setActionCode(PushMessage.ACTIONCODE_CHANGE_NANUM).setObject(response.nanum));
+
+                                                                        if (response.user != null) {
+                                                                            UserManager.getInstance(contextHelper).setMe(response.user);
+                                                                            EventBus.getDefault().post(new PushMessage().setActionCode(PushMessage.ACTIONCODE_CHANGE_ME).setObject(response.user));
+                                                                            applierMap.put(response.user.getId(), "APPLY");
+                                                                            nanum.setApplierMap(applierMap);
+                                                                        }
+
+
+                                                                        try {
+                                                                            refresh();
+                                                                        } catch (Exception e) {
+                                                                            e.printStackTrace();
+                                                                        }
+                                                                        etInput.setText("");
+
+                                                                        try {
+                                                                            InputMethodManager im = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                                                                            im.hideSoftInputFromWindow(etInput.getWindowToken(), 0);
+                                                                        } catch (Exception e) {
+                                                                            e.printStackTrace();
+                                                                        }
+
+                                                                    } else {
+                                                                        new SweetAlertDialog(getContext())
+                                                                                .setContentText(response.getErrorMessage())
+                                                                                .show();
+                                                                    }
+                                                                }
+                                                            },
+                                                            null
+                                                    );
+                                                }
+                                            })
+                                            .show();
+                                }
+                            })
+                            .show();
+                    break;
+                    // 나눔 선정하기 버튼
+                } else if (nanum.getMethod().equals(Nanum.METHOD_SELECT) && nanum.getSelectCount() < nanum.getAmount()) {
                     new SweetAlertDialog(getContext()).setContentText("당첨자 수가 모자랍니다.").show();
                 } else {
-
                     String message = "확정 후에는 당첨자를 변경할 수 없습니다. 진행 하시겠습니까?";
                     if (nanum.getMethod().equals(Nanum.METHOD_RANDOM)) {
                         message = "추첨을 시작하면 결과를 번복할 수 없습니다. 추첨을 시작하겠습니까?";
-                        List<Comment> applys = nanum.getApplys();
-                        Collections.shuffle(applys, new Random(System.nanoTime()));
+                        List<Comment> applies = nanum.getComments();
+                        Collections.shuffle(applies, new Random(System.nanoTime()));
 
-                        if (applys.size() < nanum.getAmount()) {
+                        if (applies.size() < nanum.getAmount()) {
                             new SweetAlertDialog(getContext()).setContentText("신청자 수가 모자랍니다.").show();
                             return;
                         }
 
                         for (int i = 0; i < nanum.getAmount(); i++) {
-                            Comment apply = applys.get(i);
+                            Comment apply = applies.get(i);
                             apply.isSelect = true;
                         }
                     }
@@ -533,12 +620,9 @@ public class NanumViewerFragment extends ABaseFragment {
                                             },
                                             null
                                     );
-
-
                                 }
                             })
                             .show();
-
                     break;
                 }
                 break;
@@ -614,7 +698,6 @@ public class NanumViewerFragment extends ABaseFragment {
                                                         }
                                                     })
                                                     .show();
-
                                             break;
                                     }
                                 }
@@ -639,8 +722,6 @@ public class NanumViewerFragment extends ABaseFragment {
                             })
                             .show();
                 }
-
-
                 break;
         }
     }
@@ -773,7 +854,6 @@ public class NanumViewerFragment extends ABaseFragment {
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
                     public void onGlobalLayout() {
-
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                             listView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                         } else {
@@ -862,12 +942,56 @@ public class NanumViewerFragment extends ABaseFragment {
                     btnSelect.setText("나눔 추첨하기");
                 }
             }
+        } else {
+            if (nanum.getStatus().equals(Nanum.STATUS_READY) || nanum.getStatus().equals(Nanum.STATUS_ONGOING)) {
+                viewMain.findViewById(R.id.viewSelect).setVisibility(View.VISIBLE);
+
+                btnSelect.setText("나눔 신청하기");
+            }
         }
 
         commentAdapter.setIsSelectMode(isSelectMode);
 
         commentAdapter.setData(nanum, nanum.getComments());
         commentAdapter.notifyDataSetChanged();
+    }
+
+    public void countApplier() {
+        List<Comment> comments = nanum.getComments();
+        for (int i = 0; i < comments.size(); i++) {
+            final Comment comment = comments.get(i);
+            if (!applierMap.containsKey(comment.getOwner().getId())) {
+                contextHelper.getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        UserManager.getInstance(contextHelper).read(comment.getOwner().getId(),
+                                new Response.Listener<UserData>() {
+                                    @Override
+                                    public void onResponse(UserData response) {
+                                        if (response.isSuccess()) {
+                                            NsUser user = response.user;
+                                            if (user.getApplys() != null) {
+                                                for (int j = 0; j < user.getApplys().size(); j++) {
+                                                    NanumInfo info = user.getApplys().get(j);
+                                                    if (info.getNanum() != null) {
+                                                        if (info.getNanum().getId().equals(nanum.getId())) {
+                                                            applierMap.put(user.getId(), "APPLY");
+                                                            nanum.setApplierMap(applierMap);
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            EventBus.getDefault().post(new PushMessage().setActionCode(PushMessage.ACTIONCODE_CHANGE_ME).setObject(response.user));
+                                        }
+                                    }
+                                },
+                                null
+                        );
+                    }
+                });
+            }
+        }
     }
 
     void sendComment(String message) {
@@ -884,7 +1008,7 @@ public class NanumViewerFragment extends ABaseFragment {
         //btnEnter.setProgressBar(true);
 
         btnEnter.setEnabled(false, false);
-        CommentManager.getInstance(contextHelper).createInNanum(nanum, message,
+        CommentManager.getInstance(contextHelper).createInNanum(nanum, message, false,
                 new Response.Listener<NanumData>() {
                     @Override
                     public void onResponse(NanumData response) {

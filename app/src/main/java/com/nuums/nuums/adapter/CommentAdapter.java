@@ -47,7 +47,6 @@ public class CommentAdapter extends BaseAdapter {
 
     public void setData(Nanum nanum, List<Comment> comments) {
         this.nanum = nanum;
-
         this.comments = comments;
     }
 
@@ -120,8 +119,12 @@ public class CommentAdapter extends BaseAdapter {
             h.tvMessage.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.gray));
 
             if (isSelectMode) {
-                h.cbCheck.setVisibility(View.VISIBLE);
-                h.cbCheck.setChecked(comment.isSelect);
+                if (nanum.getApplierMap().containsKey(comment.getOwner().getId())) {
+                    h.tvUsername.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.caldroid_light_red));
+                    h.tvMessage.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.caldroid_light_red));
+                    h.cbCheck.setVisibility(View.VISIBLE);
+                    h.cbCheck.setChecked(comment.isSelect);
+                }
             }
         }
 

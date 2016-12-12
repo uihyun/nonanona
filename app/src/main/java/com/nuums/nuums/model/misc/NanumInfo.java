@@ -2,7 +2,6 @@ package com.nuums.nuums.model.misc;
 
 import com.google.gson.annotations.SerializedName;
 import com.nuums.nuums.model.nanum.Nanum;
-import com.nuums.nuums.model.user.NsUser;
 
 import java.util.Date;
 
