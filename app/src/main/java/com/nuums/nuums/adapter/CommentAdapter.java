@@ -120,8 +120,8 @@ public class CommentAdapter extends BaseAdapter {
 
             if (isSelectMode) {
                 if (nanum.getApplierMap().containsKey(comment.getOwner().getId())) {
-                    h.tvUsername.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.caldroid_light_red));
-                    h.tvMessage.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.caldroid_light_red));
+                    h.tvUsername.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.pink));
+                    h.tvMessage.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.pink));
                     h.cbCheck.setVisibility(View.VISIBLE);
                     h.cbCheck.setChecked(comment.isSelect);
                 }
