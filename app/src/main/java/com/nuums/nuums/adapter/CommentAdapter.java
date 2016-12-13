@@ -115,13 +115,26 @@ public class CommentAdapter extends BaseAdapter {
                 h.ivMark.setVisibility(View.VISIBLE);
             }
 
-            h.tvUsername.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.black));
-            h.tvMessage.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.gray));
-
-            if (isSelectMode) {
-                if (nanum.getApplierMap().containsKey(comment.getOwner().getId())) {
+            if (nanum.getApplierMap() != null) {
+                if (!nanum.getApplierMap().containsKey(comment.getOwner().getId())) {
+                    h.tvUsername.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.black));
+                    h.tvMessage.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.gray));
+                } else {
                     h.tvUsername.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.pink));
                     h.tvMessage.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.pink));
+                }
+
+                if (isSelectMode) {
+                    if (nanum.getApplierMap().containsKey(comment.getOwner().getId())) {
+                        h.cbCheck.setVisibility(View.VISIBLE);
+                        h.cbCheck.setChecked(comment.isSelect);
+                    }
+                }
+            } else {
+                h.tvUsername.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.pink));
+                h.tvMessage.setTextColor(ContextCompat.getColor(contextHelper.getContext(), R.color.pink));
+
+                if (isSelectMode) {
                     h.cbCheck.setVisibility(View.VISIBLE);
                     h.cbCheck.setChecked(comment.isSelect);
                 }
