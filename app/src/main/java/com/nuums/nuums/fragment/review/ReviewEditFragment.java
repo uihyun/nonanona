@@ -30,6 +30,7 @@ import com.kakao.kakaostory.PhotoKakaoStoryPostParamBuilder;
 import com.kakao.util.KakaoParameterException;
 import com.nuums.nuums.R;
 import com.nuums.nuums.adapter.UserAdapter;
+import com.nuums.nuums.model.misc.Sns;
 import com.nuums.nuums.model.review.Review;
 import com.nuums.nuums.model.review.ReviewData;
 import com.nuums.nuums.model.review.ReviewManager;
@@ -123,7 +124,8 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
         if (isModify) {
             contextHelper.getActivity().setupActionBar("후기 수정하기");
             if (review == null)
-                review = Review.getReview(contextHelper.getActivity().getIntent().getStringExtra("review"));
+                review = Review.getReview(
+                        contextHelper.getActivity().getIntent().getStringExtra("review"));
         } else {
             contextHelper.getActivity().setupActionBar("후기 등록하기");
 
@@ -134,7 +136,8 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
 
             if (contextHelper.getActivity().getIntent().hasExtra("tag")) {
                 ArrayList<NsUser> tags = new ArrayList<>();
-                tags.add(NsUser.getUser(contextHelper.getActivity().getIntent().getStringExtra("tag")));
+                tags.add(NsUser.getUser(
+                        contextHelper.getActivity().getIntent().getStringExtra("tag")));
                 review.setTags(tags);
             }
         }
@@ -144,9 +147,11 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle saveInstanceState) {
         viewMain = inflater.inflate(R.layout.fragment_reviewedit, container, false);
-        contextHelper.getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        contextHelper.getActivity().getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         View viewTop = viewMain.findViewById(R.id.viewTop);
         UIUtil.setRatio(viewTop, getContext(), 320, 300);
@@ -161,7 +166,8 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
         etTags = (ChipsMultiAutoCompleteTextview) viewMain.findViewById(R.id.etTags);
         etTags.setContextHelper(contextHelper);
         NsUserSearch[] users = new NsUserSearch[0];
-        UserAdapter myAdapter = new UserAdapter(contextHelper.getContext(), R.layout.cell_searchuser, users);
+        UserAdapter myAdapter =
+                new UserAdapter(contextHelper.getContext(), R.layout.cell_searchuser, users);
         myAdapter.setContextHelper(contextHelper);
         etTags.setAdapter(myAdapter);
         etTags.setTokenizer(new SpaceTokenizer());
@@ -169,11 +175,17 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
         etTags.setTags(review.getTags());
 
         btnDelete = (Button) viewMain.findViewById(R.id.btnDelete);
-        btnDelete.setCompoundDrawablesWithIntrinsicBounds(null, ContextCompat.getDrawable(contextHelper.getContext(), R.drawable.tresh_round), null, null);
+        btnDelete.setCompoundDrawablesWithIntrinsicBounds(null,
+                ContextCompat.getDrawable(contextHelper.getContext(), R.drawable.tresh_round), null,
+                null);
         btnModify = (Button) viewMain.findViewById(R.id.btnModify);
-        btnModify.setCompoundDrawablesWithIntrinsicBounds(null, ContextCompat.getDrawable(contextHelper.getContext(), R.drawable.trim_round), null, null);
+        btnModify.setCompoundDrawablesWithIntrinsicBounds(null,
+                ContextCompat.getDrawable(contextHelper.getContext(), R.drawable.trim_round), null,
+                null);
         btnRotate = (Button) viewMain.findViewById(R.id.btnRotate);
-        btnRotate.setCompoundDrawablesWithIntrinsicBounds(null, ContextCompat.getDrawable(contextHelper.getContext(), R.drawable.rotation_round), null, null);
+        btnRotate.setCompoundDrawablesWithIntrinsicBounds(null,
+                ContextCompat.getDrawable(contextHelper.getContext(), R.drawable.rotation_round),
+                null, null);
 
         twitterManager = TwitterManager.getInstance(contextHelper);
         twitterPreference = TwitterPreference.getInstance(contextHelper.getContext());
@@ -182,10 +194,10 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
 
         kakaoPreference = KakaoPreference.getInstance(contextHelper.getContext());
 
-//        isPostTwitter = twitterPreference.isPostable();
-//        isPostFacebook = facebookPreference.isPostable();
-//        isPostKakao = kakaoPreference.isPostable();
-//        isPostInsta = ConfigManager.getInstance(contextHelper).getPreference().getIsShareInstagram();
+        //        isPostTwitter = twitterPreference.isPostable();
+        //        isPostFacebook = facebookPreference.isPostable();
+        //        isPostKakao = kakaoPreference.isPostable();
+        //        isPostInsta = ConfigManager.getInstance(contextHelper).getPreference().getIsShareInstagram();
 
         isPostTwitter = false;
         isPostFacebook = false;
@@ -204,7 +216,7 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
         }
 
         kakaoManager = KakaoManager.getInstance(contextHelper, new SNSLoginListener() {
-            public void success(boolean isLogin, String snsId) {
+            public void success(boolean isLogin, Sns sns) {
                 isPostKakao = kakaoPreference.isPostable();
                 refresh();
             }
@@ -323,7 +335,8 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
             break;
             case R.id.btnInsta: {
                 isPostInsta = !isPostInsta;
-                ConfigManager.getInstance(contextHelper).getPreference().putIsShareInstagram(isPostInsta);
+                ConfigManager.getInstance(contextHelper).getPreference()
+                        .putIsShareInstagram(isPostInsta);
                 refresh();
             }
             break;
@@ -331,7 +344,7 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
                 if (isPostFacebook == false && !facebookPreference.isLogin()) {
                     facebookManager.login(new SNSLoginListener() {
                         @Override
-                        public void success(boolean isLogin, String snsId) {
+                        public void success(boolean isLogin, Sns sns) {
                             isPostFacebook = facebookPreference.isPostable();
                             refresh();
                         }
@@ -394,11 +407,8 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
                     return;
                 }
 
-                new SweetAlertDialog(getContext())
-                        .setContentText("등록한 사진을 삭제합니다.")
-                        .showCancelButton(true)
-                        .setConfirmText("예")
-                        .setCancelText("아니오")
+                new SweetAlertDialog(getContext()).setContentText("등록한 사진을 삭제합니다.")
+                        .showCancelButton(true).setConfirmText("예").setCancelText("아니오")
                         .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                             @Override
                             public void onClick(final SweetAlertDialog sweetAlertDialog) {
@@ -406,8 +416,7 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
                                 review.getPhoto().clear();
                                 refresh();
                             }
-                        })
-                        .show();
+                        }).show();
             }
             break;
             case R.id.btnModify: {
@@ -488,19 +497,15 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
             submit();
             submit();
         } else {
-            new SweetAlertDialog(getContext())
-                    .setContentText("등록하시겠습니까?")
-                    .showCancelButton(true)
-                    .setConfirmText("예")
-                    .setCancelText("아니오")
+            new SweetAlertDialog(getContext()).setContentText("등록하시겠습니까?").showCancelButton(true)
+                    .setConfirmText("예").setCancelText("아니오")
                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                         @Override
                         public void onClick(final SweetAlertDialog sweetAlertDialog) {
                             sweetAlertDialog.dismissWithAnimation();
                             submit();
                         }
-                    })
-                    .show();
+                    }).show();
         }
     }
 
@@ -520,15 +525,16 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
                 @Override
                 public void run() {
                     try {
-                        ReviewManager.getInstance(contextHelper).create(
-                                new Response.Listener<ReviewData>() {
+                        ReviewManager.getInstance(contextHelper)
+                                .create(new Response.Listener<ReviewData>() {
                                     @Override
                                     public void onResponse(ReviewData response) {
                                         if (response.isSuccess()) {
                                             review.setId(response.review.getId());
                                             review.setOwner(response.review.getOwner());
                                             if (response.user != null)
-                                                UserManager.getInstance(contextHelper).setMe(response.user);
+                                                UserManager.getInstance(contextHelper)
+                                                        .setMe(response.user);
 
                                             latchCreate.countDown();
                                         } else {
@@ -538,9 +544,7 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
                                             contextHelper.hideProgress();
                                         }
                                     }
-                                },
-                                null
-                        );
+                                }, null);
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -636,7 +640,9 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
                     if (isPostInsta) {
                         Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
                         shareIntent.setType("image/*");
-                        shareIntent.putExtra(Intent.EXTRA_STREAM, getImageUri(contextHelper.getContext(), review.getPhoto().getBitmap()));
+                        shareIntent.putExtra(Intent.EXTRA_STREAM,
+                                getImageUri(contextHelper.getContext(),
+                                        review.getPhoto().getBitmap()));
                         shareIntent.putExtra(Intent.EXTRA_TEXT, review.getContent());
                         shareIntent.setPackage("com.instagram.android");
                         contextHelper.getActivity().startActivity(shareIntent);
@@ -655,16 +661,15 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
             public void run() {
                 try {
                     latchInsta.await();
-                    PhotoManager.getInstance(contextHelper).uploadPhoto(review.getPhoto(),
-                            new Response.Listener<Photo>() {
+                    PhotoManager.getInstance(contextHelper)
+                            .uploadPhoto(review.getPhoto(), new Response.Listener<Photo>() {
                                 @Override
                                 public void onResponse(Photo photo) {
                                     review.setPhoto(photo);
 
                                     latchPhoto.countDown();
                                 }
-                            },
-                            new Response.ErrorListener() {
+                            }, new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(final VolleyError error) {
                                     contextHelper.getActivity().runOnUiThread(new Runnable() {
@@ -672,15 +677,15 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
                                         public void run() {
                                             try {
                                                 contextHelper.hideProgress();
-                                                new SweetAlertDialog(contextHelper.getContext()).setContentText(error.getMessage()).show();
+                                                new SweetAlertDialog(contextHelper.getContext())
+                                                        .setContentText(error.getMessage()).show();
                                             } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
                                     });
                                 }
-                            }
-                    );
+                            });
 
                 } catch (Exception e) {
                     latchPhoto.countDown();
@@ -704,9 +709,8 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
                         }
                     });
 
-                    ReviewManager.getInstance(contextHelper).update(
-                            review,
-                            new Response.Listener<ReviewData>() {
+                    ReviewManager.getInstance(contextHelper)
+                            .update(review, new Response.Listener<ReviewData>() {
                                 @Override
                                 public void onResponse(ReviewData response) {
                                     if (response.isSuccess()) {
@@ -716,13 +720,10 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
                                         latchUpdate.countDown();
                                     } else {
                                         new SweetAlertDialog(getContext())
-                                                .setContentText(response.getErrorMessage())
-                                                .show();
+                                                .setContentText(response.getErrorMessage()).show();
                                     }
                                 }
-                            },
-                            null
-                    );
+                            }, null);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -748,13 +749,18 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
                                 PhotoManager.getInstance(contextHelper).clearCache();
 
                                 if (isModify) {
-                                    EventBus.getDefault().post(new PushMessage().setActionCode(PushMessage.ACTIONCODE_CHANGE_REVIEW).setObject(review));
+                                    EventBus.getDefault().post(new PushMessage()
+                                            .setActionCode(PushMessage.ACTIONCODE_CHANGE_REVIEW)
+                                            .setObject(review));
                                     contextHelper.getActivity().finish();
                                 } else {
-                                    EventBus.getDefault().post(new PushMessage().setActionCode(PushMessage.ACTIONCODE_ADDED_REVIEW).setObject(review));
+                                    EventBus.getDefault().post(new PushMessage()
+                                            .setActionCode(PushMessage.ACTIONCODE_ADDED_REVIEW)
+                                            .setObject(review));
                                     contextHelper.getActivity().finish();
 
-                                    Toast.makeText(contextHelper.getContext(), "등록하였습니다.", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(contextHelper.getContext(), "등록하였습니다.",
+                                            Toast.LENGTH_LONG).show();
                                 }
 
                             } catch (Exception e) {
@@ -774,27 +780,26 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
     public Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(
-                inContext.getContentResolver(), inImage, "Title", null);
+        String path = MediaStore.Images.Media
+                .insertImage(inContext.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
     }
 
 
     void updateFacebook(final CountDownLatch latch) {
 
-        Privacy privacy = new Privacy.Builder()
-                .setPrivacySettings(Privacy.PrivacySettings.ALL_FRIENDS)
-                .build();
+        Privacy privacy =
+                new Privacy.Builder().setPrivacySettings(Privacy.PrivacySettings.ALL_FRIENDS)
+                        .build();
 
         StringBuilder messageData = new StringBuilder(review.getContent()).append('\n');
         //.append("NANOJO에서 올림");
 
-        com.sromku.simple.fb.entities.Photo photoFB = new com.sromku.simple.fb.entities.Photo.Builder()
-                .setImage(review.getPhoto().getBitmap())
-                .setName(messageData.toString())
-                //.setPlace("110619208966868")
-                .setPrivacy(privacy)
-                .build();
+        com.sromku.simple.fb.entities.Photo photoFB =
+                new com.sromku.simple.fb.entities.Photo.Builder()
+                        .setImage(review.getPhoto().getBitmap()).setName(messageData.toString())
+                        //.setPlace("110619208966868")
+                        .setPrivacy(privacy).build();
 
         SimpleFacebook.getInstance().publish(photoFB, false, new OnPublishListener() {
             @Override
@@ -838,29 +843,30 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
 
 
     void updateTwitter(final CountDownLatch latch) {
-        TwitterManager.getInstance(contextHelper).post(review.getPhoto(), review.getContent(), new SNSPostListner() {
-            @Override
-            public void success() {
-                contextHelper.getActivity().runOnUiThread(new Runnable() {
+        TwitterManager.getInstance(contextHelper)
+                .post(review.getPhoto(), review.getContent(), new SNSPostListner() {
+                    @Override
+                    public void success() {
+                        contextHelper.getActivity().runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                latch.countDown();
+                            }
+                        });
+                    }
 
                     @Override
-                    public void run() {
-                        latch.countDown();
+                    public void fail() {
+                        contextHelper.getActivity().runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                latch.countDown();
+                            }
+                        });
                     }
                 });
-            }
-
-            @Override
-            public void fail() {
-                contextHelper.getActivity().runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        latch.countDown();
-                    }
-                });
-            }
-        });
 
     }
 
@@ -868,7 +874,8 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
         try {
             final List<File> files = new ArrayList<File>();
 
-            File file = FileUtil.getInstance(contextHelper.getContext()).saveBitmap(review.getPhoto().getBitmap(), "photo");
+            File file = FileUtil.getInstance(contextHelper.getContext())
+                    .saveBitmap(review.getPhoto().getBitmap(), "photo");
             files.add(file);
 
             KakaoStoryService.requestMultiUpload(new StoryResponseHandler<String[]>() {
@@ -876,23 +883,32 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
                 public void onHttpSuccess(final String[] imageURLs) {
                     try {
                         if (imageURLs != null && imageURLs.length != 0) {
-                            final PhotoKakaoStoryPostParamBuilder postParamBuilder = new PhotoKakaoStoryPostParamBuilder(imageURLs);
+                            final PhotoKakaoStoryPostParamBuilder postParamBuilder =
+                                    new PhotoKakaoStoryPostParamBuilder(imageURLs);
                             postParamBuilder.setContent(review.getContent());
 
-                            String execParam = contextHelper.getContext().getString(R.string.kakao_scheme) + "://kakaostory/review_id=" + review.getId();
-                            String marketParam = "market://details?id=com.nuums.nuums&referrer=kakaostory";//ConfigManager.getInstance(contextHelper).getConfigHello().getParams().getAdUrl();//"market://details?id=com.kakao.sample.kakaostory&referrer=kakaostory";
+                            String execParam = contextHelper.getContext().getString(
+                                    R.string.kakao_scheme) + "://kakaostory/review_id=" + review
+                                    .getId();
+                            String marketParam =
+                                    "market://details?id=com.nuums.nuums&referrer=kakaostory";//ConfigManager.getInstance(contextHelper).getConfigHello().getParams().getAdUrl();//"market://details?id=com.kakao.sample.kakaostory&referrer=kakaostory";
 
                             // 앱이 설치되어 있는 경우 kakao<app_key>://kakaostory?place=1111 로 이동.
                             // 앱이 설치되어 있지 않은 경우 market://details?id=com.kakao.sample.kakaostory&referrer=kakaostory로 이동
-                            postParamBuilder.setAndroidExecuteParam(execParam).setIOSExecuteParam(execParam).setAndroidMarketParam(marketParam).setIOSMarketParam(marketParam);
+                            postParamBuilder.setAndroidExecuteParam(execParam)
+                                    .setIOSExecuteParam(execParam)
+                                    .setAndroidMarketParam(marketParam)
+                                    .setIOSMarketParam(marketParam);
                             try {
                                 final Bundle parameters = postParamBuilder.build();
-                                KakaoStoryService.requestPost(KakaoStoryService.StoryType.PHOTO, new StoryResponseHandler<MyStoryInfo>() {
-                                    @Override
-                                    public void onHttpSuccess(final MyStoryInfo myStoryInfo) {
-                                        latchKas.countDown();
-                                    }
-                                }, parameters);
+                                KakaoStoryService.requestPost(KakaoStoryService.StoryType.PHOTO,
+                                        new StoryResponseHandler<MyStoryInfo>() {
+                                            @Override
+                                            public void onHttpSuccess(
+                                                    final MyStoryInfo myStoryInfo) {
+                                                latchKas.countDown();
+                                            }
+                                        }, parameters);
                             } catch (KakaoParameterException e) {
                                 //Logger.e(e);
                             }
@@ -946,7 +962,8 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
 
             }, files);
         } catch (Exception e) {
-            Toast.makeText(ReviewEditFragment.this.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(ReviewEditFragment.this.getContext(), e.getMessage(), Toast.LENGTH_SHORT)
+                    .show();
         }
     }
 
@@ -968,9 +985,9 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
 
         @Override
         public void onFailure(final APIErrorResult errorResult) {
-//            final String message = "MyKakaoStoryHttpResponseHandler : failure : " + errorResult;
-//            Logger.w(message);
-//            KakaoToast.makeToast(self, message, Toast.LENGTH_LONG).show();
+            //            final String message = "MyKakaoStoryHttpResponseHandler : failure : " + errorResult;
+            //            Logger.w(message);
+            //            KakaoToast.makeToast(self, message, Toast.LENGTH_LONG).show();
         }
     }
 }

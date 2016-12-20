@@ -1,70 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:ignore="Overdraw"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:ignore="Overdraw">
 
-    >
-
-    <ScrollView android:orientation="vertical"
-        android:layout_centerInParent="true"
-
-        android:layout_height="wrap_content"
+    <ScrollView
         android:layout_width="match_parent"
-        >
-        <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
 
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
-
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/logo_green"/>
-
+                android:src="@drawable/logo_green" />
 
             <LinearLayout
+                android:id="@+id/list_signup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="35dp"
+                android:orientation="vertical">
+
+                <com.yongtrim.lib.ui.UltraButton
+                    android:id="@+id/btnSigninEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:onClick="onButtonClicked"
+                    android:padding="8dp"
+                    ultra:borderColor="@color/white"
+                    ultra:borderWidth="1px"
+                    ultra:defaultColor="@color/green"
+                    ultra:focusColor="@color/buttonsel_bg"
+                    ultra:radius="10dp"
+                    ultra:style="center"
+                    ultra:text="Email로 회원가입"
+                    ultra:textColor="@color/white"
+                    ultra:textSize="20dp" />
+
+                <com.yongtrim.lib.ui.UltraButton
+                    android:id="@+id/btnSignupFacebook"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:onClick="onButtonClicked"
+                    android:padding="8dp"
+                    ultra:borderColor="@color/white"
+                    ultra:borderWidth="1px"
+                    ultra:defaultColor="@color/com_facebook_blue"
+                    ultra:focusColor="@color/buttonsel_bg"
+                    ultra:radius="10dp"
+                    ultra:style="center"
+                    ultra:text="Facebook으로 회원가입"
+                    ultra:textColor="@color/white"
+                    ultra:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/email_signup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:layout_marginTop="30dp"
-                >
+                android:orientation="vertical">
 
                 <com.yongtrim.lib.ui.UltraEditText
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hint="이메일"
                     app:bgStyle="white"
-                    />
-
+                    app:hint="이메일" />
 
 
                 <com.yongtrim.lib.ui.UltraEditText
                     android:id="@+id/etRealName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hint="이름(실명)"
                     app:bgStyle="white"
-                    />
+                    app:hint="이름(실명)" />
 
                 <com.yongtrim.lib.ui.UltraEditText
                     android:id="@+id/etNickName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hint="닉네임(2자이상)"
                     app:bgStyle="white"
-                    />
+                    app:hint="닉네임(2자이상)" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -73,70 +109,59 @@
 
                     <com.yongtrim.lib.ui.UltraEditText
                         android:id="@+id/etPassword"
-                        android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:hint="비밀번호"
-                        app:bgStyle="white"
                         android:layout_marginRight="5dp"
-                        />
+                        android:layout_weight="1"
+                        app:bgStyle="white"
+                        app:hint="비밀번호" />
 
                     <com.yongtrim.lib.ui.UltraEditText
                         android:id="@+id/etConfirm"
-                        android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:hint="비밀번호 확인"
-                        app:bgStyle="white"
                         android:layout_marginLeft="5dp"
-                        />
+                        android:layout_weight="1"
+                        app:bgStyle="white"
+                        app:hint="비밀번호 확인" />
                 </LinearLayout>
-
-
-
-
-
-
-
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="35dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
+                android:id="@+id/email_confirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="35dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tvPolicy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/red"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:text="확인 버튼을 누르면 개인정보 수집 및 이용에 동의하게 됩니다."
-                    android:textSize="10dp"
-                    />
+                    android:textColor="@color/red"
+                    android:textSize="10dp" />
 
                 <com.yongtrim.lib.ui.UltraButton
                     android:id="@+id/btnSignin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
                     android:layout_marginTop="5dp"
                     android:onClick="onButtonClicked"
-                    ultra:style="center"
-                    ultra:borderWidth="1px"
+                    android:padding="8dp"
                     ultra:borderColor="@color/white"
-                    ultra:radius="10dp"
+                    ultra:borderWidth="1px"
                     ultra:defaultColor="@color/green"
                     ultra:focusColor="@color/buttonsel_bg"
+                    ultra:radius="10dp"
+                    ultra:style="center"
                     ultra:text="확인"
-                    ultra:textSize="20dp"
-                    ultra:textColor="@color/white" />
-
-
+                    ultra:textColor="@color/white"
+                    ultra:textSize="20dp" />
             </LinearLayout>
 
         </LinearLayout>

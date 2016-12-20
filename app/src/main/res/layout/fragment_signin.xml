@@ -1,42 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/green"
-    tools:ignore="Overdraw"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:ultra="http://schemas.android.com/apk/res-auto"
-
-    >
+    android:orientation="vertical"
+    tools:ignore="Overdraw">
 
     <ScrollView
-        android:orientation="vertical"
-        android:layout_centerInParent="true"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:paddingBottom="40dp"
-        >
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:paddingBottom="40dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/logo_white"/>
+                android:src="@drawable/logo_white" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:layout_marginTop="50dp"
+                android:orientation="vertical"
 
                 >
 
@@ -45,22 +43,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:hint="이메일"
-                    app:iconRes="@drawable/mail"
-                    />
+                    app:iconRes="@drawable/mail" />
 
                 <com.yongtrim.lib.ui.UltraEditText
                     android:id="@+id/etPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:hint=""
-                    app:iconRes="@drawable/pw"
-                    />
+                    app:iconRes="@drawable/pw" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                     <CheckBox
                         android:id="@+id/cbAutoLogin"
@@ -69,15 +65,14 @@
                         android:layout_margin="5dp"
                         android:button="@drawable/checkbox"
                         android:onClick="onButtonClicked"
-                        android:text=""/>
+                        android:text="" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="자동 로그인"
                         android:textColor="@color/white"
-                        android:textSize="14dp"
-                        />
+                        android:textSize="14dp" />
 
                 </LinearLayout>
 
@@ -86,21 +81,35 @@
                     android:id="@+id/btnSignin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
                     android:layout_marginTop="10dp"
                     android:onClick="onButtonClicked"
-                    ultra:style="center"
-                    ultra:borderWidth="1px"
+                    android:padding="8dp"
                     ultra:borderColor="@color/white"
-                    ultra:radius="10dp"
+                    ultra:borderWidth="1px"
                     ultra:defaultColor="@color/white"
                     ultra:focusColor="@color/buttonsel_bg"
+                    ultra:radius="10dp"
+                    ultra:style="center"
                     ultra:text="Login"
-                    ultra:textSize="@dimen/text_large"
-                    ultra:textColor="@color/green" />
+                    ultra:textColor="@color/green"
+                    ultra:textSize="@dimen/text_large" />
 
-
-
+                <com.yongtrim.lib.ui.UltraButton
+                    android:id="@+id/btnSigninFacebook"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:onClick="onButtonClicked"
+                    android:padding="8dp"
+                    ultra:borderColor="@color/white"
+                    ultra:borderWidth="1px"
+                    ultra:defaultColor="@color/white"
+                    ultra:focusColor="@color/buttonsel_bg"
+                    ultra:radius="10dp"
+                    ultra:style="center"
+                    ultra:text="Facebook으로 Login"
+                    ultra:textColor="@color/green"
+                    ultra:textSize="@dimen/text_large" />
             </LinearLayout>
         </LinearLayout>
 
@@ -108,78 +117,77 @@
     </ScrollView>
 
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.yongtrim.lib.ui.UltraButton
+            android:id="@+id/btnFindId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp">
+            android:layout_gravity="center"
+            android:onClick="onButtonClicked"
+            android:paddingBottom="2dp"
+            android:paddingLeft="4dp"
+            android:paddingTop="2dp"
+            ultra:defaultColor="@color/trans"
+            ultra:focusColor="@color/buttonsel_bg"
+            ultra:text="아이디 찾기"
+            ultra:textColor="@color/white"
+            ultra:textSize="14dp" />
 
-            <com.yongtrim.lib.ui.UltraButton
-                android:id="@+id/btnFindId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="4dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:onClick="onButtonClicked"
-                android:layout_gravity="center"
-                ultra:defaultColor="@color/trans"
-                ultra:focusColor="@color/buttonsel_bg"
-                ultra:text="아이디 찾기"
-                ultra:textSize="14dp"
-                ultra:textColor="@color/white" />
+        <View
+            android:layout_width="1px"
+            android:layout_height="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/white" />
 
-            <View
-                android:layout_width="1px"
-                android:layout_height="10dp"
-                android:background="@color/white"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"/>
-
-            <com.yongtrim.lib.ui.UltraButton
-                android:id="@+id/btnFindPW"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingRight="4dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:onClick="onButtonClicked"
-                android:layout_gravity="center"
-                ultra:defaultColor="@color/trans"
-                ultra:focusColor="@color/buttonsel_bg"
-                ultra:text="비밀번호 찾기"
-                ultra:textSize="14dp"
-                ultra:textColor="@color/white" />
+        <com.yongtrim.lib.ui.UltraButton
+            android:id="@+id/btnFindPW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="onButtonClicked"
+            android:paddingBottom="2dp"
+            android:paddingRight="4dp"
+            android:paddingTop="2dp"
+            ultra:defaultColor="@color/trans"
+            ultra:focusColor="@color/buttonsel_bg"
+            ultra:text="비밀번호 찾기"
+            ultra:textColor="@color/white"
+            ultra:textSize="14dp" />
 
 
-            <View
-                android:layout_width="1px"
-                android:layout_height="10dp"
-                android:background="@color/white"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"/>
+        <View
+            android:layout_width="1px"
+            android:layout_height="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/white" />
 
 
-            <com.yongtrim.lib.ui.UltraButton
-                android:id="@+id/btnSignup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingRight="4dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:onClick="onButtonClicked"
-                android:layout_gravity="center"
-                ultra:defaultColor="@color/trans"
-                ultra:focusColor="@color/buttonsel_bg"
-                ultra:text="회원가입"
-                ultra:textSize="14dp"
-                ultra:textColor="@color/white" />
+        <com.yongtrim.lib.ui.UltraButton
+            android:id="@+id/btnSignup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="onButtonClicked"
+            android:paddingBottom="2dp"
+            android:paddingRight="4dp"
+            android:paddingTop="2dp"
+            ultra:defaultColor="@color/trans"
+            ultra:focusColor="@color/buttonsel_bg"
+            ultra:text="회원가입"
+            ultra:textColor="@color/white"
+            ultra:textSize="14dp" />
 
-        </LinearLayout>
-
+    </LinearLayout>
 
 
 </RelativeLayout>

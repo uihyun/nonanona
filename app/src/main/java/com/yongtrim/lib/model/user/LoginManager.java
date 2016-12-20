@@ -104,7 +104,7 @@ public class LoginManager {
                     mOnLogoutListener.onLogout(UserManager.getInstance(contextHelper).getMe());
 
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
             }
         }).start();

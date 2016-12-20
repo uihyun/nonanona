@@ -1,6 +1,5 @@
 package com.yongtrim.lib.util;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -63,8 +62,6 @@ public class BasePreferenceUtil {
     public double get(String key, double $default) {
         return Double.longBitsToDouble(sharedPreferences.getLong(key, Double.doubleToLongBits($default)));
     }
-
-
 
     public void clear(String key) {
         sharedPreferences.edit().remove(key).commit();

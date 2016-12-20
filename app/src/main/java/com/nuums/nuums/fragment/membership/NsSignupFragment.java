@@ -13,12 +13,15 @@ import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.nuums.nuums.R;
 import com.nuums.nuums.activity.BaseActivity;
+import com.nuums.nuums.model.misc.Sns;
 import com.nuums.nuums.model.user.NsUser;
+import com.sromku.simple.fb.SimpleFacebook;
 import com.yongtrim.lib.fragment.SignupFragment;
 import com.yongtrim.lib.log.Logger;
 import com.yongtrim.lib.message.PushMessage;
@@ -27,6 +30,8 @@ import com.yongtrim.lib.model.config.ConfigManager;
 import com.yongtrim.lib.model.post.Post;
 import com.yongtrim.lib.model.user.UserData;
 import com.yongtrim.lib.model.user.UserManager;
+import com.yongtrim.lib.sns.SNSLoginListener;
+import com.yongtrim.lib.sns.facebook.FacebookManager;
 import com.yongtrim.lib.ui.UltraButton;
 import com.yongtrim.lib.ui.UltraEditText;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
@@ -58,7 +63,7 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
     UltraEditText etConfirm;
     boolean isGoodPassword = true;
 
-    UltraButton btnSignin;
+    UltraButton btnSignup;
 
     NsUser user;
 
@@ -66,6 +71,12 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
 
     boolean isSignuping;
 
+    LinearLayout emailSignup;
+    LinearLayout emailConfirm;
+    LinearLayout listSignup;
+
+    FacebookManager facebookManager;
+    private SimpleFacebook mSimpleFacebook;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -74,7 +85,7 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
         contextHelper.getActivity().setBackButtonVisibility(false);
         contextHelper.getActivity().setImageButtonAndVisiable(R.drawable.del);
 
-
+        mSimpleFacebook = SimpleFacebook.getInstance(contextHelper.getActivity());
     }
 
     @Override
@@ -88,6 +99,8 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
             user.setLoginType("EMAIL");
         }
 
+        facebookManager = FacebookManager.getInstance(contextHelper);
+
         setupUI(view);
 
         verify();
@@ -98,7 +111,7 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
 
     public void setupUI(View view) {
 
-        btnSignin = (UltraButton) view.findViewById(R.id.btnSignin);
+        btnSignup = (UltraButton) view.findViewById(R.id.btnSignin);
 
         etEmail = (UltraEditText) view.findViewById(R.id.etEmail);
         etEmail.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS | InputType.TYPE_CLASS_TEXT);
@@ -170,6 +183,13 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
             );
         }
 
+        emailSignup = (LinearLayout) view.findViewById(R.id.email_signup);
+        emailSignup.setVisibility(View.GONE);
+        emailConfirm = (LinearLayout) view.findViewById(R.id.email_confirm);
+        emailConfirm.setVisibility(View.GONE);
+
+        listSignup = (LinearLayout) view.findViewById(R.id.list_signup);
+        listSignup.setVisibility(View.VISIBLE);
     }
 
 
@@ -179,6 +199,16 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
         user.setRealname(etRealName.getText());
         user.setNickname(etNickName.getText());
         user.setPasswordChanged(etPassword.getText());
+
+        ConfigManager.getInstance(contextHelper).getPreference().putSignupParam(user);
+    }
+
+    public void verifySns(Sns sns) {
+        user.setUsername(sns.getEmail());
+        user.setEmail(sns.getEmail());
+        user.setRealname(sns.getName());
+        user.setNickname(sns.getNickName());
+        user.setPasswordChanged(sns.getId());
 
         ConfigManager.getInstance(contextHelper).getPreference().putSignupParam(user);
     }
@@ -334,7 +364,6 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
                                         contextHelper.getActivity().runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {
-
                                                 signup();
                                             }
                                         });
@@ -351,7 +380,6 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
 
                 } catch (Exception e) {
                     Logger.debug(TAG, e.toString());
-
                 }
             }
         }).start();
@@ -394,6 +422,7 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
                                 contextHelper.getActivity().finish();
 
                             } catch (Exception e) {
+                                e.printStackTrace();
                             }
                         }
                     }).start();
@@ -405,7 +434,32 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
         }).start();
     }
 
+    private void snsSignup() {
+        contextHelper.showProgress("");
+        UserManager.getInstance(contextHelper).checkEmail(user.getEmail(),
+                new Response.Listener<ACommonData>() {
+                    @Override
+                    public void onResponse(ACommonData response) {
+                        if (response.isSuccess()) {
+                            contextHelper.getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    signup();
+                                }
+                            });
+                        } else {
+                            contextHelper.hideProgress();
+                            new SweetAlertDialog(getContext()).setContentText(response.getErrorMessage()).show();
+                        }
+                    }
+                },
+                null
+        );
+
+    }
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        mSimpleFacebook.onActivityResult(requestCode, resultCode, data);
     }
 
     public void onButtonClicked(View v) {
@@ -416,6 +470,29 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
             case R.id.actionbarImageButton:
                 contextHelper.getActivity().finish();
                 break;
+            case R.id.btnSigninEmail: {
+                emailSignup.setVisibility(View.VISIBLE);
+                emailConfirm.setVisibility(View.VISIBLE);
+                listSignup.setVisibility(View.GONE);
+            }
+            break;
+            case R.id.btnSignupFacebook: {
+                facebookManager.login(new SNSLoginListener() {
+                    @Override
+                    public void success(boolean isLogin, Sns sns) {
+                        verifySns(sns);
+                        snsSignup();
+                    }
+
+                    @Override
+                    public void fail() {
+                    }
+
+                    public void successAndNeedRegist() {
+                    }
+                }, true);
+            }
+            break;
         }
     }
 

@@ -1,9 +1,7 @@
 package com.yongtrim.lib.fragment;
 
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.yongtrim.lib.log.Logger;
-import com.yongtrim.lib.model.user.User;
 import com.yongtrim.lib.model.user.UserData;
 import com.yongtrim.lib.model.user.UserManager;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
@@ -17,8 +15,6 @@ import java.util.concurrent.CountDownLatch;
  */
 public class SignupFragment extends ABaseFragment {
     final String TAG = "SignupFragment";
-
-
 
     protected void createUser(
             final String loginType,
@@ -60,7 +56,7 @@ public class SignupFragment extends ABaseFragment {
                     );
 
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
             }
         }).start();

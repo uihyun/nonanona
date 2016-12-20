@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:ultra="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white2"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ultra="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white2">
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,19 +23,15 @@
                 android:id="@+id/viewTop"
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
-                android:background="@color/white"
-                >
+                android:background="@color/white">
 
                 <com.yongtrim.lib.ui.CustomNetworkImageView
                     android:id="@+id/ivPhoto"
-
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/trans"
                     android:onClick="onButtonClicked"
-
-                    android:scaleType="centerCrop"
-                    />
+                    android:scaleType="centerCrop" />
 
 
                 <ImageView
@@ -45,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:src="@drawable/big_plus"/>
+                    android:src="@drawable/big_plus" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -64,8 +58,7 @@
                         android:onClick="onButtonClicked"
                         android:text="삭제"
                         android:textColor="@color/green"
-                        android:textSize="9dp"
-                        />
+                        android:textSize="9dp" />
 
                     <Button
                         android:id="@+id/btnModify"
@@ -78,8 +71,7 @@
                         android:onClick="onButtonClicked"
                         android:text="자르기"
                         android:textColor="@color/green"
-                        android:textSize="9dp"
-                        />
+                        android:textSize="9dp" />
 
                     <Button
                         android:id="@+id/btnRotate"
@@ -91,8 +83,7 @@
                         android:onClick="onButtonClicked"
                         android:text="회전"
                         android:textColor="@color/green"
-                        android:textSize="9dp"
-                        />
+                        android:textSize="9dp" />
                 </LinearLayout>
 
 
@@ -116,8 +107,7 @@
                     android:layout_weight="1"
                     app:bgStyle="white"
                     app:hint="나눔받은 후기를 작성해주세요."
-                    app:multiline="true"
-                    />
+                    app:multiline="true" />
 
 
                 <com.yongtrim.lib.ui.ChipsMultiAutoCompleteTextview
@@ -131,8 +121,7 @@
                     android:padding="8dp"
                     android:textColorHint="@color/gray"
 
-                    android:textSize="14dp"
-                    />
+                    android:textSize="14dp" />
 
 
                 <LinearLayout
@@ -150,7 +139,7 @@
                         android:layout_margin="2dp"
                         android:background="@color/trans"
                         android:onClick="onButtonClicked"
-                        android:src="@drawable/twitter"/>
+                        android:src="@drawable/twitter" />
 
 
                     <ImageButton
@@ -160,28 +149,25 @@
                         android:layout_margin="2dp"
                         android:background="@color/trans"
                         android:onClick="onButtonClicked"
-                        android:src="@drawable/facebook"/>
+                        android:src="@drawable/facebook" />
 
 
                     <ImageButton
                         android:id="@+id/btnInsta"
                         android:layout_width="wrap_content"
-
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
                         android:background="@color/trans"
                         android:onClick="onButtonClicked"
-                        android:src="@drawable/instagram"/>
+                        android:src="@drawable/instagram" />
 
 
                     <com.nuums.nuums.view.KakaoButton
                         android:id="@+id/btnKas"
                         android:layout_width="wrap_content"
-
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
-                        android:visibility="gone"
-                        />
+                        android:visibility="gone" />
 
 
                     <ImageButton
@@ -191,7 +177,7 @@
                         android:layout_margin="2dp"
                         android:background="@color/trans"
                         android:onClick="onButtonClicked"
-                        android:src="@drawable/kakaostory"/>
+                        android:src="@drawable/kakaostory" />
 
 
                 </LinearLayout>
@@ -215,7 +201,7 @@
                     ultra:style="center"
                     ultra:text="등록하기"
                     ultra:textColor="@color/white"
-                    ultra:textSize="20dp"/>
+                    ultra:textSize="20dp" />
 
 
             </LinearLayout>

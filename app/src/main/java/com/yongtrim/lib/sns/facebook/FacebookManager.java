@@ -1,44 +1,21 @@
 package com.yongtrim.lib.sns.facebook;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.text.TextUtils;
 
-
-import com.android.volley.Response;
-import com.nuums.nuums.model.user.NsUser;
+import com.nuums.nuums.model.misc.Sns;
 import com.sromku.simple.fb.Permission;
 import com.sromku.simple.fb.SimpleFacebook;
 import com.sromku.simple.fb.entities.Profile;
-import com.sromku.simple.fb.listeners.OnFriendsListener;
 import com.sromku.simple.fb.listeners.OnLoginListener;
 import com.sromku.simple.fb.listeners.OnLogoutListener;
 import com.sromku.simple.fb.listeners.OnProfileListener;
-import com.sromku.simple.fb.utils.Attributes;
-import com.sromku.simple.fb.utils.PictureAttributes;
-import com.yongtrim.lib.Config;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.log.Logger;
-import com.yongtrim.lib.model.user.LoginManager;
-import com.yongtrim.lib.model.user.SnsInfo;
-import com.yongtrim.lib.model.user.User;
-import com.yongtrim.lib.model.user.UserData;
-import com.yongtrim.lib.model.user.UserManager;
-import com.yongtrim.lib.message.PushMessage;
 import com.yongtrim.lib.sns.SNSLoginListener;
 import com.yongtrim.lib.sns.SNSLoginoutListener;
-import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
 
-import org.json.JSONArray;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
-
-import de.greenrobot.event.EventBus;
 
 /**
  * Hair / com.yongtrim.lib.sns.facebook
@@ -50,19 +27,13 @@ public class FacebookManager {
     final static String TAG = "FacebookManager";
     private static FacebookManager mInstance;
     protected FacebookPreference facebookPreference;
-
+    SNSLoginListener mLoginListner;
+    ContextHelper contextHelper;
     private SimpleFacebook mSimpleFacebook;
 
-    SNSLoginListener mLoginListner;
-
-    ContextHelper contextHelper;
-
-
-    public static FacebookManager getInstance(ContextHelper contextHelper){
-        if(mInstance == null) {
+    public static FacebookManager getInstance(ContextHelper contextHelper) {
+        if (mInstance == null) {
             mInstance = new FacebookManager();
-
-
         }
         mInstance.contextHelper = contextHelper;
 //            mInstance.mContext = helper.context;
@@ -90,7 +61,6 @@ public class FacebookManager {
                 //--Log.w(TAG, "Failed to login");
                 //Logger.debug(TAG, "onLoginListener() | onFail()");
                 //Logger.trace(TAG, "onFail : " + reason);
-
                 mLoginListner.fail();
             }
 
@@ -105,9 +75,9 @@ public class FacebookManager {
             @Override
             public void onLogin(String accessToken, List<Permission> acceptedPermissions, List<Permission> declinedPermissions) {
 
-                Profile.Properties properties = new Profile.Properties.Builder()
-                        .add(Profile.Properties.ID)
-                        .build();
+                Profile.Properties properties = new Profile.Properties.Builder().add(Profile.Properties.ID)
+                        .add(Profile.Properties.NAME).add(Profile.Properties.EMAIL)
+                        .add(Profile.Properties.PICTURE).add(Profile.Properties.FIRST_NAME).build();
 
                 SimpleFacebook.getInstance().getProfile(properties, new OnProfileListener() {
 
@@ -117,13 +87,11 @@ public class FacebookManager {
 
                     @Override
                     public void onException(Throwable throwable) {
-
                         mLoginListner.fail();
                     }
 
                     @Override
                     public void onFail(String reason) {
-
                         mLoginListner.fail();
                     }
 
@@ -131,93 +99,100 @@ public class FacebookManager {
                     public void onComplete(Profile response) {
 
                         final String facebookId = response.getId();
+                        final String facebookEmail = response.getEmail();
 
-                        //Logger.trace(TAG, "facebookId = " + facebookId);
-                        if (needLocalLogin) {
-                            new Thread(new Runnable() {
+                        final Sns sns = new Sns();
+                        sns.setId(facebookId);
+                        sns.setEmail(facebookEmail);
+                        sns.setName(response.getName());
+                        sns.setNickName(response.getFirstName());
+                        sns.setPicture(response.getPicture());
 
-                                @Override
-                                public void run() {
-                                    try {
-                                        contextHelper.getActivity().runOnUiThread(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                contextHelper.showProgress("로그인 중입니다.");
-                                                LoginManager.getInstance(contextHelper).login(
-                                                        User.LOGINTYPE_FACEBOOK,
-                                                        facebookId,
-                                                        facebookId,
-                                                        new Response.Listener<UserData>() {
-                                                            @Override
-                                                            public void onResponse(final UserData response) {
+                        Logger.debug(TAG, "facebookId = " + facebookId);
+//                        if (needLocalLogin) {
+//                            new Thread(new Runnable() {
+//
+//                                @Override
+//                                public void run() {
+//                                    try {
+//                                        contextHelper.getActivity().runOnUiThread(new Runnable() {
+//                                            @Override
+//                                            public void run() {
+//                                                contextHelper.showProgress("로그인 중입니다.");
+//                                                LoginManager.getInstance(contextHelper).login(
+//                                                        User.LOGINTYPE_FACEBOOK,
+//                                                        facebookId,
+//                                                        facebookId,
+//                                                        new Response.Listener<UserData>() {
+//                                                            @Override
+//                                                            public void onResponse(final UserData response) {
+//
+//                                                                facebookPreference.putIsLogin(true);
+//                                                                facebookPreference.putIsPostable(true);
+//                                                                facebookPreference.putFacebookId(facebookId);
+//
+//                                                                if (response.isSuccess()) {
+//                                                                    LoginManager.getInstance(contextHelper).setLoginStatus(response.user);
+//                                                                    UserManager.getInstance(contextHelper).setMe(response.user);
+//
+//                                                                    final CountDownLatch latchFriends = new CountDownLatch(0);
+//                                                                    //updateFriends(latchFriends);
+//                                                                    new Thread(new Runnable() {
+//                                                                        @Override
+//                                                                        public void run() {
+//                                                                            try {
+//                                                                                latchFriends.await();
+//                                                                                EventBus.getDefault().post(new PushMessage().setActionCode(PushMessage.ACTIONCODE_CHANGE_ME).setObject(response.user));
+//                                                                                mLoginListner.success(true, sns);
+//                                                                            } catch (Exception e) {
+//                                                                            }
+//                                                                        }
+//                                                                    }).start();
+//
+//                                                                } else {
+//                                                                    mLoginListner.successAndNeedRegist();
+//                                                                }
+//
+//                                                                contextHelper.hideProgress();
+//                                                            }
+//                                                        },
+//                                                        null
+//                                                );
+//                                            }
+//                                        });
+//                                    } catch (Exception e) {
+//                                        e.printStackTrace();
+//                                    }
+//                                }
+//                            }).start();
+//                        } else {
 
-                                                                facebookPreference.putIsLogin(true);
-                                                                facebookPreference.putIsPostable(true);
+                        final CountDownLatch latchFriends = new CountDownLatch(0);
+                        //updateFriends(latchFriends);
 
-                                                                if (response.isSuccess()) {
-                                                                    LoginManager.getInstance(contextHelper).setLoginStatus(response.user);
-                                                                    UserManager.getInstance(contextHelper).setMe(response.user);
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    latchFriends.await();
 
+                                    contextHelper.getActivity().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            facebookPreference.putIsLogin(needLocalLogin);
+                                            facebookPreference.putIsPostable(true);
+                                            facebookPreference.putFacebookId(facebookId);
+                                            facebookPreference.putFacebookEmail(facebookEmail);
+                                            mLoginListner.success(true, sns);
+                                        }
+                                    });
 
-                                                                    final CountDownLatch latchFriends = new CountDownLatch(0);
-                                                                    //updateFriends(latchFriends);
-                                                                    new Thread(new Runnable() {
-                                                                        @Override
-                                                                        public void run() {
-                                                                            try {
-                                                                                latchFriends.await();
-                                                                                EventBus.getDefault().post(new PushMessage().setActionCode(PushMessage.ACTIONCODE_CHANGE_ME).setObject(response.user));
-                                                                                mLoginListner.success(true, facebookId);
-                                                                            } catch (Exception e) {
-                                                                            }
-                                                                        }
-                                                                    }).start();
-
-                                                                } else {
-                                                                    mLoginListner.successAndNeedRegist();
-                                                                }
-
-                                                                contextHelper.hideProgress();
-                                                            }
-                                                        },
-                                                        null
-                                                );
-                                            }
-                                        });
-
-
-                                    } catch (Exception e) {
-
-                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
                                 }
-                            }).start();
-                        } else {
-
-                            final CountDownLatch latchFriends = new CountDownLatch(0);
-                            //updateFriends(latchFriends);
-
-                            new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    try {
-                                        latchFriends.await();
-
-                                        contextHelper.getActivity().runOnUiThread(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                facebookPreference.putIsLogin(true);
-                                                facebookPreference.putIsPostable(true);
-                                                mLoginListner.success(true, facebookId);
-                                            }
-                                        });
-
-                                    } catch (Exception e) {
-                                    }
-                                }
-                            }).start();
-
-
-                        }
+                            }
+                        }).start();
+//                        }
                     }
                 });
 
@@ -235,13 +210,12 @@ public class FacebookManager {
     }
 
 
-
     public void logout(final SNSLoginoutListener listener) {
 
         mSimpleFacebook.logout(new OnLogoutListener() {
             @Override
             public void onLogout() {
-                facebookPreference.putIsLogin(false);
+//                facebookPreference.putIsLogin(false);
                 facebookPreference.putIsPostable(false);
                 listener.success(false);
             }
@@ -302,7 +276,4 @@ public class FacebookManager {
 //            }
 //        });
 //    }
-
-
-
 }
