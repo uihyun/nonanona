@@ -12,11 +12,16 @@ import android.widget.CheckBox;
 import com.nuums.nuums.R;
 import com.nuums.nuums.activity.BaseActivity;
 import com.nuums.nuums.activity.MainActivity;
+import com.nuums.nuums.model.misc.Sns;
+import com.nuums.nuums.model.user.NsUser;
+import com.sromku.simple.fb.SimpleFacebook;
 import com.yongtrim.lib.fragment.LoginFragment;
 import com.yongtrim.lib.message.PushMessage;
 import com.yongtrim.lib.model.config.ConfigManager;
 import com.yongtrim.lib.model.user.LoginManager;
 import com.yongtrim.lib.model.user.User;
+import com.yongtrim.lib.sns.SNSLoginListener;
+import com.yongtrim.lib.sns.facebook.FacebookManager;
 import com.yongtrim.lib.sns.facebook.FacebookPreference;
 import com.yongtrim.lib.ui.UltraEditText;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
@@ -34,13 +39,19 @@ public class SigninFragment extends LoginFragment {
 
     CheckBox cbAutoLogin;
 
+    NsUser user;
+
+    FacebookManager facebookManager;
     FacebookPreference facebookPreference;
+    private SimpleFacebook mSimpleFacebook;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
 
+        facebookManager = FacebookManager.getInstance(contextHelper);
         facebookPreference = FacebookPreference.getInstance(contextHelper.getContext());
+        mSimpleFacebook = SimpleFacebook.getInstance(contextHelper.getActivity());
     }
 
     @Override
@@ -102,9 +113,22 @@ public class SigninFragment extends LoginFragment {
                 getContext().startActivity(i);
             }
             break;
-            case R.id.btnSigninFacebook:
-                facebookLogin();
-                break;
+            case R.id.btnSigninFacebook: {
+                facebookManager.login(new SNSLoginListener() {
+                    @Override
+                    public void success(boolean isLogin, Sns sns) {
+                        snsLogin(sns);
+                    }
+
+                    @Override
+                    public void fail() {
+                    }
+
+                    public void successAndNeedRegist() {
+                    }
+                }, true);
+            }
+            break;
         }
     }
 
@@ -128,18 +152,6 @@ public class SigninFragment extends LoginFragment {
                 });
             }
             break;
-        }
-    }
-
-    public void facebookLogin() {
-        if (!facebookPreference.isLogin()) {
-            new SweetAlertDialog(getContext())
-                    .setContentText("아이디가 없습니다.")
-                    .show();
-        } else {
-            contextHelper.showProgress("로그인 중입니다.");
-            contextHelper.login(User.LOGINTYPE_EMAIL, facebookPreference.getFacebookEmail(),
-                    facebookPreference.getFacebookId(), false, null, null);
         }
     }
 
@@ -167,4 +179,8 @@ public class SigninFragment extends LoginFragment {
         }
     }
 
+    private void snsLogin(Sns sns) {
+        contextHelper.showProgress("로그인 중입니다.");
+        contextHelper.login(User.LOGINTYPE_EMAIL, sns.getEmail(), sns.getId(), false, null, null);
+    }
 }

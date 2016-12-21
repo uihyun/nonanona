@@ -448,14 +448,18 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
                                 }
                             });
                         } else {
-                            contextHelper.hideProgress();
-                            new SweetAlertDialog(getContext()).setContentText(response.getErrorMessage()).show();
+                            // email이 중복일 때는 facebook 로그인 된것이므로 끝.
+                            contextHelper.getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    contextHelper.getActivity().finish();
+                                }
+                            });
                         }
                     }
                 },
                 null
         );
-
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

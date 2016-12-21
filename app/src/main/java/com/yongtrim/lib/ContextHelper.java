@@ -166,7 +166,7 @@ public class ContextHelper {
                     );
 
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
             }
         }).start();
