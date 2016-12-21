@@ -49,8 +49,7 @@ public class FacebookManager {
         mSimpleFacebook.onActivityResult(requestCode, resultCode, data);
     }
 
-
-    public void login(SNSLoginListener listener, final boolean needLocalLogin) {
+    public void login(SNSLoginListener listener, final boolean nonaLogin) {
         mLoginListner = listener;
 
         mSimpleFacebook.login(new OnLoginListener() {
@@ -179,7 +178,7 @@ public class FacebookManager {
                                     contextHelper.getActivity().runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            facebookPreference.putIsLogin(needLocalLogin);
+                                            facebookPreference.putIsLogin(nonaLogin);
                                             facebookPreference.putIsPostable(true);
                                             facebookPreference.putFacebookId(facebookId);
                                             facebookPreference.putFacebookEmail(facebookEmail);

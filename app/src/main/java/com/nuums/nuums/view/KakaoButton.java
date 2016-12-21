@@ -1,11 +1,8 @@
 package com.nuums.nuums.view;
 
 import android.content.Context;
-import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 
 import com.kakao.usermgmt.LoginButton;
 import com.nuums.nuums.R;
@@ -18,6 +15,7 @@ import com.nuums.nuums.R;
 public class KakaoButton extends LoginButton {
 
     View view;
+
     public KakaoButton(Context context) {
         super(context);
     }
@@ -37,8 +35,6 @@ public class KakaoButton extends LoginButton {
         removeAllViews();
         view = inflate(getContext(), R.layout.view_kakaobutton, this);
     }
-
-
 }
 
 

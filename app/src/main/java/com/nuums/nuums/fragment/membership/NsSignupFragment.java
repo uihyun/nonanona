@@ -75,7 +75,7 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
     LinearLayout emailConfirm;
     LinearLayout listSignup;
 
-    FacebookManager facebookManager;
+    private FacebookManager facebookManager;
     private SimpleFacebook mSimpleFacebook;
 
     @Override
@@ -85,6 +85,7 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
         contextHelper.getActivity().setBackButtonVisibility(false);
         contextHelper.getActivity().setImageButtonAndVisiable(R.drawable.del);
 
+        facebookManager = FacebookManager.getInstance(contextHelper);
         mSimpleFacebook = SimpleFacebook.getInstance(contextHelper.getActivity());
     }
 
@@ -98,8 +99,6 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
             user = new NsUser();
             user.setLoginType("EMAIL");
         }
-
-        facebookManager = FacebookManager.getInstance(contextHelper);
 
         setupUI(view);
 
@@ -448,13 +447,8 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
                                 }
                             });
                         } else {
-                            // email이 중복일 때는 facebook 로그인 된것이므로 끝.
-                            contextHelper.getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    contextHelper.getActivity().finish();
-                                }
-                            });
+                            contextHelper.hideProgress();
+                            new SweetAlertDialog(getContext()).setContentText(response.getErrorMessage()).show();
                         }
                     }
                 },
@@ -497,6 +491,22 @@ public class NsSignupFragment extends SignupFragment implements UltraEditText.On
                 }, true);
             }
             break;
+//            case R.id.btnSignupKakao: {
+//                kakaoManager = KakaoManager.getInstance(contextHelper, new SNSLoginListener() {
+//                    public void success(boolean isLogin, Sns sns) {
+//                        verifySns(sns);
+//                        snsSignup();
+//                    }
+//
+//                    public void fail() {
+//
+//                    }
+//
+//                    public void successAndNeedRegist() {
+//                    }
+//                }, true, false);
+//            }
+//            break;
         }
     }
 

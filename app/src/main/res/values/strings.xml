@@ -2,8 +2,8 @@
     <string name="app_name">NONANONA</string>
     <string name="fb_app_id">348639635507476</string>
 
-    <string name="kakao_app_key">8664097126852fd4d29b23b0d8bb848e</string>
-    <string name="kakao_scheme">kakao8664097126852fd4d29b23b0d8bb848e</string>
+    <string name="kakao_app_key">abb2a9f8ccd57c18cea903bea48c87f4</string>
+    <string name="kakao_scheme">kakaoabb2a9f8ccd57c18cea903bea48c87f4</string>
     <string name="kakaolink_host">kakaolink</string>
     <string name="kakaostory_host">kakaostory</string>
 

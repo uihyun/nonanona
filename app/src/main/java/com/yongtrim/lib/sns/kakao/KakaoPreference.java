@@ -10,20 +10,19 @@ import com.yongtrim.lib.util.BasePreferenceUtil;
  * Created by Uihyun on 15. 9. 14..
  */
 public class KakaoPreference extends BasePreferenceUtil {
-    private static KakaoPreference mInstance = null;
-
     private static final String PROPERTY_ISPOSTABLE = "kakao_ispostable";
     private static final String PROPERTY_ISLOGIN = "kakao_islogin";
-
-    public static synchronized KakaoPreference getInstance(Context context) {
-        if(mInstance == null) {
-            mInstance = new KakaoPreference(context);
-        }
-        return mInstance;
-    }
+    private static KakaoPreference mInstance = null;
 
     protected KakaoPreference(Context context) {
         super(context);
+    }
+
+    public static synchronized KakaoPreference getInstance(Context context) {
+        if (mInstance == null) {
+            mInstance = new KakaoPreference(context);
+        }
+        return mInstance;
     }
 
     public void putIsPostable(boolean isPostable) {
@@ -41,7 +40,5 @@ public class KakaoPreference extends BasePreferenceUtil {
     public boolean isLogin() {
         return get(PROPERTY_ISLOGIN, false);
     }
-
-
 }
 

@@ -22,7 +22,6 @@ import com.yongtrim.lib.model.user.LoginManager;
 import com.yongtrim.lib.model.user.User;
 import com.yongtrim.lib.sns.SNSLoginListener;
 import com.yongtrim.lib.sns.facebook.FacebookManager;
-import com.yongtrim.lib.sns.facebook.FacebookPreference;
 import com.yongtrim.lib.ui.UltraEditText;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
 import com.yongtrim.lib.util.MiscUtil;
@@ -42,7 +41,6 @@ public class SigninFragment extends LoginFragment {
     NsUser user;
 
     FacebookManager facebookManager;
-    FacebookPreference facebookPreference;
     private SimpleFacebook mSimpleFacebook;
 
     @Override
@@ -50,7 +48,6 @@ public class SigninFragment extends LoginFragment {
         super.onCreate(saveInstanceState);
 
         facebookManager = FacebookManager.getInstance(contextHelper);
-        facebookPreference = FacebookPreference.getInstance(contextHelper.getContext());
         mSimpleFacebook = SimpleFacebook.getInstance(contextHelper.getActivity());
     }
 
@@ -71,9 +68,8 @@ public class SigninFragment extends LoginFragment {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //facebookManager.onActivityResult(requestCode, resultCode, data);
+        mSimpleFacebook.onActivityResult(requestCode, resultCode, data);
     }
-
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {

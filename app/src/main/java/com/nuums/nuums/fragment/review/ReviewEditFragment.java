@@ -227,7 +227,7 @@ public class ReviewEditFragment extends ABaseFragment implements UltraEditText.O
 
             public void successAndNeedRegist() {
             }
-        }, true);
+        }, true, false);
 
         return viewMain;
     }

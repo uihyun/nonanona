@@ -388,7 +388,7 @@ public class SettingFragment extends ABaseFragment {
                         @Override
                         public void run() {
 
-                            KakaoManager.getInstance(contextHelper, null, false).logout(new SNSLoginoutListener() {
+                            KakaoManager.getInstance(contextHelper, null, false, false).logout(new SNSLoginoutListener() {
                                 @Override
                                 public void success(boolean isLogin) {
                                     Logger.debug(TAG, "KakaoManager:success");
