@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
@@ -20,7 +19,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
@@ -38,22 +36,16 @@ import com.nuums.nuums.activity.BaseActivity;
 import com.nuums.nuums.model.chat.Address;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
-import com.yongtrim.lib.log.Logger;
 import com.yongtrim.lib.model.misc.CodeName;
 import com.yongtrim.lib.model.photo.Photo;
 import com.yongtrim.lib.ui.UltraButton;
 import com.yongtrim.lib.ui.UltraEditText;
-import com.yongtrim.lib.util.DateUtil;
 import com.yongtrim.lib.util.MiscUtil;
 import com.yongtrim.lib.util.OptAnimationLoader;
 import com.yongtrim.lib.util.PixelUtil;
 
-import net.simonvt.widget.NumberPicker;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -62,68 +54,6 @@ import java.util.List;
  * Created by Uihyun on 15. 9. 17..
  */
 public class SweetAlertDialog extends Dialog implements View.OnClickListener {
-
-    final String TAG = "SweetAlertDialog";
-
-    private View mDialogView;
-    private AnimationSet mModalInAnim;
-    private AnimationSet mModalOutAnim;
-
-    private int mAlertType;
-
-    private TextView mTitleTextView;
-    private String mTitleText;
-
-
-    private TextView mContentTextView;
-    private String mContentText;
-    private CharSequence mCharSequence;
-
-    private String[] mArrayValues;
-    private String[] mArrayRes;
-    private ListView listView;
-    ArrayList<ListItem> listItems;
-    private OnSweetSelectListener mSelectListener;
-
-    BaseAdapter mAdapter;
-
-    private OnSweetMultiSelectListener mMultiSelectListener;
-    private int[] mArrayIndices;
-
-    private String mTipText;
-
-
-    private EditText mEditText;
-    private String mEditTextValue;
-    private String mEditPlaceHolder;
-    private int mEditType;
-    private int mLimit;
-
-
-    private boolean mShowCancel;
-    private boolean mShowClose;
-    private boolean mShowContent;
-    private String mCancelText;
-    private String mConfirmText;
-
-    net.simonvt.widget.NumberPicker mNumberPicker;
-    int mNumberValue;
-    int mMaxValue;
-    int mMinValue;
-    String mUnit;
-
-    ContextHelper contextHelper;
-
-
-    private UltraButton mConfirmButton;
-    private UltraButton mCancelButton;
-    private ImageButton mCloseButton;
-    private View viewCancel;
-
-
-    private OnSweetClickListener mCancelClickListener;
-    private OnSweetClickListener mConfirmClickListener;
-    private boolean mCloseFromCancel;
 
     public static final int NORMAL_TYPE = 0;
     public static final int PROGRESS_TYPE = 1;
@@ -135,9 +65,9 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
     public static final int EDITTEXT_TYPE = 7;
     public static final int ADDRESS_TYPE = 8;
     public static final int DELIVERY_TYPE = 9;
-
     public static final int PHOTO_TYPE = 10;
     public static final int NORMAL2_TYPE = 11;
+    final String TAG = "SweetAlertDialog";
     public UltraEditText etName;
     public UltraEditText etNumber0;
     public UltraEditText etNumber1;
@@ -146,30 +76,53 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
     public UltraButton btnBasic;
     public EditText etDetail;
     public CheckBox cbRemember;
-    Address address;
-
-
     public UltraButton btnDeliveryCompany;
     public EditText etDeliveryNumber;
     public CodeName codeNameDeliveryCompany;
-
-
     public Photo photo;
-
+    ArrayList<ListItem> listItems;
+    BaseAdapter mAdapter;
+    net.simonvt.widget.NumberPicker mNumberPicker;
+    int mNumberValue;
+    int mMaxValue;
+    int mMinValue;
+    String mUnit;
+    ContextHelper contextHelper;
+    Address address;
+    private View mDialogView;
+    private AnimationSet mModalInAnim;
+    private AnimationSet mModalOutAnim;
+    private int mAlertType;
+    private TextView mTitleTextView;
+    private String mTitleText;
+    private TextView mContentTextView;
+    private String mContentText;
+    private CharSequence mCharSequence;
+    private String[] mArrayValues;
+    private String[] mArrayRes;
+    private ListView listView;
+    private OnSweetSelectListener mSelectListener;
+    private OnSweetMultiSelectListener mMultiSelectListener;
+    private int[] mArrayIndices;
+    private String mTipText;
+    private EditText mEditText;
+    private String mEditTextValue;
+    private String mEditPlaceHolder;
+    private int mEditType;
+    private int mLimit;
+    private boolean mShowCancel;
+    private boolean mShowClose;
+    private boolean mShowContent;
+    private String mCancelText;
+    private String mConfirmText;
+    private UltraButton mConfirmButton;
+    private UltraButton mCancelButton;
+    private ImageButton mCloseButton;
+    private View viewCancel;
+    private OnSweetClickListener mCancelClickListener;
+    private OnSweetClickListener mConfirmClickListener;
+    private boolean mCloseFromCancel;
     private ImageView iconContent;
-
-    public interface OnSweetClickListener {
-        public void onClick(SweetAlertDialog sweetAlertDialog);
-    }
-
-    public interface OnSweetSelectListener {
-        public void onSelected(SweetAlertDialog sweetAlertDialog, int index);
-    }
-
-    public interface OnSweetMultiSelectListener {
-        public void onSelected(SweetAlertDialog sweetAlertDialog, int indices[]);
-    }
-
 
     public SweetAlertDialog(Context context) {
         this(context, NORMAL_TYPE);
@@ -182,7 +135,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
 
         mAlertType = alertType;
 
-        if (mAlertType == EDITTEXT_TYPE ||  mAlertType == ADDRESS_TYPE)
+        if (mAlertType == EDITTEXT_TYPE || mAlertType == ADDRESS_TYPE)
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
         mModalInAnim = (AnimationSet) OptAnimationLoader.loadAnimation(getContext(), R.anim.dialog_modal_in);
@@ -227,8 +180,8 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
                             try {
                                 if (SweetAlertDialog.super.isShowing())
                                     SweetAlertDialog.super.dismiss();
-                            }catch (Exception e) {
-
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
                         }
                     }
@@ -250,11 +203,11 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
             setCancelable(false);
             setCanceledOnTouchOutside(false);
             mDialogView = getWindow().getDecorView().findViewById(android.R.id.content);
-            mContentTextView = (TextView)findViewById(R.id.tvContent);
+            mContentTextView = (TextView) findViewById(R.id.tvContent);
 
             return;
 
-        } else if(mAlertType == NORMAL_TYPE || mAlertType == NORMAL2_TYPE || mAlertType == EDITTEXT_TYPE) {
+        } else if (mAlertType == NORMAL_TYPE || mAlertType == NORMAL2_TYPE || mAlertType == EDITTEXT_TYPE) {
             setContentView(R.layout.dialog_sweet2);
             mDialogView = getWindow().getDecorView().findViewById(android.R.id.content);
         } else {
@@ -273,7 +226,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         mConfirmButton.setOnClickListener(this);
         mCancelButton.setOnClickListener(this);
 
-        if(mCloseButton != null)
+        if (mCloseButton != null)
             mCloseButton.setOnClickListener(this);
 
 
@@ -288,13 +241,13 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
             View viewNormal = layoutInflater.inflate(R.layout.dialog_sweet_normal, viewContent);
             mContentTextView = (TextView) viewNormal.findViewById(R.id.textContent);
             mTitleTextView.setVisibility(View.GONE);
-            iconContent = (ImageView)viewNormal.findViewById(R.id.iconContent);
+            iconContent = (ImageView) viewNormal.findViewById(R.id.iconContent);
 
         } else if (mAlertType == NORMAL2_TYPE) {
             View viewNormal = layoutInflater.inflate(R.layout.dialog_sweet_normal, viewContent);
             mContentTextView = (TextView) viewNormal.findViewById(R.id.textContent);
             mTitleTextView.setVisibility(View.GONE);
-            iconContent = (ImageView)viewNormal.findViewById(R.id.iconContent);
+            iconContent = (ImageView) viewNormal.findViewById(R.id.iconContent);
             iconContent.setVisibility(View.GONE);
             mContentTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 13);
             mContentTextView.setGravity(Gravity.CENTER);
@@ -338,7 +291,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
 
         } else if (mAlertType == NUMBERPICKER_TYPE) {
             findViewById(R.id.viewPicker).setVisibility(View.VISIBLE);
-            mNumberPicker = (net.simonvt.widget.NumberPicker)findViewById(R.id.numberPicker);
+            mNumberPicker = (net.simonvt.widget.NumberPicker) findViewById(R.id.numberPicker);
             mNumberPicker.setVisibility(View.VISIBLE);
 
             mNumberPicker.setMinValue(mMinValue);
@@ -347,8 +300,8 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
             mNumberPicker.setValue(mNumberValue);
             mTitleTextView.setText(mTitleText);
 
-            if(!TextUtils.isEmpty(mUnit)) {
-                TextView tvUnit = (TextView)findViewById(R.id.tvUnit);
+            if (!TextUtils.isEmpty(mUnit)) {
+                TextView tvUnit = (TextView) findViewById(R.id.tvUnit);
                 tvUnit.setVisibility(View.VISIBLE);
                 tvUnit.setText(mUnit);
             }
@@ -364,7 +317,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
 
             for (int i = 0; i < mArrayValues.length; i++) {
                 ListItem listItem = new ListItem(mArrayValues[i]);
-                if(mArrayRes != null) {
+                if (mArrayRes != null) {
                     listItem.setRes(mArrayRes[i]);
                 }
                 list.add(listItem);
@@ -469,20 +422,20 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
                 listView.setLayoutParams(params);
             }
 
-        } else if(mAlertType == ADDRESS_TYPE) {
+        } else if (mAlertType == ADDRESS_TYPE) {
             View viewAddress = layoutInflater.inflate(R.layout.dialog_sweet_address, viewContent);
-            etName = (UltraEditText)viewAddress.findViewById(R.id.etName);
-            etNumber0 = (UltraEditText)viewAddress.findViewById(R.id.etNumber0);
-            etNumber1 = (UltraEditText)viewAddress.findViewById(R.id.etNumber1);
-            etNumber2 = (UltraEditText)viewAddress.findViewById(R.id.etNumber2);
+            etName = (UltraEditText) viewAddress.findViewById(R.id.etName);
+            etNumber0 = (UltraEditText) viewAddress.findViewById(R.id.etNumber0);
+            etNumber1 = (UltraEditText) viewAddress.findViewById(R.id.etNumber1);
+            etNumber2 = (UltraEditText) viewAddress.findViewById(R.id.etNumber2);
             etNumber1.setEditTextId(R.id.number1);
             etNumber2.setEditTextId(R.id.number2);
 
 
-            btnPostNumber = (UltraButton)viewAddress.findViewById(R.id.btnPostNumber);
-            btnBasic = (UltraButton)viewAddress.findViewById(R.id.btnBasic);
-            etDetail = (EditText)viewAddress.findViewById(R.id.etDetail);
-            cbRemember = (CheckBox)viewAddress.findViewById(R.id.cbRemember);
+            btnPostNumber = (UltraButton) viewAddress.findViewById(R.id.btnPostNumber);
+            btnBasic = (UltraButton) viewAddress.findViewById(R.id.btnBasic);
+            etDetail = (EditText) viewAddress.findViewById(R.id.etDetail);
+            cbRemember = (CheckBox) viewAddress.findViewById(R.id.cbRemember);
 
             etNumber0.setMaxCharacters(3);
             etNumber0.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
@@ -495,7 +448,6 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
             etNumber2.setMaxCharacters(4);
             etNumber2.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
             etNumber2.setNextFocusDownId(R.id.etDetail);
-
 
 
             btnPostNumber.setOnClickListener(new View.OnClickListener() {
@@ -516,7 +468,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
                 }
             });
 
-            if(this.address != null) {
+            if (this.address != null) {
                 etName.setText(address.getName());
                 etNumber0.setText(address.getNumber0());
                 etNumber1.setText(address.getNumber1());
@@ -525,10 +477,10 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
                 btnBasic.setText(address.getAddressBasic());
                 etDetail.setText(address.getAddressDetail());
             }
-        } else if(mAlertType == DELIVERY_TYPE) {
+        } else if (mAlertType == DELIVERY_TYPE) {
             View viewDelivery = layoutInflater.inflate(R.layout.dialog_sweet_delivery, viewContent);
-            btnDeliveryCompany = (UltraButton)viewDelivery.findViewById(R.id.btnDeliveryCompany);
-            etDeliveryNumber = (EditText)viewDelivery.findViewById(R.id.etDeliveryNumber);
+            btnDeliveryCompany = (UltraButton) viewDelivery.findViewById(R.id.btnDeliveryCompany);
+            etDeliveryNumber = (EditText) viewDelivery.findViewById(R.id.etDeliveryNumber);
 
 
             btnDeliveryCompany.setOnClickListener(new View.OnClickListener() {
@@ -555,10 +507,10 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
                 }
             });
 
-        } else if(mAlertType == PHOTO_TYPE) {
+        } else if (mAlertType == PHOTO_TYPE) {
             View viewPhoto = layoutInflater.inflate(R.layout.dialog_sweet_photo, viewContent);
 
-            ImageView ivPhoto = (ImageView)viewPhoto.findViewById(R.id.ivPhoto);
+            ImageView ivPhoto = (ImageView) viewPhoto.findViewById(R.id.ivPhoto);
             ivPhoto.setImageBitmap(photo.getBitmap());
         }
 
@@ -599,7 +551,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         if (mCancelButton != null)
             mCancelButton.setVisibility(mShowCancel ? View.VISIBLE : View.GONE);
 
-        if(viewCancel != null)
+        if (viewCancel != null)
             viewCancel.setVisibility(mShowCancel ? View.VISIBLE : View.GONE);
 
         if (mCloseButton != null)
@@ -607,9 +559,8 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
 
     }
 
-
     public SweetAlertDialog setTitleText(String text) {
-        if(TextUtils.isEmpty(text)) {
+        if (TextUtils.isEmpty(text)) {
             mTitleText = "확인해 보세요";
         } else {
             mTitleText = text;
@@ -630,13 +581,11 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         return this;
     }
 
-
     public SweetAlertDialog showCloseButton(boolean isShow) {
         mShowClose = isShow;
         updateView();
         return this;
     }
-
 
     public SweetAlertDialog showContentText(boolean isShow) {
         mShowContent = isShow;
@@ -651,7 +600,6 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
 
         return this;
     }
-
 
     public SweetAlertDialog setConfirmText(String text) {
         mConfirmText = text;
@@ -733,7 +681,6 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         return this;
     }
 
-
     public SweetAlertDialog setContentText(CharSequence text) {
         mCharSequence = text;
         if (mContentTextView != null && mCharSequence != null) {
@@ -742,7 +689,6 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         }
         return this;
     }
-
 
     public SweetAlertDialog setArrayValue(String[] values) {
         this.mArrayValues = values;
@@ -771,7 +717,6 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         return mEditText.getText().toString();
     }
 
-
     public SweetAlertDialog setIndexValues(int[] indices) {
         this.mArrayIndices = indices;
         return this;
@@ -787,12 +732,10 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         return this;
     }
 
-
     public SweetAlertDialog setTip(String text) {
         mTipText = text;
         return this;
     }
-
 
     public int getNumberValue() {
         return mNumberPicker.getValue();
@@ -816,6 +759,18 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         return this;
     }
 
+    public interface OnSweetClickListener {
+        public void onClick(SweetAlertDialog sweetAlertDialog);
+    }
+
+    public interface OnSweetSelectListener {
+        public void onSelected(SweetAlertDialog sweetAlertDialog, int index);
+    }
+
+    public interface OnSweetMultiSelectListener {
+        public void onSelected(SweetAlertDialog sweetAlertDialog, int indices[]);
+    }
+
     class ListItem {
         public String title;
         public boolean isCheck;
@@ -836,19 +791,19 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
     }
 
     class ListAdapter extends BaseAdapter {
-        private ArrayList<ListItem> listItems;
         boolean isMulti = false;
+        private ArrayList<ListItem> listItems;
 
         public ListAdapter(boolean isMulti) {
             this.isMulti = isMulti;
         }
 
-        public void setData(ArrayList<ListItem> listItems) {
-            this.listItems = listItems;
-        }
-
         public ArrayList<ListItem> getData() {
             return listItems;
+        }
+
+        public void setData(ArrayList<ListItem> listItems) {
+            this.listItems = listItems;
         }
 
         @Override

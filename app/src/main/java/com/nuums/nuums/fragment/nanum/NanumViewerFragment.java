@@ -499,10 +499,7 @@ public class NanumViewerFragment extends ABaseFragment {
                             .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(final SweetAlertDialog sweetAlertDialog) {
-
                                     sweetAlertDialog.dismissWithAnimation();
-
-                                    contextHelper.showProgress(null);
 
                                     new SweetAlertDialog(getContext(), SweetAlertDialog.EDITTEXT_TYPE)
                                             .setTitleText("신청 댓글 남기기")

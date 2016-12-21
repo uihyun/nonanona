@@ -203,7 +203,7 @@ public class ContextHelper {
                             null
                     );
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
             }
         }).start();
@@ -297,7 +297,7 @@ public class ContextHelper {
         try {
             progress.show();
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -464,7 +464,7 @@ public class ContextHelper {
                         }
                     });
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
             }
         }).start();
@@ -679,7 +679,7 @@ public class ContextHelper {
             kakaoLink.sendMessage(kakaoTalkLinkMessageBuilder.build(), getContext());
 
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
