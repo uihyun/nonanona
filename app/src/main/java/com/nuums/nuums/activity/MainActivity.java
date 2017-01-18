@@ -211,6 +211,7 @@ public class MainActivity extends ABaseFragmentAcitivty {
 
         Tracker t = AppController.getInstance().getTracker(AppController.TrackerName.APP_TRACKER);
         t.setScreenName("MainActivity");
+        t.enableAdvertisingIdCollection(true);
         t.send(new HitBuilders.AppViewBuilder().build());
     }
 
