@@ -90,7 +90,7 @@
                     ultra:focusColor="@color/buttonsel_bg"
                     ultra:radius="10dp"
                     ultra:style="center"
-                    ultra:text="Login"
+                    ultra:text="로그인"
                     ultra:textColor="@color/green"
                     ultra:textSize="@dimen/text_large" />
 
@@ -107,7 +107,7 @@
                     ultra:focusColor="@color/buttonsel_bg"
                     ultra:radius="10dp"
                     ultra:style="center"
-                    ultra:text="Facebook으로 Login"
+                    ultra:text="Facebook 로그인"
                     ultra:textColor="@color/green"
                     ultra:textSize="@dimen/text_large" />
             </LinearLayout>

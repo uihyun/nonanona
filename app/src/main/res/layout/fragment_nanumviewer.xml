@@ -229,7 +229,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
                         android:background="@color/trans"
-                        android:hint="메세지를 입력하세요"
+                        android:hint="나눔 문의글을 남겨주세요"
                         android:padding="10dp"
                         android:textSize="15dp"/>
 
