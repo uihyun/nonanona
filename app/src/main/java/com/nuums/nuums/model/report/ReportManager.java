@@ -2,7 +2,7 @@ package com.nuums.nuums.model.report;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.yongtrim.lib.Config;
+import com.yongtrim.lib.Configuration;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.model.GsonBodyRequest;
 import com.yongtrim.lib.model.ModelManager;
@@ -36,7 +36,7 @@ public class ReportManager extends ModelManager {
                        final Response.Listener<ReportData> listener,
                        final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/report");
 
         JSONObject body = new JSONObject();

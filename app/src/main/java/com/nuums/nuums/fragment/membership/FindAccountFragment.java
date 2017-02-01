@@ -16,7 +16,7 @@ import com.nuums.nuums.R;
 import com.nuums.nuums.model.user.NsUser;
 import com.nuums.nuums.model.user.NsUserListData;
 import com.yongtrim.lib.fragment.ABaseFragment;
-import com.yongtrim.lib.log.Logger;
+import com.yongtrim.lib.logger.Logger;
 import com.yongtrim.lib.message.PushMessage;
 import com.yongtrim.lib.model.user.UserData;
 import com.yongtrim.lib.model.user.UserManager;

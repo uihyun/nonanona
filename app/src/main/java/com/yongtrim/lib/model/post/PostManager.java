@@ -2,7 +2,7 @@ package com.yongtrim.lib.model.post;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.yongtrim.lib.Config;
+import com.yongtrim.lib.Configuration;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.model.GsonBodyRequest;
 import com.yongtrim.lib.model.RequestManager;
@@ -39,7 +39,7 @@ public class PostManager {
                      final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/post/");
 
         url.append(type);
@@ -61,7 +61,7 @@ public class PostManager {
                       final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/postcount/");
         url.append(id);
 
@@ -84,7 +84,7 @@ public class PostManager {
             final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(com.yongtrim.lib.Config.url);
+        url.append(Configuration.url);
         url.append("/postfind?");
         url.append("&type=").append(type);
         url.append("&page=").append(page);

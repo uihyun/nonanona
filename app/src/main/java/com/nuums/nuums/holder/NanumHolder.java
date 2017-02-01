@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.nuums.nuums.R;
 import com.nuums.nuums.model.nanum.Nanum;
-import com.yongtrim.lib.Config;
+import com.yongtrim.lib.Configuration;
 import com.yongtrim.lib.ui.CircularNetworkImageView;
 import com.yongtrim.lib.ui.CustomNetworkImageView;
 import com.yongtrim.lib.ui.UltraButton;
@@ -159,7 +159,7 @@ public class NanumHolder {
         long hoursInMilli = minutesInMilli * 60;
         long daysInMilli = hoursInMilli * 24;
 
-        long different = hoursInMilli * Config.NANUM_HOUR - (date.getTime() - nanum.getTimeOngoing().getTime());
+        long different = hoursInMilli * Configuration.NANUM_HOUR - (date.getTime() - nanum.getTimeOngoing().getTime());
         //long different = minutesInMilli*2  - (date.getTime() - nanum.getTimeOngoing().getTime());
         long diff = different;
 

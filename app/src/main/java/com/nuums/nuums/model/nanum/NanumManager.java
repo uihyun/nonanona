@@ -3,7 +3,7 @@ package com.nuums.nuums.model.nanum;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.nuums.nuums.model.misc.Comment;
-import com.yongtrim.lib.Config;
+import com.yongtrim.lib.Configuration;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.model.GsonBodyRequest;
 import com.yongtrim.lib.model.RequestManager;
@@ -38,7 +38,7 @@ public class NanumManager {
     public void create(final Response.Listener<NanumData> listener,
                        final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/nanum");
 
         GsonBodyRequest<NanumData> request = new GsonBodyRequest<NanumData>(contextHelper,
@@ -58,7 +58,7 @@ public class NanumManager {
                        final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/nanum/");
 
         url.append(nanum.getId());
@@ -80,7 +80,7 @@ public class NanumManager {
                      final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/nanum/");
 
         if (id != null)
@@ -103,7 +103,7 @@ public class NanumManager {
                        final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/nanum/");
         url.append(nanum.getId());
 
@@ -140,7 +140,7 @@ public class NanumManager {
                          final Response.Listener<NanumData> listener,
                          final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/nanum/");
         url.append(nanum.getId());
         url.append("/bookmark/");
@@ -168,7 +168,7 @@ public class NanumManager {
             final Response.ErrorListener errorListener
     ) {
         StringBuffer url = new StringBuffer();
-        url.append(com.yongtrim.lib.Config.url);
+        url.append(Configuration.url);
         url.append("/nanumfind?");
         url.append("&userid=").append(userid);
         url.append("&type=").append(type);
@@ -200,7 +200,7 @@ public class NanumManager {
                     final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/nanum/");
         url.append(nanum.getId());
         url.append("/won/");

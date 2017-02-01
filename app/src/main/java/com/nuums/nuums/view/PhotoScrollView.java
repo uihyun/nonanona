@@ -9,7 +9,7 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 
 import com.nuums.nuums.adapter.PhotoCellAdapter;
-import com.yongtrim.lib.Config;
+import com.yongtrim.lib.Configuration;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.model.photo.Photo;
 import com.yongtrim.lib.util.PixelUtil;
@@ -27,7 +27,7 @@ public class PhotoScrollView extends LinearLayout {
     final String TAG = "PhotoScrollView";
 
     List<Photo> photos;
-    int maxPhotoCount = Config.MAX_NANUMPHOTO_CNT;
+    int maxPhotoCount = Configuration.MAX_NANUMPHOTO_CNT;
     int tag = 0;
 
     DynamicGridView gridView;

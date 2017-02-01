@@ -6,7 +6,7 @@ import android.util.DisplayMetrics;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.nuums.nuums.model.user.NsUser;
-import com.yongtrim.lib.Config;
+import com.yongtrim.lib.Configuration;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.message.MessageManager;
 import com.yongtrim.lib.model.GsonBodyRequest;
@@ -115,7 +115,7 @@ public class LoginManager {
                              final Response.ErrorListener errorListener
     ) {
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/login/forgot");
 
         JSONObject body = new JSONObject();
@@ -145,7 +145,7 @@ public class LoginManager {
                       final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/login");
 //
 //        loginType = User.LOGINTYPE_FACEBOOK;
@@ -210,7 +210,7 @@ public class LoginManager {
             final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/logout");
 
         GsonBodyRequest<UserData> request = new GsonBodyRequest<UserData>(contextHelper,

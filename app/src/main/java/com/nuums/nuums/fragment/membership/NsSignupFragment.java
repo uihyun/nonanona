@@ -23,7 +23,7 @@ import com.nuums.nuums.model.misc.Sns;
 import com.nuums.nuums.model.user.NsUser;
 import com.sromku.simple.fb.SimpleFacebook;
 import com.yongtrim.lib.fragment.SignupFragment;
-import com.yongtrim.lib.log.Logger;
+import com.yongtrim.lib.logger.Logger;
 import com.yongtrim.lib.message.PushMessage;
 import com.yongtrim.lib.model.ACommonData;
 import com.yongtrim.lib.model.config.ConfigManager;

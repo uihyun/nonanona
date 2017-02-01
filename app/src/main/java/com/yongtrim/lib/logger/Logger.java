@@ -1,4 +1,4 @@
-package com.yongtrim.lib.log;
+package com.yongtrim.lib.logger;
 
 import android.app.Application;
 

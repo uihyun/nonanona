@@ -26,7 +26,7 @@ import com.nuums.nuums.model.nanum.Nanum;
 import com.nuums.nuums.model.nanum.NanumData;
 import com.nuums.nuums.model.nanum.NanumManager;
 import com.nuums.nuums.view.PhotoScrollView;
-import com.yongtrim.lib.Config;
+import com.yongtrim.lib.Configuration;
 import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
 import com.yongtrim.lib.fragment.ABaseFragment;
 import com.yongtrim.lib.message.PushMessage;
@@ -162,7 +162,7 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
                 viewPhotoMain.setCurrentItem(index);
                 if (!nanum.getPhotos().get(index).hasPhoto()) {
                     contextHelper.getActivity().startActivityForResult(
-                            PhotoManager.getInstance(contextHelper).getPickImageChooserIntent(Config.MAX_NANUMPHOTO_CNT - index),
+                            PhotoManager.getInstance(contextHelper).getPickImageChooserIntent(Configuration.MAX_NANUMPHOTO_CNT - index),
                             ABaseFragmentAcitivty.REQUEST_PICK_IMAGE + index);
                 }
 
@@ -300,7 +300,7 @@ public class NanumEditFragment extends ABaseFragment implements UltraEditText.On
                 @Override
                 public void add(int index) {
                     contextHelper.getActivity().startActivityForResult(
-                            PhotoManager.getInstance(contextHelper).getPickImageChooserIntent(Config.MAX_NANUMPHOTO_CNT - index),
+                            PhotoManager.getInstance(contextHelper).getPickImageChooserIntent(Configuration.MAX_NANUMPHOTO_CNT - index),
                             ABaseFragmentAcitivty.REQUEST_PICK_IMAGE + index);
                 }
             });

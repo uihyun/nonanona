@@ -25,7 +25,6 @@ import com.nuums.nuums.model.chat.ChatDate;
 import com.nuums.nuums.model.chat.Delivery;
 import com.nuums.nuums.model.user.NsUser;
 import com.yongtrim.lib.ContextHelper;
-import com.yongtrim.lib.log.Logger;
 import com.yongtrim.lib.model.photo.PhotoManager;
 import com.yongtrim.lib.model.user.UserManager;
 import com.yongtrim.lib.ui.CircularNetworkImageView;

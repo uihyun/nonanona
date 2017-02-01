@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Environment;
 
-import com.yongtrim.lib.Config;
+import com.yongtrim.lib.Configuration;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -27,7 +27,7 @@ public class FileUtil {
             instance = new FileUtil();
 
             if (android.os.Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-                instance.cacheDir = new File(android.os.Environment.getExternalStorageDirectory(), Config.APPTAG);
+                instance.cacheDir = new File(android.os.Environment.getExternalStorageDirectory(), Configuration.APPTAG);
             } else {
                 instance.cacheDir = context.getCacheDir();
             }

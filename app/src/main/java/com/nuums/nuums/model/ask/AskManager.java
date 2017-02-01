@@ -2,10 +2,7 @@ package com.nuums.nuums.model.ask;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.nuums.nuums.model.apply.Apply;
-import com.nuums.nuums.model.apply.ApplyData;
-import com.nuums.nuums.model.apply.ApplyListData;
-import com.yongtrim.lib.Config;
+import com.yongtrim.lib.Configuration;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.model.GsonBodyRequest;
 import com.yongtrim.lib.model.RequestManager;
@@ -37,7 +34,7 @@ public class AskManager {
     public void create(final Response.Listener<AskData> listener,
                        final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/ask");
 
         GsonBodyRequest<AskData> request = new GsonBodyRequest<AskData>(contextHelper,
@@ -57,7 +54,7 @@ public class AskManager {
                        final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/ask/");
         url.append(ask.getId());
 
@@ -86,7 +83,7 @@ public class AskManager {
             final Response.Listener<AskListData> listener,
             final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
-        url.append(com.yongtrim.lib.Config.url);
+        url.append(Configuration.url);
         url.append("/askfind?");
 
         GsonBodyRequest<AskListData> request = new GsonBodyRequest<AskListData>(contextHelper,

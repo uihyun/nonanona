@@ -8,6 +8,7 @@ import com.android.volley.Response;
 import com.nuums.nuums.model.chat.Address;
 import com.nuums.nuums.model.nanum.Nanum;
 import com.nuums.nuums.model.user.NsUser;
+import com.yongtrim.lib.Configuration;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.model.GsonBodyRequest;
 import com.yongtrim.lib.model.ModelManager;
@@ -57,7 +58,7 @@ public class ConfigManager extends ModelManager {
 
 
         StringBuffer url = new StringBuffer();
-        url.append(com.yongtrim.lib.Config.url);
+        url.append(Configuration.url);
         url.append("/config/");
         url.append(type);
 

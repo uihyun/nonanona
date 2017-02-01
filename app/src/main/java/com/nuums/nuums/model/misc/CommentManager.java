@@ -6,7 +6,7 @@ import com.nuums.nuums.model.nanum.Nanum;
 import com.nuums.nuums.model.nanum.NanumData;
 import com.nuums.nuums.model.review.Review;
 import com.nuums.nuums.model.review.ReviewData;
-import com.yongtrim.lib.Config;
+import com.yongtrim.lib.Configuration;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.model.GsonBodyRequest;
 import com.yongtrim.lib.model.RequestManager;
@@ -39,7 +39,7 @@ public class CommentManager {
                               final Response.Listener<NanumData> listener,
                               final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/nanum/");
         url.append(nanum.getId());
         url.append("/comment/");
@@ -71,7 +71,7 @@ public class CommentManager {
                               final Response.Listener<NanumData> listener,
                               final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/nanum/");
         url.append(nanum.getId());
         url.append("/comment/");
@@ -102,7 +102,7 @@ public class CommentManager {
                               final Response.Listener<NanumData> listener,
                               final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/nanum/");
         url.append(nanum.getId());
         url.append("/comment");
@@ -126,7 +126,7 @@ public class CommentManager {
                                final Response.Listener<ReviewData> listener,
                                final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/review/");
         url.append(review.getId());
         url.append("/comment/");
@@ -157,7 +157,7 @@ public class CommentManager {
                                final Response.Listener<ReviewData> listener,
                                final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/review/");
         url.append(review.getId());
         url.append("/comment/");
@@ -188,7 +188,7 @@ public class CommentManager {
                                final Response.Listener<ReviewData> listener,
                                final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/review/");
         url.append(review.getId());
         url.append("/comment");

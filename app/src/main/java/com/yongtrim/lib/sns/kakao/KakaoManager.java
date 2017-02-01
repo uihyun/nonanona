@@ -11,7 +11,7 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.UserProfile;
 import com.kakao.util.exception.KakaoException;
 import com.yongtrim.lib.ContextHelper;
-import com.yongtrim.lib.log.Logger;
+import com.yongtrim.lib.logger.Logger;
 import com.yongtrim.lib.sns.SNSLoginListener;
 import com.yongtrim.lib.sns.SNSLoginoutListener;
 

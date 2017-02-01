@@ -33,7 +33,7 @@ import com.nuums.nuums.model.nanum.Nanum;
 import com.nuums.nuums.model.report.Report;
 import com.nuums.nuums.model.user.NsUser;
 import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
-import com.yongtrim.lib.log.Logger;
+import com.yongtrim.lib.logger.Logger;
 import com.yongtrim.lib.message.PushMessage;
 import com.yongtrim.lib.model.photo.Photo;
 import com.yongtrim.lib.model.user.LoginManager;

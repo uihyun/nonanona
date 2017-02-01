@@ -38,7 +38,7 @@ import com.nuums.nuums.model.user.NsUser;
 import com.nuums.nuums.view.HeaderView;
 import com.nuums.nuums.view.MypageView;
 import com.yongtrim.lib.fragment.ListFragment;
-import com.yongtrim.lib.log.Logger;
+import com.yongtrim.lib.logger.Logger;
 import com.yongtrim.lib.message.PushMessage;
 import com.yongtrim.lib.model.config.ConfigManager;
 import com.yongtrim.lib.model.list.List;

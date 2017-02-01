@@ -2,7 +2,6 @@ package com.nuums.nuums.fragment.mypage;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +11,7 @@ import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.nuums.nuums.R;
-import com.nuums.nuums.adapter.AlarmAdapter;
 import com.nuums.nuums.adapter.ApplyAdapter;
-import com.nuums.nuums.model.alarm.AlarmList;
-import com.nuums.nuums.model.alarm.AlarmListData;
-import com.nuums.nuums.model.alarm.AlarmManager;
 import com.nuums.nuums.model.apply.Apply;
 import com.nuums.nuums.model.apply.ApplyList;
 import com.nuums.nuums.model.apply.ApplyListData;
@@ -24,7 +19,7 @@ import com.nuums.nuums.model.apply.ApplyManager;
 import com.nuums.nuums.view.HeaderView;
 import com.nuums.nuums.view.MypageView;
 import com.yongtrim.lib.fragment.ListFragment;
-import com.yongtrim.lib.log.Logger;
+import com.yongtrim.lib.logger.Logger;
 import com.yongtrim.lib.message.PushMessage;
 import com.yongtrim.lib.model.list.List;
 import com.yongtrim.lib.ui.PagerSlidingTabStrip2;

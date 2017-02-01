@@ -7,32 +7,24 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 //import android.os.Parcel;
 //import android.os.Parcelable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.HorizontalScrollView;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nuums.nuums.R;
 import com.nuums.nuums.model.user.NsUser;
 import com.yongtrim.lib.ContextHelper;
-import com.yongtrim.lib.log.Logger;
 import com.yongtrim.lib.model.user.UserManager;
-import com.yongtrim.lib.util.PixelUtil;
 
 /**
  * hair / com.yongtrim.lib.ui

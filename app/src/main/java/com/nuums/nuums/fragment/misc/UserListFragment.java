@@ -2,12 +2,7 @@ package com.nuums.nuums.fragment.misc;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.location.Location;
 import android.os.Bundle;
-import android.os.Handler;
-import android.provider.Settings;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -20,42 +15,18 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.Response;
-import com.google.android.gms.maps.model.LatLng;
 import com.nuums.nuums.R;
-import com.nuums.nuums.activity.BaseActivity;
-import com.nuums.nuums.adapter.NanumAdapter;
 import com.nuums.nuums.adapter.UserListAdapter;
-import com.nuums.nuums.fragment.mypage.MypageMainFragment;
-import com.nuums.nuums.model.nanum.Nanum;
-import com.nuums.nuums.model.nanum.NanumList;
-import com.nuums.nuums.model.nanum.NanumListData;
-import com.nuums.nuums.model.nanum.NanumManager;
-import com.nuums.nuums.model.user.NsUser;
 import com.nuums.nuums.model.user.NsUserList;
 import com.nuums.nuums.model.user.NsUserListData;
-import com.nuums.nuums.view.HeaderView;
-import com.nuums.nuums.view.MypageView;
 import com.yongtrim.lib.fragment.ListFragment;
-import com.yongtrim.lib.log.Logger;
 import com.yongtrim.lib.message.PushMessage;
 import com.yongtrim.lib.model.list.List;
-import com.yongtrim.lib.model.list.Page;
-import com.yongtrim.lib.model.location.GPSTracker;
-import com.yongtrim.lib.model.location.LocationManager;
 import com.yongtrim.lib.model.user.UserManager;
-import com.yongtrim.lib.ui.PagerSlidingTabStrip2;
-import com.yongtrim.lib.ui.UltraButton;
 import com.yongtrim.lib.ui.UltraEditText;
 import com.yongtrim.lib.ui.UltraListView;
-import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
-import com.yongtrim.lib.util.PixelUtil;
 
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.concurrent.CountDownLatch;
-
-import twitter4j.UserList;
 
 /**
  * Created by YongTrim on 16. 6. 15. for nuums_ad

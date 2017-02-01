@@ -2,15 +2,12 @@ package com.yongtrim.lib.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.yongtrim.lib.ContextHelper;
-import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
 import com.yongtrim.lib.message.PushMessage;
 
 /**

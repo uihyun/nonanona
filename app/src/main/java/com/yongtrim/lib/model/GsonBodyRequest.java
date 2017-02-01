@@ -12,7 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.nuums.nuums.AppController;
 import com.yongtrim.lib.ContextHelper;
-import com.yongtrim.lib.log.Logger;
+import com.yongtrim.lib.logger.Logger;
 import com.yongtrim.lib.model.user.LoginManager;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
 

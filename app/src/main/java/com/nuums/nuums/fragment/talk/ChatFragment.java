@@ -34,7 +34,7 @@ import com.nuums.nuums.model.chat.TalkData;
 import com.nuums.nuums.model.chat.TalkManager;
 import com.nuums.nuums.model.report.Report;
 import com.nuums.nuums.model.user.NsUser;
-import com.yongtrim.lib.Config;
+import com.yongtrim.lib.Configuration;
 import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
 import com.yongtrim.lib.fragment.ListFragment;
 import com.yongtrim.lib.message.MessageManager;
@@ -91,7 +91,7 @@ public class ChatFragment extends ListFragment {
     private Socket socket;
     {
         try{
-            socket = IO.socket(Config.url);
+            socket = IO.socket(Configuration.url);
         }catch(URISyntaxException e){
             throw new RuntimeException(e);
         }

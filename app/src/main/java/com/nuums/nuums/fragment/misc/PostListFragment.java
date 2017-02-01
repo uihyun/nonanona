@@ -11,18 +11,9 @@ import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.nuums.nuums.R;
-import com.nuums.nuums.adapter.ApplyAdapter;
 import com.nuums.nuums.adapter.PostAdapter;
-import com.nuums.nuums.fragment.mypage.MypageMainFragment;
-import com.nuums.nuums.model.apply.Apply;
-import com.nuums.nuums.model.apply.ApplyList;
-import com.nuums.nuums.model.apply.ApplyListData;
-import com.nuums.nuums.model.apply.ApplyManager;
-import com.nuums.nuums.model.report.Report;
-import com.nuums.nuums.view.HeaderView;
-import com.nuums.nuums.view.MypageView;
 import com.yongtrim.lib.fragment.ListFragment;
-import com.yongtrim.lib.log.Logger;
+import com.yongtrim.lib.logger.Logger;
 import com.yongtrim.lib.message.PushMessage;
 import com.yongtrim.lib.model.list.List;
 import com.yongtrim.lib.model.post.Post;
@@ -30,9 +21,7 @@ import com.yongtrim.lib.model.post.PostList;
 import com.yongtrim.lib.model.post.PostListData;
 import com.yongtrim.lib.model.post.PostManager;
 import com.yongtrim.lib.model.user.UserManager;
-import com.yongtrim.lib.ui.PagerSlidingTabStrip2;
 import com.yongtrim.lib.ui.UltraListView;
-import com.yongtrim.lib.util.PixelUtil;
 
 import de.greenrobot.event.EventBus;
 

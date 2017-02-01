@@ -6,7 +6,7 @@ import android.net.Uri;
 
 import com.android.volley.Response;
 import com.nuums.nuums.R;
-import com.yongtrim.lib.log.Logger;
+import com.yongtrim.lib.logger.Logger;
 import com.yongtrim.lib.model.config.Config;
 import com.yongtrim.lib.model.config.ConfigData;
 import com.yongtrim.lib.model.config.ConfigManager;

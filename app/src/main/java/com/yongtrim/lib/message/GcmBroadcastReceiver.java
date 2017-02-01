@@ -6,9 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.WakefulBroadcastReceiver;
-import android.util.Log;
 
-import com.yongtrim.lib.log.Logger;
+import com.yongtrim.lib.logger.Logger;
 
 import java.net.URLDecoder;
 

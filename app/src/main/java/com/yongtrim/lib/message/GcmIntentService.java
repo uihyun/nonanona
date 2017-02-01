@@ -8,22 +8,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
 import android.text.TextUtils;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.nuums.nuums.R;
-import com.nuums.nuums.activity.BaseActivity;
 import com.nuums.nuums.activity.MainActivity;
-import com.nuums.nuums.activity.SplashActivity;
 import com.nuums.nuums.model.alarm.Alarm;
-import com.nuums.nuums.model.chat.Chat;
 import com.nuums.nuums.model.chat.Talk;
 import com.nuums.nuums.model.user.NsUser;
 import com.yongtrim.lib.Application;
-import com.yongtrim.lib.Config;
+import com.yongtrim.lib.Configuration;
 import com.yongtrim.lib.ContextHelper;
-import com.yongtrim.lib.model.config.ConfigManager;
 import com.yongtrim.lib.model.user.UserManager;
 
 import de.greenrobot.event.EventBus;
@@ -193,7 +188,7 @@ public class GcmIntentService extends IntentService {
         NotificationCompat.Builder mCompatBuilder = new NotificationCompat.Builder(this);
         mCompatBuilder.setSmallIcon(R.mipmap.push);
         mCompatBuilder.setWhen(System.currentTimeMillis());
-        mCompatBuilder.setContentTitle(Config.APPNAME);
+        mCompatBuilder.setContentTitle(Configuration.APPNAME);
 
         mCompatBuilder.setTicker(content);
         mCompatBuilder.setContentText(content);

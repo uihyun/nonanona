@@ -2,7 +2,7 @@ package com.yongtrim.lib.model.banner;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.yongtrim.lib.Config;
+import com.yongtrim.lib.Configuration;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.model.GsonBodyRequest;
 import com.yongtrim.lib.model.RequestManager;
@@ -29,7 +29,7 @@ public class BannerManager {
                       final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/bannercount/");
         url.append(id);
 
@@ -50,7 +50,7 @@ public class BannerManager {
             final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/bannernow/");
 
         GsonBodyRequest<BannerData> request = new GsonBodyRequest<BannerData>(contextHelper,

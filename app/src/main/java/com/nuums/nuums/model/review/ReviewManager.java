@@ -2,16 +2,11 @@ package com.nuums.nuums.model.review;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.nuums.nuums.model.misc.Comment;
-import com.nuums.nuums.model.nanum.Nanum;
-import com.nuums.nuums.model.nanum.NanumData;
-import com.nuums.nuums.model.nanum.NanumListData;
-import com.yongtrim.lib.Config;
+import com.yongtrim.lib.Configuration;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.model.GsonBodyRequest;
 import com.yongtrim.lib.model.RequestManager;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,7 +37,7 @@ public class ReviewManager {
     public void create(final Response.Listener<ReviewData> listener,
                        final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/review");
 
         GsonBodyRequest<ReviewData> request = new GsonBodyRequest<ReviewData>(contextHelper,
@@ -62,7 +57,7 @@ public class ReviewManager {
                        final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/review/");
 
         url.append(review.getId());
@@ -84,7 +79,7 @@ public class ReviewManager {
                      final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/review/");
 
         if(id != null)
@@ -108,7 +103,7 @@ public class ReviewManager {
                        final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/review/");
         url.append(review.getId());
 
@@ -144,7 +139,7 @@ public class ReviewManager {
                          final Response.Listener<ReviewData> listener,
                          final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/review/");
         url.append(review.getId());
         url.append("/star/");
@@ -172,7 +167,7 @@ public class ReviewManager {
             final Response.ErrorListener errorListener
     ) {
         StringBuffer url = new StringBuffer();
-        url.append(com.yongtrim.lib.Config.url);
+        url.append(Configuration.url);
         url.append("/reviewfind?");
         url.append("&userid=").append(userid);
         url.append("&type=").append(type);

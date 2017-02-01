@@ -21,10 +21,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import com.yongtrim.lib.Config;
+import com.yongtrim.lib.Configuration;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.activity.imagepicker.ImagePickerActivity;
-import com.yongtrim.lib.log.Logger;
+import com.yongtrim.lib.logger.Logger;
 import com.yongtrim.lib.model.user.UserManager;
 import com.yongtrim.lib.ui.CustomNetworkImageView;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
@@ -44,7 +44,7 @@ import java.util.concurrent.CountDownLatch;
  */
 public class PhotoManager {
     private static PhotoManager instance;
-    private final String fileNameTemp = Config.APPTAG + "img.jpg";
+    private final String fileNameTemp = Configuration.APPTAG + "img.jpg";
     private final String TAG = getClass().getSimpleName();
     int seedOfPath = 0;
     String pathCropped;
@@ -92,9 +92,9 @@ public class PhotoManager {
 
                 Log.i(TAG, ">>> path = " + paths[0]);
 
-                config.put("cloud_name", Config.cloudinary_cloud_name);
-                config.put("api_key", Config.cloudinary_api_key);
-                config.put("api_secret", Config.cloudinary_api_secret);
+                config.put("cloud_name", Configuration.cloudinary_cloud_name);
+                config.put("api_key", Configuration.cloudinary_api_key);
+                config.put("api_secret", Configuration.cloudinary_api_secret);
 
                 Cloudinary cloudinary = new Cloudinary(config);
 
@@ -237,11 +237,11 @@ public class PhotoManager {
             intent.setData(source);
 
             if (isSmall) {
-                intent.putExtra("outputX", Config.SMALL_SIZE);
-                intent.putExtra("outputY", Config.SMALL_SIZE);
+                intent.putExtra("outputX", Configuration.SMALL_SIZE);
+                intent.putExtra("outputY", Configuration.SMALL_SIZE);
             } else {
-                intent.putExtra("outputX", Config.MEDIUM_SIZE);
-                intent.putExtra("outputY", Config.MEDIUM_SIZE);
+                intent.putExtra("outputX", Configuration.MEDIUM_SIZE);
+                intent.putExtra("outputY", Configuration.MEDIUM_SIZE);
             }
 
             intent.putExtra("aspectX", 1);

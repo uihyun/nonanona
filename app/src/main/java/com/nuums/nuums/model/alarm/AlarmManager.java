@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.yongtrim.lib.Configuration;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.model.GsonBodyRequest;
 import com.yongtrim.lib.model.RequestManager;
@@ -50,7 +51,7 @@ public class AlarmManager {
             final Response.Listener<AlarmListData> listener,
             final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
-        url.append(com.yongtrim.lib.Config.url);
+        url.append(Configuration.url);
         url.append("/alarmfind?");
         url.append("&type=").append(type);
         url.append("&page=").append(page);

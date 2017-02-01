@@ -8,17 +8,13 @@ import android.graphics.drawable.BitmapDrawable;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.ImageSpan;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 
@@ -29,10 +25,8 @@ import com.nuums.nuums.model.user.NsUser;
 import com.nuums.nuums.model.user.NsUserListData;
 import com.nuums.nuums.model.user.NsUserSearch;
 import com.yongtrim.lib.ContextHelper;
-import com.yongtrim.lib.log.Logger;
 import com.yongtrim.lib.model.RequestManager;
 import com.yongtrim.lib.model.user.UserManager;
-import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
 
 import org.json.JSONObject;
 

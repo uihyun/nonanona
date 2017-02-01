@@ -1,35 +1,17 @@
 package com.nuums.nuums.fragment.misc;
 
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Response;
 import com.nuums.nuums.R;
-import com.nuums.nuums.model.user.NsUser;
 import com.yongtrim.lib.fragment.ABaseFragment;
-import com.yongtrim.lib.log.Logger;
 import com.yongtrim.lib.message.MessageManager;
 import com.yongtrim.lib.message.PushMessage;
-import com.yongtrim.lib.model.config.ConfigManager;
-import com.yongtrim.lib.model.user.LoginManager;
-import com.yongtrim.lib.model.user.UserData;
-import com.yongtrim.lib.model.user.UserManager;
-import com.yongtrim.lib.sns.SNSLoginoutListener;
-import com.yongtrim.lib.sns.facebook.FacebookManager;
-import com.yongtrim.lib.sns.kakao.KakaoManager;
-import com.yongtrim.lib.sns.twitter.TwitterManager;
 import com.yongtrim.lib.ui.UltraButton;
-import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
-
-import java.util.concurrent.CountDownLatch;
 
 /**
  * nuums / com.nuums.nuums.fragment.misc

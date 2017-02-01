@@ -18,7 +18,7 @@ import com.nuums.nuums.activity.BaseActivity;
 import com.nuums.nuums.model.report.Report;
 import com.nuums.nuums.model.user.NsUser;
 import com.yongtrim.lib.fragment.ABaseFragment;
-import com.yongtrim.lib.log.Logger;
+import com.yongtrim.lib.logger.Logger;
 import com.yongtrim.lib.message.PushMessage;
 import com.yongtrim.lib.model.config.ConfigData;
 import com.yongtrim.lib.model.config.ConfigManager;

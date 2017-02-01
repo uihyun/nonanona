@@ -5,7 +5,7 @@ package com.yongtrim.lib;
  * <p/>
  * Created by Uihyun on 15. 9. 1..
  */
-public class Config {
+public class Configuration {
 
     public static String url;
     public static boolean isDEBUG = false;

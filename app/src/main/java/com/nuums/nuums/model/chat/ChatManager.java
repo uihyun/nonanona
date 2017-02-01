@@ -1,17 +1,11 @@
 package com.nuums.nuums.model.chat;
 
-import android.text.TextUtils;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.yongtrim.lib.Config;
+import com.yongtrim.lib.Configuration;
 import com.yongtrim.lib.ContextHelper;
-import com.yongtrim.lib.model.ACommonData;
 import com.yongtrim.lib.model.GsonBodyRequest;
 import com.yongtrim.lib.model.RequestManager;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * nuums / com.nuums.nuums.model.chat
@@ -43,7 +37,7 @@ public class ChatManager {
 
 
         StringBuffer url = new StringBuffer();
-        url.append(com.yongtrim.lib.Config.url);
+        url.append(Configuration.url);
         url.append("/chatfind");
         url.append("?page=").append(page);
 

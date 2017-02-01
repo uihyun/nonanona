@@ -12,9 +12,10 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.nuums.nuums.model.user.NsUser;
+import com.yongtrim.lib.Configuration;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.fragment.SplashFragment;
-import com.yongtrim.lib.log.Logger;
+import com.yongtrim.lib.logger.Logger;
 import com.yongtrim.lib.util.BasePreferenceUtil;
 
 import java.io.IOException;
@@ -144,7 +145,7 @@ public class MessageManager {
                     if (gcm == null) {
                         gcm = GoogleCloudMessaging.getInstance(contextHelper.getContext());
                     }
-                    regId = gcm.register(com.yongtrim.lib.Config.PROJECT_ID);
+                    regId = gcm.register(Configuration.PROJECT_ID);
                     msg = "Device registered, registration ID = " + regId;
 
                     preference.putRegId(regId);

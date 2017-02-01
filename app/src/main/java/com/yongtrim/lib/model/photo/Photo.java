@@ -14,7 +14,7 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.nuums.nuums.AppController;
-import com.yongtrim.lib.Config;
+import com.yongtrim.lib.Configuration;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.model.Model;
 
@@ -119,7 +119,7 @@ public class Photo extends Model implements Parcelable {
             return url;
         }
 
-        return Config.imageHosting + url;
+        return Configuration.imageHosting + url;
     }
 
     public void setUrl(String url) {
@@ -130,7 +130,7 @@ public class Photo extends Model implements Parcelable {
         if (public_id != null) {
             StringBuffer stringBuffer = new StringBuffer();
             stringBuffer.append("http://res.cloudinary.com/");
-            stringBuffer.append(Config.cloudinary_cloud_name);
+            stringBuffer.append(Configuration.cloudinary_cloud_name);
             stringBuffer.append("/image/upload/w_256,h_256,c_fill/");
             stringBuffer.append(public_id);
             stringBuffer.append(".jpg");
@@ -139,7 +139,7 @@ public class Photo extends Model implements Parcelable {
         }
 
         if (!TextUtils.isEmpty(url_s))
-            return Config.imageHosting + url_s;
+            return Configuration.imageHosting + url_s;
         return getUrl();
     }
 
@@ -147,7 +147,7 @@ public class Photo extends Model implements Parcelable {
         if (public_id != null) {
             StringBuffer stringBuffer = new StringBuffer();
             stringBuffer.append("http://res.cloudinary.com/");
-            stringBuffer.append(Config.cloudinary_cloud_name);
+            stringBuffer.append(Configuration.cloudinary_cloud_name);
             stringBuffer.append("/image/upload/w_720,h_720,c_fill/");
             stringBuffer.append(public_id);
             stringBuffer.append(".jpg");
@@ -156,7 +156,7 @@ public class Photo extends Model implements Parcelable {
 
 
         if (!TextUtils.isEmpty(url_m))
-            return Config.imageHosting + url_m;
+            return Configuration.imageHosting + url_m;
         return getSmallUrl();
     }
 

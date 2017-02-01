@@ -2,10 +2,7 @@ package com.nuums.nuums.model.yongdal;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.nuums.nuums.model.apply.Apply;
-import com.nuums.nuums.model.apply.ApplyData;
-import com.nuums.nuums.model.apply.ApplyListData;
-import com.yongtrim.lib.Config;
+import com.yongtrim.lib.Configuration;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.model.GsonBodyRequest;
 import com.yongtrim.lib.model.RequestManager;
@@ -37,7 +34,7 @@ public class YongdalManager {
     public void create(final Response.Listener<YongdalData> listener,
                        final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/yongdal");
 
         GsonBodyRequest<YongdalData> request = new GsonBodyRequest<YongdalData>(contextHelper,
@@ -57,7 +54,7 @@ public class YongdalManager {
                        final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/yongdal/");
         url.append(yongdal.getId());
 
@@ -86,7 +83,7 @@ public class YongdalManager {
                          final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/yongdalprice/");
 
         JSONObject body = new JSONObject();

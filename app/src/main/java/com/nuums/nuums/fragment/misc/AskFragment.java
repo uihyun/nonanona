@@ -1,6 +1,5 @@
 package com.nuums.nuums.fragment.misc;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,36 +18,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
-import com.google.android.gms.maps.model.LatLng;
 import com.nuums.nuums.R;
 import com.nuums.nuums.adapter.AskAdapter;
-import com.nuums.nuums.adapter.PostcodeAdapter;
-import com.nuums.nuums.model.apply.ApplyData;
-import com.nuums.nuums.model.apply.ApplyListData;
-import com.nuums.nuums.model.apply.ApplyManager;
 import com.nuums.nuums.model.ask.Ask;
 import com.nuums.nuums.model.ask.AskData;
 import com.nuums.nuums.model.ask.AskList;
 import com.nuums.nuums.model.ask.AskListData;
 import com.nuums.nuums.model.ask.AskManager;
-import com.nuums.nuums.model.nanum.Nanum;
 import com.yongtrim.lib.fragment.ListFragment;
-import com.yongtrim.lib.log.Logger;
+import com.yongtrim.lib.logger.Logger;
 import com.yongtrim.lib.message.PushMessage;
 import com.yongtrim.lib.model.list.List;
-import com.yongtrim.lib.model.misc.LocationToAddressTask;
-import com.yongtrim.lib.model.postcode.PostCode;
-import com.yongtrim.lib.model.postcode.PostCodeList;
-import com.yongtrim.lib.model.postcode.PostCodeTask;
-import com.yongtrim.lib.model.user.LocationTask;
-import com.yongtrim.lib.model.user.UserData;
 import com.yongtrim.lib.model.user.UserManager;
 import com.yongtrim.lib.ui.UltraButton;
 import com.yongtrim.lib.ui.UltraListView;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
 import de.greenrobot.event.EventBus;

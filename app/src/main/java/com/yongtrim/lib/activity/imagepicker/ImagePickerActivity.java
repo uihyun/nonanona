@@ -25,7 +25,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nuums.nuums.R;
-import com.yongtrim.lib.Config;
+import com.yongtrim.lib.Configuration;
 import com.yongtrim.lib.activity.ABaseFragmentAcitivty;
 import com.yongtrim.lib.model.photo.Photo;
 
@@ -69,7 +69,7 @@ public class ImagePickerActivity extends ABaseFragmentAcitivty implements Adapte
                 .build();
 
 
-        maxPhotoCnt = getIntent().getIntExtra("maxphotocnt", Config.MAX_NANUMPHOTO_CNT);
+        maxPhotoCnt = getIntent().getIntExtra("maxphotocnt", Configuration.MAX_NANUMPHOTO_CNT);
 
         gridView = (GridView) findViewById(R.id.photo_grid);
         gridView.setOnItemClickListener(this);

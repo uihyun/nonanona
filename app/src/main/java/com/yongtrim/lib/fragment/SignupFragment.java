@@ -1,7 +1,7 @@
 package com.yongtrim.lib.fragment;
 
 import com.android.volley.Response;
-import com.yongtrim.lib.log.Logger;
+import com.yongtrim.lib.logger.Logger;
 import com.yongtrim.lib.model.user.UserData;
 import com.yongtrim.lib.model.user.UserManager;
 import com.yongtrim.lib.ui.sweetalert.SweetAlertDialog;

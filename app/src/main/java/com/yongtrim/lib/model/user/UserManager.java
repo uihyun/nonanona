@@ -6,7 +6,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.nuums.nuums.model.user.NsUser;
 import com.nuums.nuums.model.user.NsUserListData;
-import com.yongtrim.lib.Config;
+import com.yongtrim.lib.Configuration;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.model.ACommonData;
 import com.yongtrim.lib.model.GsonBodyRequest;
@@ -61,7 +61,7 @@ public class UserManager extends ModelManager {
                        final Response.Listener<UserData> listener,
                        final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/user");
         url.append("?login_type=").append(loginType);
         if (role != null)
@@ -94,7 +94,7 @@ public class UserManager extends ModelManager {
                      final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/user/");
 
         if (id != null)
@@ -116,7 +116,7 @@ public class UserManager extends ModelManager {
                        final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/user/");
         url.append(user.getId());
 
@@ -146,7 +146,7 @@ public class UserManager extends ModelManager {
             final Response.ErrorListener errorListener
     ) {
         StringBuffer url = new StringBuffer();
-        url.append(com.yongtrim.lib.Config.url);
+        url.append(Configuration.url);
         url.append("/userfind?");
         url.append("&page=").append(page);
 
@@ -177,7 +177,7 @@ public class UserManager extends ModelManager {
                              final Response.Listener<UserData> listener,
                              final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/user/certifyemail");
 
         JSONObject body = new JSONObject();
@@ -206,7 +206,7 @@ public class UserManager extends ModelManager {
                                              final Response.Listener<ACommonData> listener,
                                              final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/user/checkphonenumber/");
         url.append(phonenumber);
 
@@ -227,7 +227,7 @@ public class UserManager extends ModelManager {
                                           final Response.Listener<ACommonData> listener,
                                           final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/user/checkfacebook/");
         url.append(facebookId);
 
@@ -248,7 +248,7 @@ public class UserManager extends ModelManager {
                            final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/user/checkemail/");
 
         url.append(email);
@@ -270,7 +270,7 @@ public class UserManager extends ModelManager {
                               final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/user/checknickname/");
         url.append(MiscUtil.encode(nickname));
 
@@ -291,7 +291,7 @@ public class UserManager extends ModelManager {
                               final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/user/checkpassword");
 
 
@@ -340,7 +340,7 @@ public class UserManager extends ModelManager {
                                final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/user/changepassword/");
         url.append(username);
 
@@ -368,7 +368,7 @@ public class UserManager extends ModelManager {
                       final Response.Listener<UserData> listener,
                       final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/user/");
         url.append(user.getId());
         url.append("/block/");
@@ -390,7 +390,7 @@ public class UserManager extends ModelManager {
                        final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/user/");
 
         url.append(user.getId());

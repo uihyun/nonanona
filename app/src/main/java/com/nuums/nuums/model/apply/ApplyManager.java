@@ -2,11 +2,7 @@ package com.nuums.nuums.model.apply;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.nuums.nuums.model.alarm.AlarmListData;
-import com.nuums.nuums.model.chat.ChatListData;
-import com.nuums.nuums.model.nanum.Nanum;
-import com.nuums.nuums.model.nanum.NanumData;
-import com.yongtrim.lib.Config;
+import com.yongtrim.lib.Configuration;
 import com.yongtrim.lib.ContextHelper;
 import com.yongtrim.lib.model.GsonBodyRequest;
 import com.yongtrim.lib.model.RequestManager;
@@ -38,7 +34,7 @@ public class ApplyManager {
     public void create(final Response.Listener<ApplyData> listener,
                        final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/apply");
 
         GsonBodyRequest<ApplyData> request = new GsonBodyRequest<ApplyData>(contextHelper,
@@ -58,7 +54,7 @@ public class ApplyManager {
                        final Response.ErrorListener errorListener) {
 
         StringBuffer url = new StringBuffer();
-        url.append(Config.url);
+        url.append(Configuration.url);
         url.append("/apply/");
         url.append(apply.getId());
 
@@ -88,7 +84,7 @@ public class ApplyManager {
             final Response.Listener<ApplyListData> listener,
             final Response.ErrorListener errorListener) {
         StringBuffer url = new StringBuffer();
-        url.append(com.yongtrim.lib.Config.url);
+        url.append(Configuration.url);
         url.append("/applyfind?");
         url.append("&type=").append(type);
         url.append("&page=").append(page);

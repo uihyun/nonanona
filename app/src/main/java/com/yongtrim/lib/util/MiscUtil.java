@@ -3,9 +3,6 @@ package com.yongtrim.lib.util;
 import android.text.TextUtils;
 
 import com.yongtrim.lib.ContextHelper;
-import com.yongtrim.lib.log.Logger;
-
-import org.json.JSONArray;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

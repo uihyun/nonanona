@@ -28,7 +28,7 @@ import com.nuums.nuums.R;
 import com.sromku.simple.fb.Permission;
 import com.sromku.simple.fb.SimpleFacebook;
 import com.sromku.simple.fb.SimpleFacebookConfiguration;
-import com.yongtrim.lib.log.Logger;
+import com.yongtrim.lib.logger.Logger;
 import com.yongtrim.lib.model.RequestManager;
 import com.yongtrim.lib.util.images.ImageCacheManager;
 
@@ -121,12 +121,12 @@ public class Application extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
 
-        Config.url = getString(R.string.server_url);
-        Config.isDEBUG = this.getString(R.string.isDebug).equals("1");
-        Config.isDEBUGREPORT = this.getString(R.string.isDEBUGREPORT).equals("1");
-        Config.APPNAME = getString(R.string.app_name);
+        Configuration.url = getString(R.string.server_url);
+        Configuration.isDEBUG = this.getString(R.string.isDebug).equals("1");
+        Configuration.isDEBUGREPORT = this.getString(R.string.isDEBUGREPORT).equals("1");
+        Configuration.APPNAME = getString(R.string.app_name);
 
-        Logger.initialize(this, Config.isDEBUG, Config.isDEBUGREPORT);
+        Logger.initialize(this, Configuration.isDEBUG, Configuration.isDEBUGREPORT);
 
         //
         // this code is for com.yongtrim.lib
@@ -156,7 +156,7 @@ public class Application extends MultiDexApplication {
 
         SimpleFacebookConfiguration configuration = new SimpleFacebookConfiguration.Builder()
                 .setAppId(getString(R.string.fb_app_id))
-                .setNamespace(Config.APPNAME)
+                .setNamespace(Configuration.APPNAME)
                 .setPermissions(permissions)
                 .setDefaultAudience(DefaultAudience.FRIENDS)
                 .setAskForAllPermissionsAtOnce(false)
