@@ -16,8 +16,6 @@
 
 package net.simonvt.widget;
 
-import net.simonvt.datepicker.R;
-
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -39,6 +37,8 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import net.simonvt.datepicker.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -506,15 +506,18 @@ public class DatePicker extends FrameLayout {
         final int spinnerCount = order.length;
         for (int i = 0; i < spinnerCount; i++) {
             switch (order[i]) {
-                case DateFormat.DATE:
+//                case DateFormat.DATE:
+                case 'd':
                     mSpinners.addView(mDaySpinner);
                     setImeOptions(mDaySpinner, spinnerCount, i);
                     break;
-                case DateFormat.MONTH:
+//                case DateFormat.MONTH:
+                case 'M':
                     mSpinners.addView(mMonthSpinner);
                     setImeOptions(mMonthSpinner, spinnerCount, i);
                     break;
-                case DateFormat.YEAR:
+//                case DateFormat.YEAR:
+                case 'y':
                     mSpinners.addView(mYearSpinner);
                     setImeOptions(mYearSpinner, spinnerCount, i);
                     break;

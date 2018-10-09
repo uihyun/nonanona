@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.sromku:simple-fb-4.0.6">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/simple-fb-4.0.6.aar/0b834a4a0702989685409e5377bea46b/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/simple-fb-4.0.6.aar/0b834a4a0702989685409e5377bea46b/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sromku/simple-fb/4.0.6/19c5f84c54e622706099a8e3f338c1ab8552b21e/simple-fb-4.0.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

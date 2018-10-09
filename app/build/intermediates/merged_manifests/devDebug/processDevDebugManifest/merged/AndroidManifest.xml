@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.nuums.nuums.dev"
+    android:versionCode="16"
+    android:versionName="1.1.4-dev" >
+
+    <uses-sdk
+        android:minSdkVersion="28"
+        android:targetSdkVersion="28" />
+
+    <!-- To make your app use internet services -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- To access network state (used to detect internet status) -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Required as GCM needs google account -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
+    <!-- Needed if your app need to wake your device when it sleeps -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- Creates a custom permission so only this app can receive its messages. -->
+    <permission
+        android:name="com.nuums.nuums.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.nuums.nuums.permission.C2D_MESSAGE" />
+
+    <!-- This app has permission to register and receive data message. -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
+    <!-- <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" /> -->
+
+
+    <!--
+        The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but are recommended.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <application
+        android:name="com.nuums.nuums.AppController"
+        android:allowBackup="true"
+        android:debuggable="true"
+        android:icon="@mipmap/nona"
+        android:label="@string/app_name"
+        android:theme="@style/HairTheme" >
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="@string/google_maps_key" />
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
+
+        <activity
+            android:name="com.nuums.nuums.activity.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.nuums.nuums.activity.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.nuums.nuums.activity.BaseActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="@string/kakaolink_host"
+                    android:scheme="@string/kakao_scheme" />
+
+                <action android:name="android.location.PROVIDERS_CHANGED" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.nuums.nuums.activity.Base2Activity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name="com.nuums.nuums.activity.Base3Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+
+        <receiver android:name="com.yongtrim.lib.model.location.GpsLocationReceiver" >
+            <intent-filter>
+                <action android:name="android.location.PROVIDERS_CHANGED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.yongtrim.lib.message.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+
+                <!-- Receives the actual messages. -->
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+                <!-- Receives the registration id. -->
+                <!-- action android:name="com.google.android.c2dm.intent.REGISTRATION" / -->
+                <category android:name="com.nuums.nuums" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.yongtrim.lib.message.GcmIntentService" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/fb_app_id" />
+
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider777570012374079"
+            android:exported="true" />
+
+        <activity
+            android:name="org.acra.CrashReportDialog"
+            android:excludeFromRecents="true"
+            android:finishOnTaskLaunch="true"
+            android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name="com.yongtrim.lib.activity.imagepicker.ImagePickerActivity"
+            android:icon="@mipmap/pic"
+            android:label="사진 여러장 불러오기"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.nuums.nuums.activity.GalleryActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar" >
+        </activity>
+    </application>
+
+</manifest>

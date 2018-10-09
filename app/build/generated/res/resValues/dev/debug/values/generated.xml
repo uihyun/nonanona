@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Automatically generated file. DO NOT MODIFY -->
+
+    <!-- Values from build type: debug -->
+    <string name="google_maps_key" translatable="false">AIzaSyAhfYsnE8mYnA3szlf07f_-n9hlgCv-CVA</string>
+    <string name="isDEBUGREPORT" translatable="false">0</string>
+    <string name="isDebug" translatable="false">1</string>
+    <string name="server_url" translatable="false">https://nuums.herokuapp.com</string>
+
+</resources>

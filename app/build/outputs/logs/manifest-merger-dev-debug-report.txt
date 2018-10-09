@@ -1,0 +1,412 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:2:1-179:12
+INJECTED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:2:1-179:12
+INJECTED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:2:1-179:12
+INJECTED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:2:1-179:12
+MERGED from [com.google.android.gms:play-services:6.1.71] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/play-services-6.1.71.aar/ad2dcb73099c6c887bbf246dacf63a0d/AndroidManifest.xml:14:223-17:12
+MERGED from [com.android.support:appcompat-v7:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha1.aar/4c27c4bf50096d952ae265c002851c7e/AndroidManifest.xml:17:1-23:12
+MERGED from [com.sromku:simple-fb:4.0.6] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/simple-fb-4.0.6.aar/0b834a4a0702989685409e5377bea46b/AndroidManifest.xml:2:1-14:12
+MERGED from [com.facebook.android:facebook-android-sdk:4.3.0] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.3.0.aar/23fba5b4979a3322400cc35f61150d2b/AndroidManifest.xml:21:1-30:12
+MERGED from [com.android.support:support-v4:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0-alpha1.aar/e855ac2fb38e77a85450dfdffabf23ed/AndroidManifest.xml:17:1-23:12
+MERGED from [com.android.support:multidex:1.0.0] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/multidex-1.0.0.aar/03346d7fc3a8c7b9b4c4466382e7a89b/AndroidManifest.xml:16:1-19:12
+MERGED from [:androiddatepickerLibrary] /Users/Uihyun/Desktop/work/nonanona/androiddatepickerLibrary/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-11:12
+MERGED from [:androidnumberpickerLibrary] /Users/Uihyun/Desktop/work/nonanona/androidnumberpickerLibrary/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-11:12
+MERGED from [com.kakao.sdk:kakaolink:1.1.2] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/kakaolink-1.1.2.aar/94624ba9686701992543c4a72c2b68f4/AndroidManifest.xml:2:1-14:12
+MERGED from [com.kakao.sdk:kakaostory:1.1.2] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/kakaostory-1.1.2.aar/3746200aa99537dc57c38a7581fa1a63/AndroidManifest.xml:2:1-14:12
+MERGED from [com.kakao.sdk:kakaotalk:1.1.2] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/kakaotalk-1.1.2.aar/d44218a5c52e4694c6d7b52c82789e5a/AndroidManifest.xml:2:1-14:12
+MERGED from [com.kakao.sdk:usermgmt:1.1.2] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/usermgmt-1.1.2.aar/b172e1392d30d38756befe849f174edc/AndroidManifest.xml:2:1-14:12
+MERGED from [com.android.support:support-fragment:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0-alpha1.aar/6ec5c6a51c21050b8419716121fd78cb/AndroidManifest.xml:17:1-23:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0-alpha1.aar/6cc492f88a0b4ab9391f633824dd1fcc/AndroidManifest.xml:17:1-23:12
+MERGED from [com.android.support:support-core-ui:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0-alpha1.aar/81650d7802f69d4ec8cb6e40caa4e541/AndroidManifest.xml:17:1-23:12
+MERGED from [com.android.support:support-core-utils:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0-alpha1.aar/95d95c8aaffdc95b6d3ab4f1b81ac2b5/AndroidManifest.xml:17:1-23:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0-alpha1.aar/6a271abec5ce0272819ca4f53a725e5f/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/loader-28.0.0-alpha1.aar/5e5292aef190edaf9cc1f4bcbee86394/AndroidManifest.xml:17:1-23:12
+MERGED from [com.android.support:viewpager:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0-alpha1.aar/0af2f7e1ca6db0610cbe83a75d5d9c99/AndroidManifest.xml:17:1-23:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0-alpha1.aar/f1b9a63f7983ad2331cd604e39312be7/AndroidManifest.xml:17:1-23:12
+MERGED from [com.android.support:drawerlayout:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0-alpha1.aar/d21a93652c28da9035baecf502219ac1/AndroidManifest.xml:17:1-23:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0-alpha1.aar/b4945be9c4b0f7740cd55499b110feae/AndroidManifest.xml:17:1-23:12
+MERGED from [com.android.support:customview:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/customview-28.0.0-alpha1.aar/28d9ecd40e9eb2680a493f562344566f/AndroidManifest.xml:17:1-23:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0-alpha1.aar/f303d783836790eea50db6ccccde008a/AndroidManifest.xml:17:1-23:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0-alpha1.aar/1a37de48541a4a7d245b80a2b18ecff9/AndroidManifest.xml:17:1-23:12
+MERGED from [com.android.support:support-media-compat:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0-alpha1.aar/c4fad8f6cd9b8186d7b159267dc1d99b/AndroidManifest.xml:17:1-23:12
+MERGED from [com.android.support:support-compat:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0-alpha1.aar/7856ba82fe38060b43d62ce5188c6ac2/AndroidManifest.xml:17:1-23:12
+MERGED from [com.android.support:documentfile:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0-alpha1.aar/fee38a43fdbe9ab0f99557e965ff344b/AndroidManifest.xml:17:1-23:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0-alpha1.aar/c5943ad3b70f6ae36bddae85a91ad130/AndroidManifest.xml:17:1-23:12
+MERGED from [com.android.support:print:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/print-28.0.0-alpha1.aar/54129d805004860680910a999f7a6433/AndroidManifest.xml:17:1-23:12
+MERGED from [com.android.support:interpolator:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0-alpha1.aar/1dbf6fc64c07a7ae76fa2ed045b6341d/AndroidManifest.xml:17:1-23:12
+MERGED from [com.android.support:cursoradapter:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0-alpha1.aar/6ee16ec0c692bbcd7642281acef94d10/AndroidManifest.xml:17:1-23:12
+MERGED from [:androidcalendarviewLibrary] /Users/Uihyun/Desktop/work/nonanona/androidcalendarviewLibrary/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-11:12
+MERGED from [com.kakao.sdk:auth:1.1.2] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/auth-1.1.2.aar/5958a3de35275a01439be51238c8fa07/AndroidManifest.xml:2:1-14:12
+MERGED from [com.kakao.sdk:util:1.1.2] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/util-1.1.2.aar/fce94d0af5eed1ca648f53a99cff79c5/AndroidManifest.xml:2:1-14:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/f77306e55b1f62527705ce3a72d2f148/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/4585b409a75275e8d50f3cadf2036e0b/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/fa512e07e5545fdaedc82596d3ce4061/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.0] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/cb958904148247d3fef99790cd7050d5/AndroidManifest.xml:17:1-22:12
+INJECTED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:2:1-179:12
+INJECTED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:2:1-179:12
+INJECTED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:2:1-179:12
+	package
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:3:5-30
+		INJECTED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:2:1-179:12
+		INJECTED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:2:1-179:12
+		INJECTED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:6:5-66
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:6:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:9:5-79
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:9:22-76
+uses-permission#android.permission.GET_ACCOUNTS
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:12:5-71
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:12:22-68
+uses-permission#android.permission.WAKE_LOCK
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:15:5-68
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:15:22-65
+permission#com.nuums.nuums.permission.C2D_MESSAGE
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:19:5-21:47
+	android:protectionLevel
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:21:9-44
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:20:9-62
+uses-permission#com.nuums.nuums.permission.C2D_MESSAGE
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:23:5-78
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:23:22-75
+uses-permission#com.google.android.c2dm.permission.RECEIVE
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:26:5-82
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:26:22-79
+uses-permission#android.permission.CAMERA
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:29:5-65
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:29:22-62
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:31:5-81
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:31:22-78
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:32:5-80
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:32:22-77
+uses-permission#android.permission.GET_TASKS
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:34:5-68
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:34:22-65
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:42:5-81
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:42:22-78
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:43:5-79
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:43:22-76
+uses-permission#android.permission.CALL_PHONE
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:45:5-69
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:45:22-66
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:46:5-74
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:46:22-72
+application
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:48:5-177:19
+MERGED from [com.google.android.gms:play-services:6.1.71] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/play-services-6.1.71.aar/ad2dcb73099c6c887bbf246dacf63a0d/AndroidManifest.xml:16:5-19
+MERGED from [com.google.android.gms:play-services:6.1.71] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/play-services-6.1.71.aar/ad2dcb73099c6c887bbf246dacf63a0d/AndroidManifest.xml:16:5-19
+MERGED from [com.sromku:simple-fb:4.0.6] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/simple-fb-4.0.6.aar/0b834a4a0702989685409e5377bea46b/AndroidManifest.xml:12:5-20
+MERGED from [com.sromku:simple-fb:4.0.6] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/simple-fb-4.0.6.aar/0b834a4a0702989685409e5377bea46b/AndroidManifest.xml:12:5-20
+MERGED from [com.facebook.android:facebook-android-sdk:4.3.0] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.3.0.aar/23fba5b4979a3322400cc35f61150d2b/AndroidManifest.xml:28:5-20
+MERGED from [com.facebook.android:facebook-android-sdk:4.3.0] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.3.0.aar/23fba5b4979a3322400cc35f61150d2b/AndroidManifest.xml:28:5-20
+	android:label
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:51:9-41
+	android:icon
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:50:9-36
+	android:allowBackup
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:49:9-35
+	android:theme
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:52:9-41
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:53:9-37
+meta-data#com.google.android.gms.version
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:55:9-57:69
+	android:value
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:57:13-66
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:56:13-58
+meta-data#com.google.android.maps.v2.API_KEY
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:59:9-61:55
+	android:value
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:61:13-52
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:60:13-62
+meta-data#com.kakao.sdk.AppKey
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:63:9-65:53
+	android:value
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:65:13-50
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:64:13-48
+activity#com.nuums.nuums.activity.SplashActivity
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:69:9-77:20
+	android:screenOrientation
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:71:13-49
+	android:theme
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:72:13-66
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:70:13-52
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:73:13-76:29
+action#android.intent.action.MAIN
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:74:17-69
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:74:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:75:17-77
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:75:27-74
+activity#com.nuums.nuums.activity.MainActivity
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:79:9-84:20
+	android:screenOrientation
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:83:13-49
+	android:launchMode
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:82:13-44
+	android:windowSoftInputMode
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:81:13-52
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:80:13-50
+activity#com.nuums.nuums.activity.BaseActivity
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:86:9-98:20
+	android:screenOrientation
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:89:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:88:13-54
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:87:13-50
+intent-filter#action:name:android.intent.action.VIEW+action:name:android.location.PROVIDERS_CHANGED+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:host:@string/kakaolink_host+data:scheme:@string/kakao_scheme
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:91:13-97:29
+action#android.intent.action.VIEW
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:92:17-68
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:92:25-66
+category#android.intent.category.DEFAULT
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:93:17-75
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:93:27-73
+category#android.intent.category.BROWSABLE
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:94:17-77
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:94:27-75
+data
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:95:17-101
+	android:host
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:95:61-98
+	android:scheme
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:95:23-60
+action#android.location.PROVIDERS_CHANGED
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:96:17-77
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:96:25-74
+activity#com.nuums.nuums.activity.Base2Activity
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:101:9-106:20
+	android:screenOrientation
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:104:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:105:13-54
+	android:theme
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:103:13-66
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:102:13-51
+activity#com.nuums.nuums.activity.Base3Activity
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:107:9-112:20
+	android:screenOrientation
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:110:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:111:13-54
+	android:theme
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:109:13-53
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:108:13-51
+receiver#com.yongtrim.lib.model.location.GpsLocationReceiver
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:116:9-121:20
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:116:19-85
+intent-filter#action:name:android.location.PROVIDERS_CHANGED+category:name:android.intent.category.DEFAULT
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:117:13-120:29
+receiver#com.yongtrim.lib.message.GcmBroadcastReceiver
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:123:9-134:20
+	android:permission
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:125:13-73
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:124:13-73
+intent-filter#action:name:com.google.android.c2dm.intent.RECEIVE+category:name:com.nuums.nuums
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:126:13-133:29
+action#com.google.android.c2dm.intent.RECEIVE
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:128:17-81
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:128:25-78
+category#com.nuums.nuums
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:132:17-60
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:132:27-57
+service#com.yongtrim.lib.message.GcmIntentService
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:136:9-85
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:136:18-74
+activity#com.facebook.FacebookActivity
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:139:9-142:48
+	android:label
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:142:13-45
+	android:configChanges
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:140:13-96
+	android:theme
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:141:13-72
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:139:19-63
+meta-data#com.facebook.sdk.ApplicationId
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:144:9-146:49
+	android:value
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:146:13-46
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:145:13-58
+provider#com.facebook.FacebookContentProvider
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:149:9-152:39
+	android:authorities
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:151:13-90
+	android:exported
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:152:13-36
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:150:13-64
+activity#org.acra.CrashReportDialog
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:154:9-160:15
+	android:excludeFromRecents
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:158:13-46
+	android:launchMode
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:157:13-48
+	android:theme
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:156:13-56
+	android:finishOnTaskLaunch
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:159:13-46
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:155:13-54
+activity#com.yongtrim.lib.activity.imagepicker.ImagePickerActivity
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:162:9-166:20
+	android:screenOrientation
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:163:13-49
+	android:label
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:164:13-40
+	android:icon
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:165:13-39
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:162:19-91
+activity#com.nuums.nuums.activity.GalleryActivity
+ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:170:9-175:20
+	android:screenOrientation
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:172:13-49
+	android:theme
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:173:13-66
+	android:name
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml:171:13-53
+uses-sdk
+INJECTED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml
+INJECTED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml
+MERGED from [com.google.android.gms:play-services:6.1.71] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/play-services-6.1.71.aar/ad2dcb73099c6c887bbf246dacf63a0d/AndroidManifest.xml:15:5-42
+MERGED from [com.google.android.gms:play-services:6.1.71] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/play-services-6.1.71.aar/ad2dcb73099c6c887bbf246dacf63a0d/AndroidManifest.xml:15:5-42
+MERGED from [com.android.support:appcompat-v7:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha1.aar/4c27c4bf50096d952ae265c002851c7e/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha1.aar/4c27c4bf50096d952ae265c002851c7e/AndroidManifest.xml:21:5-44
+MERGED from [com.sromku:simple-fb:4.0.6] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/simple-fb-4.0.6.aar/0b834a4a0702989685409e5377bea46b/AndroidManifest.xml:8:5-10:41
+MERGED from [com.sromku:simple-fb:4.0.6] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/simple-fb-4.0.6.aar/0b834a4a0702989685409e5377bea46b/AndroidManifest.xml:8:5-10:41
+MERGED from [com.facebook.android:facebook-android-sdk:4.3.0] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.3.0.aar/23fba5b4979a3322400cc35f61150d2b/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-android-sdk:4.3.0] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.3.0.aar/23fba5b4979a3322400cc35f61150d2b/AndroidManifest.xml:24:5-26:41
+MERGED from [com.android.support:support-v4:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0-alpha1.aar/e855ac2fb38e77a85450dfdffabf23ed/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:support-v4:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0-alpha1.aar/e855ac2fb38e77a85450dfdffabf23ed/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:multidex:1.0.0] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/multidex-1.0.0.aar/03346d7fc3a8c7b9b4c4466382e7a89b/AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:multidex:1.0.0] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/multidex-1.0.0.aar/03346d7fc3a8c7b9b4c4466382e7a89b/AndroidManifest.xml:18:5-42
+MERGED from [:androiddatepickerLibrary] /Users/Uihyun/Desktop/work/nonanona/androiddatepickerLibrary/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
+MERGED from [:androiddatepickerLibrary] /Users/Uihyun/Desktop/work/nonanona/androiddatepickerLibrary/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
+MERGED from [:androidnumberpickerLibrary] /Users/Uihyun/Desktop/work/nonanona/androidnumberpickerLibrary/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
+MERGED from [:androidnumberpickerLibrary] /Users/Uihyun/Desktop/work/nonanona/androidnumberpickerLibrary/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
+MERGED from [com.kakao.sdk:kakaolink:1.1.2] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/kakaolink-1.1.2.aar/94624ba9686701992543c4a72c2b68f4/AndroidManifest.xml:10:5-12:41
+MERGED from [com.kakao.sdk:kakaolink:1.1.2] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/kakaolink-1.1.2.aar/94624ba9686701992543c4a72c2b68f4/AndroidManifest.xml:10:5-12:41
+MERGED from [com.kakao.sdk:kakaostory:1.1.2] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/kakaostory-1.1.2.aar/3746200aa99537dc57c38a7581fa1a63/AndroidManifest.xml:10:5-12:41
+MERGED from [com.kakao.sdk:kakaostory:1.1.2] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/kakaostory-1.1.2.aar/3746200aa99537dc57c38a7581fa1a63/AndroidManifest.xml:10:5-12:41
+MERGED from [com.kakao.sdk:kakaotalk:1.1.2] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/kakaotalk-1.1.2.aar/d44218a5c52e4694c6d7b52c82789e5a/AndroidManifest.xml:10:5-12:41
+MERGED from [com.kakao.sdk:kakaotalk:1.1.2] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/kakaotalk-1.1.2.aar/d44218a5c52e4694c6d7b52c82789e5a/AndroidManifest.xml:10:5-12:41
+MERGED from [com.kakao.sdk:usermgmt:1.1.2] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/usermgmt-1.1.2.aar/b172e1392d30d38756befe849f174edc/AndroidManifest.xml:10:5-12:41
+MERGED from [com.kakao.sdk:usermgmt:1.1.2] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/usermgmt-1.1.2.aar/b172e1392d30d38756befe849f174edc/AndroidManifest.xml:10:5-12:41
+MERGED from [com.android.support:support-fragment:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0-alpha1.aar/6ec5c6a51c21050b8419716121fd78cb/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:support-fragment:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0-alpha1.aar/6ec5c6a51c21050b8419716121fd78cb/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0-alpha1.aar/6cc492f88a0b4ab9391f633824dd1fcc/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0-alpha1.aar/6cc492f88a0b4ab9391f633824dd1fcc/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0-alpha1.aar/81650d7802f69d4ec8cb6e40caa4e541/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0-alpha1.aar/81650d7802f69d4ec8cb6e40caa4e541/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0-alpha1.aar/95d95c8aaffdc95b6d3ab4f1b81ac2b5/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0-alpha1.aar/95d95c8aaffdc95b6d3ab4f1b81ac2b5/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0-alpha1.aar/6a271abec5ce0272819ca4f53a725e5f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0-alpha1.aar/6a271abec5ce0272819ca4f53a725e5f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/loader-28.0.0-alpha1.aar/5e5292aef190edaf9cc1f4bcbee86394/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:loader:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/loader-28.0.0-alpha1.aar/5e5292aef190edaf9cc1f4bcbee86394/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:viewpager:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0-alpha1.aar/0af2f7e1ca6db0610cbe83a75d5d9c99/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:viewpager:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0-alpha1.aar/0af2f7e1ca6db0610cbe83a75d5d9c99/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0-alpha1.aar/f1b9a63f7983ad2331cd604e39312be7/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0-alpha1.aar/f1b9a63f7983ad2331cd604e39312be7/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0-alpha1.aar/d21a93652c28da9035baecf502219ac1/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0-alpha1.aar/d21a93652c28da9035baecf502219ac1/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0-alpha1.aar/b4945be9c4b0f7740cd55499b110feae/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0-alpha1.aar/b4945be9c4b0f7740cd55499b110feae/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:customview:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/customview-28.0.0-alpha1.aar/28d9ecd40e9eb2680a493f562344566f/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:customview:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/customview-28.0.0-alpha1.aar/28d9ecd40e9eb2680a493f562344566f/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0-alpha1.aar/f303d783836790eea50db6ccccde008a/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0-alpha1.aar/f303d783836790eea50db6ccccde008a/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0-alpha1.aar/1a37de48541a4a7d245b80a2b18ecff9/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0-alpha1.aar/1a37de48541a4a7d245b80a2b18ecff9/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0-alpha1.aar/c4fad8f6cd9b8186d7b159267dc1d99b/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0-alpha1.aar/c4fad8f6cd9b8186d7b159267dc1d99b/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:support-compat:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0-alpha1.aar/7856ba82fe38060b43d62ce5188c6ac2/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:support-compat:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0-alpha1.aar/7856ba82fe38060b43d62ce5188c6ac2/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:documentfile:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0-alpha1.aar/fee38a43fdbe9ab0f99557e965ff344b/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:documentfile:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0-alpha1.aar/fee38a43fdbe9ab0f99557e965ff344b/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0-alpha1.aar/c5943ad3b70f6ae36bddae85a91ad130/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0-alpha1.aar/c5943ad3b70f6ae36bddae85a91ad130/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:print:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/print-28.0.0-alpha1.aar/54129d805004860680910a999f7a6433/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:print:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/print-28.0.0-alpha1.aar/54129d805004860680910a999f7a6433/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:interpolator:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0-alpha1.aar/1dbf6fc64c07a7ae76fa2ed045b6341d/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:interpolator:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0-alpha1.aar/1dbf6fc64c07a7ae76fa2ed045b6341d/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0-alpha1.aar/6ee16ec0c692bbcd7642281acef94d10/AndroidManifest.xml:21:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0-alpha1] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0-alpha1.aar/6ee16ec0c692bbcd7642281acef94d10/AndroidManifest.xml:21:5-44
+MERGED from [:androidcalendarviewLibrary] /Users/Uihyun/Desktop/work/nonanona/androidcalendarviewLibrary/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
+MERGED from [:androidcalendarviewLibrary] /Users/Uihyun/Desktop/work/nonanona/androidcalendarviewLibrary/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
+MERGED from [com.kakao.sdk:auth:1.1.2] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/auth-1.1.2.aar/5958a3de35275a01439be51238c8fa07/AndroidManifest.xml:10:5-12:41
+MERGED from [com.kakao.sdk:auth:1.1.2] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/auth-1.1.2.aar/5958a3de35275a01439be51238c8fa07/AndroidManifest.xml:10:5-12:41
+MERGED from [com.kakao.sdk:util:1.1.2] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/util-1.1.2.aar/fce94d0af5eed1ca648f53a99cff79c5/AndroidManifest.xml:10:5-12:41
+MERGED from [com.kakao.sdk:util:1.1.2] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/util-1.1.2.aar/fce94d0af5eed1ca648f53a99cff79c5/AndroidManifest.xml:10:5-12:41
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/f77306e55b1f62527705ce3a72d2f148/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/f77306e55b1f62527705ce3a72d2f148/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/4585b409a75275e8d50f3cadf2036e0b/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/4585b409a75275e8d50f3cadf2036e0b/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/fa512e07e5545fdaedc82596d3ce4061/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/fa512e07e5545fdaedc82596d3ce4061/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/cb958904148247d3fef99790cd7050d5/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] /Users/Uihyun/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/cb958904148247d3fef99790cd7050d5/AndroidManifest.xml:20:5-44
+INJECTED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml
+INJECTED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml
+		ADDED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Uihyun/Desktop/work/nonanona/app/src/main/AndroidManifest.xml

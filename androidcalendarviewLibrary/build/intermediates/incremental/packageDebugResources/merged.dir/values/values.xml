@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr format="reference" name="calendarViewStyle"/>
+    <declare-styleable name="CalendarView">
+        <!-- The first day of week according to {@link java.util.Calendar}. -->
+        <attr name="android:firstDayOfWeek"/>
+        <!-- Whether do show week numbers. -->
+        <attr name="android:showWeekNumber"/>
+        <!-- The minimal date shown by this calendar view in mm/dd/yyyy format. -->
+        <attr name="android:minDate"/>
+        <!-- The minimal date shown by this calendar view in mm/dd/yyyy format. -->
+        <attr name="android:maxDate"/>
+        <!-- The number of weeks to be shown. -->
+        <attr name="android:shownWeekCount"/>
+        <!-- The background color for the selected week. -->
+        <attr name="android:selectedWeekBackgroundColor"/>
+        <!-- The color for the dates of the selected month. -->
+        <attr name="android:focusedMonthDateColor"/>
+        <!-- The color for the dates of an unfocused month. -->
+        <attr name="android:unfocusedMonthDateColor"/>
+        <!-- The color for the week numbers. -->
+        <attr name="android:weekNumberColor"/>
+        <!-- The color for the sepatator line between weeks. -->
+        <attr name="android:weekSeparatorLineColor"/>
+        <!-- Drawable for the vertical bar shown at the beggining and at the end of a selected date. -->
+        <attr name="android:selectedDateVerticalBar"/>
+        <!-- The text appearance for the week day abbreviation of the calendar header. -->
+        <attr name="android:weekDayTextAppearance"/>
+        <!-- The text appearance for the calendar dates. -->
+        <attr name="android:dateTextAppearance"/>
+    </declare-styleable>
+    <declare-styleable name="TextAppearanceCompatStyleable">
+        <attr name="android:textSize"/>
+    </declare-styleable>
+    <style name="SampleTheme" parent="@android:style/Theme">
+        <item name="calendarViewStyle">@style/Widget.Holo.CalendarView</item>
+    </style>
+    <style name="SampleTheme.Light" parent="@android:style/Theme.Light">
+        <item name="calendarViewStyle">@style/Widget.Holo.Light.CalendarView</item>
+    </style>
+    <style name="TextAppearance.Holo.CalendarViewWeekDayView" parent="TextAppearance.Small.CalendarViewWeekDayView">
+        <item name="android:textColor">#505050</item>
+    </style>
+    <style name="TextAppearance.Holo.Light.CalendarViewWeekDayView" parent="TextAppearance.Small.CalendarViewWeekDayView">
+    </style>
+    <style name="TextAppearance.Small.CalendarViewWeekDayView" parent="@android:style/TextAppearance.Small">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Widget">
+        <item name="android:textAppearance">?android:attr/textAppearance</item>
+    </style>
+    <style name="Widget.CalendarView">
+        <item name="android:showWeekNumber">true</item>
+        <item name="android:firstDayOfWeek">1</item>
+        <item name="android:minDate">01/01/1900</item>
+        <item name="android:maxDate">12/31/2100</item>
+        <item name="android:shownWeekCount">6</item>
+        <item name="android:selectedWeekBackgroundColor">#330099FF</item>
+        <item name="android:focusedMonthDateColor">#FFFFFFFF</item>
+        <item name="android:unfocusedMonthDateColor">#66FFFFFF</item>
+        <item name="android:weekNumberColor">#33FFFFFF</item>
+        <item name="android:weekSeparatorLineColor">#19FFFFFF</item>
+        <item name="android:selectedDateVerticalBar">@drawable/day_picker_week_view_dayline_holo</item>
+        <item name="android:weekDayTextAppearance">@style/TextAppearance.Small.CalendarViewWeekDayView</item>
+        <item name="android:dateTextAppearance">?android:attr/textAppearanceSmall</item>
+    </style>
+    <style name="Widget.Holo.CalendarView" parent="Widget.CalendarView">
+        <item name="android:selectedWeekBackgroundColor">#330099FF</item>
+        <item name="android:focusedMonthDateColor">#FFFFFFFF</item>
+        <item name="android:unfocusedMonthDateColor">#66FFFFFF</item>
+        <item name="android:weekNumberColor">#33FFFFFF</item>
+        <item name="android:weekSeparatorLineColor">#19FFFFFF</item>
+        <item name="android:selectedDateVerticalBar">@drawable/day_picker_week_view_dayline_holo</item>
+        <item name="android:weekDayTextAppearance">@style/TextAppearance.Holo.CalendarViewWeekDayView</item>
+    </style>
+    <style name="Widget.Holo.Light.CalendarView" parent="Widget.CalendarView">
+        <item name="android:selectedWeekBackgroundColor">#330066ff</item>
+        <item name="android:focusedMonthDateColor">#FF000000</item>
+        <item name="android:unfocusedMonthDateColor">#7F08002B</item>
+        <item name="android:weekNumberColor">#7F080021</item>
+        <item name="android:weekSeparatorLineColor">#7F08002A</item>
+        <item name="android:weekDayTextAppearance">@style/TextAppearance.Holo.Light.CalendarViewWeekDayView
+        </item>
+    </style>
+</resources>

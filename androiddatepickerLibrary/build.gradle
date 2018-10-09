@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 17
-    buildToolsVersion "19.1.0"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.2"
 
     defaultConfig {
         minSdkVersion 7
-        targetSdkVersion 16
+        targetSdkVersion 28
     }
 
     buildTypes {
@@ -18,8 +18,6 @@ android {
 }
 
 dependencies {
-    compile project(':androidcalendarviewLibrary')
-
-    compile project(':androidnumberpickerLibrary')
-
+    implementation project(':androidcalendarviewLibrary')
+    implementation project(':androidnumberpickerLibrary')
 }
